@@ -1,0 +1,36 @@
+/* [0] 🎯 色票與變數（Tokens） */
+:root {
+  --color-dark: #353242;
+  --color-cta: #d0d7f1;
+  --color-primary-accent: #bba896;
+  --color-gray-bg: #C4C7CE;
+  --color-light-bg: #f1edeb;
+  --color-text-dark: #242436;
+  --color-text-light: #ede6e2;
+  --color-white: #fff;
+  --color-border: #e2e2e2;
+  --header-h: 74px; /* 視覺微調：70→74 */
+  --color-section-bg: oklch(95% 0.01 var(--brand-hue));
+  --color-card-bg: oklch(100% 0 0);
+  --color-card-border: oklch(85% 0.02 var(--brand-hue));
+
+
+  /* [NAV COLOR SYSTEM] */
+  --nav-link:            #353242;
+  --nav-link-hover:      #353242;
+  --nav-link-active:     #353242;
+  --nav-link-muted:      #bba896;
+  --nav-cta-bg:          #d0d7f1;
+  --nav-cta-text:        #353242;
+  --nav-cta-bg-hover:    #d0d7f1;
+  --nav-cta-text-hover:  #353242;
+  --mega-bg:             #fff;
+  --mega-border:         #e2e2e2;
+  --mega-link:           #353242;
+  --mega-link-hover:     #353242;
+  --mega-heading:        #353242;
+  --mega-separator:      #e2e2e2;
+  --mega-hover-bg:       #f7f7f7;
+  --focus-ring:          rgb(208 215 241 / 60%);
+}
+

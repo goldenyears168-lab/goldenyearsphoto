@@ -1,0 +1,92 @@
+/* ===== 作用於預約主頁 (booking/index.njk) ===== */
+.page-booking-hub .store-selection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-booking-hub .store-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 5%);
+  text-decoration: none;
+  color: var(--color-text);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-booking-hub .store-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 8%);
+}
+
+.page-booking-hub .store-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.page-booking-hub .store-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.page-booking-hub .store-card:hover .store-card-image img {
+  transform: scale(1.05);
+}
+
+.page-booking-hub .store-card-content {
+  padding: 20px 24px;
+  flex-grow: 1;
+}
+
+.page-booking-hub .store-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-dark, #020044);
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.page-booking-hub .store-card-desc {
+  font-size: 1rem;
+  color: var(--color-text-subtle, #555);
+  line-height: 1.6;
+}
+
+.page-booking-hub .store-card-footer {
+  padding: 0 24px 24px;
+}
+
+.page-booking-hub .cta-button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: var(--color-cta, #E6AF2E);
+  color: var(--color-dark, #020044);
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.page-booking-hub .store-card:hover .cta-button-link {
+  background-color: var(--color-cta-hover, #d4a029);
+}
+
+@media (width <= 768px) {
+  .page-booking-hub .store-selection-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .page-booking-hub .store-card-content {
+    padding: 16px 20px;
+  }
+}

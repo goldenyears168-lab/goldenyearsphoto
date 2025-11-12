@@ -1,0 +1,92 @@
+---
+layout: "base-layout.njk"
+title: "預約公館店｜好時有影"
+seo:
+  description: "預約好時有影公館店。請先確認服務須知，再滑至下方預約系統完成預訂。"
+permalink: "/booking/gongguan/"
+---
+
+<div class="page-booking">
+  <div class="module">
+    <div class="container container-md text-align-center">
+      <h1>預約公館店</h1>
+      <p class="text-large">
+        請先確認下方的服務內容與須知，<br class="d-sm-none">
+        再使用本頁的預約系統預約。
+      </p>
+    </div>
+  </div>
+
+  <div class="module module-gray">
+    <div class="container container-lg">
+      <section id="gongguan" class="booking-content">
+        <div class="booking-text">
+          <div class="service-rules">
+            <p class="notice-box">
+              請先確認以下的服務內容與須知，再滑至下方預約系統預約。<br>
+              <strong>預約即代表您已閱讀並同意服務須知，謝謝您！</strong>
+            </p>
+
+            {# ... (服務須知內容不變) ... #}
+            <h4>預約方式</h4>
+            <ul>
+              <li>預約系統開放未來近 14 日內。</li>
+              <li>取消／改期請至預約確認信操作。</li>
+              <li>形象照＋證件照：先選形象照再備註加購證件照。</li>
+              <li>多組項目請預約兩個時段（每時段低消一張）。</li>
+            </ul>
+
+            <h4>拍攝前準備</h4>
+            <ul>
+              <li>服裝自備；店內提供學士服帽與黑色領帶。</li>
+              <li>備有吹風機、電捲棒與掛燙機。</li>
+            </ul>
+
+            <h4>其他事項</h4>
+            <ul>
+              <li>請勿飲食，垃圾請自行帶離。</li>
+              <li>IG 私訊：<strong>@goldenyears_studio</strong></li>
+              <li>
+                <p><strong>公館店地址：</strong>台北市中正區汀州路三段160巷4號6樓</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="booking-embed">
+            <script src="//widget.simplybook.asia/v2/widget/widget.js" type="text/javascript"></script>
+            <script type="text/javascript">
+              var widget = new SimplybookWidget({
+                "widget_type": "iframe",
+                "url": "https://goldenyearsportrait.simplybook.asia", /* <== 公館店 URL */
+                "theme": "creative",
+                "theme_settings": {
+                  "timeline_show_end_time": "0",
+                  "timeline_modern_display": "as_slots",
+                  "timeline_hide_unavailable": "1",
+                  "index_page_content_grid": "[{\"template\":\"col_25_50_25\",\"items\":[\"timetable\"]}]",
+                  "hide_past_days": "0", /* <== 公館店設定 */
+                  "sb_base_color": "#6173ff", /* <== 公館店顏色 */
+                  "display_item_mode": "block",
+                  "body_bg_color": "#f7f7f7", /* <== 公館店顏色 */
+                  "dark_font_color": "#241c13", /* <== 公館店顏色 */
+                  "light_font_color": "#fffaf5", /* <== 公館店顏色 */
+                  "btn_color_1": "#1a1a91", /* <== 公館店顏色 */
+                  "show_sidebar": "0"
+                },
+                "timeline": "modern_week",
+                "datepicker": "top_calendar", /* <== 公館店設定 */
+                "is_rtl": false,
+                "app_config": {"clear_session": 0, "allow_switch_to_ada": 0, "predefined": []}
+              });
+            </script>
+          </div>
+
+          <p class="safety-net">
+            若內嵌無法顯示，可改用外部頁：
+            <a href="https://goldenyearsportrait.simplybook.asia/v2/" target="_blank" rel="noopener">公館店預約連結</a>
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

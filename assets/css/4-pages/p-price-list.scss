@@ -1,0 +1,186 @@
+/* ===== 作用於價目表頁 (price-list.njk) ===== */
+
+.service-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: start;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 3%);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .service-card {
+    grid-template-columns: 1fr 1fr;
+    padding: 40px;
+  }
+}
+
+/* ===== 文字內容區 ===== */
+.service-card-details h3 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--color-dark);
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary-accent);
+  margin: 0;
+}
+
+.price-original {
+  font-size: 1rem;
+  color: var(--color-text-subtle);
+  font-weight: 400;
+}
+
+.price-student {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-cta);
+  background: #fff8e1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.service-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-subtle);
+  margin: 25px 0 10px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 8px;
+}
+
+.service-includes,
+.service-upgrades {
+  padding-left: 0;
+  margin: 0 0 20px;
+}
+
+.service-includes li,
+.service-upgrades li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.service-includes li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary-accent);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.service-upgrades li::before {
+  content: "➕";
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+.service-portfolio-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-primary-accent);
+  border: 2px solid var(--color-primary-accent);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.service-portfolio-link:hover {
+  background-color: var(--color-primary-accent);
+  color: var(--color-white);
+}
+
+/* ===== 圖片牆通用樣式 ===== */
+.service-card-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.service-card-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ===== 只調整前兩個區塊的圖片比例 (縮小為約2/3寬度) ===== */
+@media (min-width: 768px) {
+  .service-card:nth-of-type(1),
+  .service-card:nth-of-type(2) {
+    grid-template-columns: 2fr 1.3fr; /* 文字:圖片 = 約 2:1.3 */
+  }
+}
+
+.service-card:nth-of-type(1) .service-card-gallery,
+.service-card:nth-of-type(2) .service-card-gallery {
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.service-card:nth-of-type(1) .service-card-gallery img,
+.service-card:nth-of-type(2) .service-card-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  aspect-ratio: 3 / 4; /* 維持人像比例 */
+}
+
+/* 手機版仍為單欄 */
+@media (max-width: 768px) {
+  .service-card:nth-of-type(1),
+  .service-card:nth-of-type(2) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 妝髮服務區 ===== */
+.makeup-pricing-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 20px 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.makeup-pricing-list li {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.makeup-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  align-items: center;
+}
+
+.makeup-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}

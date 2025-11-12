@@ -1,0 +1,39 @@
+/* [4] 🏠 首頁專屬區塊 */
+
+/*
+.portfolio-gallery {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+*/
+
+
+/*
+ * =========================================
+ * 顧客好評分享 (IG 貼文並排) - 最終修正版
+ * =========================================
+ */
+.ig-grid-container {
+  display: flex;
+  flex-wrap: wrap;        /* 允許換行 */
+  justify-content: center;/* 將貼文群組置中 */
+  gap: 24px;
+  margin-top: 32px;
+}
+
+/*
+ * 確保 IG 嵌入碼在 Flex 容器中正確縮放
+ */
+.ig-grid-container .instagram-media {
+  /* * [!!] 關鍵修復：
+   * IG 嵌入碼的 inline-style 包含 "width: calc(100% - 2px)"
+   * 這會強制它佔滿 100% 寬度，導致 flex-wrap 換行。
+   *
+   * 我們必須用 !important 覆蓋它。
+   * 我們將 'width' 設置為 'auto'，
+   * 這樣它就會去遵守它自己的 'min-width: 326px' 和 'max-width: 540px'。
+   */
+  width: auto !important;
+
+  /* 覆蓋 IG 預設的 margin: 1px，讓 'gap' 屬性來統一管理間距 */
+  margin: 0 !important;
+}

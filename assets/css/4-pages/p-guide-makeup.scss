@@ -1,0 +1,233 @@
+/*
+ * =======================================
+ * 🎨 [頁面] 妝髮服務介紹 (p-guide-makeup)
+ * * [ 🚀 V13 重構版 - 圖片自適應 & 頁首修正 ]
+ * 策略：
+ * 1. 圖片：移除 `aspect-ratio` 和 `object-fit`，讓圖片自然呈現直式。
+ * - 圖片容器不再強制長寬比，由圖片內容撐開。
+ * - Desktop 時圖片靠右對齊，並限制最大寬度。
+ * 2. 頁首：調整 `page-hero` 的內距和最大寬度，避免文字在手機上跑版。
+ * 3. 100% 複用 V11 的 HTML 結構。
+ * =======================================
+ */
+
+/* --- 1. 頁面內容基礎 (與 V12 相同) --- */
+.page-content h3 {
+  margin-top: 40px;
+  border-bottom: 2px solid var(--color-cta);
+  padding-bottom: 8px;
+}
+
+.page-content h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--color-dark);
+  font-size: 1.5rem;
+}
+
+.page-content p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.page-content hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 40px 0;
+}
+
+/* --- 2. 頁首修正 (Image 2 跑版修正) --- */
+/*
+ * [ 🚀 V13 頁首修正 ]：
+ * 調整頁首內距和最大寬度，確保文字在小螢幕上不會擠壓。
+ */
+.module.page-hero {
+  padding: 80px 20px; /* 增加左右內距 */
+}
+.module.page-hero .container {
+  max-width: 800px; /* 限制頁首內容最大寬度 */
+}
+@media (max-width: 767px) { /* 手機板加強 */
+  .module.page-hero {
+    padding: 60px 15px; /* 手機版內距可以更小一點 */
+  }
+  .module.page-hero h1 {
+    font-size: 2rem; /* 手機版標題字體縮小 */
+  }
+  .module.page-hero .subtitle {
+    font-size: 1rem; /* 手機版副標題字體縮小 */
+  }
+}
+
+
+/* --- 3. 服務方案列表 (與 V12 相同) --- */
+.service-package-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* 卡片間距 */
+  margin-top: 30px;
+}
+
+/* --- 4. 服務方案 (Mobile-First Stack - 與 V12 相同) --- */
+.service-package {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: 單欄 */
+  
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* --- 5. 網格區域 (Mobile) --- */
+
+.package-header {
+  padding: 24px 24px 20px 24px;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+/* * [ 🚀 V13 圖片更新 ]
+ * 1. 圖片容器 `package-image-placeholder` 不再有 `aspect-ratio` 或 `background-color`。
+ * 2. 讓圖片本身撐開容器空間。
+ * 3. 圖片居中顯示。
+ */
+.package-image-placeholder {
+  /* 移除 Mobile 的 border-top，因為現在圖片自己有邊框 */
+  border-top: none; 
+  text-align: center; /* 讓圖片在容器中居中 */
+  padding: 0 24px 24px 24px; /* Mobile 時，上下左右預留空間 */
+}
+
+.package-image-placeholder picture,
+.package-image-placeholder img {
+  /* 圖片不再強制 100% 高度 */
+  width: 100%; /* 寬度仍然填滿容器 */
+  height: auto; /* 高度自適應，保持原始比例 */
+  display: block; 
+  /* [ 🚀 V13 關鍵 ] 移除 object-fit */
+  object-fit: unset; /* 或直接移除這行 */
+  border-radius: 8px; /* 圖片本身給予圓角，模擬舊有容器的圓角效果 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* 圖片增加輕微陰影 */
+}
+
+
+.package-content-wrapper {
+  padding: 24px;
+  border-top: 1px solid var(--color-border); /* Mobile 時，內容區上方仍然有分隔線 */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* --- 6. 內部元件 (與 V12 相同) --- */
+
+.package-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.package-meta .price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary-accent);
+}
+
+.package-meta .duration {
+  font-size: 1rem;
+  color: var(--color-text-dark);
+  background: var(--color-light-bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.arrival-note {
+  font-size: 0.9rem;
+  background: var(--color-light-bg);
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--color-text-dark);
+  margin-bottom: 20px; /* 增加與下方文字的間距 */
+}
+
+.package-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: auto; 
+  padding-top: 24px;
+}
+
+.package-details ul { list-style: none; margin: 0; padding: 0; }
+.package-details li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+.package-details li::before {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.includes li { color: var(--color-text-dark); }
+.includes li::before { content: '✓'; color: #28a745; }
+.excludes li { color: #888; text-decoration: line-through; }
+.excludes li::before { content: '✕'; color: #dc3545; }
+.excludes:empty { display: none; }
+
+/* --- 7. 響應式 (Desktop) --- */
+
+@media (min-width: 992px) {
+  .service-package {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .package-header {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .package-content-wrapper {
+    grid-column: 1;
+    grid-row: 2;
+    border-top: none; 
+    height: 100%; 
+  }
+  
+  /* * [ 🚀 V13 圖片更新 - Desktop ]
+   * 1. 圖片容器 `package-image-placeholder` 靠右對齊，並給予固定左右內距。
+   * 2. 圖片本身限制最大寬度，並移除陰影和圓角（這些是針對 Mobile 用的）。
+   */
+  .package-image-placeholder {
+    grid-column: 2;
+    grid-row: 2;
+    border-left: 1px solid var(--color-border);
+    padding: 24px; /* 重新定義內距 */
+    text-align: right; /* 圖片靠右對齊 */
+    align-self: start; 
+  }
+
+  .package-image-placeholder picture,
+  .package-image-placeholder img {
+    max-width: 300px; /* 桌面模式下，圖片最大寬度限制為 150px */
+    border-radius: 0; /* 桌面模式下圖片不需要圓角 */
+    box-shadow: none; /* 桌面模式下圖片不需要陰影 */
+    margin-left: auto; /* 靠右對齊的關鍵 */
+  }
+}
+
+@media (max-width: 420px) {
+  .package-details {
+    grid-template-columns: 1fr;
+  }
+}

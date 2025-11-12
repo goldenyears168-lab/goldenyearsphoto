@@ -1,0 +1,50 @@
+
+/* ===== 作用於預約頁 (簡化版) ===== */
+.page-booking .booking-text {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.page-booking .booking-text img {
+  width: 50%;
+  height: auto;
+  border-radius: 30px;
+  border: 10px solid #ddd;
+}
+
+.page-booking .notice-box {
+  background: #e0dcdc;
+  border-left: 4px solid #0F2341;
+  padding: 16px 18px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+
+.page-booking .service-rules h4 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.page-booking .service-rules ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.page-booking .service-rules li {
+  margin-bottom: 8px;
+}
+
+.page-booking .booking-embed {
+  margin-top: 28px;
+}
+
+.page-booking .safety-net {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 16px 0;
+}
+
+html, body {
+  position: static !important;
+  overflow: auto !important;
+}

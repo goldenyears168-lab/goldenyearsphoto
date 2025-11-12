@@ -1,0 +1,14 @@
+/* ---------- 🧱 區塊 Section ---------- */
+.module { padding: 60px 0; }
+.module + .module { margin-top: 56px; }
+.module-gray { background-color: var(--color-gray-bg); }
+
+.module-dark {
+  background-color: var(--color-dark);
+  color: var(--color-text-light);
+}
+
+.module-dark h1,
+.module-dark h2,
+.module-dark p { color: var(--color-text-light); }
+.module-dark a { color: var(--color-cta); }

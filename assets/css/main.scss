@@ -1,0 +1,20 @@
+/* =======================================
+ * Core Bundle (不含 4-pages)
+ * ======================================= */
+
+/* 1) 先寫 @use —— 這必須位在所有規則之前 */
+@use '1-core/c-00-tokens' as *;   // 會輸出 @layer tokens 的 :root
+@use '1-core/c-01-base';
+@use '2-layout/l-00-structure';
+@use '2-layout/l-01-header';
+@use '2-layout/l-02-footer';
+@use '3-components/k-00-components';
+@use '3-components/k-01-gallery';
+
+// 【新增這一行】
+@use '3-components/k-02-team-grid'; // 載入我們新寫的團隊網格樣式
+
+/* 2) 接著才可以宣告層級順序（CSS Cascade Layers order） */
+@layer reset, tokens, base, layout, components, utilities;
+
+/* 3) 這裡**不要**再 import 任何東西，也不要載入 4-pages */
