@@ -2,6 +2,7 @@
 layout: "base-layout.njk"
 title: "好時有影｜台北 Z 世代專業攝影（韓式證件照、形象照、畢業照）"
 pageStyles: |
+  <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/4-pages/p-home.css">
 seo:
   description: "位於台北中山/公館，專為 Z 世代打造的韓式證件照、專業形象照、畢業寫真。立即查看透明價目表，預約你的高光時刻。"
@@ -9,312 +10,356 @@ seo:
 ---
 
 <div class="module module-dark page-hero">
-  <div class="container">
-    <h1>好時有影｜台北專業履歷形象照</h1>
-    <p class="subtitle">
-      讓每一個「好時」，都有你我的「身影」
-    </p>
-    <p class="subtitle">
-      台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
-    </p>
-  </div>
+  <div class="container">
+    <h1>好時有影｜台北專業履歷形象照</h1>
+    <p class="subtitle">
+      讓每一個「好時」，都有你我的「身影」
+    </p>
+    <p class="subtitle">
+      台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
+    </p>
+  </div>
 </div>
-
 
 <div class="module">
-  <div class="container">
-    <h2 class="text-align-center">找到你的專屬風格</h2>
-    <nav class="portfolio-filter">
-      <button class="filter-btn" data-filter="korean-id">韓式證件照</button>
-      <button class="filter-btn" data-filter="linkedin-portrait">專業形象照</button>
-      <button class="filter-btn" data-filter="full-body-portrait">全身形象照</button>
-      <button class="filter-btn" data-filter="lawyer-portrait">律師形象照</button>
-      <button class="filter-btn" data-filter="doctor-coat">醫師袍照</button>
-      <button class="filter-btn" data-filter="corporate-group">企業團體照</button>
-      <button class="filter-btn" data-filter="musician-portrait">樂器演奏照</button>
-      <button class="filter-btn" data-filter="campaign-portrait">競選照</button>
-      <button class="filter-btn" data-filter="grad-id">畢業證件照</button>
-      <button class="filter-btn" data-filter="grad-happy-id">畢業學士服</button>
-      <button class="filter-btn" data-filter="grad-portrait">畢業寫真</button>
-      <button class="filter-btn" data-filter="student-group">學生團體照</button>
-      <button class="filter-btn" data-filter="couple">情侶寫真</button>
-      <button class="filter-btn" data-filter="bestie-portrait">閨蜜寫真</button>
-      <button class="filter-btn" data-filter="friends-portrait">朋友合照</button>
-      <button class="filter-btn" data-filter="family">全家福</button>
-      <button class="filter-btn" data-filter="maternity">好孕照</button>
-      <button class="filter-btn" data-filter="body-profile">體態寫真</button>
-      <button class="filter-btn" data-filter="chill-vibe">鬆弛感風</button>
-      <button class="filter-btn" data-filter="emo">情緒寫真</button>
-      <button class="filter-btn" data-filter="legacy-portrait">慈祥照</button>
-    </nav>
+  <div class="container">
+    <h2 class="text-align-center">找到你的專屬風格</h2>
+    
+    <nav class="portfolio-filter">
+      <button class="filter-btn" data-filter="korean-id">韓式證件照</button>
+      <button class="filter-btn" data-filter="linkedin-portrait">專業形象照</button>
+      <button class="filter-btn" data-filter="full-body-portrait">全身形象照</button>
+      <button class="filter-btn" data-filter="lawyer-portrait">律師形象照</button>
+      <button class="filter-btn" data-filter="doctor-coat">醫師袍照</button>
+      <button class="filter-btn" data-filter="corporate-group">企業團體照</button>
+      <button class="filter-btn" data-filter="musician-portrait">樂器演奏照</button>
+      <button class="filter-btn" data-filter="campaign-portrait">競選照</button>
+      <button class="filter-btn" data-filter="grad-id">畢業證件照</button>
+      <button class="filter-btn" data-filter="grad-happy-id">畢業學士服</button>
+      <button class="filter-btn" data-filter="grad-portrait">畢業寫真</button>
+      <button class="filter-btn" data-filter="student-group">學生團體照</button>
+      <button class="filter-btn" data-filter="couple">情侶寫真</button>
+      <button class="filter-btn" data-filter="bestie-portrait">閨蜜寫真</button>
+      <button class="filter-btn" data-filter="friends-portrait">朋友合照</button>
+      <button class="filter-btn" data-filter="family">全家福</button>
+      <button class="filter-btn" data-filter="maternity">好孕照</button>
+      <button class="filter-btn" data-filter="body-profile">體態寫真</button>
+      <button class="filter-btn" data-filter="chill-vibe">鬆弛感風</button>
+      <button class="filter-btn" data-filter="emo">情緒寫真</button>
+      <button class="filter-btn" data-filter="legacy-portrait">慈祥照</button>
+    </nav>
 
-    <div class="portfolio-gallery">
-
-  <!-- 韓式證件照 -->
-  <div class="gallery-item" data-category="korean-id">
-    {% image "/assets/images/portfolio/korean-id/korean-id-1.jpg", "韓式證件照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="korean-id">
-    {% image "/assets/images/portfolio/korean-id/korean-id-2.jpg", "韓式證件照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="korean-id">
-    {% image "/assets/images/portfolio/korean-id/korean-id-3.jpg", "韓式證件照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="korean-id">
-    {% image "/assets/images/portfolio/korean-id/korean-id-4.jpg", "韓式證件照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 專業形象照 (LinkedIn) -->
-  <div class="gallery-item" data-category="linkedin-portrait">
-    {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="linkedin-portrait">
-    {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-2.jpg", "專業形象照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="linkedin-portrait">
-    {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-3.jpg", "專業形象照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="linkedin-portrait">
-    {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-4.jpg", "專業形象照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 全身形象照 -->
-  <div class="gallery-item" data-category="full-body-portrait">
-    {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-1.jpg", "全身形象照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="full-body-portrait">
-    {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-2.jpg", "全身形象照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="full-body-portrait">
-    {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-3.jpg", "全身形象照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="full-body-portrait">
-    {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-4.jpg", "全身形象照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 律師形象照 -->
-  <div class="gallery-item" data-category="lawyer-portrait">
-    {% image "/assets/images/portfolio/lawyer-portrait/lawyer-portrait-1.jpg", "律師形象照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="lawyer-portrait">
-    {% image "/assets/images/portfolio/lawyer-portrait/lawyer-portrait-2.jpg", "律師形象照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 醫師袍照 -->
-  <div class="gallery-item" data-category="doctor-coat">
-    {% image "/assets/images/portfolio/doctor-coat/doctor-coat-1.jpg", "醫師袍照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="doctor-coat">
-    {% image "/assets/images/portfolio/doctor-coat/doctor-coat-2.jpg", "醫師袍照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="doctor-coat">
-    {% image "/assets/images/portfolio/doctor-coat/doctor-coat-3.jpg", "醫師袍照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 企業團體照 -->
-  <div class="gallery-item" data-category="corporate-group">
-    {% image "/assets/images/portfolio/corporate-group/corporate-group-1.jpg", "企業團體照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="corporate-group">
-    {% image "/assets/images/portfolio/corporate-group/corporate-group-2.jpg", "企業團體照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="corporate-group">
-    {% image "/assets/images/portfolio/corporate-group/corporate-group-3.jpg", "企業團體照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 樂器演奏照 -->
-  <div class="gallery-item" data-category="musician-portrait">
-    {% image "/assets/images/portfolio/musician-portrait/musician-portrait-1.jpg", "樂器演奏照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="musician-portrait">
-    {% image "/assets/images/portfolio/musician-portrait/musician-portrait-2.jpg", "樂器演奏照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="musician-portrait">
-    {% image "/assets/images/portfolio/musician-portrait/musician-portrait-3.jpg", "樂器演奏照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="musician-portrait">
-    {% image "/assets/images/portfolio/musician-portrait/musician-portrait-4.jpg", "樂器演奏照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 競選照 -->
-  <div class="gallery-item" data-category="campaign-portrait">
-    {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-1.jpg", "競選照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="campaign-portrait">
-    {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-2.jpg", "競選照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="campaign-portrait">
-    {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-3.jpg", "競選照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="campaign-portrait">
-    {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-4.jpg", "競選照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-
-  <!-- 畢業證件照 -->
-  <div class="gallery-item" data-category="grad-id">
-    {% image "/assets/images/portfolio/grad-id/grad-id-1.jpg", "畢業證件照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-id">
-    {% image "/assets/images/portfolio/grad-id/grad-id-2.jpg", "畢業證件照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-id">
-    {% image "/assets/images/portfolio/grad-id/grad-id-3.jpg", "畢業證件照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 畢業學士服 (活潑) -->
-  <div class="gallery-item" data-category="grad-happy-id">
-    {% image "/assets/images/portfolio/grad-happy-id/grad-happy-id-1.jpg", "畢業學士服照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-happy-id">
-    {% image "/assets/images/portfolio/grad-happy-id/grad-happy-id-2.jpg", "畢業學士服照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-happy-id">
-    {% image "/assets/images/portfolio/grad-happy-id/grad-happy-id-3.jpg", "畢業學士服照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 畢業寫真 -->
-  <div class="gallery-item" data-category="grad-portrait">
-    {% image "/assets/images/portfolio/grad-portrait/grad-portrait-2.jpg", "畢業寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-portrait">
-    {% image "/assets/images/portfolio/grad-portrait/grad-portrait-3.jpg", "畢業寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-portrait">
-    {% image "/assets/images/portfolio/grad-portrait/grad-portrait-4.jpg", "畢業寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="grad-portrait">
-    {% image "/assets/images/portfolio/grad-portrait/grad-portrait-5.jpg", "畢業寫真範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 學生團體照 -->
-  <div class="gallery-item" data-category="student-group">
-    {% image "/assets/images/portfolio/student-group/student-group-1.jpg", "學生團體照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="student-group">
-    {% image "/assets/images/portfolio/student-group/student-group-2.jpg", "學生團體照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 情侶寫真 -->
-  <div class="gallery-item" data-category="couple">
-    {% image "/assets/images/portfolio/couple/couple-1.jpg", "情侶寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="couple">
-    {% image "/assets/images/portfolio/couple/couple-2.jpg", "情侶寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="couple">
-    {% image "/assets/images/portfolio/couple/couple-3.jpg", "情侶寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="couple">
-    {% image "/assets/images/portfolio/couple/couple-4.jpg", "情侶寫真範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 閨蜜寫真 -->
-  <div class="gallery-item" data-category="bestie-portrait">
-    {% image "/assets/images/portfolio/bestie-portrait/bestie-portrait-1.jpg", "閨蜜寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="bestie-portrait">
-    {% image "/assets/images/portfolio/bestie-portrait/bestie-portrait-2.jpg", "閨蜜寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="bestie-portrait">
-    {% image "/assets/images/portfolio/bestie-portrait/bestie-portrait-3.jpg", "閨蜜寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 朋友合照 -->
-  <div class="gallery-item" data-category="friends-portrait">
-    {% image "/assets/images/portfolio/friends-portrait/friends-portrait-1.jpg", "朋友合照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="friends-portrait">
-    {% image "/assets/images/portfolio/friends-portrait/friends-portrait-2.jpg", "朋友合照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="friends-portrait">
-    {% image "/assets/images/portfolio/friends-portrait/friends-portrait-3.jpg", "朋友合照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 全家福 -->
-  <div class="gallery-item" data-category="family">
-    {% image "/assets/images/portfolio/family/family-1.jpg", "全家福範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="family">
-    {% image "/assets/images/portfolio/family/family-2.jpg", "全家福範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="family">
-    {% image "/assets/images/portfolio/family/family-3.jpg", "全家福範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="family">
-    {% image "/assets/images/portfolio/family/family-4.jpg", "全家福範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 好孕照 -->
-  <div class="gallery-item" data-category="maternity">
-    {% image "/assets/images/portfolio/maternity/maternity-1.jpg", "好孕照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="maternity">
-    {% image "/assets/images/portfolio/maternity/maternity-2.jpg", "好孕照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="maternity">
-    {% image "/assets/images/portfolio/maternity/maternity-3.jpg", "好孕照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 體態寫真 -->
-  <div class="gallery-item" data-category="body-profile">
-    {% image "/assets/images/portfolio/body-profile/body-profile-1.jpg", "體態寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="body-profile">
-    {% image "/assets/images/portfolio/body-profile/body-profile-2.jpg", "體態寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="body-profile">
-    {% image "/assets/images/portfolio/body-profile/body-profile-3.jpg", "體態寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- Chill Vibe -->
-  <div class="gallery-item" data-category="chill-vibe">
-    {% image "/assets/images/portfolio/chill-vibe/chill-vibe-1.jpg", "Chill Vibe 風範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="chill-vibe">
-    {% image "/assets/images/portfolio/chill-vibe/chill-vibe-2.jpg", "Chill Vibe 風範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="chill-vibe">
-    {% image "/assets/images/portfolio/chill-vibe/chill-vibe-3.jpg", "Chill Vibe 風範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- Emo -->
-  <div class="gallery-item" data-category="emo">
-    {% image "/assets/images/portfolio/emo/emo-1.jpg", "Emo 風範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="emo">
-    {% image "/assets/images/portfolio/emo/emo-2.jpg", "Emo 風範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="emo">
-    {% image "/assets/images/portfolio/emo/emo-3.jpg", "Emo 風範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="emo">
-    {% image "/assets/images/portfolio/emo/emo-4.jpg", "Emo 風範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-
-  <!-- 慈祥照 -->
-  <div class="gallery-item" data-category="legacy-portrait">
-    {% image "/assets/images/portfolio/legacy-portrait/legacy-1.jpg", "慈祥照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-  <div class="gallery-item" data-category="legacy-portrait">
-    {% image "/assets/images/portfolio/legacy-portrait/legacy-2.jpg", "慈祥照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
-  </div>
-</div>
+    <!-- (此處是已清理 &nbsp; 和拼寫錯誤的 HTML) -->
+    <div class="portfolio-gallery">
+      <!-- 韓式證件照 -->
+      <div class="gallery-item" data-category="korean-id">
+        {% image "/assets/images/portfolio/korean-id/korean-id-1.jpg", "韓式證件照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="korean-id">
+        {% image "/assets/images/portfolio/korean-id/korean-id-2.jpg", "韓式證件照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="korean-id">
+        {% image "/assets/images/portfolio/korean-id/korean-id-3.jpg", "韓式證件照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="korean-id">
+        {% image "/assets/images/portfolio/korean-id/korean-id-4.jpg", "韓式證件照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 專業形象照 (LinkedIn) -->
+      <div class="gallery-item" data-category="linkedin-portrait">
+        {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="linkedin-portrait">
+        {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-2.jpg", "專業形象照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="linkedin-portrait">
+        {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-3.jpg", "專業形象照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="linkedin-portrait">
+        {% image "/assets/images/portfolio/linkedin-portrait/linkedin-portrait-4.jpg", "專業形象照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 全身形象照 -->
+      <div class="gallery-item" data-category="full-body-portrait">
+        {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-1.jpg", "全身形象照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="full-body-portrait">
+        {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-2.jpg", "全身形象照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="full-body-portrait">
+        {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-3.jpg", "全身形象照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="full-body-portrait">
+        {% image "/assets/images/portfolio/full-body-portrait/full-body-portrait-4.jpg", "全身形象照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 律師形象照 -->
+      <div class="gallery-item" data-category="lawyer-portrait">
+        {% image "/assets/images/portfolio/lawyer-portrait/lawyer-portrait-1.jpg", "律師形象照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="lawyer-portrait">
+        {% image "/assets/images/portfolio/lawyer-portrait/lawyer-portrait-2.jpg", "律師形象照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 醫師袍照 -->
+      <div class="gallery-item" data-category="doctor-coat">
+        {% image "/assets/images/portfolio/doctor-coat/doctor-coat-1.jpg", "醫師袍照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="doctor-coat">
+        {% image "/assets/images/portfolio/doctor-coat/doctor-coat-2.jpg", "醫師袍照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="doctor-coat">
+        {% image "/assets/images/portfolio/doctor-coat/doctor-coat-3.jpg", "醫師袍照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 企業團體照 -->
+      <div class="gallery-item" data-category="corporate-group">
+        {% image "/assets/images/portfolio/corporate-group/corporate-group-1.jpg", "企業團體照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="corporate-group">
+        {% image "/assets/images/portfolio/corporate-group/corporate-group-2.jpg", "企業團體照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="corporate-group">
+        {% image "/assets/images/portfolio/corporate-group/corporate-group-3.jpg", "企業團體照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 樂器演奏照 -->
+      <div class="gallery-item" data-category="musician-portrait">
+        {% image "/assets/images/portfolio/musician-portrait/musician-portrait-1.jpg", "樂器演奏照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="musician-portrait">
+        {% image "/assets/images/portfolio/musician-portrait/musician-portrait-2.jpg", "樂器演奏照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="musician-portrait">
+        {% image "/assets/images/portfolio/musician-portrait/musician-portrait-3.jpg", "樂器演奏照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="musician-portrait">
+        {% image "/assets/images/portfolio/musician-portrait/musician-portrait-4.jpg", "樂器演奏照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 競選照 -->
+      <div class="gallery-item" data-category="campaign-portrait">
+        {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-1.jpg", "競選照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="campaign-portrait">
+        {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-2.jpg", "競選照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="campaign-portrait">
+        {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-3.jpg", "競選照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="campaign-portrait">
+        {% image "/assets/images/portfolio/campaign-portrait/campaign-portrait-4.jpg", "競選照範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 畢業證件照 -->
+      <div class="gallery-item" data-category="grad-id">
+        {% image "/assets/images/portfolio/grad-id/grad-id-1.jpg", "畢業證件照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-id">
+        {% image "/assets/images/portfolio/grad-id/grad-id-2.jpg", "畢業證件照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-id">
+        {% image "/assets/images/portfolio/grad-id/grad-id-3.jpg", "畢業證件照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 畢業學士服 (活潑) -->
+      <div class="gallery-item" data-category="grad-happy-id">
+        {% image "/assets/images/portfolio/grad-happy-id/grad-happy-id-1.jpg", "畢業學士服照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-happy-id">
+        {% image "/assets/images/portfolio/grad-happy-id/grad-happy-id-2.jpg", "畢業學士服照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-happy-id">
+        {% image "/assets/images/portfolio/grad-happy-id/grad-happy-id-3.jpg", "畢業學士服照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 畢業寫真 -->
+      <div class="gallery-item" data-category="grad-portrait">
+        {% image "/assets/images/portfolio/grad-portrait/grad-portrait-2.jpg", "畢業寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-portrait">
+        {% image "/assets/images/portfolio/grad-portrait/grad-portrait-3.jpg", "畢業寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-portrait">
+        {% image "/assets/images/portfolio/grad-portrait/grad-portrait-4.jpg", "畢業寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="grad-portrait">
+        {% image "/assets/images/portfolio/grad-portrait/grad-portrait-5.jpg", "畢業寫真範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 學生團體照 -->
+      <div class="gallery-item" data-category="student-group">
+        {% image "/assets/images/portfolio/student-group/student-group-1.jpg", "學生團體照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="student-group">
+        {% image "/assets/images/portfolio/student-group/student-group-2.jpg", "學生團體照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 情侶寫真 -->
+      <div class="gallery-item" data-category="couple">
+        {% image "/assets/images/portfolio/couple/couple-1.jpg", "情侶寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="couple">
+        {% image "/assets/images/portfolio/couple/couple-2.jpg", "情侶寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="couple">
+        {% image "/assets/images/portfolio/couple/couple-3.jpg", "情侶寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="couple">
+        {% image "/assets/images/portfolio/couple/couple-4.jpg", "情侶寫真範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 閨蜜寫真 -->
+      <div class="gallery-item" data-category="bestie-portrait">
+        {% image "/assets/images/portfolio/bestie-portrait/bestie-portrait-1.jpg", "閨蜜寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="bestie-portrait">
+        {% image "/assets/images/portfolio/bestie-portrait/bestie-portrait-2.jpg", "閨蜜寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="bestie-portrait">
+        {% image "/assets/images/portfolio/bestie-portrait/bestie-portrait-3.jpg", "閨蜜寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 朋友合照 -->
+      <div class="gallery-item" data-category="friends-portrait">
+        {% image "/assets/images/portfolio/friends-portrait/friends-portrait-1.jpg", "朋友合照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="friends-portrait">
+        {% image "/assets/images/portfolio/friends-portrait/friends-portrait-2.jpg", "朋友合照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="friends-portrait">
+        {% image "/assets/images/portfolio/friends-portrait/friends-portrait-3.jpg", "朋友合照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 全家福 -->
+      <div class="gallery-item" data-category="family">
+        {% image "/assets/images/portfolio/family/family-1.jpg", "全家福範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="family">
+        {% image "/assets/images/portfolio/family/family-2.jpg", "全家福範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="family">
+        {% image "/assets/images/portfolio/family/family-3.jpg", "全家福範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="family">
+        {% image "/assets/images/portfolio/family/family-4.jpg", "全家福範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 好孕照 -->
+      <div class="gallery-item" data-category="maternity">
+        {% image "/assets/images/portfolio/maternity/maternity-1.jpg", "好孕照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="maternity">
+        {% image "/assets/images/portfolio/maternity/maternity-2.jpg", "好孕照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="maternity">
+        {% image "/assets/images/portfolio/maternity/maternity-3.jpg", "好孕照範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 體態寫真 -->
+      <div class="gallery-item" data-category="body-profile">
+        {% image "/assets/images/portfolio/body-profile/body-profile-1.jpg", "體態寫真範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="body-profile">
+        {% image "/assets/images/portfolio/body-profile/body-profile-2.jpg", "體態寫真範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="body-profile">
+        {% image "/assets/images/portfolio/body-profile/body-profile-3.jpg", "體態寫真範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- Chill Vibe -->
+      <div class="gallery-item" data-category="chill-vibe">
+        {% image "/assets/images/portfolio/chill-vibe/chill-vibe-1.jpg", "Chill Vibe 風範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="chill-vibe">
+        {% image "/assets/images/portfolio/chill-vibe/chill-vibe-2.jpg", "Chill Vibe 風範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="chill-vibe">
+        {% image "/assets/images/portfolio/chill-vibe/chill-vibe-3.jpg", "Chill Vibe 風範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- Emo -->
+      <div class="gallery-item" data-category="emo">
+        {% image "/assets/images/portfolio/emo/emo-1.jpg", "Emo 風範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="emo">
+        {% image "/assets/images/portfolio/emo/emo-2.jpg", "Emo 風範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="emo">
+        {% image "/assets/images/portfolio/emo/emo-3.jpg", "Emo 風範例 3", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="emo">
+        {% image "/assets/images/portfolio/emo/emo-4.jpg", "Emo 風範例 4", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <!-- 慈祥照 -->
+      <div class="gallery-item" data-category="legacy-portrait">
+        {% image "/assets/images/portfolio/legacy-portrait/legacy-1.jpg", "慈祥照範例 1", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+      <div class="gallery-item" data-category="legacy-portrait">
+        {% image "/assets/images/portfolio/legacy-portrait/legacy-2.jpg", "慈祥照範例 2", "(min-width: 768px) 50vw, 100vw", "" %}
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="module module-gray">
+  <div class="container text-align-center">
+    <h2>歷年代表客戶</h2>
+    <p>感謝各界專業人士與組織的信任，選擇好時有影留下影像。</p>
+    <h3>代表企業客戶：</h3>
+    <p>
+      Amazon亞馬遜、MSD美商默沙東藥廠、鵬耀法律事務所、遠雄集團、智選科技、技鋼科技、聖邦科技、CHARLES &amp; KEITH、萬寶華、資生堂、微軟、雅培、IBM、Inline樂排、foodpanda、英美菸草、Happy hair、白蘭氏、生洋網路、Garmin、臺大醫院。
+    </p>
+    <h3>代表校園客戶：</h3>
+    <p>
+      台大醫、台大牙醫、台大物治、陽明醫、陽明物治、中山醫、馬偕醫、馬偕聽語、輔大醫、政大EMBA、交大GMBA。
+    </p>
+  </div>
+</div>
 
-  <div class="module module-gray">
-    <div class="container text-align-center">
-      <h2>歷年代表客戶</h2>
-      <p>感謝各界專業人士與組織的信任，選擇好時有影留下影像。</p>
-      <h3>代表企業客戶：</h3>
-      <p>
-        Amazon亞馬遜、MSD美商默沙東藥廠、鵬耀法律事務所、遠雄集團、智選科技、技鋼科技、聖邦科技、CHARLES &amp; KEITH、萬寶華、資生堂、微軟、雅培、IBM、Inline樂排、foodpanda、英美菸草、Happy hair、白蘭氏、生洋網路、Garmin、臺大醫院。
-      </p>
-      <h3>代表校園客戶：</h3>
-      <p>
-        台大醫、台大牙醫、台大物治、陽明醫、陽明物治、中山醫、馬偕醫、馬偕聽語、輔大醫、政大EMBA、交大GMBA。
+<!--
+ * =========================================
+ * [!!] 篩選器功能 (Filter Function)
+ * =========================================
+ *
+ * 策略：
+ * 1. 將篩選器 JS 直接嵌入，確保它 100% 會執行。
+ * 2. 這會實現您要的「天真藍」範例功能：
+ * 點擊按鈕 -> 隱藏其他 -> 只顯示該分類。
+ -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ========== Index 圖庫篩選 ========== */
+  
+  // 加上防呆檢查，只在有 .portfolio-filter 的頁面執行
+  const filterContainer = document.querySelector('.portfolio-filter');
+  
+  if (filterContainer) {
+    const buttons = document.querySelectorAll('.portfolio-filter .filter-btn');
+    const items = document.querySelectorAll('.portfolio-gallery .gallery-item');
 
-      </p>
-    </div>
-  </div>
+    // 讓按鈕不觸發 form submit（保險）
+    buttons.forEach(btn => { if (!btn.hasAttribute('type')) btn.setAttribute('type', 'button'); });
+
+    // 顯示/隱藏邏輯
+    function applyFilter(category) {
+      // 遍歷 items 並設定 display
+      items.forEach(item => {
+        const match = (category === 'all') || (item.dataset.category === category);
+        
+        // 使用 'display: none' 來隱藏不匹配的項目
+        // 這是正確的，因為我們的 CSS 戰爭已經在 p-home.scss 中
+        // 用 'float: none !important' 解決了。
+        item.style.display = match ? '' : 'none';
+      });
+      // 遍歷 buttons 並設定 active class
+      buttons.forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === category);
+      });
+    }
+
+    // 預設：顯示第一個按鈕的分類
+    // 這將實現您要的「天真藍」效果 (預設只顯示一組)
+    const defaultCategory = buttons[0]?.dataset.filter || 'all';
+    applyFilter(defaultCategory); // 預設會自動加上 active class
+
+    // 點擊互動
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // (可選) 支援網址 hash：#filter=linkedin-portrait
+    const hash = new URLSearchParams(location.hash.replace(/^#/, '')).get('filter');
+    if (hash) {
+      const target = [...buttons].find(b => b.dataset.filter === hash);
+      if (target) {
+        // 觸發點擊，JS 會自動處理 applyFilter
+        target.click(); 
+      }
+    }
+  }
+});
+</script>

@@ -9,9 +9,13 @@
 @use '2-layout/l-01-header';
 @use '2-layout/l-02-footer';
 @use '3-components/k-00-components';
-@use '3-components/k-01-gallery';
 
-// 【新增這一行】
+/* * [!!] 關鍵修復：
+ * 停用此處的 Gallery 載入。
+ * 我們將在 p-home.scss 中定義 Gallery，以避免 CSS 衝突。
+ */
+// @use '3-components/k-01-gallery';
+
 @use '3-components/k-02-team-grid'; // 載入我們新寫的團隊網格樣式
 
 /* 2) 接著才可以宣告層級順序（CSS Cascade Layers order） */
