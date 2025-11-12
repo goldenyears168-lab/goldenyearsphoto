@@ -1,6 +1,6 @@
 /* =======================================
  * [p-home.scss]
- * 首頁專屬樣式 (最終 "Naive Blue" 版)
+ * 首頁專屬樣式 (美感優化版)
  * ======================================= */
 
 /* 🎛 濾鏡按鈕（作品分類） */
@@ -10,14 +10,14 @@
   justify-content: center;
   gap: 10px;
   margin-bottom: 30px;
-  margin-top: 32px; /* 增加與上方 H2 的間距 */
+  margin-top: 32px; 
 }
 
 .filter-btn {
   padding: 8px 16px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--color-text-dark, #333); /* 增加備用顏色 */
+  color: var(--color-text-dark, #333); 
   background-color: var(--color-white, #fff);
   border: 1px solid var(--color-gray-bg, #eee);
   border-radius: 20px;
@@ -34,7 +34,7 @@
   background-color: var(--color-cta, #e6e0ff); 
   color: var(--color-dark, #431f9c);
   border-color: var(--color-cta, #e6e0ff);
-  box-shadow: 0 4px 10px rgba(67, 31, 156, 0.2); /* 陰影匹配主題色 */
+  box-shadow: 0 4px 10px rgba(67, 31, 156, 0.2); 
   transform: scale(1.02);
 }
 
@@ -42,54 +42,49 @@
 /* 🖼 圖片牆（Gallery） - "Naive Blue" 佈局 */
 
 .portfolio-gallery {
-  /* [!!] 關鍵修復 #1：強制 Grid 並清除 float */
   display: grid !important;
-  float: none !important; /* ⭐️ 這是戰勝舊規則的關鍵 ⭐️ */
-
-  /* [!!] 關鍵修復 #2：
-   * 停止使用易碎的 @media 斷點。
-   * 改用現代的 auto-fill 寫法，
-   * 自動處理 4, 3, 2, 1 欄的響應式變化。
-   * (260px 是格子的最小寬度)
-   */
+  float: none !important; 
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
-  
   margin-top: 24px;
   margin-bottom: 56px;
 }
 
 .gallery-item {
-  /* [!!] 關鍵修復 #1.B：在項目層級再次清除 float */
-  float: none !important; /* ⭐️ 這是戰勝舊規則的關鍵 ⭐️ */
-  width: 100% !important; /* 重設寬度，讓 Grid 接管 */
-
-  /* [!!] 關鍵修復 #3：實現「等高」
-   * 這是實現 "Naive Blue" 佈局的關鍵。
-   * 我們給所有格子一個固定的高度。
-   * 您可以隨意調整 350px 這個值。
-   */
+  float: none !important; 
+  width: 100% !important;
   height: 350px; 
-
-  /* 保留您原有的美觀樣式 */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  background: #f7f7f7;
-  transition: transform 0.3s ease;
+
+  /* [!!] 關鍵修改 #1：
+   * 1. 移除 'background' (使其透明)
+   * 2. 移除 'box-shadow'
+   * 3. 擴展 'transition' 以包含陰影
+   */
+  background: transparent; 
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); */ /* <- 移除預設陰影 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* <- 擴展 transition */
+}
+
+/* [!!] 關鍵新增 #2：
+ * 增加 'hover' 效果，使其「浮動」
+ */
+.gallery-item:hover {
+  transform: translateY(-5px); /* 向上浮動 5px */
+  
+  /* 在 hover 時才加上陰影，創造浮動感 */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
 }
 
 .gallery-item img,
 .gallery-item picture {
-  /* [!!] 關鍵修復 #4：實現「維持原始比例」
-   * 圖片將會 'contain' (完整顯示) 在 350px 高的格子中。
-   */
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ⭐️ 這是「維持原始比例」的關鍵 ⭐️ */
+  object-fit: contain; /* (維持原始比例) */
   object-position: center;
   max-width: 100%;
 }
