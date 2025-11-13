@@ -1,35 +1,71 @@
-# --- 服務與工具 ---
-/photo-cropper/                                      /guide/crop-tool/photo-cropper/      301
-/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm/     /guide/crop-tool/                 301
-/Price-List/                                         /price-list/                         301
-/%E5%A6%9D%E9%AB%AE%E6%9C%8D%E5%8B%99-akeup/                      /guide/makeup-and-hair/          301
-/feedback/                                            /guide/faq/                          301
+# --- 網站轉址規則 V4 (採用 URL 編碼，並修復所有錯誤) ---
 
-# --- 預約頁面 ---
-/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/gongguan/            /booking/gongguan/             301
-/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/zhongshan/           /booking/zhongshan/            301
-/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/outdoor-service/     /booking/                      301
-/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84/gongguan/                    /booking/gongguan/             301
-/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/pop-up-studio-1     /booking/                      301
-/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/workshop            /booking/                      301
+# 服務與工具
+/photo-cropper /guide/crop-tool/photo-cropper/ 301
+/photo-cropper/ /guide/crop-tool/photo-cropper/ 301
+/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm /guide/crop-tool/ 301
+/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm/ /guide/crop-tool/ 301
+/Price-List /price-list/ 301
+/Price-List/ /price-list/ 301
+/%E5%A6%9D%E9%AB%AE%E6%9C%8D%E5%8B%99-akeup /guide/makeup-and-hair/ 301
+/%E5%A6%9D%E9%AB%AE%E6%9C%8D%E5%8B%99-akeup/ /guide/makeup-and-hair/ 301
+/feedback /guide/faq/ 301
+/feedback/ /guide/faq/ 301
+/FAQS /guide/faq/ 301
+/FAQS/ /guide/faq/ 301
 
-# --- 作品集 (Blog) ---
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%B0%88%E6%A5%AD%E5%BD%A2%E8%B1%A1%E7%85%A7-linkedin/    /blog/profile/       301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%80%8B%E4%BA%BA%E5%AF%AB%E7%9C%9F/                    /blog/profile/       301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%83%85%E4%BE%B6%E5%AF%AB%E7%9C%9F/                    /blog/couples/       301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%80%8B%E4%BA%BA%E5%AF%AB%E7%9C%9F/                    /blog/graduation/    301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E7%95%A2%E6%A5%AD%E8%AD%89%E4%BB%B6%E7%85%A7/            /blog/graduation/    301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E9%9F%93%E5%BC%8F%E8%AD%89%E4%BB%B6%E7%85%A7/            /blog/korean-id/     301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%85%A8%E5%AE%B6%E7%A6%8F%E8%A6%AA%E5%AD%90%E5%AF%AB%E7%9C%9F/   /blog/family/        301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AF%B5%E7%89%A9%E5%90%88%E7%85%A7/                    /blog/pet/           301
-/world-pop-up-studio-project/                                      /blog/workshop/               301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%B4%BB%E5%8B%95%E7%B4%80%E9%8C%84/                                           301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%A0%A1%E5%9C%92%E8%B4%8A%E5%8A%A9%E6%A1%88%E4%BE%8B/                          301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%A4%96%E6%8B%8D%E5%A4%A7%E5%90%88%E7%85%A7/                                  301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AD%95%E5%A9%A6%E5%AF%AB%E7%9C%9F/                                          301
-/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/outdoors-service/                                          301
-/DreamList/                                                                                 301
-/studio-space/                                                                              301
-/%E6%94%9D%E5%BD%B1%E6%A3%9A%E7%A7%9F%E5%80%9F/                                                  301
-/corporate/                                                                               301
-/home/                                                                                     301
+# 預約頁面
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/gongguan /booking/gongguan/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/gongguan/ /booking/gongguan/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/zhongshan /booking/zhongshan/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/zhongshan/ /booking/zhongshan/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%10%E7%B4%84-booking/outdoor-service /booking/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/outdoor-service/ /booking/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%10%E7%B4%84/gongguan /booking/gongguan/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%10%E7%B4%84/gongguan/ /booking/gongguan/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/pop-up-studio-1 /booking/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/pop-up-studio-1/ /booking/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/workshop /booking/ 301
+/%E7%B7%9A%E4%B8%8A%E9%A0%90%E7%B4%84-booking/workshop/ /booking/ 301
+
+# 作品集 (Blog)
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%B0%88%E6%A5%AD%E5%BD%A2%E8%B1%A1%E7%85%A7-linkedin /blog/profile/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%B0%88%E6%A5%AD%E5%BD%A2%E8%B1%A1%E7%85%A7-linkedin/ /blog/profile/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%80%8B%E4%BA%BA%E5%AF%AB%E7%9C%9F /blog/profile/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%80%8B%E4%BA%BA%E5%AF%AB%E7%9C%9F/ /blog/profile/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%83%85%E4%BE%B6%E5%AF%AB%E7%9C%9F /blog/couples/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%83%85%E4%BE%B6%E5%AF%AB%E7%9C%9F/ /blog/couples/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E7%95%A2%E6%A5%AD%E5%AF%AB%E7%9C%9F /blog/graduation/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E7%95%A2%E6%A5%AD%E5%AF%AB%E7%9C%9F/ /blog/graduation/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E7%95%A2%E6%A5%AD%E8%AD%89%E4%BB%B6%E7%85%A7 /blog/graduation/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E7%95%A2%E6%A5%AD%E8%AD%89%E4%BB%B6%E7%85%A7/ /blog/graduation/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E9%9F%93%E5%BC%8F%E8%AD%89%E4%BB%B6%E7%85%A7 /blog/korean-id/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E9%9F%93%E5%BC%8F%E8%AD%89%E4%BB%B6%E7%85%A7/ /blog/korean-id/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%85%A8%E5%AE%B6%E7%A6%8F%E8%A6%AA%E5%AD%90%E5%AF%AB%E7%9C%9F /blog/family/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%85%A8%E5%AE%B6%E7%A6%8F%E8%A6%AA%E5%AD%90%E5%AF%AB%E7%9C%9F/ /blog/family/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AF%B5%E7%89%A9%E5%90%88%E7%85%A7 /blog/pet/ 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AF%B5%E7%89%A9%E5%90%88%E7%85%A7/ /blog/pet/ 301
+/world-pop-up-studio-project /blog/workshop/ 301
+/world-pop-up-studio-project/ /blog/workshop/ 301
+
+# --- 轉到首頁的規則 (V4 修復版) ---
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%B4%BB%E5%8B%95%E7%B4%80%E9%8C%84 / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%B4%BB%E5%8B%95%E7%B4%80%E9%8C%84/ / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%A0%A1%E5%9C%92%E8%B4%8A%E5%8A%A9%E6%A1%88%E4%BE%8B / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%A0%A1%E5%9C%92%E8%B4%8A%E5%8A%A9%E6%A1%88%E4%BE%8B/ / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%A4%96%E6%8B%8D%E5%A4%A7%E5%90%88%E7%85%A7 / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%A4%96%E6%8B%8D%E5%A4%A7%E5%90%88%E7%85%A7/ / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AD%95%E5%A9%A6%E5%AF%AB%E7%9C%9F / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AD%95%E5%A9%A6%E5%AF%AB%E7%9C%9F/ / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/outdoors-service / 301
+/%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/outdoors-service/ / 301
+/DreamList / 301
+/DreamList/ / 301
+/studio-space / 301
+/studio-space/ / 301
+/%E6%94%9D%E5%BD%B1%E6%A3%9A%E7%A7%9F%E5%80%9F / 301
+/%E6%94%9D%E5%BD%B1%E6%A3%9A%E7%A7%9F%E5%80%9F/ / 301
+/corporate / 301
+/corporate/ / 301
+/home / 301
+/home/ / 301
