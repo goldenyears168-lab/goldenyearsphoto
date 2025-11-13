@@ -1,10 +1,10 @@
 # --- 網站轉址規則 V4 (採用 URL 編碼，並修復所有錯誤) ---
 
 # 服務與工具
-/photo-cropper /guide/crop-tool/photo-cropper/ 301
-/photo-cropper/ /guide/crop-tool/photo-cropper/ 301
-/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm /guide/crop-tool/ 301
-/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm/ /guide/crop-tool/ 301
+/photo-cropper /guide/crop-tool/ 301
+/photo-cropper/ /guide/crop-tool/ 301
+/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm /guide/ 301
+/photo-cropper/%E7%BE%8E%E5%9C%8B%E7%B0%BD%E8%AD%895cm5cm/ /guide/ 301
 /Price-List /price-list/ 301
 /Price-List/ /price-list/ 301
 /%E5%A6%9D%E9%AB%AE%E6%9C%8D%E5%8B%99-akeup /guide/makeup-and-hair/ 301

@@ -38,20 +38,30 @@
                     <li><a href="/"> 首頁</a></li>
                     <li><a href="/price-list/"> 價目表</a></li>
                     
-                    <li class="dropdown dropdown--guide">
-                        {# [ V9.0 ] 改為 <button> 並添加 ARIA #}
+                    {# [!!] 策略：將 .dropdown--guide 升級為 .megamenu 結構 #}
+                    <li class="dropdown dropdown--guide megamenu">
+                        
                         <button class="nav-dropdown-trigger" 
                                 type="button"
                                 aria-expanded="false" 
                                 aria-controls="menu-guide">
                             拍攝指南
                         </button>
-                        {# [ V9.0 ] 新增 id="menu-guide" 並預設 hidden #}
-                        <ul class="dropdown-menu" id="menu-guide" hidden>
-                            <li><a href="/guide/makeup-and-hair/"> 妝髮服務介紹</a></li>
-                            <li><a href="/guide/faq/"> 常見問題 (FAQ)</a></li>
-                            <li><a href="/guide/crop-tool/"> 自助裁切工具</a></li>
-                        </ul>
+                        
+                        {# [!!] 結構變更：使用與「專欄文章」相同的 div.megamenu-container #}
+                        <div class="dropdown-menu megamenu-container" id="menu-guide" hidden>
+                            <div class="megamenu-column">
+                                
+                                <h5 class="megamenu-heading">拍攝指南</h5>
+                                
+                                <ul>
+                                    <li><a href="/guide/makeup-and-hair/"> 妝髮服務介紹</a></li>
+                                    <li><a href="/guide/faq/"> 常見問題 (FAQ)</a></li>
+                                    <li><a href="/guide/crop-tool/"> 自助裁切工具</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
                     </li>
 
                     <li class="dropdown megamenu">
