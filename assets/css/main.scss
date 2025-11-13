@@ -1,24 +1,28 @@
 /* =======================================
- * Core Bundle (不含 4-pages)
+ * Core Bundle (V8.0 升級版)
  * ======================================= */
 
-/* 1) 先寫 @use —— 這必須位在所有規則之前 */
-@use '1-core/c-00-tokens' as *;   // 會輸出 @layer tokens 的 :root
+/* * [ V8.0 關鍵變更 ]
+ * 1) @use 規則
+ * 我們不再需要 _l-03-layout-fix.scss
+ * 因為 position: sticky 解決了佈局問題。
+ */
+@use '1-core/c-00-tokens' as *;
 @use '1-core/c-01-base';
 @use '2-layout/l-00-structure';
 @use '2-layout/l-01-header';
 @use '2-layout/l-02-footer';
+
+/* [ 🚀 V8.0 ] _l-03-layout-fix 已被移除 */
+/* @use '2-layout/_l-03-layout-fix'; */
+
 @use '3-components/k-00-components';
+@use '3-components/k-02-team-grid'; 
 
-/* * [!!] 關鍵修復：
- * 停用此處的 Gallery 載入。
- * 我們將在 p-home.scss 中定義 Gallery，以避免 CSS 衝突。
+@use '4-pages/p-graduation';     // 載入「畢業照」的獨特樣式
+@use '4-pages/p-guide-makeup'; // 載入「妝髮服務」的獨特樣式
+@use '4-pages/p-blog-pages';     // 載入「寵物/全家福/醫師袍」的共用樣式
+
+/* * 2) @layer 宣告層級順序
  */
-// @use '3-components/k-01-gallery';
-
-@use '3-components/k-02-team-grid'; // 載入我們新寫的團隊網格樣式
-
-/* 2) 接著才可以宣告層級順序（CSS Cascade Layers order） */
-@layer reset, tokens, base, layout, components, utilities;
-
-/* 3) 這裡**不要**再 import 任何東西，也不要載入 4-pages */
+@layer reset, tokens, base, layout, components, pages, utilities;

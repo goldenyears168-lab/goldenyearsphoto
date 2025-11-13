@@ -1,161 +1,171 @@
-/*
- * 好時有影 V6.2 - 主 JavaScript (最終修復版)
- * 工程師：Gemini
- * 策略：
- * 1. [V6.2 關鍵修復] JS 點擊監聽器 "必須" 先檢查 isDesktop()。
- * 2. [V6.2] e.preventDefault() "只能" 在行動版 (!isDesktop()) 中執行。
- * 3. [V6.1] CSS 100% 負責 Desktop :hover。
- * 4. [V6.1] JS "強制" 清理 L1 (漢堡) 和 L2 (下拉) 選單的 .is-open 狀態。
+/* ==================================================
+ * [V9.0 升級] 核心互動邏輯
+ * 1. 處理漢堡選單 (Toggle) 的 ARIA 狀態與 [hidden]
+ * 2. 處理行動版下拉選單 (Dropdown) 的點擊 (僅限行動版)
+ * 3. 處理點擊外部 (Click Outside) 關閉選單
+ *
+ * 註：此檔案是 V6.2 的 "完全替換版"，
+ * 專為 V9.0 的 <button> 與 ARIA 架構設計。
+ * ==================================================
  */
-
-document.addEventListener('DOMContentLoaded', () => {
-  const mqDesktop = window.matchMedia('(min-width: 992px)');
-  const isDesktop = () => mqDesktop.matches;
-
-  /* ========== 1) RWD 手機選單 (L1) ========== */
-  const toggleButton = document.querySelector('.mobile-nav-toggle');
-  const navMenu = document.querySelector('.header-nav');
-
-  if (toggleButton && navMenu) {
-    // 點擊漢堡按鈕
-    toggleButton.addEventListener('click', () => {
-      // (保險) 如果在桌機版，確保選單是關的
-      if (isDesktop()) {
-        navMenu.classList.remove('is-open');
-        toggleButton.innerHTML = '&#9776;';
-        return;
-      }
-      // 切換行動版選單
-      const isOpen = navMenu.classList.toggle('is-open');
-      toggleButton.innerHTML = isOpen ? '&times;' : '&#9776;';
-    });
-
-    // [V6.1 關鍵修復] 斷點切換：*強制*重置 L1 (漢堡) 選單
-    mqDesktop.addEventListener('change', () => {
-      navMenu.classList.remove('is-open');
-      toggleButton.innerHTML = '&#9776;';
-    });
+(function(){
+  
+  const toggle = document.querySelector('.mobile-nav-toggle');
+  const nav = document.getElementById('primary-nav');
+  if (!toggle || !nav) {
+    console.warn('V9.0: 找不到漢堡鈕 (toggle) 或導覽列 (nav) 元素。');
+    return;
   }
 
-  /* ========== 2) Dropdown (L2) - V6.2 簡化邏輯 ========== */
+  // [ 🚀 V10.0 補強 ] 保險：避免在 form 中提交
+  if (!toggle.hasAttribute('type')) toggle.setAttribute('type', 'button');
+  document.querySelectorAll('.nav-dropdown-trigger').forEach(btn=>{
+    if (!btn.hasAttribute('type')) btn.setAttribute('type', 'button');
+  });
+
+  // --- 1. 主選單開關 (Toggle) ---
   
-  const allDropdowns = document.querySelectorAll('.dropdown');
+  function setOpen(open){
+    toggle.setAttribute('aria-expanded', String(open));
+    if (open) {
+      nav.hidden = false;
+      nav.classList.add('is-open'); // .is-open 用於 CSS 過渡
+      document.documentElement.classList.add('nav-open'); // 可選：鎖定 body 滾動
+    } else {
+      nav.classList.remove('is-open');
+      nav.hidden = true;
+      document.documentElement.classList.remove('nav-open');
+    }
+  }
 
-  // 統一關閉 L2 選單 (行動版)
-  const closeAllL2Dropdowns = () => {
-    allDropdowns.forEach(dropdown => {
-      dropdown.classList.remove('is-open');
-      const trigger = dropdown.querySelector('.nav-dropdown-trigger') || dropdown.querySelector(':scope > a');
-      if (trigger) {
-        trigger.setAttribute('aria-expanded', 'false');
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    setOpen(!open);
+  });
+
+  // --- 2. 下拉選單 (Dropdown) ---
+  // [ 顧問強化 ] 僅在行動版啟用 JS 點擊，桌面版保留 CSS :hover
+  
+  const dropdownTriggers = document.querySelectorAll('.nav-dropdown-trigger');
+  const mediaQuery = window.matchMedia('(max-width: 992px)');
+
+  function handleDropdownClick(btn, panel) {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    panel.hidden = expanded; // true -> 收合
+  }
+
+  dropdownTriggers.forEach(btn => {
+    const controls = btn.getAttribute('aria-controls');
+    const panel = controls && document.getElementById(controls);
+    if (!panel) return;
+
+    btn.addEventListener('click', () => {
+      // [ V9.0 關鍵 ] 僅在行動版(992px以下)執行點擊切換
+      if (mediaQuery.matches) {
+        handleDropdownClick(btn, panel);
       }
-    });
-  };
-
-  // 統一處理所有 L2 下拉選單
-  allDropdowns.forEach(dropdown => {
-    // [V6.0] 尋找觸發器 (<a> 標籤)
-    const trigger = dropdown.querySelector('.nav-dropdown-trigger') || dropdown.querySelector(':scope > a');
-    const menu = dropdown.querySelector('.dropdown-menu');
-
-    if (!trigger || !menu) return; // 不是有效的 dropdown
-
-    // a11y 輔助
-    trigger.setAttribute('role', 'button');
-    trigger.setAttribute('aria-haspopup', 'true');
-    trigger.setAttribute('aria-expanded', 'false');
-
-    // [ 🚀 關鍵修復 V6.2：JS 只在行動版作用 ]
-    trigger.addEventListener('click', (e) => {
-      
-      // [V6.2 關鍵修復] 1. 檢查是否為桌面版
-      if (isDesktop()) {
-        // 桌面版 100% 交給 CSS :hover，JS "不" 執行 preventDefault。
-        // 允許 href="#" 正常運作，不干擾 CSS :hover。
-        return; 
-      }
-      
-      // --- [V6.2] 以下是 "行動版" 邏輯 ---
-
-      // 2. (只在行動版) 阻止 <a> 標籤跳轉
-      e.preventDefault(); 
-      
-      // 3. [V4.2] 檢查目前的狀態
-      const wasOpen = dropdown.classList.contains('is-open');
-
-      // 4. [V4.2] 無條件關閉「所有」L2 選單（重置狀態）
-      closeAllL2Dropdowns();
-
-      // 5. [V4.2] 如果它原本是關的，就把它打開
-      if (!wasOpen) {
-        dropdown.classList.add('is-open');
-        trigger.setAttribute('aria-expanded', 'true');
-      }
-      // (如果它原本是開的，它在步驟 4 已被關閉，任務完成)
     });
   });
 
-  // 全局：點擊選單外部，關閉所有 L2 選單 (行動版)
-  document.addEventListener('click', (e) => {
-    // 如果點擊的目標不在 .dropdown 內部，則關閉所有
-    if (!e.target.closest('.dropdown')) {
-      // [FIX] 確保點擊外部時，是呼叫 "關閉所有" 函數
-      closeAllL2Dropdowns();
+  // [ V9.0 關鍵 ] 
+  // 當視窗從 mobile resize 到 desktop 時，重設所有下拉選單狀態
+  mediaQuery.addEventListener('change', (e) => {
+    if (!e.matches) { // 進入桌面版 (non-mobile)
+      dropdownTriggers.forEach(btn => {
+        const controls = btn.getAttribute('aria-controls');
+        const panel = controls && document.getElementById(controls);
+        if (panel) {
+          btn.setAttribute('aria-expanded', 'false');
+          panel.hidden = true; // 隱藏所有面板，交給 CSS :hover
+        }
+      });
+      
+      // 並確保主選單也關閉
+      setOpen(false);
     }
   });
 
-  // [ 🚀 關鍵修復：清理 L2 (下拉) 選單斷點切換 (Bug #B) ]
-  const cleanupL2DropdownsOnResize = () => {
-    // [FIX V3.9] 移除 if (isDesktop()) 檢查，強制清理
-    closeAllL2Dropdowns();
-  };
+  // --- 3. 點擊外部 (Click Outside) ---
+  
+  document.addEventListener('click', (e)=>{
+    if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+      setOpen(false);
+    }
+  });
+  
+  // --- [ 🚀 V10.0 補強 ] 4. 鍵盤與連結點擊 ---
 
-  // 頁面載入時跑一次，並綁定到斷點切換事件
-  cleanupL2DropdownsOnResize();
-  mqDesktop.addEventListener('change', cleanupL2DropdownsOnResize);
+  // Esc 關閉（主選單與任何展開的 dropdown）
+  document.addEventListener('keydown', (e)=>{
+    if (e.key !== 'Escape') return;
+    let changed = false;
+    dropdownTriggers.forEach(btn => {
+      // 檢查是否展開
+      if (btn.getAttribute('aria-expanded') === 'true') {
+        const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        if (panel) { 
+          btn.setAttribute('aria-expanded','false'); 
+          panel.hidden = true; 
+          changed = true; 
+        }
+      }
+    });
+    // 如果主選單是開的，也關閉它
+    if (nav.classList.contains('is-open')) { 
+      setOpen(false); 
+      changed = true; 
+    }
+    // 如果有任何狀態改變，阻止預設行為 (例如 Esc 可能會停止頁面載入)
+    if (changed) e.preventDefault();
+  });
 
+  // 行動：點選單連結後自動關閉（避免殘留）
+  nav.addEventListener('click', (e)=>{
+    const a = e.target.closest('a');
+    // 如果點擊的不是 <a> 連結，就不用動作
+    if (!a) return; 
+    
+    // [ 顧問強化 ] 僅在行動版 (mediaQuery.matches) 點擊連結時關閉
+    if (mediaQuery.matches) {
+      setOpen(false);
+    }
+  });
 
-  /* ========== 3) Index 圖庫篩選 (Refactored from index.njk) ========== */
-  // 加上防呆檢查，只在有 .portfolio-filter 的頁面執行
+  /* ========== 5) [移植 V6.2] Index 圖庫篩選 ========== */
+  // (此邏輯與 Header 無關，但若您需要，可保留)
   const filterContainer = document.querySelector('.portfolio-filter');
   
   if (filterContainer) {
     const buttons = document.querySelectorAll('.portfolio-filter .filter-btn');
     const items = document.querySelectorAll('.portfolio-gallery .gallery-item');
 
-    // 讓按鈕不觸發 form submit（保險）
     buttons.forEach(btn => { if (!btn.hasAttribute('type')) btn.setAttribute('type', 'button'); });
 
-    // 顯示/隱藏邏輯
     function applyFilter(category) {
-      // (優化) 遍歷 items 並設定 display
       items.forEach(item => {
         const match = (category === 'all') || (item.dataset.category === category);
         item.style.display = match ? '' : 'none';
       });
-      // (優化) 遍歷 buttons 並設定 active class
       buttons.forEach(b => {
         b.classList.toggle('active', b.dataset.filter === category);
       });
     }
 
-    // 預設：顯示第一個按鈕的分類
     const defaultCategory = buttons[0]?.dataset.filter || 'all';
-    applyFilter(defaultCategory); // 預設會自動加上 active class
+    applyFilter(defaultCategory); 
 
-    // 點擊互動
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         applyFilter(btn.dataset.filter);
       });
     });
 
-    // 支援網址 hash（可選）：#filter=linkedin-portrait
     const hash = new URLSearchParams(location.hash.replace(/^#/, '')).get('filter');
     if (hash) {
       const target = [...buttons].find(b => b.dataset.filter === hash);
-      if (target) target.click(); // .click() 會觸發上面的監聽器並執行 applyFilter
+      if (target) target.click();
     }
   }
-  
-});
+
+})();

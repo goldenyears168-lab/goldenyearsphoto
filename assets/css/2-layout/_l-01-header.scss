@@ -1,273 +1,458 @@
-/*
- * ==================================================
- * [V6.2 修正版] Global Header (Mobile-First)
- * 策略：
- * 1. 修正 V6.1 行動版 Toggle 未靠右的佈局問題。
- * 2. 桌面版：保持 V6.1 的 "Logo-Left, Nav-Center" 佈局。
- * ==================================================
- */
+@layer layout {
 
-/* --- 0. 系統變數 (建議放在 :root) --- */
-/*
-  :root {
-    --z-index-dropdown: 1000;
-    --z-index-header-nav: 1500;
-    --z-index-header: 2000;
+  /* [ V9.0 ] 瀏覽器應自動處理 [hidden]，但可加一層保險 */
+  /* [V18.0] 保留：功能性覆寫 */
+  [hidden] {
+    display: none !important;
   }
-*/
-/* 註：z-index 變數通常會放在 _c-00-tokens.scss 中統一管理 */
 
+  /* [ 🚀 V10.0 補強 ] 鎖定滾動 */
+  html.nav-open { 
+    overflow: hidden; 
+  }
 
-/* --- 1. Header 基礎結構 (Mobile & Desktop 共通) --- */
-.global-header {
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-h);
-  z-index: var(--z-index-header);
-  display: flex;
-  align-items: center;
-}
+  /* --- 1. Header 基礎結構 (Mobile & Desktop 共通) --- */
+  .global-header {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    /* [ 🚀 V19.0 升級 ] 改為 position: fixed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h); /* [V19.0] 固定佈局需要明確高度 */
+    z-index: var(--z-index-header);
+    display: flex;
+    align-items: center;
+    margin: 0; /* [V19.0] 確保移除 body 邊距影響 */
+  }
 
-.global-header nav {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 20px;
-}
+  .global-header nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
 
-.header-logo {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.header-logo img {
-  height: 40px !important;
-  width: 40px !important;
-  max-width: 100%;
-}
-
-/* --- 2. 行動版導航 (Mobile-First Default) --- */
-.mobile-nav-toggle {
-  display: block;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--color-dark);
-
-  /* * [ 🚀 V6.2 修正 ]
-   * 這是修正行動版跑版的關鍵。
-   * 使用 auto margin 將此按鈕推到 flex 容器的最右側。
-   * 這取代了在 nav 上使用 'justify-content: space-between' 的舊方法。
-   */
-  margin-left: auto;
-}
-
-.header-nav {
-  display: none;
-}
-
-.header-cta {
-  display: none;
-}
-
-/* --- 3. 全局顏色與連結樣式 --- */
-.header-nav a,
-.nav-dropdown-trigger,
-.header-cta {
-  color: var(--nav-link) !important;
-  cursor: pointer; 
-}
-
-/* 頂層選單的 Hover 效果 */
-.header-nav > li > a:hover,
-.header-nav > li > a:focus-visible,
-.header-nav > li > a.active,
-.dropdown:hover > .nav-dropdown-trigger,
-.nav-dropdown-trigger[aria-expanded=true], /* JS (行動版) */
-.header-cta:hover,
-.header-cta:focus-visible {
-  color: var(--nav-link-hover) !important;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* 統一的 Focus 樣式 */
-.header-nav a:focus-visible,
-.nav-dropdown-trigger:focus-visible,
-.header-cta:focus-visible,
-.mobile-nav-toggle:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* --- 4. 行動版 L1 選單開啟狀態 (Mobile State: .is-open) --- */
-.header-nav.is-open {
-  display: block;
-  position: absolute;
-  top: var(--header-h);
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: var(--color-white);
-  border-top: 1px solid var(--color-border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  z-index: var(--z-index-header-nav);
-  max-height: calc(100vh - var(--header-h));
-  overflow-y: auto;
-}
-
-/* 行動版 L1 連結 */
-.header-nav.is-open > li > a {
-  display: block;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.header-nav.is-open > li > a:hover {
-  background-color: #f0f0f0;
-}
-
-/* [V6.0] 行動版 L2 下拉選單邏輯 (由 JS 控制) */
-.header-nav.is-open .dropdown-menu {
-  display: none; /* 預設隱藏 */
-  padding-left: 20px; /* 內縮 */
-  background: #fafafa;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.header-nav.is-open .dropdown.is-open > .dropdown-menu {
-  display: block; /* JS 點擊時顯示 */
-}
-
-.header-nav.is-open .dropdown-menu a {
-  display: block;
-  padding: 12px 20px;
-  border-bottom: 1px dashed var(--color-border);
-  color: var(--mega-link);
-}
-.header-nav.is-open .dropdown-menu li:last-child a {
-  border-bottom: none;
-}
-.header-nav.is-open .dropdown-menu a:hover {
-  background-color: #f0f0f0;
-  color: var(--mega-link-hover);
-}
-
-
-/* --- 5. 桌面版導航 (Desktop @media) --- */
-@media (min-width: 992px) {
-  
-  /* [結構修正] 啟用桌面版的群組包裝器 */
   .header-navigation-wrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .header-logo {
     display: flex;
     align-items: center;
-    /* 這個 gap 是 .header-nav 和 .header-cta 之間的間距 */
-    gap: 25px; 
-    
-    /* [置中修改] 使用 auto margin 實現置中 */
-    margin-left: auto;
-    margin-right: auto;
+    flex-shrink: 0;
+  }
+
+  .header-logo img {
+    height: 40px !important; /* [V18.0] 保留：此為覆蓋 Nunjucks {% image %} 內聯樣式所需 */
+    width: 40px !important;  /* [V18.0] 保留：同上 */
+    max-width: 100%;
+  }
+
+  /* --- 2. 行動版導航 (Mobile-First Default) --- */
+  .mobile-nav-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-dark);
+    margin-left: auto; 
+    flex-shrink: 0;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .header-nav {
+    display: none; 
+  }
+
+
+  /* --- 3. [ V18.0 ] 全域按鈕重置 (移除 !important) --- */
+  /*
+   * V18.0 重構：
+   * 移除 V13.0 的 !important。
+   * 我們依賴 V15.0 的 Token (--nav-link) 來設定顏色。
+   */
+  .global-header .nav-dropdown-trigger {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    padding: 0;                 /* 由下方 RWD 區塊各自賦值 */
+    font: inherit;
+    line-height: inherit;
+    color: var(--nav-link, #353242); /* [V18.0] 直接使用 Token */
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+    text-align: left;
+    display: inline-block; /* 桌面版基礎 */
   }
   
-  /* 5.1 顯示桌面元素 */
-  .mobile-nav-toggle { display: none; }
-  .header-cta { display: inline-flex; align-items: center; }
-
-  /* [V6.1 關鍵修復] 提高特異性，確保 100% 覆蓋 .is-open */
-  .header-nav,
-  .header-nav.is-open {
+  .header-nav > li {
     display: flex;
     align-items: center;
-    gap: 25px; /* 這個 gap 是 L1 連結 (li) 之間的間距 */
-    /* 覆蓋行動版 .is-open 樣式 */
-    position: static;
-    border-top: none;
-    box-shadow: none;
-    max-height: none;
-    overflow: visible;
-    background: none;
-    width: auto; /* [關鍵修復] 覆蓋行動版的 width: 100% */
   }
 
-  /* 覆蓋行動版 L1 連結樣式 */
-  .header-nav.is-open > li > a,
-  .header-nav > li > a {
-    display: inline;
-    padding: 0;
-    border-bottom: none;
+
+  /* 頂層選單的 Hover / Focus 效果 */
+  /* [V18.0] 移除 !important，依賴 V15.0 Token */
+  .header-nav > li > a:hover,
+  .header-nav > li > a:focus-visible,
+  .header-nav > li > a.active,
+  .dropdown:hover > .nav-dropdown-trigger,
+  .nav-dropdown-trigger:focus-visible,
+  .nav-dropdown-trigger[aria-expanded="true"],
+  .header-cta:hover,
+  .header-cta:focus-visible {
+    color: var(--nav-link-hover);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
+
+  /* 統一的 Focus 樣式 */
+  .header-nav a:focus-visible,
+  .nav-dropdown-trigger:focus-visible,
+  .header-cta:focus-visible,
+  .mobile-nav-toggle:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* --- 4. 行動版 L1 選單開啟狀態 (Mobile State: .is-open) --- */
+  .header-nav.is-open {
+    display: block;
+    position: absolute;
+    top: var(--header-h); 
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    z-index: var(--z-index-header-nav); 
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    padding-bottom: 20px; 
+    list-style: none;
+    margin: 0;
+    padding-left: 0; 
+  }
+
   .header-nav.is-open > li > a:hover,
-  .header-nav > li > a:hover {
-    background: none;
+  .header-nav.is-open > li > .nav-dropdown-trigger:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* [V16.0 移除] (保持移除) */
+
+  /* [V9.0] 行動版 CTA 樣式 (在 <li> 內) */
+  .header-cta-mobile {
+    display: list-item !important; /* [V18.0] 保留：功能性覆寫 */
+    border-bottom: none !important; /* [V18.0] 保留：功能性覆寫 */
+    padding: 0; 
+  }
+  
+
+  /* --- 5. [ V18.0 ] RWD 響應式樣式重構 --- */
+
+  /* ===== 5.1) 手機版：條目與 CTA 全部左齊 (V18.0) ===== */
+  @media (max-width: 992px) {
+    /* [V18.0] 移除 V14.0 的 !important */
+    .global-header .header-nav { 
+      margin: 0; 
+      padding: 0; 
+      list-style: none; 
+    }
+    .global-header .header-nav > li { 
+      border-bottom: 1px solid var(--color-border, #eee); 
+      padding: 0; 
+    }
+    
+    /* [V13.0] 統一 <a> 和 <button> 樣式 */
+    .global-header .header-nav a,
+    .global-header .nav-dropdown-trigger {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 16px 24px;
+      text-decoration: none;
+      color: var(--nav-link); /* [V18.0] */
+    }
+
+    /* [V18.0] 讓「線上預約」跟清單條目完全齊平（移除 !important） */
+    .global-header .header-nav .header-cta-mobile > a {
+      display: block;
+      width: 100%;
+      max-width: none;
+      margin: 0;                 
+      padding: 16px 24px;        
+      background: transparent;   
+      color: var(--nav-link); 
+      border: 0;
+      border-radius: 0;          
+      box-shadow: none;          
+      text-align: left;          
+      font-weight: 600; 
+      text-decoration: none; 
+    }
+    
+    /* [V14.0] 視覺一致：加上與其他 LI 相同的分隔線 */
+    .global-header .header-nav .header-cta-mobile {
+      border-bottom: 1px solid var(--color-border, #eee);
+    }
+    
+    .global-header .header-cta-mobile a:hover {
+        background: #f0f0f0;
+    }
+
+    /* === [ V18.0 ] 行動版 L2 (移除 !important) === */
+    .global-header .dropdown-menu,
+    .global-header .megamenu-container {
+      position: static;     /* [V18.0] */
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      background: var(--mega-bg, #fff); 
+      border-top: 1px solid var(--color-border, #eee); 
+      border-bottom: none; 
+      padding-left: 0; 
+    }
+  
+    .global-header .dropdown-menu ul,
+    .global-header .megamenu-container ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .global-header .dropdown-menu li,
+    .global-header .megamenu-container li {
+      border-bottom: 1px solid var(--color-border, #eee);  
+    }
+    
+    .global-header .dropdown-menu a,
+    .global-header .megamenu-container a {
+      display: block;
+      padding: 16px 32px;              
+      text-align: left;
+      color: var(--mega-link, inherit);
+      text-decoration: none;
+      border-bottom: none; 
+    }
+    
+    .global-header .dropdown-menu li:last-child,
+    .global-header .megamenu-container li:last-child {
+        border-bottom: none; 
+    }
+  
+    .global-header .dropdown-menu,
+    .global-header .megamenu-container {
+      border-left: none;
+      border-right: none;
+    }
+    /* === [ V16.0 結束 ] === */
+
   }
 
-  /* 5.2 [V6.0] 桌面版 L2 下拉選單 (純 CSS :hover) */
-  .dropdown {
+
+  /* ===== 5.2) 桌面版：(V18.0) ===== */
+  @media (min-width: 993px) {
+    
+    .header-navigation-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 25px; 
+      margin-left: auto;
+      margin-right: auto;
+      flex: 0 1 auto; 
+      min-width: auto;
+    }
+    
+    .mobile-nav-toggle { display: none; }
+    .header-cta { 
+      display: inline-flex; 
+      align-items: center; 
+      color: var(--nav-cta-text); /* [V18.0] */
+      background: var(--nav-cta-bg); /* [V18.0] */
+      /* (此處應有 padding, border-radius 等，繼承自佈景主題) */
+    }
+    .header-cta-mobile { display: none !important; } /* [V18.0] 保留：功能性覆寫 */
+    
+    .header-nav,
+    .header-nav.is-open {
+      display: flex !important; /* [V18.0] 保留：功能性覆寫 */
+      align-items: center;
+      gap: 25px; 
+      position: static;
+      border-top: none;
+      box-shadow: none;
+      max-height: none;
+      overflow: visible;
+      background: none;
+      width: auto;
+      padding-bottom: 0; 
+    }
+
+    .global-header .header-nav > li { 
+      border: 0; 
+      display: flex; 
+      align-items: center; 
+    }
+    
+    .global-header .header-nav a,
+    .global-header .nav-dropdown-trigger {
+      display: inline-block;
+      padding: 0; 
+      vertical-align: middle;
+      text-decoration: none;
+      width: auto; 
+      border-bottom: none; 
+      color: var(--nav-link); /* [V18.0] */
+    }
+    
+    .header-nav > li > a:hover,
+    .header-nav > li > .nav-dropdown-trigger:hover {
+      background: none; 
+      color: var(--nav-link-hover); /* [V18.0] */
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none; 
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: var(--z-index-dropdown); 
+      width: max-content;
+      min-width: 200px; 
+      padding: 10px;
+      background: var(--mega-bg);
+      border: 1px solid var(--mega-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    .dropdown-menu a {
+      display: block; padding: 10px 15px;
+      white-space: nowrap; color: var(--mega-link);
+      border-radius: 6px; border-bottom: none; 
+    }
+
+    .dropdown-menu a:hover {
+      color: var(--mega-link-hover);
+      background: var(--mega-hover-bg);
+      text-decoration: none;
+    }
+
+    .dropdown:hover > .dropdown-menu {
+      display: block !important; /* [V18.0] 保留：功能性覆寫 */
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    /* [V9.0] 確保 JS 的 [hidden] 在桌面版被 :hover 覆蓋 */
+    .dropdown-menu[hidden] {
+        display: none;
+    }
+    .dropdown:hover > .dropdown-menu[hidden] {
+        display: block !important; /* [V18.0] 保留：功能性覆寫 */
+    }
+
+
+  } /* 結束 @media (min-width: 993px) */
+
+  /* === [ V20.0 恢復 V17.0 策略性覆寫 ] === */
+  /* * V20.0 修復：
+   * 1. 恢復 V17.0 的強制覆寫，解決 V18.0 移除 !important 後，
+   * <a> 標籤被全域樣式污染的問題 (顯示為淡金色)。
+   * 2. 確保 <a> 和 <button> 都能正確使用 V15.0 的 Token。
+   */
+  .global-header {
+    /* 所有連結、按鈕、次選單、CTA 都使用 V15.0 的 Token */
+    .header-nav a,
+    .header-nav .nav-dropdown-trigger,
+    .header-cta,
+    .header-cta-mobile a,
+    .dropdown-menu a,
+    .megamenu-container a {
+      /* [V20.0] 使用 V15.0 Token + 強制覆寫 */
+      color: var(--nav-link, #353242) !important;
+    }
+
+    /* 滑過或 focus 時也保持 V15.0 的 Token */
+    .header-nav a:hover,
+    .header-nav a:focus-visible, /* [V20.0] 修正為 focus-visible */
+    .nav-dropdown-trigger:hover,
+    .nav-dropdown-trigger:focus-visible, /* [V20.0] 修正為 focus-visible */
+    .dropdown-menu a:hover,
+    .megamenu-container a:hover {
+      color: var(--nav-link-hover, #353242) !important;
+      background-color: var(--mega-hover-bg, #f7f7f7); 
+    }
+
+    /* active 狀態一併重置 */
+    .header-nav .active > a,
+    .header-nav a.active,
+    .dropdown-menu .active > a,
+    .megamenu-container .active > a {
+      color: var(--nav-link-active, #353242) !important;
+    }
+  }
+
+} /* 結束 @layer layout */
+
+/* ========= Desktop：讓「拍攝指南」的 dropdown 跟 megamenu 統一風格 ========= */
+@media (min-width: 993px) {
+  .global-header .dropdown--guide {
     position: relative;
   }
 
-  /* 隱藏行動版 JS 狀態 (保險) */
-  .header-nav.is-open .dropdown-menu,
-  .header-nav.is-open .dropdown.is-open > .dropdown-menu {
-    display: none;
-    padding-left: 0;
-    background: none;
-    border-bottom: none;
-  }
-  
-  /* 桌面版 L2 基礎樣式 */
-  .dropdown-menu {
-    display: none; /* 關鍵：預設隱藏 */
+  .global-header .dropdown--guide .dropdown-menu {
     position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: var(--z-index-dropdown);
-    
-    /* [V6.0] 統一簡化樣式 */
-    width: max-content;
-    min-width: 200px; 
-    padding: 10px;
-    background: var(--mega-bg);
-    border: 1px solid var(--mega-border);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-
-    /* 動畫 (參考 style.css) */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    top: calc(100% + 8px);       /* 跟 header 有一點距離，和 megamenu 對齊 */
+    left: 50%;
+    transform: translateX(-50%); /* 以「拍攝指南」居中對齊 */
+    min-width: 260px;            /* 給一個穩定寬度，不會太窄 */
+    padding: 16px 24px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+    z-index: var(--z-index-dropdown, 1002);
   }
 
-  /* 桌面版 L2 連結樣式 */
-  .dropdown-menu a {
+  /* 內部每個項目間距，排版跟 megamenu 類似 */
+  .global-header .dropdown--guide .dropdown-menu li + li {
+    margin-top: 12px;
+  }
+
+  .global-header .dropdown--guide .dropdown-menu a {
     display: block;
-    padding: 10px 15px;
-    white-space: nowrap;
-    color: var(--mega-link);
-    border-radius: 6px;
-    border-bottom: none; /* 覆蓋行動版樣式 */
-  }
-
-  .dropdown-menu a:hover {
-    color: var(--mega-link-hover);
-    background: var(--mega-hover-bg);
+    padding: 0;
     text-decoration: none;
+    color: #000;
   }
 
-  /* [V6.0] 桌面版 :hover 觸發 */
-  .dropdown:hover > .dropdown-menu {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  .global-header .dropdown--guide .dropdown-menu a:hover,
+  .global-header .dropdown--guide .dropdown-menu a:focus {
+    color: #000;
+    text-decoration: underline;
   }
-
-} /* 結束 @media (min-width: 992px) */
+}

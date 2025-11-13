@@ -6,7 +6,9 @@
   <title>{{ title }}｜好時有影 Golden Years</title>
 
   {# --- [ SEO 驗證成功 ] --- #}
-  {% if seo.description %}<meta name="description" content="{{ seo.description }}">{% endif %}
+  {% if seo and seo.description %}
+    <meta name="description" content="{{ seo.description }}">
+  {% endif %}
   <link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
   {# --- [ SEO 結束 ] --- #}
   
@@ -15,13 +17,13 @@
   {{ pageStyles | safe }}
 
   <link rel="icon" href="/assets/images/ui/Favicon.jpg">
-  <link rel="apple-touch-icon" href="/assets/images/ui/logo.jpg">
+  <link rel="apple-touch-icon" href="/assets/images/ui/apple-touch-icon-180.png">
 </head>
 
 <body>
-
+    {# --- [ V9.0 升級 ] --- #}
     <header class="global-header">
-        <nav class="container nav-container"> 
+        <nav class="container nav-container">
             <!-- 子元素 1：Logo -->
             <a href="/" class="header-logo">
                 {% image "/assets/images/ui/logo.jpg", "好時有影 Golden Years Logo", "", "" %}
@@ -31,29 +33,47 @@
             <div class="header-navigation-wrapper">
 
                 <!-- Wrapper 內項目 1：選單 -->
-                <ul class="header-nav">
+                {# [ V9.0 ] 新增 id="primary-nav" 並預設 hidden #}
+                <ul class="header-nav" id="primary-nav" hidden>
                     <li><a href="/"> 首頁</a></li>
                     <li><a href="/price-list/"> 價目表</a></li>
                     
                     <li class="dropdown dropdown--guide">
-                        <span class="nav-dropdown-trigger"> 拍攝指南</span>
-                        <ul class="dropdown-menu">
+                        {# [ V9.0 ] 改為 <button> 並添加 ARIA #}
+                        <button class="nav-dropdown-trigger" 
+                                type="button"
+                                aria-expanded="false" 
+                                aria-controls="menu-guide">
+                            拍攝指南
+                        </button>
+                        {# [ V9.0 ] 新增 id="menu-guide" 並預設 hidden #}
+                        <ul class="dropdown-menu" id="menu-guide" hidden>
                             <li><a href="/guide/makeup-and-hair/"> 妝髮服務介紹</a></li>
                             <li><a href="/guide/faq/"> 常見問題 (FAQ)</a></li>
                             <li><a href="/guide/crop-tool/"> 自助裁切工具</a></li>
                         </ul>
                     </li>
 
-                    <li class="dropdown megamenu"> 
-                        <span class="nav-dropdown-trigger"> 專欄文章</span>
-                        <div class="dropdown-menu megamenu-container">
+                    <li class="dropdown megamenu">
+                        {# [ V9.0 ] 改為 <button> 並添加 ARIA #}
+                        <button class="nav-dropdown-trigger" 
+                                type="button"
+                                aria-expanded="false" 
+                                aria-controls="menu-mega">
+                            專欄文章
+                        </button>
+                        {# [ V9.0 ] 新增 id="menu-mega" 並預設 hidden #}
+                        <div class="dropdown-menu megamenu-container" id="menu-mega" hidden>
                             <div class="megamenu-column">
-                                <h5 class="megamenu-heading">主題文章</h5> 
+                                <h5 class="megamenu-heading">主題文章</h5>
                                 <ul>
                                     <li><a href="/blog/profile/"> 形象照</a></li>
                                     <li><a href="/blog/korean-id/"> 韓式證件照</a></li>
                                     <li><a href="/blog/graduation/"> 畢業儀式</a></li>
                                     <li><a href="/blog/couples/"> 情侶里程碑</a></li>
+                                    <li><a href="/blog/family/"> 全家福</a></li>
+                                    <li><a href="/blog/pet/"> 寵物寫真</a></li>
+                                    <li><a href="/blog/medical/"> 醫師袍形象照</a></li>
                                 </ul>
                             </div>
                             <div class="megamenu-column">
@@ -66,15 +86,24 @@
                         </div>
                     </li>
                     <li><a href="/about/"> 關於我們</a></li>
+                    
+                    {# [ V9.0 ] CTA-Mobile 位於 <ul> 內部，確保會跟著展開 #}
+                    <li class="header-cta-mobile"><a href="/booking/">線上預約</a></li>
                 </ul>
 
-                <!-- Wrapper 內項目 2：CTA -->
+                <!-- Wrapper 內項目 2：CTA (桌面版) -->
                 <a href="/booking/" class="header-cta">線上預約</a>
 
             </div> <!-- 結束 .header-navigation-wrapper -->
             
             <!-- 行動版漢堡選單 -->
-            <button class="mobile-nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+            {# [ V9.0 ] 補全 ARIA 屬性，指向 primary-nav #}
+            <button class="mobile-nav-toggle" 
+                    aria-label="開關導覽" 
+                    aria-expanded="false" 
+                    aria-controls="primary-nav">
+                &#9776;
+            </button>
         </nav>
     </header>
 
@@ -82,9 +111,6 @@
         {{ content | safe }}
     </main>
 
-    {# --- [ 關鍵修復：Accessibility ] --- 
-       我已修復此處的 HTML 結構，確保 <ul> 只包含 <li> 
-    #}
     <footer class="global-footer">
         <div class="container footer-grid">
             
@@ -136,8 +162,8 @@
             </div>
         </div>
     </footer>
-    {# --- [ 修復結束 ] --- #}
 
+    {# [ V9.0 ] 載入新的 JS 檔案 #}
     <script src="/assets/js/main.js"></script>
     
 </body>

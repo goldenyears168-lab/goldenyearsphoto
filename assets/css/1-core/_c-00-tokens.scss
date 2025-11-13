@@ -1,36 +1,58 @@
-/* [0] 🎯 色票與變數（Tokens） */
-:root {
-  --color-dark: #353242;
-  --color-cta: #d0d7f1;
-  --color-primary-accent: #bba896;
-  --color-gray-bg: #C4C7CE;
-  --color-light-bg: #f1edeb;
-  --color-text-dark: #242436;
-  --color-text-light: #ede6e2;
-  --color-white: #fff;
-  --color-border: #e2e2e2;
-  --header-h: 74px; /* 視覺微調：70→74 */
-  --color-section-bg: oklch(95% 0.01 var(--brand-hue));
-  --color-card-bg: oklch(100% 0 0);
-  --color-card-border: oklch(85% 0.02 var(--brand-hue));
+/* ==================================================
+ * [V15.0 策略性合併版] SASS 核心變數 (Tokens)
+ *
+ * 1. [V15.0] 採用您偏好的完整色票系統 (NAV COLOR SYSTEM)
+ * 2. [V15.0] 採用您偏好的 --header-h: 74px
+ * 3. [V9.0] 保留架構所需的 @layer tokens
+ * 4. [V9.0] 保留架構所需的 z-index 變數
+ * ==================================================
+ */
+
+@layer tokens {
+  
+  /* [0] 🎯 色票與變數（V15.0） */
+  :root {
+    --color-dark: #353242;
+    --color-cta: #d0d7f1;
+    --color-primary-accent: #bba896;
+    --color-gray-bg: #C4C7CE;
+    --color-light-bg: #f1edeb;
+    --color-text-dark: #242436;
+    --color-text-light: #ede6e2;
+    --color-white: #fff;
+    --color-border: #e2e2e2;
+    
+    /* [V15.0] 採用您偏好的 74px */
+    --header-h: 74px; 
+    
+    --color-section-bg: oklch(95% 0.01 var(--brand-hue));
+    --color-card-bg: oklch(100% 0 0);
+    --color-card-border: oklch(85% 0.02 var(--brand-hue));
 
 
-  /* [NAV COLOR SYSTEM] */
-  --nav-link:            #353242;
-  --nav-link-hover:      #353242;
-  --nav-link-active:     #353242;
-  --nav-link-muted:      #bba896;
-  --nav-cta-bg:          #d0d7f1;
-  --nav-cta-text:        #353242;
-  --nav-cta-bg-hover:    #d0d7f1;
-  --nav-cta-text-hover:  #353242;
-  --mega-bg:             #fff;
-  --mega-border:         #e2e2e2;
-  --mega-link:           #353242;
-  --mega-link-hover:     #353242;
-  --mega-heading:        #353242;
-  --mega-separator:      #e2e2e2;
-  --mega-hover-bg:       #f7f7f7;
-  --focus-ring:          rgb(208 215 241 / 60%);
+    /* [NAV COLOR SYSTEM] (V15.0) */
+    --nav-link:            #353242;
+    --nav-link-hover:      #353242;
+    --nav-link-active:     #353242;
+    --nav-link-muted:      #bba896;
+    --nav-cta-bg:          #d0d7f1;
+    --nav-cta-text:        #353242;
+    --nav-cta-bg-hover:    #d0d7f1;
+    --nav-cta-text-hover:  #353242;
+    --mega-bg:             #fff;
+    --mega-border:         #e2e2e2;
+    --mega-link:           #353242;
+    --mega-link-hover:     #353242;
+    --mega-heading:        #353242;
+    --mega-separator:      #e2e2e2;
+    --mega-hover-bg:       #f7f7f7;
+    --focus-ring:          rgb(208 215 241 / 60%);
+    
+    /* --- [V9.0-V14.0] 關鍵系統變數 (V15.0 合併) --- */
+    /* (保留 V9.0-V14.0 系統架構所需的 z-index) */
+    --z-index-header: 1000;
+    --z-index-header-nav: 1001;  /* 行動版選單 (在 Header 之上) */
+    --z-index-dropdown: 1002;  /* 桌面版選單 (在 Header 之上) */
+  }
+  
 }
-
