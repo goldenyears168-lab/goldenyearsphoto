@@ -1,0 +1,46 @@
+# --- 網站轉址規則 (Google Site to Netlify) ---
+
+# 服務與工具
+/photo-cropper/                   /guide/crop-tool/photo-cropper/   301
+/美國簽證5cm5cm/                /guide/crop-tool/                 301
+/Price-List/                      /price-list/                      301
+/妝髮服務-akeup/                 /guide/makeup-and-hair/           301
+/FAQS/                            /guide/faq/                       301
+/feedback/                        /guide/faq/                       301
+
+# 預約頁面
+/線上預約-booking/gongguan/         /booking/gongguan/                301
+/線上預約-booking/zhongshan/        /booking/zhongshan/               301
+/線上預約-booking/outdoor-service/  /booking/                         301
+/線上預約/gongguan/                 /booking/gongguan/                301
+/線上預約-booking/pop-up-studio-1/  /booking/                         301
+/線上預約-booking/workshop/         /booking/                         301
+
+# 作品集 (Blog)
+/作品集-portfolio/專業形象照-linkedin/    /blog/profile/                    301
+/作品集-portfolio/個人寫真/             /blog/profile/                    301
+/作品集-portfolio/情侶寫真/             /blog/couples/                    301
+/作品集-portfolio/畢業寫真/             /blog/graduation/                 301
+/作品集-portfolio/畢業證件照/           /blog/graduation/                 301
+/作品集-portfolio/韓式證件照/           /blog/korean-id/                  301
+/作品集-portfolio/全家福親子寫真/       /blog/family/                     301
+/作品集-portfolio/寵物合照/             /blog/pet/                        301
+/world-pop-up-studio-project/     /blog/workshop/                   301
+
+# --- !!! 待處理：請填上新路徑 !!! ---
+# 這些是你提供了舊路徑，但沒有提供新路徑的頁面
+# 請把 [請填上新路徑] 換成 / (首頁) 或 /blog/ 或其他你希望它們去的地方
+
+/作品集-portfolio/活動紀錄/           /  301
+/作品集-portfolio/校園贊助案例/       /  301
+/作品集-portfolio/外拍大合照/         /  301
+/作品集-portfolio/孕婦寫真/           /  301
+/作品集-portfolio/outdoors-service/   /  301
+/DreamList/                       /  301
+/studio-space/                    /  301
+/攝影棚租借/                        /  301
+/corporate/                       /  301
+
+# --- (選填) 建議加入的 Google Site 轉址 ---
+# Google Site 通常有一個 /home 頁面，建議一起轉到首頁
+/home                             /           301
