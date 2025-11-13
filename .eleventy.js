@@ -75,6 +75,14 @@ module.exports = function(eleventyConfig) {
       };
     }
   });
+  module.exports = function(eleventyConfig) {
+    // ... 您的其他設定
+
+    // 確保此行存在
+    eleventyConfig.addPassthroughCopy("_redirects");
+
+    // ... 您的其他設定
+  };
 
   // === 檔案複製 (Passthrough Copy) ===
   
@@ -92,6 +100,7 @@ module.exports = function(eleventyConfig) {
   // === 監聽 (Watch) ===
   eleventyConfig.addWatchTarget("src/scss/");
 
+
   // === Eleventy 設定 (Return 必須是最後) ===
   return {
     dir: {
@@ -105,3 +114,4 @@ module.exports = function(eleventyConfig) {
     templateFormats: ["njk", "md", "html", "scss"], 
   };
 };
+
