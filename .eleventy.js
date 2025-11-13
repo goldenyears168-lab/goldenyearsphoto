@@ -9,13 +9,10 @@ const Image = require("@11ty/eleventy-img");
 // === P2 圖片處理異步 Shortcode (v3 - 帶有錯誤日誌) ===
 async function imageShortcode(src, alt, sizes, cssClass) {
   
-  // (v2 的修復行)
   let cleanSrc = src.startsWith('/') ? src.substring(1) : src;
 
-  // 【 ⬇️ 這是新增的 try...catch 錯誤處理 ⬇️ 】
   try {
-    // 1. 取得圖片元數據
-    let metadata = await Image(cleanSrc, { // <== 確保這裡使用的是 cleanSrc
+    let metadata = await Image(cleanSrc, {
       widths: [400, 800, 1200], 
       formats: ["webp", "auto"], 
       outputDir: "./_site/assets/img-processed/",
@@ -27,7 +24,6 @@ async function imageShortcode(src, alt, sizes, cssClass) {
       }
     });
 
-    // 2. 設定 <img> 標籤的屬性
     let imageAttributes = {
       class: cssClass,
       alt,
@@ -36,19 +32,17 @@ async function imageShortcode(src, alt, sizes, cssClass) {
       decoding: "async",
     };
 
-    // 3. 回傳 Eleventy 自動生成的 <picture> 標籤 HTML
     return Image.generateHTML(metadata, imageAttributes, {
       whitespaceMode: "inline" 
     });
 
   } catch (e) {
-    // 【 ⬇️ 新的錯誤日誌 ⬇️ 】
     console.error(`[Eleventy-Img-Error] 處理圖片失敗： ${src}`);
     console.error(`[Eleventy-Img-Error] 原始錯誤： ${e.message}`);
-    // 拋出一個更清晰的錯誤，Eleventy 會捕獲它
     throw new Error(`[Eleventy-Img] 處理圖片時出錯，來源: [${src}]. \n原始錯誤: ${e.message}`);
   }
 }
+
 
 // === Eleventy 主設定 (唯一的 module.exports) ===
 module.exports = function(eleventyConfig) {
@@ -75,23 +69,16 @@ module.exports = function(eleventyConfig) {
       };
     }
   });
-  module.exports = function(eleventyConfig) {
-    // ... 您的其他設定
-
-    // 確保此行存在
-    eleventyConfig.addPassthroughCopy("_redirects");
-
-    // ... 您的其他設定
-  };
 
   // === 檔案複製 (Passthrough Copy) ===
   
-  // 僅複製 UI 相關圖片
+  // 【 ⬇️ 這是修正後的位置 ⬇️ 】
+  // 複製SOP轉址檔案
+  eleventyConfig.addPassthroughCopy("_redirects");
+
+  // 複製其他靜態資源
   eleventyConfig.addPassthroughCopy("assets/images/ui"); 
   eleventyConfig.addPassthroughCopy("assets/js");
-
-  // === 【重要】從第二個區塊合併過來的 Passthrough ===
-  // 確保這兩個檔案確實存在於您的專案根目錄
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("favicon.ico");
@@ -114,4 +101,3 @@ module.exports = function(eleventyConfig) {
     templateFormats: ["njk", "md", "html", "scss"], 
   };
 };
-
