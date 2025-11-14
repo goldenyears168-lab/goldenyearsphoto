@@ -1,15 +1,18 @@
-// === 1. 導入 Node.js 核心模組 ===
+// === 1. Node.js 核心模組 ===
 const path = require("path");
 const sass = require("sass");
 const fs = require("fs");
 
-// === 2. 導入 Eleventy 插件 ===
+// === 2. Eleventy 插件 ===
 const Image = require("@11ty/eleventy-img");
-const sitemap = require("@quasibit/eleventy-plugin-sitemap");
+// （現在不使用任何 sitemap 外掛，由 sitemap.xml.njk 自己產出）
 
-// === 3. 圖片處理異步 Shortcode ===
+// === 3. 圖片處理 Shortcode ===
 async function imageShortcode(src, alt, sizes, cssClass) {
+  // 確保路徑沒有多餘的前導斜線
   const cleanSrc = src.startsWith("/") ? src.substring(1) : src;
+
+  // 沒有傳 sizes 就給一個安全預設值，避免 Missing `sizes` 錯誤
   const resolvedSizes = sizes || "100vw";
 
   try {
@@ -18,7 +21,7 @@ async function imageShortcode(src, alt, sizes, cssClass) {
       formats: ["webp", "auto"],
       outputDir: "./_site/assets/img-processed/",
       urlPath: "/assets/img-processed/",
-      filenameFormat(id, src, width, format, options) {
+      filenameFormat(id, src, width, format) {
         const extension = path.extname(src);
         const name = path.basename(src, extension);
         return `${name}-${width}w-${id}.${format}`;
@@ -27,8 +30,8 @@ async function imageShortcode(src, alt, sizes, cssClass) {
 
     const imageAttributes = {
       class: cssClass,
-      alt,
-      sizes: resolvedSizes, // ✅ 用我們剛剛的 resolvedSizes
+      alt: alt || "",
+      sizes: resolvedSizes,
       loading: "lazy",
       decoding: "async",
     };
@@ -45,47 +48,73 @@ async function imageShortcode(src, alt, sizes, cssClass) {
   }
 }
 
-// === 4. Eleventy 主設定 (唯一的 module.exports) ===
+// === 4. Eleventy 主設定（唯一的 module.exports） ===
 module.exports = function (eleventyConfig) {
-  // 插件：sitemap
-  eleventyConfig.addPlugin(sitemap, {
-    sitemap: {
-      hostname: "https://www.goldenyearsphoto.com",
-    },
-  });
-
-  // Shortcode：image
+  // 4.1 圖片 shortcode
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
 
-  // Sass 編譯
+  // 4.2 ✅ 新增：只給 Sitemap 用的 Page 集合
+  eleventyConfig.addCollection("pagesForSitemap", (collectionApi) => {
+    return collectionApi.getAll().filter((item) => {
+      const url = item.url;
+      if (!url) return false;
+
+      // 排除靜態資產與報告
+      if (url.startsWith("/assets/")) return false;      // CSS, JS, images…
+      if (url.startsWith("/127.0.0.1_")) return false;   // lighthouse / report
+      if (url.includes(".report/")) return false;
+
+      // 排除明確是檔案副檔名的東西 (Sitemap 只需要頁面)
+      if (url.endsWith(".css")) return false;
+      if (url.endsWith(".js")) return false;
+      if (url.endsWith(".json")) return false;
+      if (url.endsWith(".xml")) return false;
+
+      // 排除 sitemap.xml 本身 (如果它有 eleventyExcludeFromCollections: false)
+      if (url === "/sitemap.xml") return false;
+
+      // 其餘視為正常頁面
+      return true;
+    });
+  });
+
+  // 4.3 Sass 編譯（Eleventy v2 的 addExtension 寫法）
   const scssInputPath = "assets/css";
   eleventyConfig.addTemplateFormats("scss");
   eleventyConfig.addExtension("scss", {
     outputFileExtension: "css",
     async compile(inputContent, inputPath) {
       const parsed = path.parse(inputPath);
-      if (parsed.name.startsWith("_")) return; // partial 不輸出
+      // 以 _ 開頭的 partial 不輸出獨立檔案
+      if (parsed.name.startsWith("_")) return;
 
       const result = sass.compileString(inputContent, {
         loadPaths: [scssInputPath],
         style: "expanded",
       });
+
       return async () => result.css;
     },
   });
 
-  // 靜態檔案複製
+  // 4.4 靜態檔案複製
   eleventyConfig.addPassthroughCopy("_redirects");
   eleventyConfig.addPassthroughCopy("assets/images/ui");
   eleventyConfig.addPassthroughCopy("assets/js");
   eleventyConfig.addPassthroughCopy("robots.txt");
-  // ❌ 不再複製 sitemap.xml，讓 plugin 產生
-  // eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("favicon.ico");
 
-  // 監聽（依你的實際路徑調整，若 SCSS 在 assets/css，建議用這個）
+  // 4.5 監聽 SCSS 變更
   eleventyConfig.addWatchTarget("assets/css/");
 
+  // 4.6 提供給 sitemap.xml.njk 使用的日期 Filter (保留，sitemap 仍在使用)
+  eleventyConfig.addFilter("dateToISO", function (value) {
+    if (!value) return "";
+    const date = value instanceof Date ? value : new Date(value);
+    return date.toISOString();
+  });
+
+  // 4.7 Eleventy 輸出設定
   return {
     dir: {
       input: ".",
@@ -95,6 +124,7 @@ module.exports = function (eleventyConfig) {
       output: "_site",
     },
     passthroughFileCopy: true,
-    templateFormats: ["njk", "md", "html", "scss"],
+    // 要讓 sitemap.xml.njk 正確輸出 XML，一定要包含 'xml'
+    templateFormats: ["njk", "md", "html", "scss", "xml"],
   };
 };

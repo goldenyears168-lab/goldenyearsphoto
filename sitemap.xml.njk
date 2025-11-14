@@ -1,0 +1,28 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+{% for page in collections.all %}
+  {# --- 修改開始 --- #}
+  {# 1. 確保 page.url 存在 #}
+  {# 2. 只包含結尾為 / (目錄) 或 .html (檔案) 的頁面 #}
+  {# 這會自動過濾掉 .css, .js, .json, .xml 等檔案 #}
+  {% if page.url and (page.url.endsWith('/') or page.url.endsWith('.html')) %}
+  <url>
+    <loc>https://www.goldenyearsphoto.com{{ page.url }}</loc>
+    {% if page.date %}
+      <lastmod>{{ page.date | dateToISO }}</lastmod>
+    {% endif %}
+  </url>
+  {% endif %}
+  {# --- 修改結束 --- #}
+{% endfor %}
+
+</urlset>
