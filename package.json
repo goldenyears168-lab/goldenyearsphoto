@@ -38,7 +38,7 @@
     "stylelint-config-standard-scss": "^13.1.0"
   },
   "dependencies": {
-    "@11ty/eleventy-img": "^6.0.4",
+    "@11ty/eleventy-img": "^4.0.2",
     "@quasibit/eleventy-plugin-sitemap": "^2.2.0"
   }
 }
