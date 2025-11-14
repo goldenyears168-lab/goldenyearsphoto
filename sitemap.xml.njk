@@ -9,20 +9,14 @@ eleventyExcludeFromCollections: true
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
-{% for page in collections.all %}
-  {# --- 修改開始 --- #}
-  {# 1. 確保 page.url 存在 #}
-  {# 2. 只包含結尾為 / (目錄) 或 .html (檔案) 的頁面 #}
-  {# 這會自動過濾掉 .css, .js, .json, .xml 等檔案 #}
-  {% if page.url and (page.url.endsWith('/') or page.url.endsWith('.html')) %}
+{% for page in collections.pagesForSitemap %}
   <url>
     <loc>https://www.goldenyearsphoto.com{{ page.url }}</loc>
+
     {% if page.date %}
       <lastmod>{{ page.date | dateToISO }}</lastmod>
     {% endif %}
-  </url>
-  {% endif %}
-  {# --- 修改結束 --- #}
-{% endfor %}
 
+  </url>
+{% endfor %}
 </urlset>
