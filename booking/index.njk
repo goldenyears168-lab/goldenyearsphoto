@@ -32,10 +32,7 @@ permalink: "/booking/"
         <a href="/booking/zhongshan/" class="store-card">
           <div class="store-card-image">
             {# 使用 Eleventy Image Shortcode #}
-            {% image "assets/images/content/booking/location-1.jpg", 
-                    "好時有影 中山店", 
-                    "(max-width: 600px) 100vw, 500px", 
-                    "" %}
+            <img src="{{ 'content/booking/location-1.jpg' | r2img }}" alt="好時有影 中山店" sizes="(max-width: 600px) 100vw, 500px" loading="lazy" decoding="async" class="" />
           </div>
           <div class="store-card-content">
             <h3 class="store-card-title">中山店</h3>
@@ -51,10 +48,7 @@ permalink: "/booking/"
         <a href="/booking/gongguan/" class="store-card">
           <div class="store-card-image">
             {# 使用 Eleventy Image Shortcode #}
-            {% image "assets/images/content/booking/location-2.jpg", 
-                    "好時有影 公館店", 
-                    "(max-width: 600px) 100vw, 500px", 
-                    "" %}
+            <img src="{{ 'content/booking/location-2.jpg' | r2img }}" alt="好時有影 公館店" sizes="(max-width: 600px) 100vw, 500px" loading="lazy" decoding="async" class="" />
           </div>
           <div class="store-card-content">
             <h3 class="store-card-title">公館店</h3>

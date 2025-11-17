@@ -69,9 +69,16 @@
       overflow: clip;
       transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
+    
+    .faq-item[open] {
+      background: var(--color-surface);
+      border-color: var(--color-accent-weak);
+      box-shadow: var(--elevation-1);
+    }
 
     .faq-q {
-      list-style: none;
+      --faq-icon: "＋"; /* 1. 優化點：定義預設圖示變數 */
+      list-style: none; /* 2. 優化點：隱藏 Firefox 預設圖示 */
       cursor: pointer;
       font-weight: 700;
       color: var(--color-ink);
@@ -79,9 +86,13 @@
       font-size: var(--fs-2);
       position: relative;
     }
-    .faq-q::marker, .faq-q::-webkit-details-marker { display: none; }
+    
+    .faq-q::-webkit-details-marker { 
+      display: none; /* 2. 優化點：隱藏 WebKit 預設圖示 */ 
+    }
+    
     .faq-q::after {
-      content: "＋";
+      content: var(--faq-icon); /* 1. 優化點：使用變數 */
       position: absolute;
       inset-inline-end: var(--space-5);
       inset-block-start: 50%;
@@ -89,13 +100,10 @@
       font-weight: 600;
       opacity: .55;
     }
-
-    .faq-item[open] {
-      background: var(--color-surface);
-      border-color: var(--color-accent-weak);
-      box-shadow: var(--elevation-1);
+    
+    .faq-item[open] > .faq-q {
+      --faq-icon: "－"; /* 1. 優化點：僅切換變數 */
     }
-    .faq-item[open] .faq-q::after { content: "－"; }
 
     .faq-a {
       border-block-start: 1px solid var(--color-border);
@@ -121,3 +129,4 @@
     }
   }
 }
+

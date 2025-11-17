@@ -16,7 +16,6 @@
   
   {{ pageStyles | safe }}
 
-  <link rel="icon" href="/assets/images/ui/Favicon.jpg">
   <link rel="apple-touch-icon" href="/assets/images/ui/apple-touch-icon-180.png">
 </head>
 
@@ -26,7 +25,10 @@
         <nav class="container nav-container">
             <!-- 子元素 1：Logo -->
             <a href="/" class="header-logo">
-                {% image "/assets/images/ui/logo.jpg", "好時有影 Golden Years Logo", "", "" %}
+                <img
+                src="/assets/images/ui/logo.jpg"
+                alt="好時有影 Golden Years Logo"
+                />
             </a>
             
             <!-- 子元素 2：導覽列 Wrapper -->
@@ -162,7 +164,11 @@
             <!-- 社群與品牌區塊 -->
             <div class="footer-col">
                 <a href="/" class="footer-logo">
-                    {% image "/assets/images/ui/logo2.png", "好時有影 Golden Years Logo", "", "" %}
+                    <img
+                    src="/assets/images/ui/logo2.png"
+                    alt="好時有影 Golden Years Logo"
+                    />
+
                 </a>
                 <p class="footer-tagline">
                     好時有影攝影工作室<br>

@@ -8,6 +8,8 @@
     "dev": "npx @11ty/eleventy --serve",
     "start": "eleventy --serve",
     "build": "eleventy",
+    "compress-images": "node scripts/compress-images.mjs",
+    "upload-portfolio": "node scripts/upload-portfolio-to-r2.mjs",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:js": "eslint \"assets/js/**/*.js\"",
     "lint:js:fix": "eslint \"assets/js/**/*.js\" --fix",
@@ -33,12 +35,15 @@
     "pa11y": "^9.0.1",
     "pa11y-ci": "^4.0.1",
     "sass": "^1.94.0",
+    "sharp": "^0.34.5",
     "sitemap-stream-parser": "^1.7.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
     "stylelint-config-standard-scss": "^13.1.0"
   },
   "dependencies": {
-    "@11ty/eleventy-img": "^4.0.2"
+    "@11ty/eleventy-img": "^4.0.2",
+    "@aws-sdk/client-s3": "^3.932.0",
+    "dotenv": "^17.2.3"
   }
 }
