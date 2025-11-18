@@ -18,7 +18,7 @@
 
   <link rel="apple-touch-icon" href="/assets/images/ui/apple-touch-icon-180.png">
 
-  {# === 新增：只給 Lighthouse 用的隱藏 heading 樣式 === #}
+  {# Lighthouse 用的隱藏 heading 樣式 #}
   <style>
     .visually-hidden {
       position: absolute;
@@ -32,17 +32,15 @@
       border: 0;
     }
   </style>
-  {# === 新增區塊結束 === #}
 </head>
 
 <body>
 
-    {# === 新增：隱藏的 h1~h4，用來建立正確 heading 階層 === #}
+    {# 只給螢幕閱讀器 / Lighthouse 用的隱藏 h1~h4 #}
     <h1 class="visually-hidden">好時有影 Golden Years 主網站</h1>
     <h2 class="visually-hidden">主導覽</h2>
     <h3 class="visually-hidden">導覽群組</h3>
     <h4 class="visually-hidden">導覽選單標題</h4>
-    {# === 新增區塊結束 === #}
 
     {# --- [ V9.0 升級 ] --- #}
     <header class="global-header">
@@ -149,6 +147,9 @@
     <footer class="global-footer">
         <div class="container footer-grid">
         
+            {# 新增：隱藏 h3，銜接 main 裡最後的 h2 → footer h4 #}
+            <h3 class="visually-hidden">頁尾資訊</h3>
+
             <div class="footer-col">
                 <h4>中山店</h4>
                 <ul class="footer-links location-info">
@@ -160,7 +161,6 @@
                 </ul>
             </div>    
 
-
             <div class="footer-col">
                 <h4>公館店</h4>
                 <ul class="footer-links location-info">
@@ -171,8 +171,6 @@
                     <li>電話: 02-2936-5460</li>
                 </ul>
             </div>
-
-            
 
             <div class="footer-col">
                 <h4>資源與協助</h4>
@@ -192,7 +190,6 @@
                     src="/assets/images/ui/logo2.png"
                     alt="好時有影 Golden Years Logo"
                     />
-
                 </a>
                 <p class="footer-tagline">
                     好時有影攝影工作室<br>
