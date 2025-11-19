@@ -147,6 +147,75 @@ module.exports = function (eleventyConfig) {
     return date.toISOString();
   });
 
+  // 4.9 CSS Inlining Filter: Compiles SCSS on-the-fly for inlining
+  // This eliminates render-blocking resources by inlining CSS in <style> tags
+  // Strategy: Map CSS paths to SCSS source files and compile directly (more reliable than reading _site/)
+  eleventyConfig.addNunjucksFilter("inlineCSS", function (cssPath) {
+    if (!cssPath) return "";
+
+    // Remove leading slash and normalize path
+    let cleanPath = String(cssPath).replace(/^\//, "");
+    
+    // If path doesn't start with assets/css, assume it's relative to assets/css
+    if (!cleanPath.startsWith("assets/css/")) {
+      cleanPath = `assets/css/${cleanPath}`;
+    }
+
+    // Map CSS path to SCSS source file
+    // e.g., /assets/css/main.css -> assets/css/main.scss
+    // e.g., /assets/css/4-pages/p-home.css -> assets/css/4-pages/p-home.scss
+    const scssPath = cleanPath.replace(/\.css$/, ".scss");
+    const scssPathFull = path.join(".", scssPath);
+
+    try {
+      // Primary strategy: Compile SCSS directly from source
+      if (fs.existsSync(scssPathFull)) {
+        const sourceContent = fs.readFileSync(scssPathFull, "utf8");
+        const result = sass.compileString(sourceContent, {
+          loadPaths: ["assets/css"],
+          style: "compressed",
+        });
+        // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
+        return result.css.replace(/^\uFEFF/, '');
+      }
+
+      // Fallback: Try reading compiled CSS from _site (in case SCSS doesn't exist)
+      const outputPath = path.join("_site", cleanPath);
+      if (fs.existsSync(outputPath)) {
+        const cssContent = fs.readFileSync(outputPath, "utf8");
+        // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
+        return cssContent.replace(/^\uFEFF/, '');
+      }
+
+      console.warn(`[inlineCSS] CSS/SCSS file not found: ${cssPath} (tried ${scssPathFull} and ${outputPath})`);
+      return "";
+    } catch (error) {
+      console.error(`[inlineCSS] Error compiling CSS from ${cssPath}:`, error.message);
+      console.error(`[inlineCSS] Stack:`, error.stack);
+      return "";
+    }
+  });
+
+  // 4.10 Extract CSS paths from pageStyles front matter
+  // Parses HTML string containing <link> tags and returns array of CSS file paths
+  eleventyConfig.addNunjucksFilter("extractCSSPaths", function (pageStylesContent) {
+    if (!pageStylesContent) return [];
+    
+    const cssPaths = [];
+    const lines = String(pageStylesContent).split("\n");
+    
+    for (const line of lines) {
+      const trimmed = line.trim();
+      // Match <link rel="stylesheet" href="/path/to/file.css">
+      const hrefMatch = trimmed.match(/href=["']([^"']+\.css)["']/);
+      if (hrefMatch && hrefMatch[1]) {
+        cssPaths.push(hrefMatch[1]);
+      }
+    }
+    
+    return cssPaths;
+  });
+
   // 4.8 Eleventy 輸出設定
   return {
     dir: {
