@@ -118,63 +118,142 @@
 
 /* ========= 價目表頁面專用的圖片畫廊樣式 ========= */
 
-/* Price Gallery - 圖片與說明文字的容器 */
-.price-gallery {
-  /* 覆蓋基礎 card__media 的高度，縮小圖片 */
+/* 關鍵修復 1：覆蓋 .card 和 .c-card 的 overflow: hidden */
+/* 這是導致內容被裁切的最主要原因 */
+.card:has(.price-gallery),
+.c-card:has(.price-gallery),
+.card.card--service:has(.price-gallery),
+.c-card.c-card--price:has(.price-gallery),
+.c-card.c-card--makeup:has(.price-gallery) {
+  overflow: visible !important;
+}
+
+/* 備用方案：如果瀏覽器不支持 :has()，使用更通用的選擇器 */
+.card--split .price-gallery,
+.c-card--split .price-gallery {
+  position: relative;
+  z-index: 1;
+}
+
+/* 覆蓋 split 卡片的最小高度限制，讓卡片可以隨內容撐開 */
+.card--split,
+.c-card--split {
+  @media (min-width: 768px) {
+    min-height: 0 !important; /* 移除 600px 的最小高度限制 */
+    align-items: flex-start !important; /* 改為 flex-start，讓內容從頂部對齊 */
+    
+    /* 覆蓋 .card__media 和 .c-card__media 在 split 布局中的樣式 */
+    .card__media,
+    .c-card__media {
+      align-self: auto !important; /* 覆蓋 align-self: stretch */
+      height: auto !important; /* 覆蓋固定高度 */
+      min-height: 0 !important;
+    }
+  }
+}
+
+/* 價目表頁的圖片區塊：完全解除固定高度限制 */
+.card__media.price-gallery,
+.c-card__media.price-gallery,
+.price-makeup-card__gallery.price-gallery {
   height: auto !important;
-  min-height: 240px;
+  min-height: 0 !important;
+  align-self: auto !important;
+  
+  /* 關鍵修復 2：覆蓋 .card__media img 的 height: 100% */
+  /* 這必須在 .card__media.price-gallery 層級覆蓋，確保優先級 */
+  img {
+    height: auto !important; /* 覆蓋 height: 100% */
+    max-height: none; /* 暫時移除 max-height 限制，讓圖片可以完整顯示 */
+  }
   
   @media (min-width: 768px) {
-    min-height: 280px;
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: auto !important;
+    
+    img {
+      height: auto !important;
+      max-height: none;
+    }
   }
   
   @media (min-width: 992px) {
-    min-height: 300px;
+    img {
+      height: auto !important;
+      max-height: none;
+    }
   }
-  
+}
+
+/* Price Gallery - 圖片與說明文字的容器 */
+.price-gallery {
   /* 增加圖片之間的間距 */
   gap: var(--space-4);
   
   /* 確保 grid items 對齊 */
-  align-items: start;
+  align-items: stretch;
+  /* 覆蓋 split 布局中的 align-content: start，讓 grid 可以隨內容撐開 */
+  align-content: start;
 }
 
-/* Price Gallery Item - 每張圖片與其說明文字 */
+/* Price Gallery Item - 每張圖片與其說明文字（卡片形式） */
 .price-gallery__item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  gap: var(--space-2);
   width: 100%;
   
+  /* 卡片樣式 */
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  /* 移除 overflow: hidden，讓內容可以撐開卡片，而不是被裁切 */
+  overflow: visible;
+  transition: transform var(--transition-hover), box-shadow var(--transition-hover);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  
+  /* 輕微的 hover 效果 */
+  &:hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  /* 圖片容器區域 - 圖片高度由自己決定，不再被父容器硬拉長 */
   img {
+    width: 100%;
+    /* 確保圖片高度是自適應的，徹底覆蓋 card__media 裡的 height: 100% */
+    height: auto !important;
+    max-width: 100%;
+    
+    /* 限制最大尺寸，確保不超出容器 */
+    max-height: 200px; /* 移動端 */
+    
     /* 確保不裁切，維持原本比例 */
-    object-fit: contain;
+    object-fit: contain !important;
     object-position: center center;
     
-    /* 統一圖片大小 - 縮小並限制尺寸 */
-    max-width: 100%;
-    max-height: 180px; /* 統一最大高度，縮小圖片 */
-    width: auto;
-    height: auto;
-    
-    /* 確保圖片居中 */
+    /* 圖片容器樣式 */
     display: block;
-    margin: 0 auto;
-    
-    /* 統一容器背景和樣式 */
     background-color: var(--color-neutral-100);
-    border-radius: var(--radius-md);
-    padding: var(--space-2);
+    padding: var(--space-3);
     box-sizing: border-box;
-    
-    @media (min-width: 768px) {
-      max-height: 220px; /* 桌面版稍微大一點 */
+    flex-shrink: 0;
+  }
+  
+  /* 響應式調整圖片高度 */
+  @media (min-width: 768px) {
+    img {
+      max-height: 260px; /* 桌面版圖片更高，適合豎版照片 */
     }
-    
-    @media (min-width: 992px) {
-      max-height: 240px; /* 大螢幕再大一點 */
+  }
+  
+  @media (min-width: 992px) {
+    img {
+      max-height: 300px; /* 大螢幕圖片更高 */
     }
   }
 }
@@ -186,6 +265,20 @@
   color: var(--color-text-subtle);
   text-align: center;
   margin: 0;
+  padding: var(--space-3) var(--space-2);
   line-height: var(--line-height-normal);
-  padding: 0 var(--space-2);
+  background-color: var(--color-surface);
+  flex-shrink: 0;
+}
+
+/* 尊重用戶的動畫偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .price-gallery__item {
+    transition: box-shadow var(--transition-hover);
+    transform: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
 }
