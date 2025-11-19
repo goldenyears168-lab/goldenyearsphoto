@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
+import sharp from "sharp";
 
 dotenv.config();
 
@@ -20,6 +21,10 @@ const FOLDERS = [
   "price-list",
 ];
 
+// 🚀 Image Optimization Constants
+const MAX_WIDTH = 1200; // Sufficient for retina displays, much smaller than raw 4000px photos
+const QUALITY = 80; // Balanced for photography (80% quality)
+
 if (!ACCOUNT_ID || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY || !BUCKET_NAME) {
   console.error("❌ .env 相關 R2 設定缺一個，請再確認 .env");
   process.exit(1);
@@ -36,8 +41,80 @@ const s3 = new S3Client({
 
 const IMAGES_ROOT = path.join("assets", "images");
 
+/**
+ * Format bytes to human-readable string
+ */
+function formatBytes(bytes) {
+  if (bytes === 0) return "0 Bytes";
+  const k = 1024;
+  const sizes = ["Bytes", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+}
+
+/**
+ * Optimize image using Sharp before uploading to R2
+ * @param {string} localPath - Path to local image file
+ * @returns {Promise<Buffer>} - Optimized image buffer
+ */
+async function optimizeImage(localPath) {
+  const originalBuffer = fs.readFileSync(localPath);
+  const originalSize = originalBuffer.length;
+
+  // Get image metadata to check dimensions
+  const metadata = await sharp(originalBuffer).metadata();
+  const needsResize = metadata.width && metadata.width > MAX_WIDTH;
+
+  // Build Sharp pipeline
+  let pipeline = sharp(originalBuffer);
+
+  // Resize only if image is wider than MAX_WIDTH (maintains aspect ratio)
+  if (needsResize) {
+    pipeline = pipeline.resize(MAX_WIDTH, null, {
+      withoutEnlargement: true, // Don't upscale smaller images
+      fit: "inside", // Maintain aspect ratio
+    });
+  }
+
+  // Determine format based on file extension and apply compression
+  const ext = path.extname(localPath).toLowerCase();
+
+  if (ext === ".jpg" || ext === ".jpeg") {
+    pipeline = pipeline.jpeg({ quality: QUALITY, mozjpeg: true });
+  } else if (ext === ".png") {
+    pipeline = pipeline.png({ quality: QUALITY, compressionLevel: 9 });
+  } else if (ext === ".webp") {
+    pipeline = pipeline.webp({ quality: QUALITY });
+  }
+
+  // Strip metadata (EXIF, etc.) to save space
+  // Note: Sharp strips metadata by default when processing, but we're being explicit
+  pipeline = pipeline.withMetadata({}); // Empty metadata object removes all EXIF/IPTC/XMP data
+
+  // Generate optimized buffer
+  const optimizedBuffer = await pipeline.toBuffer();
+  const optimizedSize = optimizedBuffer.length;
+
+  // Log optimization results
+  const reduction = ((originalSize - optimizedSize) / originalSize * 100).toFixed(1);
+  console.log(
+    `📊 ${path.basename(localPath)} | ` +
+    `Original: ${formatBytes(originalSize)} -> ` +
+    `Optimized: ${formatBytes(optimizedSize)} ` +
+    `(${reduction}% reduction)`
+  );
+
+  return optimizedBuffer;
+}
+
 async function uploadFile(localPath, key) {
-  const fileContent = fs.readFileSync(localPath);
+  // Get original file size for logging
+  const originalStats = fs.statSync(localPath);
+  const originalSize = originalStats.size;
+
+  // Optimize image before uploading (does NOT modify local file)
+  const optimizedBuffer = await optimizeImage(localPath);
+  const optimizedSize = optimizedBuffer.length;
 
   const contentType = (() => {
     if (key.endsWith(".jpg") || key.endsWith(".jpeg")) return "image/jpeg";
@@ -49,12 +126,19 @@ async function uploadFile(localPath, key) {
   const command = new PutObjectCommand({
     Bucket: BUCKET_NAME,
     Key: key,
-    Body: fileContent,
+    Body: optimizedBuffer, // Upload optimized buffer, not original file
     ContentType: contentType,
   });
 
   await s3.send(command);
-  console.log(`✅ Uploaded: ${key}`);
+  
+  // Log upload success with size comparison
+  const reduction = ((originalSize - optimizedSize) / originalSize * 100).toFixed(1);
+  console.log(
+    `✅ Uploaded: ${key} | ` +
+    `Original: ${formatBytes(originalSize)} -> ` +
+    `Optimized: ${formatBytes(optimizedSize)} (${reduction}% reduction)`
+  );
 }
 
 async function walkAndUpload(dir, prefix = "") {

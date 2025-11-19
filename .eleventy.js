@@ -123,7 +123,7 @@ module.exports = function (eleventyConfig) {
 
       const result = sass.compileString(inputContent, {
         loadPaths: [scssInputPath],
-        style: "expanded",
+        style: "compressed",
       });
 
       return async () => result.css;

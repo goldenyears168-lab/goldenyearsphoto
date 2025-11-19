@@ -7,17 +7,21 @@
     - path: Relative path inside portfolio folder (e.g., "korean-id/korean-id-1.jpg")
     - alt: Alt text for the image
     - className: Optional CSS classes (default: empty string)
+    - w: Optional width in pixels (default: 476)
+    - h: Optional height in pixels (default: 613)
   
   Usage:
     {% from "macros/portfolio.njk" import portfolioImg %}
     {{ portfolioImg("korean-id/korean-id-1.jpg", "韓式證件照範例 1") }}
-    {{ portfolioImg("linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1", "custom-class") }}
+    {{ portfolioImg("linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1", "custom-class", 800, 1000) }}
 #}
 
-{% macro portfolioImg(path, alt, className='') %}
+{% macro portfolioImg(path, alt, className='', w=476, h=613) %}
   <img 
     src="{{ ('portfolio/' + path) | r2img }}" 
     alt="{{ alt }}" 
+    width="{{ w }}"
+    height="{{ h }}"
     {% if className %}class="{{ className }}"{% endif %}
     loading="lazy" 
     decoding="async"
