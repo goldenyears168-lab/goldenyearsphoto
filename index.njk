@@ -9,6 +9,8 @@ seo:
   keywords: "韓式證件照, 專業形象照, 畢業照, 台北攝影"
 ---
 
+{% from "macros/portfolio.njk" import portfolioImg %}
+
 <div class="module module-dark page-hero">
   <div class="container">
     <h1>好時有影｜台北專業履歷形象照</h1>
@@ -51,46 +53,26 @@ seo:
     <div class="portfolio-gallery">
       <!-- 韓式證件照 -->
       <div class="gallery-item" data-category="korean-id">
-        <img
-          src="{{ 'portfolio/korean-id/korean-id-1.jpg' | r2img }}"
-          alt="韓式證件照範例 1"
-          loading="lazy"
-          decoding="async"
-        />
+        {{ portfolioImg("korean-id/korean-id-1.jpg", "韓式證件照範例 1") }}
       </div>
 
       <div class="gallery-item" data-category="korean-id">
-        <img
-          src="{{ 'portfolio/korean-id/korean-id-2.jpg' | r2img }}"
-          alt="韓式證件照範例 2"
-          loading="lazy"
-          decoding="async"
-        />
+        {{ portfolioImg("korean-id/korean-id-2.jpg", "韓式證件照範例 2") }}
       </div>
 
       <div class="gallery-item" data-category="korean-id">
-        <img
-          src="{{ 'portfolio/korean-id/korean-id-3.jpg' | r2img }}"
-          alt="韓式證件照範例 3"
-          loading="lazy"
-          decoding="async"
-        />
+        {{ portfolioImg("korean-id/korean-id-3.jpg", "韓式證件照範例 3") }}
       </div>
 
       <div class="gallery-item" data-category="korean-id">
-        <img
-          src="{{ 'portfolio/korean-id/korean-id-4.jpg' | r2img }}"
-          alt="韓式證件照範例 4"
-          loading="lazy"
-          decoding="async"
-        />
+        {{ portfolioImg("korean-id/korean-id-4.jpg", "韓式證件照範例 4") }}
       </div>
       <!-- 專業形象照 (LinkedIn) -->
       <div class="gallery-item" data-category="linkedin-portrait">
-        <img src="{{ 'portfolio/linkedin-portrait/linkedin-portrait-1.jpg' | r2img }}" alt="專業形象照範例 1" loading="lazy" decoding="async" class="">
+        {{ portfolioImg("linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1") }}
       </div>
       <div class="gallery-item" data-category="linkedin-portrait">
-        <img src="{{ 'portfolio/linkedin-portrait/linkedin-portrait-2.jpg' | r2img }}" alt="專業形象照範例 2" loading="lazy" decoding="async" class="">
+        {{ portfolioImg("linkedin-portrait/linkedin-portrait-2.jpg", "專業形象照範例 2") }}
       </div>
       <div class="gallery-item" data-category="linkedin-portrait">
         <img src="{{ 'portfolio/linkedin-portrait/linkedin-portrait-3.jpg' | r2img }}" alt="專業形象照範例 3" loading="lazy" decoding="async" class="">

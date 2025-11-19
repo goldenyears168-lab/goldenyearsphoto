@@ -1,0 +1,26 @@
+{# 
+  Portfolio Image Macro
+  
+  Generates an optimized <img> tag for portfolio images using the r2img filter.
+  
+  Parameters:
+    - path: Relative path inside portfolio folder (e.g., "korean-id/korean-id-1.jpg")
+    - alt: Alt text for the image
+    - className: Optional CSS classes (default: empty string)
+  
+  Usage:
+    {% from "macros/portfolio.njk" import portfolioImg %}
+    {{ portfolioImg("korean-id/korean-id-1.jpg", "韓式證件照範例 1") }}
+    {{ portfolioImg("linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1", "custom-class") }}
+#}
+
+{% macro portfolioImg(path, alt, className='') %}
+  <img 
+    src="{{ ('portfolio/' + path) | r2img }}" 
+    alt="{{ alt }}" 
+    {% if className %}class="{{ className }}"{% endif %}
+    loading="lazy" 
+    decoding="async"
+  />
+{% endmacro %}
+
