@@ -80,16 +80,23 @@ async function optimizeImage(localPath) {
   const ext = path.extname(localPath).toLowerCase();
 
   if (ext === ".jpg" || ext === ".jpeg") {
-    pipeline = pipeline.jpeg({ quality: QUALITY, mozjpeg: true });
+    // Apply compression with mozjpeg (better compression)
+    // Metadata (EXIF) is automatically stripped during format conversion
+    pipeline = pipeline.jpeg({ 
+      quality: QUALITY, 
+      mozjpeg: true
+    });
   } else if (ext === ".png") {
-    pipeline = pipeline.png({ quality: QUALITY, compressionLevel: 9 });
+    pipeline = pipeline.png({ 
+      quality: QUALITY, 
+      compressionLevel: 9 
+    });
   } else if (ext === ".webp") {
     pipeline = pipeline.webp({ quality: QUALITY });
   }
 
-  // Strip metadata (EXIF, etc.) to save space
-  // Note: Sharp strips metadata by default when processing, but we're being explicit
-  pipeline = pipeline.withMetadata({}); // Empty metadata object removes all EXIF/IPTC/XMP data
+  // Note: Metadata (EXIF, IPTC, XMP) is automatically stripped by Sharp
+  // when converting/processing images, so no explicit removal needed
 
   // Generate optimized buffer
   const optimizedBuffer = await pipeline.toBuffer();
