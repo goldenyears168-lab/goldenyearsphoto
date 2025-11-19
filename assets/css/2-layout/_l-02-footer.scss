@@ -2,14 +2,14 @@
 .global-footer {
   background-color: var(--color-dark);
   color: var(--color-text-light);
-  padding: 60px 0 30px;
-  margin-top: 60px;
+  padding: var(--space-12) 0 var(--space-8);
+  margin-top: var(--space-12);
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: var(--space-9);
 }
 
 @media (min-width: 992px) {
@@ -20,11 +20,11 @@
 .footer-col h4 {
   color: var(--color-white);
   font-size: 1.1rem;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 .footer-links li {
-  margin-bottom: 10px;
+  margin-bottom: var(--space-2);
 }
 
 .footer-links a {
@@ -42,7 +42,7 @@
  */
 .social-links {
   display: flex;
-  gap: 20px;
+  gap: var(--space-5);
 }
 
 .social-links a {
@@ -54,10 +54,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  border-top: 1px solid #3E3E3E;
-  padding-top: 30px;
-  margin-top: 40px;
+  gap: var(--space-5);
+  border-top: 1px solid var(--color-border-dark);
+  padding-top: var(--space-8);
+  margin-top: var(--space-9);
   font-size: 0.9rem;
 }
 

@@ -10,6 +10,22 @@
 */
 .price-service-card {
   /* 目前維持使用 .c-card 預設樣式，有需要再加 override */
+  margin-bottom: var(--space-10); /* Increased gap between cards */
+  
+  &:last-child {
+    margin-bottom: 0; /* Remove margin from last card */
+  }
+}
+
+/* Add gap between service cards */
+.card--service,
+.c-card--price,
+.c-card--makeup {
+  margin-bottom: var(--space-10); /* Increased gap between cards */
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .price-service-card__title {
@@ -31,14 +47,14 @@
 /* ========= 區塊副標題：服務包含 / 升級選項 ========= */
 
 .price-section-title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--color-text-subtle);
-  margin: 25px 0 10px 0;
+  margin: var(--space-7) 0 var(--space-2) 0;
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: 8px;
+  padding-bottom: var(--space-2);
 }
 
 /* ========= 價格列表（服務包含 / 升級 / 妝髮通用基底） ========= */
@@ -46,15 +62,15 @@
 .price-list {
   list-style: none;
   padding-left: 0;
-  margin: 0 0 20px 0;
+  margin: 0 0 var(--space-5) 0;
 }
 
 .price-list__item {
   position: relative;
-  padding-left: 28px;
-  margin-bottom: 12px;
+  padding-left: var(--space-7);
+  margin-bottom: var(--space-3);
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 /* 服務包含項目（✓） */
@@ -98,4 +114,78 @@
 
 .price-makeup-card__gallery {
   /* 目前沿用 .c-card__media 的兩欄 grid，如未來改成單欄可在此覆寫 */
+}
+
+/* ========= 價目表頁面專用的圖片畫廊樣式 ========= */
+
+/* Price Gallery - 圖片與說明文字的容器 */
+.price-gallery {
+  /* 覆蓋基礎 card__media 的高度，縮小圖片 */
+  height: auto !important;
+  min-height: 240px;
+  
+  @media (min-width: 768px) {
+    min-height: 280px;
+  }
+  
+  @media (min-width: 992px) {
+    min-height: 300px;
+  }
+  
+  /* 增加圖片之間的間距 */
+  gap: var(--space-4);
+  
+  /* 確保 grid items 對齊 */
+  align-items: start;
+}
+
+/* Price Gallery Item - 每張圖片與其說明文字 */
+.price-gallery__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+  
+  img {
+    /* 確保不裁切，維持原本比例 */
+    object-fit: contain;
+    object-position: center center;
+    
+    /* 統一圖片大小 - 縮小並限制尺寸 */
+    max-width: 100%;
+    max-height: 180px; /* 統一最大高度，縮小圖片 */
+    width: auto;
+    height: auto;
+    
+    /* 確保圖片居中 */
+    display: block;
+    margin: 0 auto;
+    
+    /* 統一容器背景和樣式 */
+    background-color: var(--color-neutral-100);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    box-sizing: border-box;
+    
+    @media (min-width: 768px) {
+      max-height: 220px; /* 桌面版稍微大一點 */
+    }
+    
+    @media (min-width: 992px) {
+      max-height: 240px; /* 大螢幕再大一點 */
+    }
+  }
+}
+
+/* Price Gallery 圖片說明文字 */
+.price-gallery__caption {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-subtle);
+  text-align: center;
+  margin: 0;
+  line-height: var(--line-height-normal);
+  padding: 0 var(--space-2);
 }

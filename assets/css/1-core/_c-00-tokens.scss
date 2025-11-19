@@ -1,58 +1,267 @@
 /* ==================================================
- * [V15.0 策略性合併版] SASS 核心變數 (Tokens)
- *
- * 1. [V15.0] 採用您偏好的完整色票系統 (NAV COLOR SYSTEM)
- * 2. [V15.0] 採用您偏好的 --header-h: 74px
- * 3. [V9.0] 保留架構所需的 @layer tokens
- * 4. [V9.0] 保留架構所需的 z-index 變數
+ * Design Tokens - "Warm × Enterprise" Design System
+ * 
+ * Semantic CSS custom properties for colors, typography,
+ * spacing, radius, and shadows. Organized for easy
+ * brand customization while maintaining consistency.
+ * 
+ * To change the brand look, edit the values in the
+ * Brand Colors and Accent Colors sections below.
  * ==================================================
  */
 
 @layer tokens {
   
-  /* [0] 🎯 色票與變數（V15.0） */
   :root {
-    --color-dark: #353242;
-    --color-cta: #d0d7f1;
-    --color-primary-accent: #958985;
-    --color-gray-bg: #C4C7CE;
-    --color-light-bg: #f1edeb;
-    --color-text-dark: #242436;
-    --color-text-light: #ede6e2;
-    --color-white: #fff;
-    --color-border: #e2e2e2;
     
-    /* [V15.0] 採用您偏好的 74px */
-    --header-h: 74px; 
+    /* ============================================
+     * COLOR TOKENS
+     * ============================================ */
     
-    --color-section-bg: oklch(95% 0.01 var(--brand-hue));
-    --color-card-bg: oklch(100% 0 0);
-    --color-card-border: oklch(85% 0.02 var(--brand-hue));
-
-
-    /* [NAV COLOR SYSTEM] (V15.0) */
-    --nav-link:            #353242;
-    --nav-link-hover:      #353242;
-    --nav-link-active:     #353242;
-    --nav-link-muted:      #bba896;
-    --nav-cta-bg:          #d0d7f1;
-    --nav-cta-text:        #353242;
-    --nav-cta-bg-hover:    #d0d7f1;
-    --nav-cta-text-hover:  #353242;
-    --mega-bg:             #fff;
-    --mega-border:         #e2e2e2;
-    --mega-link:           #353242;
-    --mega-link-hover:     #353242;
-    --mega-heading:        #353242;
-    --mega-separator:      #e2e2e2;
-    --mega-hover-bg:       #f7f7f7;
-    --focus-ring:          rgb(208 215 241 / 60%);
+    /* Brand Colors - Primary brand identity
+     * These are the core colors that define the brand.
+     * Change these to rebrand the entire site. */
+    --color-brand-primary: #353242;        /* Deep warm gray-purple (main brand) */
+    --color-brand-accent: #958985;          /* Warm taupe-gray (secondary accent) */
+    --color-brand-cta: #d0d7f1;             /* Soft lavender-blue (call-to-action) */
+    --color-brand-cta-hover: #b8c4d9;       /* CTA hover state (darker than base) */
     
-    /* --- [V9.0-V14.0] 關鍵系統變數 (V15.0 合併) --- */
-    /* (保留 V9.0-V14.0 系統架構所需的 z-index) */
-    --z-index-header: 1000;
-    --z-index-header-nav: 1001;  /* 行動版選單 (在 Header 之上) */
-    --z-index-dropdown: 1002;  /* 桌面版選單 (在 Header 之上) */
+    /* Accent Colors - Interactive states and highlights */
+    --color-accent: var(--color-brand-accent);
+    --color-accent-weak: #bba896;           /* Muted warm accent for subtle highlights */
+    --color-accent-strong: var(--color-brand-primary);
+    
+    /* Neutral Colors - Grays and backgrounds (50=lightest, 950=darkest) */
+    --color-neutral-50: #f7f7f7;            /* Lightest neutral (hover states) */
+    --color-neutral-100: #f0f0f0;          /* Very light neutral (subtle backgrounds) */
+    --color-neutral-200: #e2e2e2;          /* Light neutral (borders, dividers) */
+    --color-neutral-300: #C4C7CE;         /* Medium-light neutral (gray backgrounds) */
+    --color-neutral-400: #958985;          /* Medium neutral (matches accent) */
+    --color-neutral-900: #242436;          /* Dark neutral (text) */
+    --color-neutral-950: #353242;         /* Darkest neutral (matches brand primary) */
+    
+    /* Surface Colors - Backgrounds for content areas */
+    --color-surface: #ffffff;              /* Primary surface (cards, modals) */
+    --color-surface-alt: var(--color-neutral-100); /* Alternative surface (hover) */
+    --color-surface-2: #f1edeb;            /* Secondary surface (warm off-white) */
+    --color-surface-3: var(--color-brand-primary); /* Dark surface (hero, footer) */
+    --color-surface-elevated: var(--color-surface); /* Elevated surfaces (dropdowns) */
+    
+    /* Overlay Colors - Semi-transparent overlays */
+    --color-overlay-dark: rgba(53, 50, 66, 0.7);   /* Dark overlay (hero, 70% opacity) */
+    --color-overlay-light: rgba(255, 255, 255, 0.05); /* Light overlay (5% opacity) */
+    
+    /* Button Hover Backgrounds - Subtle hover states */
+    --color-ghost-hover-bg: rgba(65, 74, 138, 0.06); /* Ghost button hover background (subtle brand tint) */
+    
+    /* Text Colors - Semantic text color tokens */
+    --color-text: var(--color-neutral-900);        /* Primary/main text (WCAG AA) */
+    --color-text-main: var(--color-text);          /* Alias for primary text */
+    --color-text-subtle: #555555;                  /* Secondary text (muted) */
+    --color-text-on-dark: #ede6e2;                 /* Text on dark surfaces */
+    --color-text-on-accent: #ffffff;               /* Text on accent (WCAG AA) */
+    --color-text-link: var(--color-brand-accent);  /* Link color */
+    --color-text-link-hover: var(--color-brand-cta); /* Link hover */
+    
+    /* Status Colors - Semantic status indicators */
+    --color-success: #28a745;                       /* Success (checkmarks) */
+    --color-error: #dc3545;                        /* Error (warnings) */
+    
+    /* Border Colors - Borders and dividers */
+    --color-border: var(--color-neutral-200);      /* Default border */
+    --color-border-strong: var(--color-neutral-300); /* Stronger border (focus) */
+    --color-border-subtle: var(--color-neutral-100); /* Subtle border */
+    --color-border-dark: #3E3E3E;                  /* Dark border (footers) */
+    
+    /* Legacy Color Mappings - For backward compatibility
+     * These map old token names to new semantic tokens */
+    --color-dark: var(--color-brand-primary);
+    --color-cta: var(--color-brand-cta);
+    --color-primary-accent: var(--color-brand-accent);
+    --color-gray-bg: var(--color-neutral-300);
+    --color-light-bg: var(--color-surface-2);
+    --color-text-dark: var(--color-text);
+    --color-text-light: var(--color-text-on-dark);
+    --color-white: var(--color-surface);
+    
+    /* Navigation Colors - Navigation component tokens */
+    --nav-link: var(--color-brand-primary);
+    --nav-link-hover: var(--nav-link);
+    --nav-link-active: var(--nav-link);
+    --nav-link-muted: var(--color-accent-weak);
+    --nav-cta-bg: var(--color-brand-cta);
+    --nav-cta-text: var(--color-brand-primary);
+    --nav-cta-bg-hover: var(--nav-cta-bg);
+    --nav-cta-text-hover: var(--nav-cta-text);
+    --mega-bg: var(--color-surface-elevated);
+    --mega-border: var(--color-border);
+    --mega-link: var(--color-brand-primary);
+    --mega-link-hover: var(--mega-link);
+    --mega-heading: var(--mega-link);
+    --mega-separator: var(--color-border);
+    --mega-hover-bg: var(--color-neutral-50);
+    --focus-ring: rgb(208 215 241 / 60%); /* Focus ring for accessibility */
+    
+    
+    /* ============================================
+     * TYPOGRAPHY TOKENS
+     * ============================================ */
+    
+    /* Font Families - System font stack for optimal performance */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-family-heading: var(--font-family-base); /* Same as base for consistency */
+    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace; /* For code if needed */
+    
+    /* Font Sizes - Type scale for consistent typography
+     * Based on 16px base (1rem = 16px) */
+    --font-size-xs: 0.75rem;    /* 12px - Small labels, captions */
+    --font-size-sm: 0.875rem;    /* 14px - Secondary text */
+    --font-size-base: 1rem;      /* 16px - Base body text */
+    --font-size-lg: 1.125rem;    /* 18px - Large body text */
+    --font-size-xl: 1.25rem;     /* 20px - Small headings */
+    --font-size-2xl: 1.5rem;     /* 24px - Medium headings */
+    --font-size-3xl: 1.875rem;   /* 30px - Large headings */
+    --font-size-4xl: 2.25rem;    /* 36px - Hero headings */
+    
+    /* Line Heights - Vertical rhythm for readability */
+    --line-height-tight: 1.2;    /* Headings */
+    --line-height-normal: 1.3;   /* Small headings, compact text */
+    --line-height-relaxed: 1.6;  /* Body text */
+    --line-height-loose: 1.7;     /* Prose, long-form content */
+    
+    /* Font Weights - Semantic weight tokens */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    
+    /* ============================================
+     * SPACING TOKENS
+     * ============================================ */
+    
+    /* Spacing Scale - 4px base unit for consistent spacing
+     * Use these for padding, margin, and gap values */
+    --space-1: 0.25rem;   /* 4px - Tight spacing */
+    --space-2: 0.5rem;    /* 8px - Small spacing */
+    --space-3: 0.75rem;   /* 12px - Medium-small spacing */
+    --space-4: 1rem;      /* 16px - Base spacing unit */
+    --space-5: 1.25rem;   /* 20px - Medium spacing */
+    --space-6: 1.5rem;    /* 24px - Large spacing */
+    --space-7: 1.75rem;   /* 28px - Large-medium spacing */
+    --space-8: 2rem;     /* 32px - Extra large spacing */
+    --space-9: 2.5rem;    /* 40px - Section spacing */
+    --space-10: 3rem;     /* 48px - Large section spacing */
+    --space-12: 4rem;     /* 64px - Hero spacing */
+    
+    
+    /* ============================================
+     * RADIUS TOKENS
+     * ============================================ */
+    
+    /* Border Radius - Consistent rounded corners
+     * Use semantic names based on component type */
+    --radius-none: 0;
+    --radius-sm: 4px;      /* Small elements (badges, tags) */
+    --radius-md: 8px;      /* Medium elements (inputs, small cards) */
+    --radius-lg: 12px;     /* Large elements (cards, containers) */
+    --radius-xl: 20px;     /* Extra large (buttons, featured cards) */
+    --radius-full: 9999px; /* Fully rounded (pill buttons, avatars) */
+    
+    /* Component-Specific Radius - Semantic tokens for common components */
+    --radius-button: var(--radius-full);  /* Buttons (pill shape - 9999px) */
+    --radius-card: var(--radius-lg);      /* Cards and containers */
+    --radius-input: var(--radius-md);     /* Form inputs */
+    --radius-image: var(--radius-lg);     /* Images in cards */
+    
+    /* Legacy Radius Mappings - For backward compatibility */
+    --radius-1: var(--radius-sm);
+    --radius-2: var(--radius-md);
+    --radius-3: var(--radius-lg);
+    
+    
+    /* ============================================
+     * SHADOW TOKENS
+     * ============================================ */
+    
+    /* Shadows - Elevation system for depth
+     * Subtle shadows maintain the warm, approachable feel */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);           /* Subtle elevation */
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);          /* Default card shadow */
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.08);           /* Elevated cards */
+    --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.08);         /* High elevation (modals) */
+    
+    /* Soft Shadows - Softer, more refined shadow values for enhanced depth */
+    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.06);       /* Soft shadow for cards and surfaces */
+    --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.12);      /* Enhanced shadow for hover states */
+    
+    /* Component-Specific Shadows - Semantic tokens for interactive states */
+    --shadow-card: var(--shadow-soft);                     /* Default card shadow (soft) */
+    --shadow-card-hover: var(--shadow-hover);              /* Card hover state (enhanced) */
+    --shadow-button: 0 4px 15px rgba(230, 175, 46, 0.3);   /* Button shadow (warm accent) */
+    --shadow-button-hover: 0 6px 20px rgba(230, 175, 46, 0.4); /* Button hover shadow */
+    --shadow-ghost-hover: 0 4px 12px rgba(0, 0, 0, 0.08);  /* Ghost button hover shadow (subtle elevation) */
+    --shadow-dropdown: var(--shadow-xl);                    /* Dropdown menus */
+    --shadow-focus: 0 0 0 3px var(--focus-ring);          /* Focus ring shadow */
+    --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05); /* Hero image shadow (multi-layer depth) */
+    
+    
+    /* ============================================
+     * GRADIENT TOKENS
+     * ============================================ */
+    
+    /* Gradients - Smooth transitions and radial effects
+     * Used for section transitions and visual depth */
+    --gradient-section-transition: 80px;                    /* Height for section transition gradients */
+    --gradient-radial-start: color-mix(in srgb, var(--color-brand-primary) 90%, white); /* Radial gradient start (lightened brand color) */
+    --gradient-radial-end: color-mix(in srgb, var(--color-brand-primary) 95%, black);   /* Radial gradient end (darkened brand color) */
+    
+    
+    /* ============================================
+     * ANIMATION TOKENS
+     * ============================================ */
+    
+    /* Transitions - Smooth motion for interactive elements
+     * Optimized timing for natural, responsive feel */
+    --transition-smooth: 0.18s ease-out;                   /* Smooth transition for general interactions */
+    --transition-hover: 0.16s ease-out;                    /* Quicker transition for hover states */
+    
+    /* Transforms - Subtle lift effects for depth perception
+     * Using translate3d for GPU acceleration */
+    --transform-lift: translate3d(0, -1px, 0);              /* Subtle lift for buttons and small elements */
+    --transform-lift-card: translate3d(0, -4px, 0);         /* Enhanced lift for cards on hover */
+    
+    
+    /* ============================================
+     * TEXTURE TOKENS
+     * ============================================ */
+    
+    /* Background Textures - Subtle visual texture for depth
+     * SVG-based noise pattern for organic, warm feel */
+    --texture-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); /* Subtle SVG noise texture (3% opacity) */
+    
+    
+    /* ============================================
+     * LAYOUT TOKENS
+     * ============================================ */
+    
+    /* Layout Dimensions - Key layout measurements */
+    --header-height: 74px;                  /* Fixed header height */
+    --container-max-width: 1140px;          /* Main content container */
+    --container-max-width-md: 900px;        /* Medium container (blog posts) */
+    --container-padding: 20px;              /* Container side padding */
+    
+    /* Z-Index Scale - Layering system for stacking context */
+    --z-index-base: 1;
+    --z-index-header: 1000;                 /* Fixed header */
+    --z-index-header-nav: 1001;            /* Mobile navigation menu */
+    --z-index-dropdown: 1002;              /* Desktop dropdown menus */
+    --z-index-modal: 2000;                 /* Modals and overlays */
+    --z-index-tooltip: 3000;                /* Tooltips (if needed) */
+    
+    /* Legacy Layout Mappings - For backward compatibility */
+    --header-h: var(--header-height);
+    
   }
   
 }

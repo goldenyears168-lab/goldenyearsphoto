@@ -95,10 +95,44 @@
   }
 
 
+  /* Underline animation for navigation links */
+  .header-nav > li > a {
+    position: relative;
+    /* Remove default underline to use custom animated underline */
+    text-decoration: none;
+    
+    /* Animated underline using ::after pseudo-element */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -0.35rem;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-brand-primary);
+      transition: width var(--transition-smooth);
+      /* Ensure smooth animation and GPU acceleration */
+      will-change: width;
+      transform: translateZ(0);
+    }
+    
+    /* Hover and active states: expand underline */
+    &:hover::after,
+    &:focus-visible::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
+
   /* 頂層選單的 Hover / Focus 效果 */
   .header-nav > li > a:hover,
   .header-nav > li > a:focus-visible,
-  .header-nav > li > a.active,
+  .header-nav > li > a.active {
+    color: var(--nav-link-hover);
+    /* Remove default underline - using animated underline instead */
+    text-decoration: none;
+  }
+  
   .dropdown:hover > .nav-dropdown-trigger,
   .nav-dropdown-trigger:focus-visible,
   .nav-dropdown-trigger[aria-expanded="true"],
@@ -306,6 +340,8 @@
     .header-nav > li > .nav-dropdown-trigger:hover {
       background: none; 
       color: var(--nav-link-hover);
+      /* Animated underline is handled by ::after pseudo-element */
+      text-decoration: none;
     }
 
     .dropdown {
@@ -407,6 +443,12 @@
     .megamenu-container a:hover {
       color: var(--nav-link-hover, #353242) !important;
       background-color: var(--mega-hover-bg, transparent) !important; 
+    }
+
+    /* Top-level nav links use animated underline, not text-decoration */
+    .header-nav > li > a:hover,
+    .header-nav > li > a:focus-visible {
+      text-decoration: none !important;
     }
 
     /* [V22.0] 修正：僅 L2 連結在 hover 時有 underline */

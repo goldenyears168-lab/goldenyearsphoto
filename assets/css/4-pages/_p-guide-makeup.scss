@@ -13,27 +13,27 @@
 
 /* --- 1. 頁面內容基礎 (與 V12 相同) --- */
 .page-content h3 {
-  margin-top: 40px;
+  margin-top: var(--space-9);
   border-bottom: 2px solid var(--color-cta);
-  padding-bottom: 8px;
+  padding-bottom: var(--space-2);
 }
 
 .page-content h4 {
   margin-top: 0;
   margin-bottom: 0;
   color: var(--color-dark);
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
 .page-content p {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
   line-height: 1.7;
 }
 
 .page-content hr {
   border: 0;
   border-top: 1px solid var(--color-border);
-  margin: 40px 0;
+  margin: var(--space-9) 0;
 }
 
 /* --- 2. 頁首修正 (Image 2 跑版修正) --- */
@@ -42,14 +42,14 @@
  * 調整頁首內距和最大寬度，確保文字在小螢幕上不會擠壓。
  */
 .module.page-hero {
-  padding: 80px 20px; /* 增加左右內距 */
+  padding: var(--space-12) var(--space-5); /* 增加左右內距 */
 }
 .module.page-hero .container {
   max-width: 800px; /* 限制頁首內容最大寬度 */
 }
 @media (max-width: 767px) { /* 手機板加強 */
   .module.page-hero {
-    padding: 60px 15px; /* 手機版內距可以更小一點 */
+    padding: var(--space-10) var(--space-4); /* 手機版內距可以更小一點 */
   }
   .module.page-hero h1 {
     font-size: 2rem; /* 手機版標題字體縮小 */
@@ -64,8 +64,8 @@
 .service-package-list {
   display: flex;
   flex-direction: column;
-  gap: 30px; /* 卡片間距 */
-  margin-top: 30px;
+  gap: var(--space-8); /* 卡片間距 */
+  margin-top: var(--space-8);
 }
 
 /* --- 4. 服務方案 (Mobile-First Stack - 與 V12 相同) --- */
@@ -75,20 +75,20 @@
   
   border: 1px solid var(--color-border);
   background: var(--color-white);
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
 /* --- 5. 網格區域 (Mobile) --- */
 
 .package-header {
-  padding: 24px 24px 20px 24px;
+  padding: var(--space-6) var(--space-6) var(--space-5) var(--space-6);
   display: flex;
   flex-wrap: wrap; 
   justify-content: space-between;
   align-items: baseline;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 /* * [ 🚀 V13 圖片更新 ]
@@ -100,7 +100,7 @@
   /* 移除 Mobile 的 border-top，因為現在圖片自己有邊框 */
   border-top: none; 
   text-align: center; /* 讓圖片在容器中居中 */
-  padding: 0 24px 24px 24px; /* Mobile 時，上下左右預留空間 */
+  padding: 0 var(--space-6) var(--space-6) var(--space-6); /* Mobile 時，上下左右預留空間 */
 }
 
 .package-image-placeholder picture,
@@ -111,13 +111,13 @@
   display: block; 
   /* [ 🚀 V13 關鍵 ] 移除 object-fit */
   object-fit: unset; /* 或直接移除這行 */
-  border-radius: 8px; /* 圖片本身給予圓角，模擬舊有容器的圓角效果 */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* 圖片增加輕微陰影 */
+  border-radius: var(--radius-md); /* 圖片本身給予圓角，模擬舊有容器的圓角效果 */
+  box-shadow: var(--shadow-sm); /* 圖片增加輕微陰影 */
 }
 
 
 .package-content-wrapper {
-  padding: 24px;
+  padding: var(--space-6);
   border-top: 1px solid var(--color-border); /* Mobile 時，內容區上方仍然有分隔線 */
   display: flex;
   flex-direction: column;
@@ -129,7 +129,7 @@
 .package-meta {
   display: flex;
   align-items: baseline;
-  gap: 16px;
+  gap: var(--space-4);
   flex-shrink: 0;
 }
 
@@ -150,25 +150,25 @@
 .arrival-note {
   font-size: 0.9rem;
   background: var(--color-light-bg);
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
   color: var(--color-text-dark);
-  margin-bottom: 20px; /* 增加與下方文字的間距 */
+  margin-bottom: var(--space-5); /* 增加與下方文字的間距 */
 }
 
 .package-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: var(--space-4);
   margin-top: auto; 
-  padding-top: 24px;
+  padding-top: var(--space-6);
 }
 
 .package-details ul { list-style: none; margin: 0; padding: 0; }
 .package-details li {
   position: relative;
-  padding-left: 24px;
-  margin-bottom: 8px;
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-2);
   font-size: 0.95rem;
 }
 .package-details li::before {
@@ -179,9 +179,9 @@
   font-weight: 700;
 }
 .includes li { color: var(--color-text-dark); }
-.includes li::before { content: '✓'; color: #28a745; }
-.excludes li { color: #888; text-decoration: line-through; }
-.excludes li::before { content: '✕'; color: #dc3545; }
+.includes li::before { content: '✓'; color: var(--color-success); }
+.excludes li { color: var(--color-text-subtle); text-decoration: line-through; }
+.excludes li::before { content: '✕'; color: var(--color-error); }
 .excludes:empty { display: none; }
 
 /* --- 7. 響應式 (Desktop) --- */
@@ -212,7 +212,7 @@
     grid-column: 2;
     grid-row: 2;
     border-left: 1px solid var(--color-border);
-    padding: 24px; /* 重新定義內距 */
+    padding: var(--space-6); /* 重新定義內距 */
     text-align: right; /* 圖片靠右對齊 */
     align-self: start; 
   }

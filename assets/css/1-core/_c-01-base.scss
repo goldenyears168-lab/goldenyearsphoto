@@ -3,7 +3,12 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Smooth Scrolling - Global setting for anchor jumps and wheel scroll
+ * Applies to all anchor links (#section) and native browser scrolling
+ * Do not override this in component styles */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;

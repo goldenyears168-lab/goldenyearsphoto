@@ -132,40 +132,6 @@
     }
   });
 
-  /* ========== 5) [移植 V6.2] Index 圖庫篩選 ========== */
-  // (此邏輯與 Header 無關，但若您需要，可保留)
-  const filterContainer = document.querySelector('.portfolio-filter');
-  
-  if (filterContainer) {
-    const buttons = document.querySelectorAll('.portfolio-filter .filter-btn');
-    const items = document.querySelectorAll('.portfolio-gallery .gallery-item');
-
-    buttons.forEach(btn => { if (!btn.hasAttribute('type')) btn.setAttribute('type', 'button'); });
-
-    function applyFilter(category) {
-      items.forEach(item => {
-        const match = (category === 'all') || (item.dataset.category === category);
-        item.style.display = match ? '' : 'none';
-      });
-      buttons.forEach(b => {
-        b.classList.toggle('active', b.dataset.filter === category);
-      });
-    }
-
-    const defaultCategory = buttons[0]?.dataset.filter || 'all';
-    applyFilter(defaultCategory); 
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        applyFilter(btn.dataset.filter);
-      });
-    });
-
-    const hash = new URLSearchParams(location.hash.replace(/^#/, '')).get('filter');
-    if (hash) {
-      const target = [...buttons].find(b => b.dataset.filter === hash);
-      if (target) target.click();
-    }
-  }
+  /* Portfolio gallery filter is now handled inline in index.njk */
 
 })();

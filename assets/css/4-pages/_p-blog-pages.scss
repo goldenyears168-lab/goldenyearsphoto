@@ -1,115 +1,19 @@
-/*
- * =======================================
- * 🎨 [頁面] 內容頁面 (寵物/全家福/醫師袍)
- * =======================================
+/* ==================================================
+ * Blog Pages - Page-Specific Overrides
+ * 
+ * Note: Reusable layout components (content-intro,
+ * layout-split, content-image-grid) have been moved
+ * to 3-components/_k-content-layout.scss to enforce
+ * ITCSS layer responsibilities.
+ * 
+ * This file should only contain blog-specific
+ * overrides that cannot be handled by components.
+ * ==================================================
  */
 
-/* --- 1. 介紹文字區塊 --- */
-.content-intro {
-  font-size: 1.1rem;
-  text-align: center;
-  margin-bottom: 50px;
-  max-width: 750px; /* 限制最大寬度，使其更易閱讀 */
-  margin-inline: auto; /* 水平置中 */
-  color: var(--color-text-dark);
-  line-height: 1.7;
-
-  /* 第一段文字稍微放大，作為引言 */
-  p:first-of-type {
-    font-size: 1.15rem;
-    color: var(--color-dark);
-    font-weight: 500;
-  }
-
-  /* 強調的文字 */
-  strong {
-    color: var(--color-primary-accent); /* 使用主題色 */
-    font-weight: 600;
-  }
-}
-
-/* --- 2. 圖文分離 (雙欄) --- */
-.layout-split {
-  display: grid;
-  grid-template-columns: 1fr; /* Mobile: 單欄 */
-  gap: 30px;
-  align-items: center;
-  margin-top: 40px;
-
-  /* Desktop: 雙欄 */
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-
-  /* 圖片在左側的變化 */
-  &.image-left {
-    @media (min-width: 768px) {
-      .layout-split-image {
-        order: -1; /* 將圖片順序提前 */
-      }
-    }
-  }
-}
-
-.layout-split-image {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-
-  img {
-    width: 100%;
-    height: auto; /* [修改] 改為 auto，讓高度依比例自動調整 */
-    object-fit: unset; /* [修改] 移除 cover 裁切 */
-    display: block;
-  }
-}
-
-.layout-split-text {
-  h2 {
-    margin-top: 0;
-    font-size: 1.8rem;
-    color: var(--color-dark);
-    margin-bottom: 16px;
-  }
-  p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-  strong {
-    color: var(--color-dark);
-  }
-}
-
-/* --- 3. 內容圖片格線 (3張圖) --- */
-.content-image-grid {
-  display: grid;
-  grid-template-columns: 1fr; /* Mobile: 單欄 */
-  gap: 15px;
-  margin-top: 30px;
-
-  /* Tablet: 雙欄 */
-  @media (min-width: 500px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@layer pages {
   
-  /* Desktop: 三欄 */
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .grid-image {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    aspect-ratio: unset; /* [修改] 移除 1:1 的正方形比例限制 */
-
-    img {
-      width: 100%;
-      height: auto; /* [修改] 改為 auto，讓高度依比例自動調整 */
-      object-fit: unset; /* [修改] 移除 cover 裁切 */
-      display: block;
-    }
-  }
+  /* Blog-specific overrides can go here if needed */
+  /* Example: .blog-post-specific-class { ... } */
+  
 }

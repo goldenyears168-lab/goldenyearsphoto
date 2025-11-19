@@ -1,0 +1,50 @@
+
+/* ===== 作用於預約頁 (簡化版) ===== */
+.page-booking .booking-text {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.page-booking .booking-text img {
+  width: 50%;
+  height: auto;
+  border-radius: var(--radius-xl);
+  border: var(--space-2) solid var(--color-border-strong);
+}
+
+.page-booking .notice-box {
+  background: var(--color-neutral-200);
+  border-left: var(--space-1) solid var(--color-brand-primary);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-7);
+}
+
+.page-booking .service-rules h4 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.page-booking .service-rules ul {
+  padding-left: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.page-booking .service-rules li {
+  margin-bottom: var(--space-2);
+}
+
+.page-booking .booking-embed {
+  margin-top: var(--space-7);
+}
+
+.page-booking .safety-net {
+  font-size: 0.9rem;
+  color: var(--color-text-subtle);
+  margin: var(--space-4) 0;
+}
+
+html, body {
+  position: static !important;
+  overflow: auto !important;
+}

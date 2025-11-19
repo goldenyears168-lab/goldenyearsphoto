@@ -6,7 +6,7 @@
 
 .team-grid {
   display: grid;
-  gap: 1.5rem; // 24px
+  gap: var(--space-6);
   
   // 【新增】
   // 讓不同高度的卡片從頂部對齊，而不是拉伸
@@ -42,14 +42,32 @@
   text-decoration: none;
   color: inherit;
   text-align: center;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow: hidden; // 確保圖片圓角
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* GPU acceleration for smooth animations */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
 
   &:hover,
   &:focus {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transform: translate3d(0, -5px, 0);
+    box-shadow: var(--shadow-card-hover);
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .team-card {
+      transition: box-shadow 0.3s ease;
+      transform: none;
+      will-change: auto;
+      
+      &:hover,
+      &:focus {
+        transform: none;
+      }
+    }
   }
 
   // 圖片容器
@@ -63,21 +81,21 @@
       // aspect-ratio: 1 / 1; 
       // object-fit: cover; 
       
-      background-color: #f4f4f4; // 圖片載入前的底色
+      background-color: var(--color-neutral-100); // 圖片載入前的底色
     }
   }
 
   // 成員姓名
   h3 {
-    font-size: 1.125rem; // 18px
-    font-weight: 600;
-    margin: 0.75rem 0 0.25rem;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin: var(--space-3) 0 var(--space-1);
   }
 
   // 職稱
   .team-title {
-    font-size: 0.9rem; // 14.4px
-    color: #555; // 較淺的顏色
+    font-size: var(--font-size-sm);
+    color: var(--color-text-subtle);
     margin: 0;
   }
 }

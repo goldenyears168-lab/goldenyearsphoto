@@ -11,60 +11,83 @@ seo:
 
 {% from "macros/portfolio.njk" import portfolioImg %}
 
-<div class="module module-dark page-hero">
+<section class="module module-dark page-hero" aria-labelledby="hero-title">
   <div class="container">
-    <h1>好時有影｜台北專業履歷形象照</h1>
-    <p class="subtitle">
-      讓每一個「好時」，都有你我的「身影」
-    </p>
-    <p class="subtitle">
-      台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
-    </p>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <p class="hero-kicker">台北專業攝影工作室</p>
+        <h1 id="hero-title" class="hero-title">好時有影</h1>
+        <p class="hero-subtitle">
+          讓每一個「好時」，都有你我的「身影」
+        </p>
+        <p class="hero-description">
+          台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
+        </p>
+        <div class="hero-actions">
+          <a href="/booking/" class="button button--primary hero-cta-primary">
+            立即預約
+          </a>
+          <a href="/price-list/" class="button button--secondary hero-cta-secondary">
+            查看價目
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img 
+          src="{{ 'content/home/hero/Hero_Images_16x9.jpg' | r2img }}" 
+          alt="好時有影專業攝影工作室 - 專業形象照、韓式證件照、畢業照服務"
+          loading="eager"
+          decoding="async"
+          width="1200"
+          height="675"
+        />
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <div class="module">
   <div class="container">
     <h2 class="text-align-center">找到你的專屬風格</h2>
     
-    <nav class="portfolio-filter">
-      <button class="filter-btn" data-filter="korean-id">韓式證件照</button>
-      <button class="filter-btn" data-filter="linkedin-portrait">專業形象照</button>
-      <button class="filter-btn" data-filter="full-body-portrait">全身形象照</button>
-      <button class="filter-btn" data-filter="lawyer-portrait">律師形象照</button>
-      <button class="filter-btn" data-filter="doctor-coat">醫師袍照</button>
-      <button class="filter-btn" data-filter="corporate-group">企業團體照</button>
-      <button class="filter-btn" data-filter="musician-portrait">樂器演奏照</button>
-      <button class="filter-btn" data-filter="campaign-portrait">競選照</button>
-      <button class="filter-btn" data-filter="grad-id">畢業證件照</button>
-      <button class="filter-btn" data-filter="grad-happy-id">畢業學士服</button>
-      <button class="filter-btn" data-filter="grad-portrait">畢業寫真</button>
-      <button class="filter-btn" data-filter="student-group">學生團體照</button>
-      <button class="filter-btn" data-filter="couple">情侶寫真</button>
-      <button class="filter-btn" data-filter="bestie-portrait">閨蜜寫真</button>
-      <button class="filter-btn" data-filter="friends-portrait">朋友合照</button>
-      <button class="filter-btn" data-filter="family">全家福</button>
-      <button class="filter-btn" data-filter="maternity">好孕照</button>
-      <button class="filter-btn" data-filter="body-profile">體態寫真</button>
-      <button class="filter-btn" data-filter="emo">情緒寫真</button>
+    <nav class="portfolio-filter" role="tablist" aria-label="作品分類篩選">
+      <button class="filter-btn is-active" type="button" data-filter="passport-korea" aria-pressed="true" role="tab">韓式證件照</button>
+      <button class="filter-btn" type="button" data-filter="linkedin-portrait" aria-pressed="false" role="tab">專業形象照</button>
+      <button class="filter-btn" type="button" data-filter="full-body-portrait" aria-pressed="false" role="tab">全身形象照</button>
+      <button class="filter-btn" type="button" data-filter="lawyer-portrait" aria-pressed="false" role="tab">律師形象照</button>
+      <button class="filter-btn" type="button" data-filter="doctor-coat" aria-pressed="false" role="tab">醫師袍照</button>
+      <button class="filter-btn" type="button" data-filter="corporate-group" aria-pressed="false" role="tab">企業團體照</button>
+      <button class="filter-btn" type="button" data-filter="musician-portrait" aria-pressed="false" role="tab">樂器演奏照</button>
+      <button class="filter-btn" type="button" data-filter="campaign-portrait" aria-pressed="false" role="tab">競選照</button>
+      <button class="filter-btn" type="button" data-filter="grad-id" aria-pressed="false" role="tab">畢業證件照</button>
+      <button class="filter-btn" type="button" data-filter="grad-happy-id" aria-pressed="false" role="tab">畢業學士服</button>
+      <button class="filter-btn" type="button" data-filter="grad-portrait" aria-pressed="false" role="tab">畢業寫真</button>
+      <button class="filter-btn" type="button" data-filter="student-group" aria-pressed="false" role="tab">學生團體照</button>
+      <button class="filter-btn" type="button" data-filter="couple" aria-pressed="false" role="tab">情侶寫真</button>
+      <button class="filter-btn" type="button" data-filter="bestie-portrait" aria-pressed="false" role="tab">閨蜜寫真</button>
+      <button class="filter-btn" type="button" data-filter="friends-portrait" aria-pressed="false" role="tab">朋友合照</button>
+      <button class="filter-btn" type="button" data-filter="family" aria-pressed="false" role="tab">全家福</button>
+      <button class="filter-btn" type="button" data-filter="maternity" aria-pressed="false" role="tab">好孕照</button>
+      <button class="filter-btn" type="button" data-filter="body-profile" aria-pressed="false" role="tab">體態寫真</button>
+      <button class="filter-btn" type="button" data-filter="emo" aria-pressed="false" role="tab">情緒寫真</button>
     </nav>
 
     <!-- (此處是已清理 &nbsp; 和拼寫錯誤的 HTML) -->
     <div class="portfolio-gallery">
       <!-- 韓式證件照 -->
-      <div class="gallery-item" data-category="korean-id">
+      <div class="gallery-item" data-category="passport-korea">
         {{ portfolioImg("korean-id/korean-id-1.jpg", "韓式證件照範例 1") }}
       </div>
 
-      <div class="gallery-item" data-category="korean-id">
+      <div class="gallery-item" data-category="passport-korea">
         {{ portfolioImg("korean-id/korean-id-2.jpg", "韓式證件照範例 2") }}
       </div>
 
-      <div class="gallery-item" data-category="korean-id">
+      <div class="gallery-item" data-category="passport-korea">
         {{ portfolioImg("korean-id/korean-id-3.jpg", "韓式證件照範例 3") }}
       </div>
 
-      <div class="gallery-item" data-category="korean-id">
+      <div class="gallery-item" data-category="passport-korea">
         {{ portfolioImg("korean-id/korean-id-4.jpg", "韓式證件照範例 4") }}
       </div>
       <!-- 專業形象照 (LinkedIn) -->
@@ -347,57 +370,125 @@ seo:
 
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  /* ========== Index 圖庫篩選 ========== */
+/**
+ * Portfolio Gallery Filter
+ * 
+ * Simple, accessible filtering for portfolio gallery items.
+ * Uses data-filter and data-category attributes for clean separation.
+ */
+(function() {
+  'use strict';
   
-  // 加上防呆檢查，只在有 .portfolio-filter 的頁面執行
   const filterContainer = document.querySelector('.portfolio-filter');
+  if (!filterContainer) return;
   
-  if (filterContainer) {
-    const buttons = document.querySelectorAll('.portfolio-filter .filter-btn');
-    const items = document.querySelectorAll('.portfolio-gallery .gallery-item');
-
-    // 讓按鈕不觸發 form submit（保險）
-    buttons.forEach(btn => { if (!btn.hasAttribute('type')) btn.setAttribute('type', 'button'); });
-
-    // 顯示/隱藏邏輯
-    function applyFilter(category) {
-      // 遍歷 items 並設定 display
-      items.forEach(item => {
-        const match = (category === 'all') || (item.dataset.category === category);
-        
-        // 使用 'display: none' 來隱藏不匹配的項目
-        // 這是正確的，因為我們的 CSS 戰爭已經在 p-home.scss 中
-        // 用 'float: none !important' 解決了。
-        item.style.display = match ? '' : 'none';
-      });
-      // 遍歷 buttons 並設定 active class
-      buttons.forEach(b => {
-        b.classList.toggle('active', b.dataset.filter === category);
-      });
-    }
-
-    // 預設：顯示第一個按鈕的分類
-    // 這將實現您要的「天真藍」效果 (預設只顯示一組)
-    const defaultCategory = buttons[0]?.dataset.filter || 'all';
-    applyFilter(defaultCategory); // 預設會自動加上 active class
-
-    // 點擊互動
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        applyFilter(btn.dataset.filter);
-      });
+  const buttons = document.querySelectorAll('.portfolio-filter .filter-btn');
+  const items = document.querySelectorAll('.portfolio-gallery .gallery-item');
+  
+  /**
+   * Apply filter to gallery items
+   * @param {string} category - Category to filter by, or 'all' to show all
+   */
+  function applyFilter(category) {
+    // Update gallery items visibility
+    items.forEach(item => {
+      const shouldShow = category === 'all' || item.dataset.category === category;
+      item.hidden = !shouldShow;
     });
-
-    // (可選) 支援網址 hash：#filter=linkedin-portrait
-    const hash = new URLSearchParams(location.hash.replace(/^#/, '')).get('filter');
-    if (hash) {
-      const target = [...buttons].find(b => b.dataset.filter === hash);
-      if (target) {
-        // 觸發點擊，JS 會自動處理 applyFilter
-        target.click(); 
+    
+    // Update button states
+    buttons.forEach(button => {
+      const isActive = button.dataset.filter === category;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+  
+  /**
+   * Handle filter button clicks
+   */
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.dataset.filter;
+      applyFilter(category);
+      
+      // Update URL hash for shareable links
+      if (category === 'all') {
+        history.replaceState(null, '', window.location.pathname);
+      } else {
+        history.replaceState(null, '', `#filter=${category}`);
       }
+    });
+  });
+  
+  /**
+   * Initialize filter from URL hash or default to 'passport-korea'
+   */
+  function initializeFilter() {
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, '')).get('filter');
+    // Default to 'passport-korea' instead of 'all' - only show Korean passport items on load
+    const defaultCategory = hash || 'passport-korea';
+    applyFilter(defaultCategory);
+  }
+  
+  // Initialize on page load - will automatically filter to passport-korea
+  initializeFilter();
+  
+  // Handle browser back/forward navigation
+  window.addEventListener('hashchange', initializeFilter);
+})();
+</script>
+
+<script>
+/**
+ * Hero Image Float Animation
+ * 
+ * Gentle fade-in and float-up animation for hero image on page load.
+ * Aligned with "Warm × Enterprise" design system - subtle and professional.
+ */
+(function() {
+  'use strict';
+  
+  // Wait for DOM and images to be ready
+  function initHeroAnimation() {
+    const heroImage = document.querySelector('.hero-image');
+    if (!heroImage) return;
+    
+    // Check if image is already loaded
+    const img = heroImage.querySelector('img');
+    if (img && img.complete) {
+      // Image already loaded, trigger animation immediately
+      requestAnimationFrame(() => {
+        heroImage.classList.add('is-loaded');
+      });
+    } else if (img) {
+      // Wait for image to load
+      img.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          heroImage.classList.add('is-loaded');
+        });
+      }, { once: true });
+      
+      // Fallback: trigger after a short delay if image takes too long
+      setTimeout(() => {
+        if (!heroImage.classList.contains('is-loaded')) {
+          heroImage.classList.add('is-loaded');
+        }
+      }, 500);
+    } else {
+      // No image found, trigger animation anyway
+      requestAnimationFrame(() => {
+        heroImage.classList.add('is-loaded');
+      });
     }
   }
-});
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroAnimation);
+  } else {
+    // DOM already ready
+    initHeroAnimation();
+  }
+})();
 </script>

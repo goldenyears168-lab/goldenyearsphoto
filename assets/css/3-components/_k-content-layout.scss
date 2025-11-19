@@ -1,0 +1,152 @@
+/* ==================================================
+ * Content Layout Components - "Warm × Enterprise" Design System
+ * 
+ * Reusable layout components for blog/content pages:
+ * - Content intro sections
+ * - Split layout (image + text)
+ * - Content image grids
+ * 
+ * Moved from 4-pages/_p-blog-pages.scss to enforce
+ * ITCSS layer responsibilities.
+ * ==================================================
+ */
+
+@layer components {
+  
+  /* ============================================
+   * Content Intro - Centered introduction text
+   * ============================================ */
+  
+  .content-intro {
+    font-size: var(--font-size-lg);
+    text-align: center;
+    margin-bottom: var(--space-10);
+    max-width: 46.875rem; /* 750px - readable line length */
+    margin-inline: auto;
+    color: var(--color-text);
+    line-height: var(--line-height-loose);
+    
+    /* First paragraph as lead text */
+    p:first-of-type {
+      font-size: var(--font-size-xl);
+      color: var(--color-brand-primary);
+      font-weight: var(--font-weight-medium);
+    }
+    
+    /* Emphasized text */
+    strong {
+      color: var(--color-brand-accent);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+  
+  
+  /* ============================================
+   * Split Layout - Two-column image + text layout
+   * ============================================ */
+  
+  .layout-split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: center;
+    margin-top: var(--space-8);
+    
+    /* Desktop: Two columns */
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+    
+    /* Image on left variant */
+    &.image-left {
+      @media (min-width: 768px) {
+        .layout-split-image {
+          order: -1;
+        }
+      }
+    }
+    
+    /* Image on right variant */
+    &.image-right {
+      @media (min-width: 768px) {
+        .layout-split-image {
+          order: 2;
+        }
+      }
+    }
+  }
+  
+  /* Split Layout Image Container */
+  .layout-split-image {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  
+  /* Split Layout Text Content */
+  .layout-split-text {
+    h2 {
+      margin-top: 0;
+      font-size: var(--font-size-3xl);
+      color: var(--color-brand-primary);
+      margin-bottom: var(--space-4);
+      line-height: var(--line-height-tight);
+    }
+    
+    p {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-loose);
+      margin-bottom: var(--space-4);
+      color: var(--color-text);
+    }
+    
+    strong {
+      color: var(--color-brand-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+  
+  
+  /* ============================================
+   * Content Image Grid - Responsive image gallery
+   * ============================================ */
+  
+  .content-image-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    
+    /* Tablet: Two columns */
+    @media (min-width: 500px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Desktop: Three columns */
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Grid Image Item */
+  .content-image-grid .grid-image {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  
+}
+

@@ -29,35 +29,33 @@ permalink: "/booking/"
     <div class="container container-lg">
       <div class="store-selection-grid">
 
-        <a href="/booking/zhongshan/" class="store-card">
-          <div class="store-card-image">
-            {# 使用 Eleventy Image Shortcode #}
-            <img src="{{ 'content/booking/location-1.jpg' | r2img }}" alt="好時有影 中山店" sizes="(max-width: 600px) 100vw, 500px" loading="lazy" decoding="async" class="" />
+        <a href="/booking/zhongshan/" class="card card--booking">
+          <div class="card__image">
+            <img src="{{ 'content/booking/location-1.jpg' | r2img }}" alt="好時有影 中山店" sizes="(max-width: 600px) 100vw, 500px" loading="lazy" decoding="async" />
           </div>
-          <div class="store-card-content">
-            <h3 class="store-card-title">中山店</h3>
-            <p class="store-card-desc">
+          <div class="card__body">
+            <h3 class="card__title">中山店</h3>
+            <p class="card__content">
               鄰近中山捷運站，交通便利。適合上班族拍攝專業形象照。
             </p>
           </div>
-          <div class="store-card-footer">
-            <span class="cta-button-link">預約中山店</span>
+          <div class="card__footer">
+            <span class="card__action">預約中山店</span>
           </div>
         </a>
 
-        <a href="/booking/gongguan/" class="store-card">
-          <div class="store-card-image">
-            {# 使用 Eleventy Image Shortcode #}
-            <img src="{{ 'content/booking/location-2.jpg' | r2img }}" alt="好時有影 公館店" sizes="(max-width: 600px) 100vw, 500px" loading="lazy" decoding="async" class="" />
+        <a href="/booking/gongguan/" class="card card--booking">
+          <div class="card__image">
+            <img src="{{ 'content/booking/location-2.jpg' | r2img }}" alt="好時有影 公館店" sizes="(max-width: 600px) 100vw, 500px" loading="lazy" decoding="async" />
           </div>
-          <div class="store-card-content">
-            <h3 class="store-card-title">公館店</h3>
-            <p class="store-card-desc">
+          <div class="card__body">
+            <h3 class="card__title">公館店</h3>
+            <p class="card__content">
               鄰近台灣大學，風格清新。適合學生拍攝證件照與學士服照。
             </p>
           </div>
-          <div class="store-card-footer">
-            <span class="cta-button-link">預約公館店</span>
+          <div class="card__footer">
+            <span class="card__action">預約公館店</span>
           </div>
         </a>
 

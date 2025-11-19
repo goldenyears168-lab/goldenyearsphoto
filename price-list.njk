@@ -16,11 +16,11 @@ seo:
 <div class="module module-gray">
   <div class="container">
     {# 韓式證件照 #}
-    <div class="c-card c-card--price c-card--split price-service-card price-service-card--id">
-      <div class="c-card__body price-service-card__details">
-        <h3 class="c-card__title price-service-card__title">韓式證件照</h3>
-        <p class="c-card__price price-service-card__price">
-          優惠 $399 <span class="c-card__price-unit price-service-card__price-unit">/張</span>
+    <div class="card card--service card--split">
+      <div class="card__body">
+        <h3 class="card__title">韓式證件照</h3>
+        <p class="card__price">
+          優惠 $399 <span class="card__price-unit">/張</span>
         </p>
 
         <h4 class="price-section-title">服務包含</h4>
@@ -38,11 +38,23 @@ seo:
         </ul>
       </div>
 
-      <div class="c-card__media price-service-card__gallery">
-        <img src="{{ 'content/price-list/ID_Card_Example_1.jpg' | r2img }}" alt="韓式證件照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/ID_Card_Example_2.jpg' | r2img }}" alt="韓式證件照範例 2" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/ID_Card_Example_3.jpg' | r2img }}" alt="韓式證件照範例 3" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/ID_Card_Example_4.jpg' | r2img }}" alt="韓式證件照範例 4" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+      <div class="card__media price-gallery">
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/ID_Card_Example_1.jpg' | r2img }}" alt="正式證件/大頭照" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">正式證件/大頭照</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/ID_Card_Example_2.jpg' | r2img }}" alt="履歷證件/大頭照" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">履歷證件/大頭照</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/ID_Card_Example_3.jpg' | r2img }}" alt="畢業證件" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">畢業證件</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/ID_Card_Example_4.jpg' | r2img }}" alt="畢業紀念" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">畢業紀念</p>
+        </div>
       </div>
     </div>
 
@@ -73,11 +85,23 @@ seo:
         </ul>
       </div>
 
-      <div class="c-card__media price-service-card__gallery">
-        <img src="{{ 'content/price-list/Portrait_Example_1.jpg' | r2img }}" alt="專業形象照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Portrait_Example_2.jpg' | r2img }}" alt="專業形象照範例 2" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Portrait_Example_3.jpg' | r2img }}" alt="專業形象照範例 3" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Portrait_Example_4.jpg' | r2img }}" alt="專業形象照範例 4" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+      <div class="card__media price-gallery">
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Portrait_Example_1.jpg' | r2img }}" alt="專業形象" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">專業形象</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Portrait_Example_2.jpg' | r2img }}" alt="畢業寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">畢業寫真</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Portrait_Example_3.jpg' | r2img }}" alt="各式寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">各式寫真</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Portrait_Example_4.jpg' | r2img }}" alt="體態寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">體態寫真</p>
+        </div>
       </div>
     </div>
 
@@ -106,11 +130,23 @@ seo:
         </ul>
       </div>
 
-      <div class="c-card__media price-service-card__gallery">
-        <img src="{{ 'content/price-list/Group_Example_1.jpg' | r2img }}" alt="情侶寫真範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Group_Example_2.jpg' | r2img }}" alt="畢業紀念範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Group_Example_3.jpg' | r2img }}" alt="家庭合照範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Group_Example_4.jpg' | r2img }}" alt="朋友合照範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+      <div class="card__media price-gallery">
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Group_Example_1.jpg' | r2img }}" alt="情侶寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">情侶寫真</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Group_Example_2.jpg' | r2img }}" alt="畢業紀念" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">畢業紀念</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Group_Example_3.jpg' | r2img }}" alt="親子寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">親子寫真</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Group_Example_4.jpg' | r2img }}" alt="寵物合照" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">寵物合照</p>
+        </div>
       </div>
     </div>
   </div>
@@ -132,9 +168,15 @@ seo:
         </ul>
       </div>
 
-      <div class="c-card__media price-makeup-card__gallery">
-        <img src="{{ 'content/price-list/Makeup_Example_Female.jpg' | r2img }}" alt="妝髮服務範例 - 女生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-        <img src="{{ 'content/price-list/Makeup_Example_Male.jpg' | r2img }}" alt="妝髮服務範例 - 男生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+      <div class="c-card__media price-makeup-card__gallery price-gallery">
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Makeup_Example_Female.jpg' | r2img }}" alt="妝髮服務範例 - 女生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">女生妝髮</p>
+        </div>
+        <div class="price-gallery__item">
+          <img src="{{ 'content/price-list/Makeup_Example_Male.jpg' | r2img }}" alt="妝髮服務範例 - 男生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+          <p class="price-gallery__caption">男生妝髮</p>
+        </div>
       </div>
     </div>
   </div>

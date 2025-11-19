@@ -1,0 +1,176 @@
+/* ==================================================
+ * Process Steps Component - "Warm × Enterprise" Design System
+ * 
+ * Card-based horizontal process flow display:
+ * - Elegant step cards with numbers
+ * - Left-to-right horizontal layout
+ * - Professional, warm aesthetic
+ * ==================================================
+ */
+
+@layer components {
+  
+  /* Process Steps Container - Horizontal card layout */
+  .step-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 var(--space-8) 0;
+    /* Reset default ordered list numbering */
+    counter-reset: step-counter;
+    
+    @media (min-width: 768px) {
+      flex-direction: row;
+      gap: var(--space-5);
+      align-items: stretch;
+    }
+    
+    @media (min-width: 992px) {
+      gap: var(--space-6);
+    }
+  }
+  
+  /* Individual Step Card */
+  .step-list > li {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Subtle gradient background for depth */
+    background: linear-gradient(to bottom, 
+      var(--color-surface) 0%, 
+      var(--color-surface-alt) 100%);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: var(--space-6) var(--space-5) var(--space-5);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease, 
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+    /* GPU acceleration for smooth animations */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform;
+    counter-increment: step-counter;
+    
+    /* Step Number Badge - Top right corner (doesn't block text) */
+    &::before {
+      content: counter(step-counter);
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: linear-gradient(135deg, var(--color-brand-cta) 0%, var(--color-brand-cta-hover) 100%);
+      color: var(--color-brand-primary);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      line-height: 1;
+      box-shadow: var(--shadow-md);
+      z-index: 1;
+    }
+    
+    /* Hover state - Subtle lift with enhanced badge */
+    &:hover {
+      transform: translate3d(0, -4px, 0);
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--color-brand-accent);
+      
+      &::before {
+        transform: scale3d(1.1, 1.1, 1);
+        box-shadow: var(--shadow-lg);
+      }
+    }
+    
+    /* Focus state - For keyboard navigation */
+    &:focus-within {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+      border-radius: var(--radius-card);
+    }
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .process-step {
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      transform: none;
+      will-change: auto;
+      
+      &:hover {
+        transform: none;
+        
+        &::before {
+          transform: none;
+        }
+      }
+    }
+  }
+  
+  /* Step Title */
+  .step-list > li > h3 {
+    margin: 0 0 var(--space-3) 0;
+    padding: 0;
+    padding-right: var(--space-10); /* Space for badge on right */
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-brand-primary);
+  }
+  
+  /* Step Description */
+  .step-list > li > p {
+    margin: 0;
+    padding-left: 0;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text);
+    flex: 1;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .step-list > li {
+      padding: var(--space-6) var(--space-6) var(--space-5);
+      
+      &::before {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: var(--font-size-xl);
+        top: var(--space-4);
+        right: var(--space-5);
+      }
+      
+      > h3 {
+        padding-right: var(--space-12);
+      }
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .step-list > li {
+      padding: var(--space-5) var(--space-4) var(--space-4);
+      
+      &::before {
+        width: 2rem;
+        height: 2rem;
+        font-size: var(--font-size-base);
+        top: var(--space-3);
+        right: var(--space-4);
+      }
+      
+      > h3 {
+        padding-right: var(--space-8);
+        font-size: var(--font-size-lg);
+      }
+    }
+  }
+  
+}
+

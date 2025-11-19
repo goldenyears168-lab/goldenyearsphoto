@@ -1,0 +1,130 @@
+{# ==================================================
+   Example: Homepage with Scroll Animations
+   
+   This file shows how to apply scroll-triggered animations
+   to homepage sections for a smooth, fluid, premium feel.
+   
+   NOTE: This file is excluded from Eleventy build via .eleventyignore
+   ================================================== #}
+
+{% from "macros/portfolio.njk" import portfolioImg %}
+
+{# Hero Section - Already has animations, but can enhance #}
+<section class="module module-dark page-hero">
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-copy slide-right">
+        <p class="hero-kicker">台北專業攝影工作室</p>
+        <h1 id="hero-title" class="hero-title">好時有影</h1>
+        <p class="hero-subtitle">
+          讓每一個「好時」，都有你我的「身影」
+        </p>
+        <p class="hero-description">
+          台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
+        </p>
+        <div class="hero-actions">
+          <a href="/booking/" class="button button--primary hero-cta-primary">
+            立即預約
+          </a>
+          <a href="/price-list/" class="button button--secondary hero-cta-secondary">
+            查看價目
+          </a>
+        </div>
+      </div>
+      <div class="hero-image slide-left">
+        <img 
+          src="{{ 'content/home/hero/Hero_Images_16x9.jpg' | r2img }}" 
+          alt="好時有影專業攝影工作室"
+          loading="eager"
+          decoding="async"
+          width="1200"
+          height="675"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Portfolio Section - Fade-in title, staggered gallery items #}
+<div class="module fade-in">
+  <div class="container">
+    <h2 class="text-align-center slide-up">找到你的專屬風格</h2>
+    
+    <nav class="portfolio-filter fade-in animate-delay-1" role="tablist" aria-label="作品分類篩選">
+      {# Filter buttons... #}
+    </nav>
+
+    <div class="portfolio-gallery" data-animate-stagger>
+      <div class="gallery-item" data-category="passport-korea" data-animate-item>
+        {{ portfolioImg("korean-id/korean-id-1.jpg", "韓式證件照範例 1") }}
+      </div>
+      <div class="gallery-item" data-category="passport-korea" data-animate-item>
+        {{ portfolioImg("korean-id/korean-id-2.jpg", "韓式證件照範例 2") }}
+      </div>
+      {# More gallery items with data-animate-item... #}
+    </div>
+  </div>
+</div>
+
+{# Content Section - Progressive reveal #}
+<section class="module fade-in">
+  <div class="container">
+    <div class="content-intro slide-up">
+      <h2>Section Title</h2>
+      <p>Introduction text that fades in smoothly</p>
+    </div>
+    
+    <div class="layout-split">
+      <div class="layout-split-text slide-right">
+        <h3>Content Title</h3>
+        <p>Content that slides in from the right</p>
+      </div>
+      <div class="layout-split-image slide-left">
+        <img 
+          src="{{ 'content/blog/example.jpg' | r2img }}" 
+          alt="Example image"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Card Grid - Staggered animation #}
+<div class="module fade-in">
+  <div class="container">
+    <h2 class="text-align-center slide-up">Our Services</h2>
+    
+    <div class="service-grid" data-animate-stagger>
+      <div class="card card--service slide-up" data-animate-item>
+        <div class="card__body">
+          <h3 class="card__title">Service 1</h3>
+          <p class="card__content">Service description</p>
+        </div>
+      </div>
+      <div class="card card--service slide-up" data-animate-item>
+        <div class="card__body">
+          <h3 class="card__title">Service 2</h3>
+          <p class="card__content">Service description</p>
+        </div>
+      </div>
+      {# More cards... #}
+    </div>
+  </div>
+</div>
+
+{# Final CTA Section - Fade-in with delay #}
+<div class="container final-cta fade-in animate-delay-2">
+  <div>
+    <h2 class="section-title slide-up">準備好，讓自己被好好看見了嗎？</h2>
+    <p class="page-intro slide-up animate-delay-1">
+      不用先想好要怎麼笑、怎麼站，只要帶著你現在的樣子來就好。
+      其他的，我們一起慢慢找到。
+    </p>
+  </div>
+  <a href="/booking/" class="btn btn--primary btn--lg slide-up animate-delay-2">
+    預約下一個好時刻
+  </a>
+</div>
+
