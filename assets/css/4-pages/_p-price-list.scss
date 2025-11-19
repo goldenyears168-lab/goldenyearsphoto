@@ -1,51 +1,94 @@
 /* ==============================
  * 價目表頁 (price-list.njk) 專用樣式
- * - 通用卡片外觀由全域 _k-00-components.scss 的 .c-card 提供
- * - 此處只負責：服務卡片、妝髮卡片、價目列表等 page-level 樣式
+ * 專業排版：左邊文字，右邊四張圖片
+ * 完全移除卡片樣式，使用簡潔布局
  * ============================ */
 
-/* 服務卡片 Block：.price-service-card
-   - HTML：<div class="c-card c-card--price c-card--split price-service-card ...">
-   - 使用全域 .c-card，這裡只做 page-level 調整或未來客製
-*/
-.price-service-card {
-  /* 目前維持使用 .c-card 預設樣式，有需要再加 override */
-  margin-bottom: var(--space-10); /* Increased gap between cards */
-  
-  &:last-child {
-    margin-bottom: 0; /* Remove margin from last card */
-  }
-}
-
-/* Add gap between service cards */
-.card--service,
-.c-card--price,
-.c-card--makeup {
-  margin-bottom: var(--space-10); /* Increased gap between cards */
+/* ========= 完全移除卡片樣式，改為簡潔布局 ========= */
+.card.card--service.card--split,
+.c-card.c-card--price.c-card--split,
+.c-card.c-card--makeup.c-card--split {
+  /* 完全移除卡片樣式 */
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  margin-bottom: var(--space-12);
+  min-height: 0 !important;
   
   &:last-child {
     margin-bottom: 0;
   }
+  
+  /* 桌面版：兩列布局（左文字，右圖片） */
+  @media (min-width: 768px) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+    align-items: start;
+    flex-direction: row !important;
+    
+    .card__body,
+    .c-card__body {
+      flex: none !important;
+      padding: 0 !important;
+      width: 100%;
+      display: block;
+    }
+    
+    .card__media,
+    .c-card__media {
+      flex: none !important;
+      padding: 0 !important;
+      width: 100%;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      align-self: auto !important;
+    }
+  }
 }
 
-.price-service-card__title {
-  /* 若未來不同服務要有不同標題樣式，可在此覆寫 */
+/* ========= 服務標題和價格樣式 ========= */
+.card__title,
+.c-card__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-primary);
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--line-height-tight);
 }
 
-.price-service-card__price {
-  /* 若要針對某些服務調整價格樣式，可在此覆寫 */
+.card__price,
+.c-card__price {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-accent);
+  margin: 0 0 var(--space-2) 0;
+  line-height: var(--line-height-tight);
 }
 
-.price-service-card__price-tag {
-  /* 專屬服務卡片的價格標籤調整放這裡 */
+.card__price-unit,
+.c-card__price-unit {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-subtle);
 }
 
-.price-service-card__gallery {
-  /* 目前沿用 .c-card__media 的 grid，保留給未來特殊 layout 用 */
+.c-card__price-tag {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-brand-accent);
 }
 
 /* ========= 區塊副標題：服務包含 / 升級選項 ========= */
-
 .price-section-title {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
@@ -58,7 +101,6 @@
 }
 
 /* ========= 價格列表（服務包含 / 升級 / 妝髮通用基底） ========= */
-
 .price-list {
   list-style: none;
   padding-left: 0;
@@ -99,105 +141,26 @@
   padding-left: 0;      /* 不需要 icon，去掉縮排 */
 }
 
-/* ==============================
- * 妝髮卡片 Block：.price-makeup-card
- * - HTML：<div class="c-card c-card--makeup c-card--split price-makeup-card">
- * ============================ */
-
-.price-makeup-card {
-  /* 共用 .c-card 外觀；若要與服務卡片做視覺區隔，可在此覆寫背景、邊框等 */
-}
-
-.price-makeup-card__title {
-  /* 若希望妝髮標題略小／色彩不同，可在此調整 */
-}
-
-.price-makeup-card__gallery {
-  /* 目前沿用 .c-card__media 的兩欄 grid，如未來改成單欄可在此覆寫 */
-}
-
-/* ========= 價目表頁面專用的圖片畫廊樣式 ========= */
-
-/* 關鍵修復 1：覆蓋 .card 和 .c-card 的 overflow: hidden */
-/* 這是導致內容被裁切的最主要原因 */
-.card:has(.price-gallery),
-.c-card:has(.price-gallery),
-.card.card--service:has(.price-gallery),
-.c-card.c-card--price:has(.price-gallery),
-.c-card.c-card--makeup:has(.price-gallery) {
-  overflow: visible !important;
-}
-
-/* 備用方案：如果瀏覽器不支持 :has()，使用更通用的選擇器 */
-.card--split .price-gallery,
-.c-card--split .price-gallery {
-  position: relative;
-  z-index: 1;
-}
-
-/* 覆蓋 split 卡片的最小高度限制，讓卡片可以隨內容撐開 */
-.card--split,
-.c-card--split {
-  @media (min-width: 768px) {
-    min-height: 0 !important; /* 移除 600px 的最小高度限制 */
-    align-items: flex-start !important; /* 改為 flex-start，讓內容從頂部對齊 */
-    
-    /* 覆蓋 .card__media 和 .c-card__media 在 split 布局中的樣式 */
-    .card__media,
-    .c-card__media {
-      align-self: auto !important; /* 覆蓋 align-self: stretch */
-      height: auto !important; /* 覆蓋固定高度 */
-      min-height: 0 !important;
-    }
-  }
-}
-
-/* 價目表頁的圖片區塊：完全解除固定高度限制 */
-.card__media.price-gallery,
-.c-card__media.price-gallery,
-.price-makeup-card__gallery.price-gallery {
+/* ========= 圖片畫廊區域（右側） ========= */
+.price-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  width: 100%;
   height: auto !important;
   min-height: 0 !important;
-  align-self: auto !important;
+  max-height: none !important;
   
-  /* 關鍵修復 2：覆蓋 .card__media img 的 height: 100% */
-  /* 這必須在 .card__media.price-gallery 層級覆蓋，確保優先級 */
+  /* 確保所有圖片相關的樣式都被覆蓋 */
   img {
-    height: auto !important; /* 覆蓋 height: 100% */
-    max-height: none; /* 暫時移除 max-height 限制，讓圖片可以完整顯示 */
-  }
-  
-  @media (min-width: 768px) {
     height: auto !important;
-    min-height: 0 !important;
-    align-self: auto !important;
-    
-    img {
-      height: auto !important;
-      max-height: none;
-    }
-  }
-  
-  @media (min-width: 992px) {
-    img {
-      height: auto !important;
-      max-height: none;
-    }
+    width: 100%;
+    max-width: 100%;
+    max-height: none !important;
   }
 }
 
-/* Price Gallery - 圖片與說明文字的容器 */
-.price-gallery {
-  /* 增加圖片之間的間距 */
-  gap: var(--space-4);
-  
-  /* 確保 grid items 對齊 */
-  align-items: stretch;
-  /* 覆蓋 split 布局中的 align-content: start，讓 grid 可以隨內容撐開 */
-  align-content: start;
-}
-
-/* Price Gallery Item - 每張圖片與其說明文字（卡片形式） */
+/* ========= 圖片項目（每張圖片 + 說明文字）- 移除卡片樣式 ========= */
 .price-gallery__item {
   display: flex;
   flex-direction: column;
@@ -205,27 +168,19 @@
   justify-content: flex-start;
   width: 100%;
   
-  /* 卡片樣式 */
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
-  /* 移除 overflow: hidden，讓內容可以撐開卡片，而不是被裁切 */
+  /* 完全移除卡片樣式 */
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
   overflow: visible;
-  transition: transform var(--transition-hover), box-shadow var(--transition-hover);
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
+  padding: 0;
+  transition: none;
+  transform: none;
   
-  /* 輕微的 hover 效果 */
-  &:hover {
-    transform: translate3d(0, -2px, 0);
-    box-shadow: var(--shadow-hover);
-  }
-  
-  /* 圖片容器區域 - 圖片高度由自己決定，不再被父容器硬拉長 */
+  /* 圖片樣式 */
   img {
     width: 100%;
-    /* 確保圖片高度是自適應的，徹底覆蓋 card__media 裡的 height: 100% */
     height: auto !important;
     max-width: 100%;
     
@@ -233,7 +188,7 @@
     max-height: 200px; /* 移動端 */
     
     /* 確保不裁切，維持原本比例 */
-    object-fit: contain !important;
+    object-fit: contain;
     object-position: center center;
     
     /* 圖片容器樣式 */
@@ -241,7 +196,7 @@
     background-color: var(--color-neutral-100);
     padding: var(--space-3);
     box-sizing: border-box;
-    flex-shrink: 0;
+    border-radius: var(--radius-md);
   }
   
   /* 響應式調整圖片高度 */
@@ -258,27 +213,21 @@
   }
 }
 
-/* Price Gallery 圖片說明文字 */
+/* ========= 圖片說明文字 ========= */
 .price-gallery__caption {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-subtle);
   text-align: center;
-  margin: 0;
-  padding: var(--space-3) var(--space-2);
+  margin: var(--space-2) 0 0 0;
+  padding: 0;
   line-height: var(--line-height-normal);
-  background-color: var(--color-surface);
-  flex-shrink: 0;
 }
 
-/* 尊重用戶的動畫偏好 */
+/* ========= 尊重用戶的動畫偏好 ========= */
 @media (prefers-reduced-motion: reduce) {
   .price-gallery__item {
-    transition: box-shadow var(--transition-hover);
+    transition: none;
     transform: none;
-    
-    &:hover {
-      transform: none;
-    }
   }
 }
