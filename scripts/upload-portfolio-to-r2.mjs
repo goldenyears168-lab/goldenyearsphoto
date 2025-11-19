@@ -1,7 +1,7 @@
 // scripts/upload-portfolio-to-r2.mjs
 import fs from "fs";
 import path from "path";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
 import sharp from "sharp";
 
@@ -114,7 +114,37 @@ async function optimizeImage(localPath) {
   return optimizedBuffer;
 }
 
+/**
+ * Check if file already exists in R2
+ * @param {string} key - R2 object key
+ * @returns {Promise<boolean>} - True if file exists, false otherwise
+ */
+async function fileExistsInR2(key) {
+  try {
+    const headCommand = new HeadObjectCommand({
+      Bucket: BUCKET_NAME,
+      Key: key,
+    });
+    await s3.send(headCommand);
+    return true; // File exists (200 OK)
+  } catch (error) {
+    // 404 Not Found means file doesn't exist, which is fine
+    if (error.name === "NotFound" || error.$metadata?.httpStatusCode === 404) {
+      return false;
+    }
+    // Re-throw other errors (network issues, permissions, etc.)
+    throw error;
+  }
+}
+
 async function uploadFile(localPath, key) {
+  // Check if file already exists in R2 (idempotent check)
+  const exists = await fileExistsInR2(key);
+  if (exists) {
+    console.log(`⏭️  Skipped (Already exists): ${key}`);
+    return; // Skip processing and uploading
+  }
+
   // Get original file size for logging
   const originalStats = fs.statSync(localPath);
   const originalSize = originalStats.size;
