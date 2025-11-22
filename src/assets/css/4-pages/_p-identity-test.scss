@@ -109,15 +109,16 @@
     /* Type Cards Preview */
     .type-cards-preview {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-4);
+      grid-template-columns: repeat(2, 1fr); /* 手机版：一排 2 个 × 3 排 */
+      gap: var(--space-3);
       margin-top: var(--space-12);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
       
       @media (min-width: 640px) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 桌面版：3 列 */
+        gap: var(--space-4);
       }
     }
     
@@ -147,6 +148,8 @@
       font-size: var(--font-size-sm);
       font-weight: var(--font-weight-medium);
       color: var(--color-text);
+      white-space: nowrap; /* 防止文字换行 */
+      line-height: var(--line-height-tight);
     }
   }
   
@@ -308,11 +311,12 @@
     /* Options Grid */
     .options-grid {
       display: grid;
-      gap: var(--space-4);
+      grid-template-columns: repeat(2, 1fr); /* 手机版就是 2 列 */
+      gap: var(--space-3);
       margin-bottom: var(--space-10);
       
       @media (min-width: 640px) {
-        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
       }
     }
     
@@ -345,10 +349,17 @@
       }
       
       &.selected {
-        border-color: var(--color-brand-cta);
+        border-color: var(--color-brand-primary);
         border-width: 2px;
-        background: color-mix(in srgb, var(--color-brand-cta) 10%, var(--color-surface));
-        box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand-cta) 10%, transparent), var(--shadow-hover);
+        background: color-mix(in srgb, var(--color-brand-cta) 40%, var(--color-surface));
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand-cta) 30%, transparent), 
+                    var(--shadow-hover);
+        transform: translateY(-2px);
+        
+        .option-text {
+          color: var(--color-brand-primary);
+          font-weight: var(--font-weight-semibold);
+        }
       }
     }
     
@@ -367,7 +378,7 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-4);
-      flex-wrap: wrap;
+      flex-wrap: nowrap; /* 始终保持左右排列，不换行 */
     }
     
     .question-counter {
@@ -378,16 +389,19 @@
       background: var(--color-surface);
       border-radius: var(--radius-md);
       border: 1px solid var(--color-border);
+      white-space: nowrap; /* 防止文字换行 */
+      flex-shrink: 0; /* 防止计数器被压缩 */
     }
     
-    @media (max-width: 640px) {
-      .quiz-nav {
-        flex-direction: column;
-      }
+    .quiz-nav .btn-primary,
+    .quiz-nav .btn-secondary {
+      flex: 0 0 auto; /* 按钮不伸缩 */
+      min-width: 120px; /* 设置最小宽度 */
       
-      .quiz-nav .btn-primary,
-      .quiz-nav .btn-secondary {
-        width: 100%;
+      @media (max-width: 480px) {
+        min-width: 100px;
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--font-size-sm);
       }
     }
   }
