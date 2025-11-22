@@ -15,8 +15,7 @@
     selectedOptions: [], // 目前題目被勾選的選項 index 陣列
     // 用户信息
     userEmail: null,
-    userName: null,
-    userPhone: null
+    userName: null
   };
 
   // DOM Elements (will be initialized in initQuiz)
@@ -47,7 +46,6 @@
     userInfoFormElement: null,
     userNameInput: null,
     userEmailInput: null,
-    userPhoneInput: null,
     skipUserInfoBtn: null
   };
 
@@ -82,7 +80,6 @@
     elements.userInfoFormElement = document.getElementById('user-info-form-element');
     elements.userNameInput = document.getElementById('user-name');
     elements.userEmailInput = document.getElementById('user-email');
-    elements.userPhoneInput = document.getElementById('user-phone');
     elements.skipUserInfoBtn = document.getElementById('skip-user-info');
 
     // Load data from JSON
@@ -167,7 +164,6 @@
     state.selectedOptions = [];
     state.userEmail = null;
     state.userName = null;
-    state.userPhone = null;
     
     // Reset user info form if exists
     if (elements.userInfoFormElement) {
@@ -500,10 +496,9 @@
     // Get form values
     state.userName = elements.userNameInput?.value.trim() || null;
     state.userEmail = elements.userEmailInput?.value.trim() || null;
-    state.userPhone = elements.userPhoneInput?.value.trim() || null;
     
     // If no data provided, just hide the form
-    if (!state.userName && !state.userEmail && !state.userPhone) {
+    if (!state.userName && !state.userEmail) {
       hideUserInfoForm();
       return;
     }
@@ -568,7 +563,6 @@
         answers: state.answers,
         email: state.userEmail || null,
         name: state.userName || null,
-        phone: state.userPhone || null,
         user_agent: navigator.userAgent,
         referrer: document.referrer || null
       };
