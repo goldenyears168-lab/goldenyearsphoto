@@ -12,6 +12,7 @@
 @use '2-layout/l-00-structure';
 @use '2-layout/l-01-header';
 @use '2-layout/l-02-footer';
+@use '2-layout/l-04-bento';
 
 /* [ 🚀 V8.0 ] _l-03-layout-fix 已被移除 */
 /* @use '2-layout/_l-03-layout-fix'; */
@@ -26,10 +27,14 @@
 @use '3-components/c-team-grid';
 @use '3-components/k-masonry'; 
 
-@use '4-pages/_p-graduation';     // 載入「畢業照」的獨特樣式
+@use '4-pages/_p-home';         // 載入「首頁」的獨特樣式
+@use '4-pages/_p-graduation';   // 載入「畢業照」的獨特樣式
 @use '4-pages/_p-guide-makeup'; // 載入「妝髮服務」的獨特樣式
-@use '4-pages/_p-blog-pages';     // 載入「寵物/全家福/醫師袍」的共用樣式
-@use '4-pages/_p-price-list'; // 載入「價目表」專用樣式
+@use '4-pages/_p-blog-pages';   // 載入「寵物/全家福/醫師袍」的共用樣式
+@use '4-pages/_p-price-list';   // 載入「價目表」專用樣式
+@use '4-pages/_p-booking-hub';  // 載入「預約中心」專用樣式
+@use '4-pages/_p-booking-page'; // 載入「預約頁面」專用樣式
+@use '4-pages/_p-faq';          // 載入「FAQ」專用樣式
 
 
 /* * 2) @layer 宣告層級順序

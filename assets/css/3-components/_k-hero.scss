@@ -1,16 +1,185 @@
 /* ==================================================
- * Hero Component - "Warm × Enterprise" Design System
+ * Hero Component - BEM Structure
  * 
- * Reusable hero section with two-column layout:
- * - Text content on left (desktop) / top (mobile)
- * - Image on right (desktop) / bottom (mobile)
- * - Primary and secondary CTAs
- * - Accessible semantic structure
- * ==================================================
- */
+ * Block: .hero
+ * Elements: .hero__layout, .hero__content, etc.
+ * ================================================== */
 
 @layer components {
-  
+
+  /* ==================================================
+   * Hero Block - BEM Structure
+   * ================================================== */
+
+  .hero {
+    /* Hero block container - Warm Humanism Mode */
+    position: relative;
+    z-index: 1;
+    /* 柔白背景 + 淡淡紙紋 + 漸層，與其他區塊區分 */
+    background-color: var(--color-surface-card); /* 柔白背景 */
+    background-image: var(--texture-paper), var(--gradient-hero); /* 淡淡紙紋 + 漸層 */
+    background-size: cover, cover; /* 兩個背景都覆蓋 */
+    background-position: center, top right; /* 紙紋居中，漸層右上 */
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay, normal; /* 紙紋淡淡混合，漸層正常 */
+    
+    /* 微妙的玻璃質感 - 淡淡的不明顯 */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      backdrop-filter: var(--glass-blur-subtle);
+      -webkit-backdrop-filter: var(--glass-blur-subtle);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3; /* 降低不透明度，讓紙紋和背景更自然 */
+      mix-blend-mode: soft-light; /* 柔和混合 */
+    }
+    
+    /* 確保內容在玻璃層之上 */
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Layout - Two-column grid */
+    &__layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      position: relative;
+      z-index: 2;
+
+      @media (min-width: 992px) {
+        grid-template-columns: 1.1fr 1fr;
+        gap: var(--space-10);
+      }
+    }
+
+    /* Hero Content - Text area */
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      position: relative;
+      z-index: 3;
+
+      @media (min-width: 768px) {
+        gap: var(--space-5);
+        padding: var(--space-6);
+      }
+    }
+
+    /* Hero Kicker */
+    &__kicker {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--palette-morning-gold); /* 晨曦金 */
+      margin-bottom: var(--space-2);
+    }
+
+    /* Hero Title - 確保清晰可見 */
+    &__title {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+      color: var(--palette-deep-brown) !important; /* 強制使用深褐，最高對比度 */
+      margin: 0;
+      font-family: var(--font-family-heading); /* 宋體 */
+      opacity: 1 !important; /* 確保完全不透明 */
+
+      @media (min-width: 768px) {
+        font-size: clamp(2.25rem, 5vw, 3.5rem);
+      }
+    }
+
+    /* Hero Subtitle - 確保清晰可見 */
+    &__subtitle {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-semibold); /* 加粗字體 */
+      line-height: var(--line-height-relaxed);
+      color: var(--palette-deep-gray) !important; /* 強制使用深灰，確保可見 */
+      margin: 0;
+      opacity: 1 !important; /* 確保完全不透明 */
+
+      @media (min-width: 768px) {
+        font-size: var(--font-size-2xl);
+      }
+    }
+
+    /* Hero Description - 確保清晰可見 */
+    &__description {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      color: var(--palette-deep-gray) !important; /* 強制使用深灰，確保可見 */
+      opacity: 1 !important; /* 確保完全不透明 */
+      margin: 0;
+      font-weight: var(--font-weight-medium); /* 加粗字體 */
+
+      @media (min-width: 768px) {
+        font-size: var(--font-size-lg);
+      }
+    }
+
+    /* Hero Actions - Button container */
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+
+      @media (min-width: 480px) {
+        flex-direction: row;
+        gap: var(--space-4);
+      }
+    }
+
+    /* Hero CTA - Primary button in hero */
+    &__cta {
+      &--primary {
+        /* Primary CTA button styles (extends .button--primary) */
+        min-width: 140px;
+
+        @media (min-width: 768px) {
+          min-width: 160px;
+        }
+      }
+
+      &--secondary {
+        /* Secondary CTA button styles */
+        min-width: 140px;
+
+        @media (min-width: 768px) {
+          min-width: 160px;
+        }
+      }
+    }
+
+    /* Hero Media - Image area */
+    &__media {
+      position: relative;
+      z-index: 3;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius-card); /* 24px 超橢圓圓角 */
+        box-shadow: var(--shadow-card); /* 暖色調陰影 */
+      }
+    }
+  }
+
+  /* 移除午後樹影動畫 - 暖色背景不需要深色光影效果 */
+
+  /* ==================================================
+   * DEPRECATED: .page-hero
+   * 
+   * Use .section.section--hero with .hero block instead
+   * ================================================== */
+
   /* Hero Section Container
    * Background Image with Dark Overlay for Readability
    * 
@@ -19,7 +188,13 @@
    * Ensures WCAG AA contrast compliance for all foreground content
    */
   .page-hero {
+    /* Keep existing styles for backward compatibility - Warm Humanism Mode */
     padding-block: var(--space-10) var(--space-12);
+    background-color: var(--color-surface-base); /* 暖杏色背景 */
+    color: var(--color-text-body); /* 深灰文字 */
+    position: relative;
+    overflow: hidden;
+
     /* Background image with cover sizing and center positioning
      * Note: Image path may need adjustment based on CDN/R2 configuration
      * If using R2 CDN, consider using CSS variable or inline style for dynamic URL */
@@ -27,23 +202,16 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--color-brand-primary); /* Fallback color */
-    color: var(--color-text-on-dark);
-    position: relative;
-    overflow: hidden;
-    
-    /* Dark Overlay - Semi-transparent mask for readability
-     * Uses --color-brand-primary (#353242) at 70% opacity
-     * Ensures text and buttons maintain WCAG AA contrast */
+
     &::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-color: var(--color-overlay-dark);
+      background: var(--gradient-hero); /* 暖色調漸層 */
       z-index: 0;
       pointer-events: none;
     }
-    
+
     /* Content Stacking - Ensure all content layers above overlay */
     .container {
       position: relative;
@@ -279,6 +447,54 @@
     outline: 3px solid var(--focus-ring);
     outline-offset: 3px;
   }
-  
+
+  /* ==================================================
+   * DEPRECATED: Legacy Hero Classes
+   * 
+   * These map to new BEM structure.
+   * Please use .hero__* classes instead.
+   * ================================================== */
+
+  .hero-layout {
+    @extend .hero__layout;
+  }
+
+  .hero-copy {
+    @extend .hero__content;
+  }
+
+  .hero-kicker {
+    @extend .hero__kicker;
+  }
+
+  .hero-title {
+    @extend .hero__title;
+  }
+
+  .hero-subtitle {
+    @extend .hero__subtitle;
+  }
+
+  .hero-description {
+    @extend .hero__description;
+  }
+
+  .hero-actions {
+    @extend .hero__actions;
+  }
+
+  .hero-image {
+    @extend .hero__media;
+  }
+
+  .hero-cta-primary {
+    @extend .hero__cta--primary;
+  }
+
+  .hero-cta-secondary {
+    @extend .hero__cta--secondary;
+  }
+
 }
+
 

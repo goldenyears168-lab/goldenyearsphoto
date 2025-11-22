@@ -1,22 +1,20 @@
 ---
 layout: "base-layout.njk"
 title: "服務價目表｜好時有影 - 韓式證件照、形象照)"
-pageStyles: |
-  <link rel="stylesheet" href="/assets/css/4-pages/p-price-list.css">
 seo:
   description: "查詢好時有影「韓式證件照」、「專業形象照」、「合照」及「妝髮服務」的完整價格。我們 100% 堅持價格透明，提供 Z 世代最安心的預約體驗。"
 ---
 
-<div class="module">
+<div class="section">
   <div class="container container-md text-align-center">
     <h1>服務項目與價目表</h1>
   </div>
 </div>
 
-<div class="module module-gray">
+<div class="section">
   <div class="container">
     {# 韓式證件照 #}
-    <div class="card card--service card--split">
+    <div class="card card--service card--split price-page__card">
       <div class="card__body">
         <h3 class="card__title">韓式證件照</h3>
         <p class="card__price">
@@ -59,13 +57,13 @@ seo:
     </div>
 
     {# 個人形象照 #}
-    <div class="c-card c-card--price c-card--split price-service-card price-service-card--portrait">
-      <div class="c-card__body price-service-card__details">
-        <h3 class="c-card__title price-service-card__title">個人形象照</h3>
-        <p class="c-card__price price-service-card__price">
-          優惠 $999 <span class="c-card__price-unit price-service-card__price-unit">/張</span>
+    <div class="card card--service card--split price-page__card">
+      <div class="card__body">
+        <h3 class="card__title">個人形象照</h3>
+        <p class="card__price">
+          優惠 $999 <span class="card__price-unit">/張</span>
         </p>
-        <p class="c-card__price-tag c-card__price-tag--student price-service-card__price-tag">
+        <p class="card__price-tag card__price-tag--student">
           持學生證可優惠 $899 /張
         </p>
 
@@ -106,13 +104,13 @@ seo:
     </div>
 
     {# 合照 (2-6人) #}
-    <div class="c-card c-card--price c-card--split price-service-card price-service-card--group">
-      <div class="c-card__body price-service-card__details">
-        <h3 class="c-card__title price-service-card__title">合照 (2-6人)</h3>
-        <p class="c-card__price price-service-card__price">
-          優惠 $1199 <span class="c-card__price-unit price-service-card__price-unit">/張</span>
+    <div class="card card--service card--split price-page__card">
+      <div class="card__body">
+        <h3 class="card__title">合照 (2-6人)</h3>
+        <p class="card__price">
+          優惠 $1199 <span class="card__price-unit">/張</span>
         </p>
-        <p class="c-card__price-tag c-card__price-tag--student price-service-card__price-tag">
+        <p class="card__price-tag card__price-tag--student">
           持學生證可優惠 $1099 /張
         </p>
 
@@ -152,13 +150,13 @@ seo:
   </div>
 </div>
 
-<div class="module">
+<div class="section">
   <div class="container">
     <h2 class="text-align-center">加購妝髮服務</h2>
 
-    <div class="c-card c-card--makeup c-card--split price-makeup-card">
-      <div class="c-card__body price-makeup-card__details">
-        <h3 class="c-card__title price-makeup-card__title">加購妝髮方案價格</h3>
+    <div class="card card--service card--split price-page__card--makeup">
+      <div class="card__body">
+        <h3 class="card__title">加購妝髮方案價格</h3>
         <ul class="price-list price-list--makeup">
           <li class="price-list__item">A. 女生 基礎日常妝 $800 / 30min</li>
           <li class="price-list__item">B. 男生 基礎妝髮 $600 / 30min</li>
@@ -168,7 +166,7 @@ seo:
         </ul>
       </div>
 
-      <div class="c-card__media price-makeup-card__gallery price-gallery">
+      <div class="card__media price-gallery">
         <div class="price-gallery__item">
           <img src="{{ 'content/price-list/Makeup_Example_Female.jpg' | r2img }}" alt="妝髮服務範例 - 女生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
           <p class="price-gallery__caption">女生妝髮</p>

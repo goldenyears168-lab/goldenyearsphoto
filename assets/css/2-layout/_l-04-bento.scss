@@ -1,0 +1,74 @@
+/* ==================================================
+ * Bento Grid Layout - Shared Skeleton
+ * 
+ * Flexible grid system for card-based layouts
+ * Used by both SmartBoss and Golden Years
+ * ================================================== */
+
+@layer layout {
+  
+  /* Bento Grid Container */
+  .bento-grid {
+    display: grid;
+    gap: var(--space-6);
+    
+    /* Mobile: single column */
+    grid-template-columns: 1fr;
+    
+    /* Tablet: 4 columns */
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-8);
+    }
+    
+    /* Desktop: 6 columns */
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--space-10);
+    }
+  }
+  
+  /* Bento Item Sizes */
+  .bento-item--1x1 {
+    /* Mobile: full width */
+    grid-column: 1 / -1;
+    
+    /* Tablet+: span 2 columns (1x1 in 4-col grid) */
+    @media (min-width: 768px) {
+      grid-column: span 2;
+    }
+  }
+  
+  .bento-item--2x1 {
+    /* Mobile: full width */
+    grid-column: 1 / -1;
+    
+    /* Tablet+: span 4 columns (2x1 in 4-col grid) */
+    @media (min-width: 768px) {
+      grid-column: span 4;
+    }
+  }
+  
+  .bento-item--2x2 {
+    /* Mobile: full width */
+    grid-column: 1 / -1;
+    
+    /* Tablet+: span 4 columns, 2 rows */
+    @media (min-width: 768px) {
+      grid-column: span 4;
+      grid-row: span 2;
+    }
+  }
+  
+  /* Mobile: All items become single column */
+  @media (max-width: 767px) {
+    .bento-item--1x1,
+    .bento-item--2x1,
+    .bento-item--2x2 {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+  }
+  
+}
+

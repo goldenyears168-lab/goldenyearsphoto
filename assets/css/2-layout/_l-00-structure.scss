@@ -1,74 +1,226 @@
 /* ==================================================
  * Layout: Section Structure
  * 
- * 定義頁面區塊（module）的基礎樣式
- * - 移除所有漸層過渡效果，保持乾淨的色塊切換
- * - 遵循 "Warm × Enterprise" 設計系統
+ * 定義頁面區塊的基礎樣式
+ * - Section System (新的統一系統)
+ * - Legacy Module Classes (deprecated, kept for backward compatibility)
  * ================================================== */
 
-/* ---------- 🧱 區塊 Section ---------- */
+@layer layout {
 
-/* 基礎 Module - 淺色背景區塊 */
-.module { 
-  padding: 60px 0; 
-}
+  /* ==================================================
+   * Section System - Shared Skeleton
+   * 
+   * Unified section structure replacing .module* classes
+   * Visual styling (colors, backgrounds) will be applied in Phase 4
+   * ================================================== */
 
-/* Module 之間的間距 */
-.module + .module { 
-  margin-top: 56px; 
-}
+  /* Base Section - 暖杏色背景 + 淡淡紙紋 */
+  .section {
+    padding: var(--space-10) 0;
+    background-color: var(--color-surface-base); /* 暖杏色背景 */
+    background-image: var(--texture-paper); /* 淡淡紙紋紋理 - 全站背景 */
+    background-size: cover; /* 覆蓋整個區塊 */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* 使用 blend mode 讓紙紋淡淡的不明顯 */
+    background-blend-mode: overlay;
+    opacity: 1; /* 確保區塊本身不透明 */
+    
+    & + .section {
+      margin-top: 0; /* Sections are adjacent */
+    }
+  }
 
-/* Module Gray - 灰色背景區塊 */
-.module-gray { 
-  background-color: var(--color-gray-bg); 
-}
+  /* Section Variants - 區塊分色 */
+  .section--hero {
+    padding: var(--space-12) 0 var(--space-10);
+    position: relative;
+    overflow: hidden;
+    /* 柔白背景 + 漸層 + 淡淡紙紋，與其他區塊區分 */
+    background-color: var(--color-surface-card); /* 柔白背景 */
+    background-image: var(--texture-paper), var(--gradient-hero); /* 紙紋 + 漸層 */
+    background-size: cover, cover; /* 兩個背景都覆蓋 */
+    background-position: center, top right; /* 紙紋居中，漸層右上 */
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay, normal; /* 紙紋淡淡混合，漸層正常 */
+  }
 
-/* Module Dark - 深色背景區塊（Hero, Footer 等）
- * 
- * 使用純色背景，無漸層過渡
- * 如需徑向漸層效果，可取消下方註解
- */
-.module-dark,
-.module--dark {
-  /* 純色背景（推薦） */
-  background-color: var(--color-surface-3);
+  /* Alternate Section - 柔白背景 + 淡淡紙紋，與基礎區塊形成對比 */
+  .section--alt {
+    background-color: var(--color-surface-card); /* 柔白背景 */
+    background-image: var(--texture-paper), var(--gradient-section-alt); /* 淡淡紙紋 + 漸層 */
+    background-size: cover, cover; /* 兩個背景都覆蓋 */
+    background-position: center, center; /* 兩個背景都居中 */
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay, normal; /* 紙紋淡淡混合，漸層正常 */
+    position: relative;
+    
+    .container {
+      position: relative;
+      z-index: 1; /* 確保內容在背景之上 */
+    }
+    
+    /* 確保所有文字清晰可見 - 使用更深的顏色 */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--palette-deep-brown) !important; /* 強制使用深褐 */
+      opacity: 1 !important;
+      font-weight: var(--font-weight-bold) !important;
+    }
+    
+    p, span {
+      color: var(--palette-deep-gray) !important; /* 強制使用深灰 */
+      opacity: 1 !important;
+      font-weight: var(--font-weight-medium) !important; /* 加粗字體 */
+    }
+    
+    a {
+      color: var(--palette-morning-gold) !important; /* 連結使用晨曦金 */
+      opacity: 1 !important;
+    }
+  }
   
-  /* 可選：徑向漸層背景（增加深度感，但無過渡線條） */
+  /* 偶數區塊使用柔白背景 + 淡淡紙紋 */
+  .section:nth-child(even) {
+    background-color: var(--color-surface-card); /* 柔白背景 */
+    background-image: var(--texture-paper); /* 淡淡紙紋紋理 */
+    background-size: cover; /* 覆蓋整個區塊 */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay; /* 淡淡混合，不明顯 */
+  }
+
+  /* Dark Section - 深褐背景 + 漸層 + 淡淡紙紋 */
+  .section--inverse {
+    background-color: var(--color-surface-dark); /* 深褐背景 */
+    background-image: var(--texture-paper), var(--gradient-dark); /* 淡淡紙紋 + 漸層 */
+    background-size: cover, cover; /* 兩個背景都覆蓋 */
+    background-position: center, center; /* 兩個背景都居中 */
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay, normal; /* 紙紋淡淡混合，漸層正常 */
+    color: var(--color-text-on-dark); /* 暖杏色文字 */
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-text-on-dark) !important; /* 確保標題可見 */
+      opacity: 1 !important;
+    }
+    
+    p {
+      color: var(--color-text-on-dark) !important;
+      opacity: 1 !important;
+    }
+  }
+
+  /* CTA Section - 漸層背景 + 淡淡紙紋 */
+  .section--cta {
+    text-align: center;
+    background-color: var(--color-surface-dark);
+    background-image: var(--texture-paper), var(--gradient-cta); /* 淡淡紙紋 + 漸層 */
+    background-size: cover, cover; /* 兩個背景都覆蓋 */
+    background-position: center, center; /* 兩個背景都居中 */
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay, normal; /* 紙紋淡淡混合，漸層正常 */
+    color: var(--color-text-on-dark);
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-text-on-dark) !important; /* 確保標題可見 */
+      opacity: 1 !important;
+    }
+    
+    p {
+      color: var(--color-text-on-dark) !important;
+      opacity: 1 !important;
+    }
+  }
+
+  /* Section Background Container (for lighting effects) */
+  .section-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    
+    /* Lighting effects (午後樹影) will be applied in Phase 4 */
+  }
+
+  /* Section Content (must be above .section-bg) */
+  .section .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ==================================================
+   * DEPRECATED: Legacy Module Classes
+   * 
+   * These are kept for backward compatibility.
+   * Please use .section* classes instead.
+   * ================================================== */
+
+  /* Legacy .module → .section */
+  .module {
+    padding: 60px 0; /* Keep original padding for compatibility */
+  }
+
+  .module + .module {
+    margin-top: 56px; /* Keep original spacing for compatibility */
+  }
+
+  /* Legacy .module-gray → .section */
+  .module-gray {
+    /* Background will be handled by tokens in Phase 4 */
+  }
+
+  /* Legacy .module-dark → .section.section--inverse */
+  /* 使用深褐背景 - 暖色調深色區塊 */
+  .module-dark,
+  .module--dark {
+    /* 深褐背景 + 漸層 - 確保標題可見 */
+    background: var(--gradient-dark);
+    background-color: var(--color-surface-dark); /* 深褐背景 */
+    color: var(--color-text-on-dark); /* 暖杏色文字 */
+  }
+
+  /* Module Dark 內的文字顏色 - 確保標題清晰可見 */
+  .module-dark h1,
+  .module-dark h2,
+  .module-dark h3,
+  .module-dark h4,
+  .module-dark h5,
+  .module-dark h6,
+  .module-dark p,
+  .module--dark h1,
+  .module--dark h2,
+  .module--dark h3,
+  .module--dark h4,
+  .module--dark h5,
+  .module--dark h6,
+  .module--dark p {
+    color: var(--color-text-on-dark); /* 暖杏色 - 確保對比度 */
+  }
   
-  background: radial-gradient(
-    ellipse at 0% 0%,
-    color-mix(in srgb, var(--color-brand-primary) 95%, white) 0%,
-    var(--color-brand-primary) 100%
-  );
-  background-color: var(--color-surface-3);
- 
-  
-  color: var(--color-text-on-dark);
-}
+  /* 確保標題有足夠的字重和對比 */
+  .module-dark h1,
+  .module-dark h2,
+  .module-dark h3,
+  .module--dark h1,
+  .module--dark h2,
+  .module--dark h3 {
+    font-weight: var(--font-weight-bold);
+    opacity: 1;
+  }
 
-/* Module Dark 內的文字顏色 */
-.module-dark h1,
-.module-dark h2,
-.module-dark h3,
-.module-dark h4,
-.module-dark p,
-.module--dark h1,
-.module--dark h2,
-.module--dark h3,
-.module--dark h4,
-.module--dark p {
-  color: var(--color-text-on-dark);
-}
+  /* Module Dark 內的連結顏色 */
+  .module-dark a:not(.button):not(.btn),
+  .module--dark a:not(.button):not(.btn) {
+    color: var(--color-brand-cta);
+  }
 
-/* Module Dark 內的連結顏色 */
-.module-dark a:not(.button):not(.btn),
-.module--dark a:not(.button):not(.btn) {
-  color: var(--color-brand-cta);
-}
+  /* Module Dark 內的連結 hover 狀態 */
+  .module-dark a:not(.button):not(.btn):hover,
+  .module--dark a:not(.button):not(.btn):hover {
+    color: var(--color-text-on-dark);
+    opacity: 0.9;
+  }
 
-/* Module Dark 內的連結 hover 狀態 */
-.module-dark a:not(.button):not(.btn):hover,
-.module--dark a:not(.button):not(.btn):hover {
-  color: var(--color-text-on-dark);
-  opacity: 0.9;
 }

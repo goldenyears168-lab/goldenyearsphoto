@@ -145,24 +145,30 @@
    */
   function initAnimations() {
     if (!observer) return;
-    
+
     // Find all elements with animation classes
     const animatedElements = document.querySelectorAll([
+      // New unified animation classes
+      '.anim-fade-in-up',
+      '[data-animate="fade-in-up"]',
+      '[data-animate="anim-fade-in-up"]',
+      // Legacy classes (maintained for compatibility)
       '.fade-in',
       '.fade-scale',
       '.slide-up',
       '.slide-left',
       '.slide-right',
+      // Other animations
       '.parallax-layer',
       '[data-animate]',
       '.lazy-image-container'
     ].join(', '));
-    
+
     // Observe each element
     animatedElements.forEach(element => {
       observer.observe(element);
     });
-    
+
     // Handle lazy images separately
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
     lazyImages.forEach(img => {

@@ -20,29 +20,85 @@
   .card {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-card);
-    /* Multi-layer shadow system for depth */
-    box-shadow:
-      var(--shadow-soft),                    /* Outer shadow - main depth */
-      inset 0 1px 0 rgba(255, 255, 255, 0.1), /* Inner highlight - subtle top edge */
-      0 0 0 1px rgba(0, 0, 0, 0.02);        /* Border shadow - subtle edge definition */
+
+    /* Paper Texture (紙張質感) - Warm Humanism Mode - 淡淡紋理 */
+    background-color: var(--color-surface-card); /* 柔白卡片背景 */
+    background-image: var(--texture-paper); /* 淡淡紙紋紋理 - 使用真實圖片 */
+    background-size: cover; /* 覆蓋整個卡片 */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* 使用 blend mode 讓紙紋淡淡的不明顯 */
+    background-blend-mode: overlay; /* 淡淡混合，不明顯 */
+    border: 1px solid var(--color-border-subtle); /* 極淡的褐色邊框 */
+    border-radius: var(--radius-card); /* 24px 超橢圓圓角 */
+
+    /* 微妙的玻璃質感層 - 淡淡的不明顯 */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient-card);
+      backdrop-filter: var(--glass-blur-subtle);
+      -webkit-backdrop-filter: var(--glass-blur-subtle);
+      border-radius: var(--radius-card);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.25; /* 降低不透明度，讓紙紋自然透過 */
+      border: 1px solid var(--glass-border-subtle); /* 晨曦金邊框光暈 */
+      mix-blend-mode: soft-light; /* 柔和混合 */
+    }
+
+    /* Shadow system using warm brown shadow */
+    box-shadow: var(--shadow-card);
+    position: relative; /* 確保 ::before 定位正確 */
+
+    /* Existing styles... */
     overflow: hidden;
-    transition: transform var(--transition-hover), box-shadow var(--transition-hover);
+    
+    /* 確保內容在所有背景層之上 */
+    > * {
+      position: relative;
+      z-index: 2; /* 提高 z-index，確保在所有背景層之上 */
+    }
+    transition: transform var(--transition-hover), box-shadow var(--transition-hover), border-color var(--transition-hover);
     /* GPU acceleration for smooth animations */
     transform: translate3d(0, 0, 0);
     will-change: transform, box-shadow;
-    
-    /* Hover state - Enhanced lift and shadow */
+
+    /* Hover state - Enhanced card lift with warm shadow */
     &:hover {
-      transform: var(--transform-lift-card);
-      box-shadow:
-        var(--shadow-hover),                 /* Enhanced outer shadow */
-        inset 0 1px 0 rgba(255, 255, 255, 0.1), /* Maintain inner highlight */
-        0 0 0 1px rgba(0, 0, 0, 0.02);      /* Maintain border shadow */
+      transform: var(--transform-lift-card); /* 懸停浮起 */
+      border-color: var(--palette-morning-gold); /* 晨曦金邊框 */
+      box-shadow: var(--shadow-card-hover), var(--shadow-glow);
+
+      /* 玻璃效果增強 */
+      &::before {
+        opacity: 0.75; /* 更明顯的玻璃層 */
+        background: var(--gradient-card), var(--glass-subtle);
+      }
+      
+      /* 確保所有文字在 hover 時清晰可見 - 使用更深的顏色 */
+      .card__title,
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--palette-deep-brown) !important; /* 強制使用深褐，最高對比度 */
+        opacity: 1 !important; /* 確保完全不透明 */
+        font-weight: var(--font-weight-bold); /* 加粗字體 */
+      }
+      
+      .card__body,
+      .card__price,
+      .card__desc,
+      p, span {
+        color: var(--palette-deep-gray) !important; /* 強制使用深灰，確保可見 */
+        opacity: 1 !important; /* 確保完全不透明 */
+      }
+      
+      a {
+        color: var(--palette-morning-gold) !important; /* 連結使用晨曦金 */
+        opacity: 1 !important;
+      }
     }
-    
+
     /* Focus state - For keyboard navigation */
     &:focus-visible {
       outline: 3px solid var(--focus-ring);
@@ -81,31 +137,67 @@
     flex-direction: column;
   }
   
-  /* Card Title */
+  /* Card Title - 確保清晰可見 */
   .card__title {
     margin: 0 0 var(--space-3) 0;
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
-    color: var(--color-brand-primary);
+    color: var(--palette-deep-brown) !important; /* 強制使用深褐，最高對比度 */
+    opacity: 1 !important; /* 確保完全不透明 */
   }
   
-  /* Card Subtitle */
+  /* Card Subtitle - 確保清晰可見 */
   .card__subtitle {
     margin: 0 0 var(--space-4) 0;
     font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold); /* 加粗字體 */
     line-height: var(--line-height-relaxed);
-    color: var(--color-text-subtle);
+    color: var(--palette-deep-gray) !important; /* 強制使用深灰，確保可見 */
+    opacity: 1 !important; /* 確保完全不透明 */
   }
   
-  /* Card Content - Body text */
+  /* Card Content - Body text - 確保清晰可見 */
   .card__content {
     margin: 0;
     font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
-    color: var(--color-text);
+    color: var(--palette-deep-gray) !important; /* 強制使用深灰，確保可見 */
+    opacity: 1 !important; /* 確保完全不透明 */
     flex: 1;
+    font-weight: var(--font-weight-medium); /* 加粗字體 */
+  }
+  
+  /* Card Body - 確保所有文字清晰可見 */
+  .card__body {
+    color: var(--palette-deep-gray) !important; /* 深灰文字 */
+    opacity: 1 !important;
+  }
+  
+  .card__body h1,
+  .card__body h2,
+  .card__body h3,
+  .card__body h4,
+  .card__body h5,
+  .card__body h6,
+  .card__body .card__title {
+    color: var(--palette-deep-brown) !important; /* 深褐標題 */
+    opacity: 1 !important;
+    font-weight: var(--font-weight-bold) !important;
+  }
+  
+  .card__body p,
+  .card__body span,
+  .card__body .card__content,
+  .card__body .card__desc {
+    color: var(--palette-deep-gray) !important; /* 深灰文字 */
+    opacity: 1 !important;
+    font-weight: var(--font-weight-medium) !important; /* 加粗字體 */
+  }
+  
+  .card__body a {
+    color: var(--palette-morning-gold) !important; /* 連結使用晨曦金 */
+    opacity: 1 !important;
   }
   
   /* Card Footer - Actions or metadata */
@@ -351,14 +443,16 @@
       font-weight: var(--font-weight-semibold);
       text-align: center;
       background-color: var(--color-brand-cta);
-      color: var(--color-text-on-accent);
+      color: var(--color-text-on-dark); /* 確保文字顏色正確 */
       border-radius: var(--radius-md);
-      transition: background-color 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      opacity: 1; /* 確保完全不透明 */
     }
     
     &:hover .card__action {
-      background-color: var(--color-brand-cta);
-      opacity: 0.9;
+      background-color: var(--color-brand-cta-hover); /* 晨曦金 hover */
+      color: var(--color-text-on-dark); /* 確保文字清晰可見 */
+      opacity: 1; /* 確保完全不透明 */
     }
   }
   

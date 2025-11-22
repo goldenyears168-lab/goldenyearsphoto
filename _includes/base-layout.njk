@@ -14,21 +14,7 @@
   
   {# --- [ Performance Optimization ] Inline CSS to eliminate render-blocking resources --- #}
   <style>
-    {# Inline main.css (always included) #}
     {{ "/assets/css/main.css" | inlineCSS | safe }}
-    
-    {# Inline page-specific CSS from pageStyles front matter #}
-    {# Note: If pageStyles includes main.css, it will be skipped to avoid duplication #}
-    {% if pageStyles %}
-      {% set cssFiles = pageStyles | extractCSSPaths %}
-      {% set mainCssPath = "/assets/css/main.css" %}
-      {% for cssFile in cssFiles %}
-        {# Skip main.css if it's already included above #}
-        {% if cssFile != mainCssPath %}
-          {{ cssFile | inlineCSS | safe }}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
   </style>
 
   <link rel="apple-touch-icon" href="/assets/images/ui/apple-touch-icon-180.png">

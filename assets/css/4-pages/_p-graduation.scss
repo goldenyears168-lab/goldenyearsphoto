@@ -1,8 +1,21 @@
 @layer pages {
   .page-graduation {
     --hero-pad: clamp(3rem, 6vw, 6rem);
-    .page-hero { padding-block: var(--hero-pad); background: var(--surface-3); color: var(--text-on-dark); }
-    .intro { text-align: center; }
-    .quotes { padding: clamp(1.5rem, 3vw, 2.5rem); }
+    
+    .page-hero {
+      padding-block: var(--hero-pad);
+      background: var(--color-surface-base); /* 深午夜藍 */
+      color: var(--color-text-on-dark); /* 霧白 */
+    }
+    
+    .intro {
+      text-align: center;
+      color: var(--color-text-body); /* 霧白 */
+    }
+    
+    .quotes {
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      color: var(--color-text-body); /* 霧白 */
+    }
   }
 }

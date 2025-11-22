@@ -1,149 +1,140 @@
-/* ===== 作用於預約主頁 (booking/index.njk) ===== */
-.page-booking-hub .store-selection-grid {
-  display: grid;
-  /* Mobile: single column (stacked) */
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
+/* ==================================================
+ * Booking Hub Page - Page-Specific Overrides
+ * 
+ * Note: All card styles come from .card base in 3-components/_k-card.scss
+ * This file only contains page-specific layout adjustments.
+ * Visual styling (smoked glass, gold border) comes from tokens.
+ * ================================================== */
+
+@layer pages {
   
-  /* Desktop: two columns side by side - 中山店左邊，公館店右邊 */
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-    max-width: 1200px;
-    margin: 0 auto;
-    /* Ensure cards are always side by side on desktop */
-    grid-auto-flow: row;
+  /* Booking Hub - Grid layout */
+  .page-booking-hub .store-selection-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      max-width: 1200px;
+      margin: 0 auto;
+      grid-auto-flow: row;
+    }
+    
+    @media (min-width: 992px) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   
-  /* Ensure even on very small desktop screens, cards stay side by side */
-  @media (min-width: 992px) {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.page-booking-hub .store-card {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-  text-decoration: none;
-  color: var(--color-text);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* GPU acceleration for smooth animations */
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.page-booking-hub .store-card:hover {
-  transform: translate3d(0, -5px, 0);
-  box-shadow: var(--shadow-card-hover);
-}
-
-/* Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .page-booking-hub .store-card {
-    transition: box-shadow 0.3s ease;
-    transform: none;
-    will-change: auto;
+  /* Booking Hub - Card wrapper (use .card card--booking in HTML) */
+  .booking-hub__card,
+  .page-booking-hub .card--booking {
+    /* Only page-specific adjustments, if any */
+    /* Full card styling comes from .card base */
+    /* Visual styling (smoked glass, gold border) comes from .card base */
+    
+    /* Card link styling */
+    text-decoration: none;
+    color: var(--color-text-body);
     
     &:hover {
-      transform: none;
+      text-decoration: none;
+      color: var(--color-text-body);
     }
+  }
+  
+  /* Booking Hub - Card image aspect ratio override */
+  .booking-hub__card .card__image,
+  .page-booking-hub .card--booking .card__image {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
     
-    .store-card-image img {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-hover);
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+  }
+  
+  .booking-hub__card:hover .card__image img,
+  .page-booking-hub .card--booking:hover .card__image img {
+    transform: scale3d(1.05, 1.05, 1);
+  }
+  
+  /* Booking Hub - Card content */
+  .booking-hub__card .card__body,
+  .page-booking-hub .card--booking .card__body {
+    flex-grow: 1;
+  }
+  
+  /* Booking Hub - Card title */
+  .booking-hub__card .card__title,
+  .page-booking-hub .card--booking .card__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-heading);
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+  }
+  
+  /* Booking Hub - Card description */
+  .booking-hub__card .card__desc,
+  .page-booking-hub .card--booking .card__desc {
+    font-size: var(--font-size-base);
+    color: var(--color-text-body); /* 使用 body 顏色，確保可見 */
+    line-height: var(--line-height-relaxed);
+    opacity: 1; /* 確保完全不透明 */
+  }
+  
+  /* 確保 hover 時所有文字都清晰可見 */
+  .booking-hub__card:hover .card__title,
+  .booking-hub__card:hover .card__desc,
+  .page-booking-hub .card--booking:hover .card__title,
+  .page-booking-hub .card--booking:hover .card__desc {
+    color: var(--color-text-heading); /* 深褐，確保對比度 */
+    opacity: 1; /* 確保完全不透明 */
+  }
+  
+  /* Booking Hub - Card footer */
+  .booking-hub__card .card__footer,
+  .page-booking-hub .card--booking .card__footer {
+    /* Footer styling if needed */
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .booking-hub__card .card__body,
+    .page-booking-hub .card--booking .card__body {
+      padding: var(--space-4) var(--space-5);
+    }
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .booking-hub__card,
+    .page-booking-hub .card--booking {
+      transition: box-shadow var(--transition-hover);
       transform: none;
       will-change: auto;
+      
+      &:hover {
+        transform: none;
+      }
+      
+      .card__image img {
+        transform: none;
+        will-change: auto;
+      }
+      
+      &:hover .card__image img {
+        transform: none;
+      }
     }
-    
-    &:hover .store-card-image img {
-      transform: none;
-    }
   }
-}
 
-.page-booking-hub .store-card-image {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-}
-
-.page-booking-hub .store-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  /* GPU acceleration for smooth animations */
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.page-booking-hub .store-card:hover .store-card-image img {
-  transform: scale3d(1.05, 1.05, 1);
-}
-
-.page-booking-hub .store-card-content {
-  padding: var(--space-5) var(--space-6);
-  flex-grow: 1;
-}
-
-.page-booking-hub .store-card-title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-dark);
-  margin-top: 0;
-  margin-bottom: var(--space-3);
-}
-
-.page-booking-hub .store-card-desc {
-  font-size: 1rem;
-  color: var(--color-text-subtle, #555);
-  line-height: 1.6;
-}
-
-.page-booking-hub .store-card-footer {
-  padding: 0 var(--space-6) var(--space-6);
-}
-
-.page-booking-hub .cta-button-link {
-  display: inline-block;
-  padding: var(--space-2) var(--space-5);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  text-align: center;
-  background-color: var(--color-cta);
-  color: var(--color-dark);
-  border-radius: var(--radius-md);
-  /* Use pseudo-element for background-color to avoid layout repaint */
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--color-cta-hover, #d4a029);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    z-index: -1;
-    pointer-events: none;
-    border-radius: var(--radius-md);
-  }
-}
-
-.page-booking-hub .store-card:hover .cta-button-link::before {
-  opacity: 1;
-}
-
-/* Mobile adjustments */
-@media (max-width: 767px) {
-  .page-booking-hub .store-card-content {
-    padding: var(--space-4) var(--space-5);
-  }
 }

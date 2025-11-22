@@ -1,9 +1,12 @@
-/* =======================================
- * [p-home.scss]
- * Homepage-specific styles
+/* ==================================================
+ * Home Page - Page-Specific Overrides
  * 
  * Note: Gallery and filter styles are now in
  * `3-components/_k-gallery.scss` using design tokens.
- * ======================================= */
+ * ================================================== */
 
-/* Homepage-specific overrides can go here if needed */
+@layer pages {
+  
+  /* Homepage-specific overrides can go here if needed */
+  
+}

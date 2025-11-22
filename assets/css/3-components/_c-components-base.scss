@@ -40,39 +40,45 @@
     flex-shrink: 0;
   }
   
-  /* Primary Button - Main CTA style
-   * Enhanced visibility: Dark text on light CTA background for maximum contrast
-   * Text color uses --color-brand-primary for strong visual impact */
+  /* Primary Button - 參考CSS風格：薰衣草紫按鈕 */
   .button--primary,
   .button-primary,
   .btn--primary {
-    background-color: var(--color-brand-cta);
-    color: var(--color-brand-primary); /* Dark text for maximum contrast and impact */
+    /* 薰衣草紫實心按鈕 */
+    background-color: var(--color-brand-cta); /* 薰衣草紫 */
+    color: var(--color-brand-primary); /* 深紫灰文字 */
     border-color: var(--color-brand-cta);
-    box-shadow: var(--shadow-button);
+    border-radius: var(--radius-button); /* 超橢圓圓角 */
+    box-shadow: var(--shadow-button); /* 金色微光陰影 */
+
+    /* Smooth transition */
+    transition: transform var(--transition-hover),
+                box-shadow var(--transition-hover),
+                background-color var(--transition-hover),
+                border-color var(--transition-hover);
   }
-  
+
   .button--primary:hover,
   .button-primary:hover,
   .btn--primary:hover {
-    /* Darken background by ~12% for hover state */
-    /* Fallback for browsers without color-mix support */
-    background-color: var(--color-brand-cta-hover);
+    /* 薰衣草紫加深 on hover */
+    background-color: var(--color-brand-cta-hover); /* 深薰衣草 */
     border-color: var(--color-brand-cta-hover);
-    /* Modern browsers with color-mix support */
+    /* 使用 color-mix 加深效果 */
     background-color: color-mix(in srgb, var(--color-brand-cta) 88%, black);
     border-color: color-mix(in srgb, var(--color-brand-cta) 88%, black);
-    transform: var(--transform-lift);
-    box-shadow: var(--shadow-button-hover);
+    box-shadow: var(--shadow-button-hover); /* 更強的金色微光 */
+    transform: var(--transform-lift); /* 懸停浮起 */
+    color: var(--color-brand-primary); /* 保持深紫灰文字 */
   }
-  
+
   .button--primary:active,
   .button-primary:active,
   .btn--primary:active {
-    transform: translate3d(0, 0, 0);
-    box-shadow: var(--shadow-card);
+    transform: translate3d(0, 0, 0); /* 移除浮起效果 */
+    box-shadow: var(--shadow-card); /* Reduced shadow */
   }
-  
+
   .button--primary:focus-visible,
   .button-primary:focus-visible,
   .btn--primary:focus-visible {
@@ -80,32 +86,31 @@
     outline-offset: 3px;
   }
   
-  /* Ghost Button - Transparent with border
-   * WCAG AA compliant: High contrast text */
+  /* Ghost Button - Transparent with border (參考CSS風格) */
   .button--ghost,
   .button-ghost,
   .btn--ghost {
     background-color: transparent;
     color: var(--color-text-main);
-    border: 1px solid var(--color-border-subtle);
+    border: 1px solid var(--color-border-subtle); /* 極淡邊框 */
     box-shadow: none;
     letter-spacing: 0.08em;
   }
-  
+
   .button--ghost:hover,
   .button-ghost:hover,
   .btn--ghost:hover {
-    background-color: var(--color-ghost-hover-bg);
-    color: var(--color-text-main);
-    border-color: var(--color-brand-primary);
+    background-color: var(--color-ghost-hover-bg); /* 幽靈按鈕 hover 背景 */
+    color: var(--color-text-main); /* 保持文字顏色 */
+    border-color: var(--color-brand-primary); /* 深紫灰邊框 */
     transform: var(--transform-lift);
-    box-shadow: var(--shadow-ghost-hover);
+    box-shadow: var(--shadow-ghost-hover); /* 幽靈按鈕 hover 陰影 */
   }
   
   .button--ghost:active,
   .button-ghost:active,
   .btn--ghost:active {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); /* 移除浮起效果 */
   }
   
   .button--ghost:focus-visible,
@@ -120,7 +125,12 @@
   .button--secondary,
   .button-secondary,
   .btn--secondary {
-    background-color: var(--color-surface);
+    background-color: var(--color-surface); /* 柔白背景 */
+    background-image: var(--texture-paper); /* 淡淡紙紋紋理 */
+    background-size: cover; /* 覆蓋整個按鈕 */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay; /* 淡淡混合，不明顯 */
     color: var(--color-brand-accent);
     border-color: var(--color-brand-accent);
     box-shadow: var(--shadow-sm);

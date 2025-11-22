@@ -13,8 +13,13 @@
 
   /* --- 1. Header 基礎結構 (Mobile & Desktop 共通) --- */
   .global-header {
-    background: var(--color-white);
-    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface-card); /* 柔白背景 */
+    background-image: var(--texture-paper); /* 淡淡紙紋紋理 */
+    background-size: cover; /* 覆蓋整個 header */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay; /* 淡淡混合，不明顯 */
+    border-bottom: 1px solid var(--color-border-subtle); /* 極淡的褐色邊框 */
     position: fixed;
     top: 0;
     left: 0;
@@ -57,7 +62,7 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: var(--color-dark);
+    color: var(--color-text-heading); /* 深褐文字 */
     margin-left: auto; 
     flex-shrink: 0;
   }
@@ -161,7 +166,12 @@
     left: 0;
     right: 0;
     width: 100%;
-    background: var(--color-white);
+    background-color: var(--color-surface-card); /* 柔白背景 */
+    background-image: var(--texture-paper); /* 淡淡紙紋紋理 */
+    background-size: cover; /* 覆蓋整個 nav */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay; /* 淡淡混合，不明顯 */
     border-top: 1px solid var(--color-border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     z-index: var(--z-index-header-nav); 
@@ -241,7 +251,12 @@
       margin: 0;
       padding: 0;
       box-shadow: none;
-      background: var(--mega-bg, #fff); 
+      background-color: var(--mega-bg, var(--color-surface-card)); /* 柔白背景 */
+      background-image: var(--texture-paper); /* 淡淡紙紋紋理 */
+      background-size: cover; /* 覆蓋整個選單 */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay; /* 淡淡混合，不明顯 */ 
       border-top: 1px solid var(--color-border, #eee); 
       border-bottom: none; 
       padding-left: 0; 
@@ -364,7 +379,12 @@
       width: max-content;
       min-width: 260px;
       padding: 16px 24px;
-      background: var(--mega-bg, #fff);
+      background-color: var(--mega-bg, var(--color-surface-card)); /* 柔白背景 */
+      background-image: var(--texture-paper); /* 淡淡紙紋紋理 */
+      background-size: cover; /* 覆蓋整個選單 */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay; /* 淡淡混合，不明顯 */
       border: 1px solid var(--mega-border, #eee);
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       border-radius: 10px;

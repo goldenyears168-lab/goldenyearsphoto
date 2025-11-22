@@ -1,266 +1,280 @@
 /* ==================================================
- * Design Tokens - "Warm × Enterprise" Design System
- * 
- * Semantic CSS custom properties for colors, typography,
- * spacing, radius, and shadows. Organized for easy
- * brand customization while maintaining consistency.
- * 
- * To change the brand look, edit the values in the
- * Brand Colors and Accent Colors sections below.
- * ==================================================
- */
+ * Design Tokens - Golden Years (Cool Professional Mode)
+ * Strategy: Cool Base with "Stationery Aesthetic"
+ * Mood: Professional, Elegant, Modern, Stationery-inspired
+ * ================================================== */
 
 @layer tokens {
   
   :root {
     
     /* ============================================
-     * COLOR TOKENS
+     * 1. 核心色盤 (PALETTE - RAW VALUES)
      * ============================================ */
     
-    /* Brand Colors - Primary brand identity
-     * These are the core colors that define the brand.
-     * Change these to rebrand the entire site. */
-    --color-brand-primary: #353242;        /* Deep warm gray-purple (main brand) */
-    --color-brand-accent: #958985;          /* Warm taupe-gray (secondary accent) */
-    --color-brand-cta: #d0d7f1;             /* Soft lavender-blue (call-to-action) */
-    --color-brand-cta-hover: #b8c4d9;       /* CTA hover state (darker than base) */
+    /* 主角：現代專業冷色系 (Cool Series) */
+    --palette-midnight-iris: #353242;     /* 深紫灰 (Brand Primary) - 專業基底 */
+    --palette-lavender-mist: #d0d7f1;     /* 薰衣草紫 (Brand CTA) - 年輕亮點 */
+    --palette-lavender-deep: #b8c4d9;     /* 深薰衣草 (Hover) */
     
-    /* Accent Colors - Interactive states and highlights */
-    --color-accent: var(--color-brand-accent);
-    --color-accent-weak: #bba896;           /* Muted warm accent for subtle highlights */
-    --color-accent-strong: var(--color-brand-primary);
+    /* 基底：高級信紙色調 (Stationery Neutrals) */
+    --palette-paper-white:   #ffffff;     /* 純白 (Card Surface) */
+    --palette-cool-gray:     #f1edeb;     /* 極淡冷灰 (Main Background) - 像高級灰卡紙 */
+    --palette-ink-navy:      #242436;     /* 深邃藍黑 (Main Text) - 像高級墨水 */
+    --palette-steel-gray:    #555555;     /* 鋼鐵灰 (Subtle Text) */
     
-    /* Neutral Colors - Grays and backgrounds (50=lightest, 950=darkest) */
-    --color-neutral-50: #f7f7f7;            /* Lightest neutral (hover states) */
-    --color-neutral-100: #f0f0f0;          /* Very light neutral (subtle backgrounds) */
-    --color-neutral-200: #e2e2e2;          /* Light neutral (borders, dividers) */
-    --color-neutral-300: #C4C7CE;         /* Medium-light neutral (gray backgrounds) */
-    --color-neutral-400: #958985;          /* Medium neutral (matches accent) */
-    --color-neutral-900: #242436;          /* Dark neutral (text) */
-    --color-neutral-950: #353242;         /* Darkest neutral (matches brand primary) */
-    
-    /* Surface Colors - Backgrounds for content areas */
-    --color-surface: #ffffff;              /* Primary surface (cards, modals) */
-    --color-surface-alt: var(--color-neutral-100); /* Alternative surface (hover) */
-    --color-surface-2: #f1edeb;            /* Secondary surface (warm off-white) */
-    --color-surface-3: var(--color-brand-primary); /* Dark surface (hero, footer) */
-    --color-surface-elevated: var(--color-surface); /* Elevated surfaces (dropdowns) */
-    
-    /* Overlay Colors - Semi-transparent overlays */
-    --color-overlay-dark: rgba(53, 50, 66, 0.7);   /* Dark overlay (hero, 70% opacity) */
-    --color-overlay-light: rgba(255, 255, 255, 0.05); /* Light overlay (5% opacity) */
-    
-    /* Button Hover Backgrounds - Subtle hover states */
-    --color-ghost-hover-bg: rgba(65, 74, 138, 0.06); /* Ghost button hover background (subtle brand tint) */
-    
-    /* Text Colors - Semantic text color tokens */
-    --color-text: var(--color-neutral-900);        /* Primary/main text (WCAG AA) */
-    --color-text-main: var(--color-text);          /* Alias for primary text */
-    --color-text-subtle: #555555;                  /* Secondary text (muted) */
-    --color-text-on-dark: #ede6e2;                 /* Text on dark surfaces */
-    --color-text-on-accent: #ffffff;               /* Text on accent (WCAG AA) */
-    --color-text-link: var(--color-brand-accent);  /* Link color */
-    --color-text-link-hover: var(--color-brand-cta); /* Link hover */
-    
-    /* Status Colors - Semantic status indicators */
-    --color-success: #28a745;                       /* Success (checkmarks) */
-    --color-error: #dc3545;                        /* Error (warnings) */
-    
-    /* Border Colors - Borders and dividers */
-    --color-border: var(--color-neutral-200);      /* Default border */
-    --color-border-strong: var(--color-neutral-300); /* Stronger border (focus) */
-    --color-border-subtle: var(--color-neutral-100); /* Subtle border */
-    --color-border-dark: #3E3E3E;                  /* Dark border (footers) */
-    
-    /* Legacy Color Mappings - For backward compatibility
-     * These map old token names to new semantic tokens */
-    --color-dark: var(--color-brand-primary);
-    --color-cta: var(--color-brand-cta);
-    --color-primary-accent: var(--color-brand-accent);
-    --color-gray-bg: var(--color-neutral-300);
-    --color-light-bg: var(--color-surface-2);
-    --color-text-dark: var(--color-text);
-    --color-text-light: var(--color-text-on-dark);
-    --color-white: var(--color-surface);
-    
-    /* Navigation Colors - Navigation component tokens */
-    --nav-link: var(--color-brand-primary);
-    --nav-link-hover: var(--nav-link);
-    --nav-link-active: var(--nav-link);
-    --nav-link-muted: var(--color-accent-weak);
-    --nav-cta-bg: var(--color-brand-cta);
-    --nav-cta-text: var(--color-brand-primary);
-    --nav-cta-bg-hover: var(--nav-cta-bg);
-    --nav-cta-text-hover: var(--nav-cta-text);
-    --mega-bg: var(--color-surface-elevated);
-    --mega-border: var(--color-border);
-    --mega-link: var(--color-brand-primary);
-    --mega-link-hover: var(--mega-link);
-    --mega-heading: var(--mega-link);
-    --mega-separator: var(--color-border);
-    --mega-hover-bg: var(--color-neutral-50);
-    --focus-ring: rgb(208 215 241 / 60%); /* Focus ring for accessibility */
-    
+    /* 配角：SmartBoss 生態系連結 */
+    --palette-tech-blue:     #0F172A;     /* SmartBoss 深藍 (Footer/Bridge) */
     
     /* ============================================
-     * TYPOGRAPHY TOKENS
+     * 2. 語意化變數 (SEMANTIC TOKENS)
      * ============================================ */
     
-    /* Font Families - System font stack for optimal performance */
-    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-family-heading: var(--font-family-base); /* Same as base for consistency */
-    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace; /* For code if needed */
+    /* --- Backgrounds (高級信紙色調) --- */
+    --color-surface-base:   var(--palette-cool-gray);     /* 全站大背景：極淡冷灰（像高級灰卡紙） */
+    --color-surface-card:   var(--palette-paper-white);   /* 卡片背景：純白 */
+    --color-surface:        #ffffff;  /* Card surface - 純白 */
+    --color-surface-alt:    var(--color-neutral-100);     /* 替代背景 */
+    --color-surface-2:      #f1edeb;  /* Page background - 極淡冷灰 */
+    --color-surface-3:      var(--color-brand-primary);   /* Footer/深色區塊：深紫灰 */
+    --color-surface-dark:   var(--palette-midnight-iris); /* 深色區塊：深紫灰 */
+    --color-surface-bridge: var(--palette-tech-blue);     /* 特殊：Footer 專用深藍 */
+    --color-surface-elevated: var(--color-surface);       /* 提升背景 */
     
-    /* Font Sizes - Type scale for consistent typography
-     * Based on 16px base (1rem = 16px) */
-    --font-size-xs: 0.75rem;    /* 12px - Small labels, captions */
-    --font-size-sm: 0.875rem;    /* 14px - Secondary text */
-    --font-size-base: 1rem;      /* 16px - Base body text */
-    --font-size-lg: 1.125rem;    /* 18px - Large body text */
-    --font-size-xl: 1.25rem;     /* 20px - Small headings */
-    --font-size-2xl: 1.5rem;     /* 24px - Medium headings */
-    --font-size-3xl: 1.875rem;   /* 30px - Large headings */
-    --font-size-4xl: 2.25rem;    /* 36px - Hero headings */
+    /* --- Brand & Interaction --- */
+    --color-brand-primary:  var(--palette-midnight-iris); /* 主品牌色：深紫灰 #353242 */
+    --color-brand-accent:   #958985;  /* 品牌強調色：棕色調 */
+    --color-brand-glow:     var(--palette-lavender-mist); /* 發光效果：薰衣草紫 */
+    --color-brand-cta:      var(--palette-lavender-mist); /* CTA 按鈕：薰衣草紫 #d0d7f1 */
+    --color-brand-cta-hover: var(--palette-lavender-deep); /* CTA Hover：深薰衣草 #b8c4d9 */
+    --color-accent:         var(--color-brand-accent);
+    --color-accent-weak:    #bba896;  /* 弱強調色 */
+    --color-accent-strong:  var(--color-brand-primary);
     
-    /* Line Heights - Vertical rhythm for readability */
-    --line-height-tight: 1.2;    /* Headings */
-    --line-height-normal: 1.3;   /* Small headings, compact text */
-    --line-height-relaxed: 1.6;  /* Body text */
-    --line-height-loose: 1.7;     /* Prose, long-form content */
+    /* --- Typography (深色字在淺色底) --- */
+    --color-text-heading:   var(--palette-ink-navy);      /* 標題：深邃藍黑（像高級墨水） */
+    --color-text-body:      var(--palette-steel-gray);    /* 內文：鋼鐵灰 */
+    --color-text-muted:     rgba(36, 36, 54, 0.6);        /* 註解：淡化藍黑 */
+    --color-text:           var(--color-neutral-900);     /* 主文字：深邃藍黑 */
+    --color-text-main:      var(--color-text);            /* 主文字 */
+    --color-text-subtle:    #555555;  /* 次要文字：鋼鐵灰 */
+    --color-text-on-dark:   #ede6e2;  /* 深色底上的字：淺米色 */
+    --color-text-on-accent: #ffffff;  /* 強調色底上的字：純白 */
+    --color-text-link:      var(--color-brand-accent);    /* 連結：品牌強調色 */
+    --color-text-link-hover: var(--color-brand-cta);      /* 連結 Hover：薰衣草紫 */
     
-    /* Font Weights - Semantic weight tokens */
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
+    /* --- Borders & Dividers --- */
+    --color-border-subtle:  var(--color-neutral-100);     /* 極淡的邊框 */
+    --color-border:         var(--color-neutral-200);     /* 標準邊框 #e2e2e2 */
+    --color-border-strong:  var(--color-neutral-300);     /* 強邊框 #C4C7CE */
+    --color-border-bridge:  rgba(15, 23, 42, 0.1);        /* SmartBoss 藍調邊框 */
+    --color-border-dark:    #3E3E3E;  /* 深色邊框 */
+    --color-border-gold:    rgba(53, 50, 66, 0.2);        /* 深紫灰邊框 */
+    
+    /* --- UI Status --- */
+    --color-cta-bg:         var(--palette-midnight-iris); /* CTA 按鈕背景：深紫灰 */
+    --color-cta-text:       var(--palette-paper-white);   /* CTA 按鈕文字：純白 */
+    --color-success:        #28a745;  /* 標準綠色 */
+    --color-error:          #dc3545;  /* 標準紅色 */
+    
+    /* --- Overlay Colors --- */
+    --color-overlay-dark:   rgba(53, 50, 66, 0.7);        /* 深色遮罩 */
+    --color-overlay-light:  rgba(255, 255, 255, 0.05);    /* 淺色遮罩 */
+    --color-ghost-hover-bg: rgba(65, 74, 138, 0.06);      /* 幽靈按鈕 hover 背景 */
+    
+    /* --- Neutral Colors (for compatibility) --- */
+    --color-neutral-50:     #f7f7f7;  /* 極淺灰 */
+    --color-neutral-100:    #f0f0f0;  /* 淺灰 */
+    --color-neutral-200:    #e2e2e2;  /* 中淺灰 */
+    --color-neutral-300:    #C4C7CE;  /* 中灰 */
+    --color-neutral-400:    #958985;  /* 中深灰（與品牌強調色相同） */
+    --color-neutral-900:    #242436;  /* 深灰（深邃藍黑） */
+    --color-neutral-950:    #353242;  /* 最深灰（深紫灰） */
+    
+    /* ============================================
+     * 3. 材質與特效 (TEXTURES & EFFECTS)
+     * ============================================ */
+    
+    /* Paper Texture (紙張質感) - 使用真實圖片強調「觸感」 */
+    --texture-paper: url("/assets/images/ui/paper-texture.jpg");
+    
+    /* Glass Effect (玻璃質感 - 冷色調) */
+    --glass-subtle: rgba(255, 255, 255, 0.85); /* 較不透明的純白 */
+    --glass-blur-subtle: blur(12px); /* 更明顯的模糊 */
+    --glass-border-subtle: rgba(53, 50, 66, 0.3); /* 深紫灰邊框光暈 */
+    
+    /* Shadows (冷色調陰影 - 專業優雅) */
+    --shadow-sm:            0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md:            0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-lg:            0 8px 25px rgba(0, 0, 0, 0.08);
+    --shadow-xl:            0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-soft:          0 12px 30px rgba(0, 0, 0, 0.06);
+    --shadow-hover:         0 18px 40px rgba(0, 0, 0, 0.12);
+    --shadow-card:          var(--shadow-soft);
+    --shadow-card-hover:    var(--shadow-hover);
+    --shadow-float:         0 10px 30px -5px rgba(0, 0, 0, 0.12);
+    --shadow-glow:          0 0 20px rgba(53, 50, 66, 0.15); /* 深紫灰微光 */
+    --shadow-button:        0 4px 15px rgba(230, 175, 46, 0.3); /* 金色微光 */
+    --shadow-button-hover:  0 6px 20px rgba(230, 175, 46, 0.4); /* 金色微光增強 */
+    --shadow-button-strong: var(--shadow-button-hover);
+    --shadow-ghost-hover:   0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-dropdown:      var(--shadow-xl);
+    --shadow-focus:         0 0 0 3px var(--focus-ring);
+    --shadow-hero:          0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    
+    /* Gradients (冷色調漸層 - 專業優雅的視覺層次) */
+    --gradient-hero:        radial-gradient(circle at top right, rgba(255, 255, 255, 0.9), rgba(208, 215, 241, 0.3) 40%, rgba(241, 237, 235, 0.95) 70%, rgba(241, 237, 235, 1) 100%);
+    --gradient-page-soft:   radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), rgba(208, 215, 241, 0.2) 50%, rgba(241, 237, 235, 0.85) 80%, rgba(241, 237, 235, 1) 100%);
+    --gradient-section-alt: linear-gradient(180deg, var(--palette-paper-white) 0%, rgba(208, 215, 241, 0.15) 50%, var(--palette-cool-gray) 100%);
+    --gradient-cta:         linear-gradient(135deg, var(--palette-midnight-iris) 0%, rgba(53, 50, 66, 0.4) 40%, var(--palette-lavender-mist) 100%);
+    --gradient-dark:        linear-gradient(135deg, var(--palette-midnight-iris) 0%, rgba(36, 36, 54, 0.9) 50%, rgba(53, 50, 66, 0.8) 100%);
+    --gradient-card:        linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 237, 235, 0.6) 100%);
+    
+    /* ============================================
+     * 4. TYPOGRAPHY TOKENS
+     * ============================================ */
+    
+    /* Font Families */
+    --font-family-base:     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-family-heading:  var(--font-family-base); /* 與參考樣式一致 */
+    --font-family-mono:     "SF Mono", Monaco, "Cascadia Code", monospace;
+    
+    /* Font Sizes */
+    --font-size-xs:         0.75rem;    /* 12px */
+    --font-size-sm:         0.875rem;   /* 14px */
+    --font-size-base:       1rem;       /* 16px */
+    --font-size-lg:         1.125rem;   /* 18px */
+    --font-size-xl:         1.25rem;    /* 20px */
+    --font-size-2xl:        1.5rem;     /* 24px */
+    --font-size-3xl:        1.875rem;   /* 30px */
+    --font-size-4xl:        2.25rem;    /* 36px */
+    
+    /* Font Weights */
+    --font-weight-normal:   400;
+    --font-weight-medium:   500;
     --font-weight-semibold: 600;
-    --font-weight-bold: 700;
+    --font-weight-bold:     700;
     
-    
-    /* ============================================
-     * SPACING TOKENS
-     * ============================================ */
-    
-    /* Spacing Scale - 4px base unit for consistent spacing
-     * Use these for padding, margin, and gap values */
-    --space-1: 0.25rem;   /* 4px - Tight spacing */
-    --space-2: 0.5rem;    /* 8px - Small spacing */
-    --space-3: 0.75rem;   /* 12px - Medium-small spacing */
-    --space-4: 1rem;      /* 16px - Base spacing unit */
-    --space-5: 1.25rem;   /* 20px - Medium spacing */
-    --space-6: 1.5rem;    /* 24px - Large spacing */
-    --space-7: 1.75rem;   /* 28px - Large-medium spacing */
-    --space-8: 2rem;     /* 32px - Extra large spacing */
-    --space-9: 2.5rem;    /* 40px - Section spacing */
-    --space-10: 3rem;     /* 48px - Large section spacing */
-    --space-12: 4rem;     /* 64px - Hero spacing */
-    
+    /* Line Heights */
+    --line-height-tight:    1.2;
+    --line-height-normal:   1.3;
+    --line-height-relaxed:  1.6;
+    --line-height-loose:    1.7;
     
     /* ============================================
-     * RADIUS TOKENS
+     * 5. SPACING TOKENS
      * ============================================ */
     
-    /* Border Radius - Consistent rounded corners
-     * Use semantic names based on component type */
-    --radius-none: 0;
-    --radius-sm: 4px;      /* Small elements (badges, tags) */
-    --radius-md: 8px;      /* Medium elements (inputs, small cards) */
-    --radius-lg: 12px;     /* Large elements (cards, containers) */
-    --radius-xl: 20px;     /* Extra large (buttons, featured cards) */
-    --radius-full: 9999px; /* Fully rounded (pill buttons, avatars) */
-    
-    /* Component-Specific Radius - Semantic tokens for common components */
-    --radius-button: var(--radius-full);  /* Buttons (pill shape - 9999px) */
-    --radius-card: var(--radius-lg);      /* Cards and containers */
-    --radius-input: var(--radius-md);     /* Form inputs */
-    --radius-image: var(--radius-lg);     /* Images in cards */
-    
-    /* Legacy Radius Mappings - For backward compatibility */
-    --radius-1: var(--radius-sm);
-    --radius-2: var(--radius-md);
-    --radius-3: var(--radius-lg);
-    
+    --space-1:              0.25rem;   /* 4px */
+    --space-2:              0.5rem;    /* 8px */
+    --space-3:              0.75rem;   /* 12px */
+    --space-4:              1rem;      /* 16px */
+    --space-5:              1.25rem;   /* 20px */
+    --space-6:              1.5rem;    /* 24px */
+    --space-7:              1.75rem;   /* 28px */
+    --space-8:              2rem;      /* 32px */
+    --space-9:              2.5rem;    /* 40px */
+    --space-10:             3rem;      /* 48px */
+    --space-12:             4rem;      /* 64px */
     
     /* ============================================
-     * SHADOW TOKENS
+     * 6. RADIUS TOKENS (超橢圓圓角 - Shared Skeleton)
      * ============================================ */
     
-    /* Shadows - Elevation system for depth
-     * Subtle shadows maintain the warm, approachable feel */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);           /* Subtle elevation */
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);          /* Default card shadow */
-    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.08);           /* Elevated cards */
-    --shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.08);         /* High elevation (modals) */
-    
-    /* Soft Shadows - Softer, more refined shadow values for enhanced depth */
-    --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.06);       /* Soft shadow for cards and surfaces */
-    --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.12);      /* Enhanced shadow for hover states */
-    
-    /* Component-Specific Shadows - Semantic tokens for interactive states */
-    --shadow-card: var(--shadow-soft);                     /* Default card shadow (soft) */
-    --shadow-card-hover: var(--shadow-hover);              /* Card hover state (enhanced) */
-    --shadow-button: 0 4px 15px rgba(230, 175, 46, 0.3);   /* Button shadow (warm accent) */
-    --shadow-button-hover: 0 6px 20px rgba(230, 175, 46, 0.4); /* Button hover shadow */
-    --shadow-ghost-hover: 0 4px 12px rgba(0, 0, 0, 0.08);  /* Ghost button hover shadow (subtle elevation) */
-    --shadow-dropdown: var(--shadow-xl);                    /* Dropdown menus */
-    --shadow-focus: 0 0 0 3px var(--focus-ring);          /* Focus ring shadow */
-    --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05); /* Hero image shadow (multi-layer depth) */
-    
+    --radius-none:          0;
+    --radius-sm:            4px;
+    --radius-md:            8px;
+    --radius-lg:            12px;
+    --radius-xl:            20px;
+    --radius-full:          9999px;
+    --radius-pill:          9999px;
+    --radius-card:          var(--radius-lg);  /* 12px - 使用參考樣式 */
+    --radius-button:        var(--radius-pill);
+    --radius-input:         var(--radius-md);
+    --radius-image:         var(--radius-lg);  /* 圖片圓角 */
+    --radius-1:             var(--radius-sm);  /* 兼容性別名 */
+    --radius-2:             var(--radius-md);
+    --radius-3:             var(--radius-lg);
     
     /* ============================================
-     * GRADIENT TOKENS
+     * 7. ANIMATION TOKENS
      * ============================================ */
     
-    /* Gradients - Smooth transitions and radial effects
-     * Used for section transitions and visual depth */
-    --gradient-section-transition: 80px;                    /* Height for section transition gradients */
-    --gradient-radial-start: color-mix(in srgb, var(--color-brand-primary) 90%, white); /* Radial gradient start (lightened brand color) */
-    --gradient-radial-end: color-mix(in srgb, var(--color-brand-primary) 95%, black);   /* Radial gradient end (darkened brand color) */
+    /* Transitions */
+    --transition-smooth:    0.18s ease-out;
+    --transition-hover:     0.16s ease-out;
     
+    /* Transforms (微互動 - Shared Skeleton) */
+    --transform-lift:       translate3d(0, -1px, 0);
+    --transform-lift-card:  translate3d(0, -4px, 0);
+    --transform-scale-hover: scale(1.02);
+    --transform-scale-tap:   scale(0.98);
     
     /* ============================================
-     * ANIMATION TOKENS
+     * 8. LAYOUT TOKENS
      * ============================================ */
     
-    /* Transitions - Smooth motion for interactive elements
-     * Optimized timing for natural, responsive feel */
-    --transition-smooth: 0.18s ease-out;                   /* Smooth transition for general interactions */
-    --transition-hover: 0.16s ease-out;                    /* Quicker transition for hover states */
-    
-    /* Transforms - Subtle lift effects for depth perception
-     * Using translate3d for GPU acceleration */
-    --transform-lift: translate3d(0, -1px, 0);              /* Subtle lift for buttons and small elements */
-    --transform-lift-card: translate3d(0, -4px, 0);         /* Enhanced lift for cards on hover */
-    
+    --header-height:        74px;
+    --container-max-width:  1140px;
+    --container-max-width-md: 900px;
+    --container-padding:    20px;
+    --z-index-base:         1;
+    --z-index-header:       1000;
+    --z-index-header-nav:    1001;
+    --z-index-dropdown:      1002;
+    --z-index-modal:         2000;
+    --z-index-tooltip:       3000;
     
     /* ============================================
-     * TEXTURE TOKENS
+     * 9. BACKWARD COMPATIBILITY
      * ============================================ */
     
-    /* Background Textures - Subtle visual texture for depth
-     * SVG-based noise pattern for organic, warm feel */
-    --texture-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); /* Subtle SVG noise texture (3% opacity) */
+    --color-primary-accent: var(--color-brand-primary);
+    --color-cta:            var(--color-brand-cta);
+    --color-light-bg:       var(--color-surface-2);
+    --color-text-dark:      var(--color-text);
+    --color-text-light:     var(--color-text-on-dark);
+    --color-white:          var(--color-surface-card);
+    --color-dark:           var(--palette-midnight-iris);
+    --color-gray-bg:        var(--color-neutral-300);
+    --header-h:             var(--header-height);
+    --focus-ring:           rgb(208 215 241 / 60%);  /* 薰衣草紫 focus ring */
     
+    /* Navigation Tokens */
+    --nav-link:             var(--color-brand-primary);
+    --nav-link-hover:       var(--nav-link);
+    --nav-link-active:      var(--nav-link);
+    --nav-link-muted:       var(--color-accent-weak);
+    --nav-cta-bg:           var(--color-brand-cta);
+    --nav-cta-text:         var(--color-brand-primary);
+    --nav-cta-bg-hover:     var(--nav-cta-bg);
+    --nav-cta-text-hover:   var(--nav-cta-text);
     
-    /* ============================================
-     * LAYOUT TOKENS
-     * ============================================ */
+    /* Mega Menu Tokens */
+    --mega-bg:              var(--color-surface-elevated);
+    --mega-border:          var(--color-border);
+    --mega-link:            var(--color-brand-primary);
+    --mega-link-hover:      var(--mega-link);
+    --mega-heading:         var(--mega-link);
+    --mega-separator:       var(--color-border);
+    --mega-hover-bg:        var(--color-neutral-50);
     
-    /* Layout Dimensions - Key layout measurements */
-    --header-height: 74px;                  /* Fixed header height */
-    --container-max-width: 1140px;          /* Main content container */
-    --container-max-width-md: 900px;        /* Medium container (blog posts) */
-    --container-padding: 20px;              /* Container side padding */
+    /* Gradient Transition */
+    --gradient-section-transition: 80px;
+    --gradient-radial-start: color-mix(in srgb, var(--color-brand-primary) 90%, white);
+    --gradient-radial-end: color-mix(in srgb, var(--color-brand-primary) 95%, black);
     
-    /* Z-Index Scale - Layering system for stacking context */
-    --z-index-base: 1;
-    --z-index-header: 1000;                 /* Fixed header */
-    --z-index-header-nav: 1001;            /* Mobile navigation menu */
-    --z-index-dropdown: 1002;              /* Desktop dropdown menus */
-    --z-index-modal: 2000;                 /* Modals and overlays */
-    --z-index-tooltip: 3000;                /* Tooltips (if needed) */
+    /* Texture Noise */
+    --texture-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
     
-    /* Legacy Layout Mappings - For backward compatibility */
-    --header-h: var(--header-height);
+    /* Legacy warm palette aliases (for backward compatibility) */
+    --palette-morning-gold: var(--palette-midnight-iris);  /* 映射到深紫灰 */
+    --palette-gold-light:   var(--palette-lavender-mist);  /* 映射到薰衣草紫 */
+    --palette-warm-apricot: var(--palette-cool-gray);      /* 映射到極淡冷灰 */
+    --palette-deep-brown:   var(--palette-ink-navy);       /* 映射到深邃藍黑 */
+    --palette-deep-gray:    var(--palette-steel-gray);     /* 映射到鋼鐵灰 */
+    --palette-white-soft:   var(--palette-paper-white);    /* 映射到純白 */
+    --palette-midnight-bridge: var(--palette-tech-blue);   /* 映射到 SmartBoss 深藍 */
     
   }
   

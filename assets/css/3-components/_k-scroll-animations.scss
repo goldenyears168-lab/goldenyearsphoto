@@ -10,12 +10,142 @@
  */
 
 @layer components {
-  
+
+  /* ==================================================
+   * Unified Animation System - Shared Skeleton
+   * 
+   * Primary animations:
+   * - .anim-fade-in-up: Fade in with upward motion (primary entrance)
+   * - .anim-pulse: Pulsing scale & shadow effect (CTA emphasis)
+   * 
+   * Legacy animations are aliased to new system for compatibility.
+   * Visual effects (shadows) use Golden Years tokens (warm gold glow).
+   * ================================================== */
+
+  /* ============================================
+   * Fade-in-up Animation (Primary Entrance)
+   * ============================================ */
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, var(--space-8), 0); /* Start 32px below */
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .anim-fade-in-up {
+    /* Initial hidden state */
+    opacity: 0;
+    transform: translate3d(0, var(--space-8), 0);
+
+    /* GPU acceleration hints */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+
+    /* Animation will be triggered by JS adding .is-visible */
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Visible state - triggered by scroll-animations.js */
+  .anim-fade-in-up.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Support for data-animate="fade-in-up" */
+  [data-animate="fade-in-up"],
+  [data-animate="anim-fade-in-up"] {
+    opacity: 0;
+    transform: translate3d(0, var(--space-8), 0);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-animate="fade-in-up"].is-visible,
+  [data-animate="anim-fade-in-up"].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* ============================================
+   * Pulse Animation (CTA Emphasis)
+   * Uses warm gold glow shadow
+   * ============================================ */
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: var(--shadow-button);
+    }
+
+    50% {
+      transform: scale(1.03);
+      box-shadow: var(--shadow-button-strong), var(--shadow-glow); /* 暖調金棕光 */
+    }
+  }
+
+  .anim-pulse {
+    /* Continuous pulsing animation */
+    animation: pulse 1.4s ease-in-out infinite;
+
+    /* GPU acceleration */
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+  }
+
+  /* Pause pulse on hover/interaction */
+  .anim-pulse:hover,
+  .anim-pulse:focus,
+  .anim-pulse:active {
+    animation-play-state: paused;
+    transform: scale(1.02); /* Slightly larger on interaction */
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .anim-fade-in-up,
+    .anim-pulse,
+    [data-animate="fade-in-up"],
+    [data-animate="anim-fade-in-up"] {
+      animation: none;
+      transition: opacity 0.3s ease;
+      transform: none;
+      will-change: auto;
+    }
+
+    .anim-fade-in-up,
+    [data-animate="fade-in-up"],
+    [data-animate="anim-fade-in-up"] {
+      opacity: 1; /* Show immediately without animation */
+    }
+
+    .anim-fade-in-up.is-visible,
+    [data-animate="fade-in-up"].is-visible,
+    [data-animate="anim-fade-in-up"].is-visible {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .anim-pulse {
+      animation: none;
+      transform: none;
+    }
+  }
+
   /* ============================================
    * Base Animation Styles
    * ============================================
    */
-  
+
   /* Common base for all animated elements */
   [class*="fade-in"],
   [class*="fade-scale"],
@@ -26,15 +156,15 @@
     will-change: transform, opacity;
     backface-visibility: hidden;
     perspective: 1000px;
-    
+
     /* Initial hidden state */
     opacity: 0;
-    
+
     /* Smooth transition when is-visible is added */
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
                 transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   /* Visible state - triggered by Intersection Observer */
   [class*="fade-in"].is-visible,
   [class*="fade-scale"].is-visible,
@@ -44,7 +174,7 @@
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-  
+
   /* Respect user's motion preferences */
   @media (prefers-reduced-motion: reduce) {
     [class*="fade-in"],
@@ -60,7 +190,7 @@
       transform: none;
       will-change: auto;
     }
-    
+
     /* Ensure visible state is applied immediately */
     [class*="fade-in"].is-visible,
     [class*="fade-scale"].is-visible,
@@ -281,18 +411,123 @@
    * Animation Duration Utilities
    * ============================================
    */
-  
+
   .animate-fast {
     transition-duration: 0.4s;
   }
-  
+
   .animate-normal {
     transition-duration: 0.8s;
   }
-  
+
   .animate-slow {
     transition-duration: 1.2s;
   }
-  
+
+  /* ==================================================
+   * DEPRECATED: Legacy Animation Classes
+   * 
+   * These are aliased to new .anim-* classes for compatibility.
+   * Please use .anim-fade-in-up instead.
+   * ================================================== */
+
+  /* Legacy fade-in → anim-fade-in-up */
+  .fade-in {
+    opacity: 0;
+    transform: translate3d(0, var(--space-8), 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-in.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Legacy slide-up → anim-fade-in-up */
+  .slide-up {
+    opacity: 0;
+    transform: translate3d(0, var(--space-8), 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide-up.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Legacy slide-left → anim-fade-in-up (with horizontal offset) */
+  .slide-left {
+    opacity: 0;
+    transform: translate3d(var(--space-8), 0, 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide-left.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Legacy slide-right → anim-fade-in-up (with horizontal offset) */
+  .slide-right {
+    opacity: 0;
+    transform: translate3d(calc(var(--space-8) * -1), 0, 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide-right.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Legacy fade-scale → anim-fade-in-up with scale */
+  .fade-scale {
+    opacity: 0;
+    transform: scale3d(0.98, 0.98, 1) translate3d(0, var(--space-8), 0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-scale.is-visible {
+    opacity: 1;
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+  }
+
+  /* Respect user's motion preferences for legacy classes */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .slide-up,
+    .slide-left,
+    .slide-right,
+    .fade-scale {
+      animation: none;
+      transition: opacity 0.3s ease;
+      transform: none;
+      will-change: auto;
+    }
+
+    .fade-in.is-visible,
+    .slide-up.is-visible,
+    .slide-left.is-visible,
+    .slide-right.is-visible,
+    .fade-scale.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
 }
 

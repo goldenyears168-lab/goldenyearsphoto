@@ -143,14 +143,14 @@
     flex: 0 0 calc(50% - var(--space-2)); /* Mobile: 2 columns */
     /* No fixed aspect-ratio - let images maintain their original proportions */
     height: auto; /* Height adapts to image's natural aspect ratio */
-    border-radius: var(--radius-card);
+    border-radius: var(--radius-card); /* 24px 超橢圓圓角 */
     overflow: hidden; /* Hide any overflow, no visible borders */
     background-color: transparent;
     background: transparent; /* Ensure no background shows through */
     border: none; /* No border to avoid visible frame */
     outline: none; /* Remove any default outline */
-    box-shadow: var(--shadow-card);
-    transition: transform 0.3s ease, 
+    box-shadow: var(--shadow-card); /* 暖色調陰影 */
+    transition: transform 0.3s ease,
                 box-shadow 0.3s ease,
                 opacity 0.2s ease;
     cursor: pointer;
@@ -203,8 +203,8 @@
     /* Hover state - Subtle lift with enhanced shadow and gradient overlay */
     &:hover {
       transform: translate3d(0, -4px, 0);
-      box-shadow: var(--shadow-card-hover);
-      
+      box-shadow: var(--shadow-card-hover); /* 暖色調陰影 */
+
       /* Show gradient overlay on hover */
       &::after {
         opacity: 1;

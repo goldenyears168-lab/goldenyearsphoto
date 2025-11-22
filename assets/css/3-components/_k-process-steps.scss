@@ -38,10 +38,15 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    /* Subtle gradient background for depth */
-    background: linear-gradient(to bottom, 
+    /* 柔白背景 + 淡淡紙紋 + 漸層 */
+    background-color: var(--color-surface); /* 柔白背景 */
+    background-image: var(--texture-paper), linear-gradient(to bottom, 
       var(--color-surface) 0%, 
       var(--color-surface-alt) 100%);
+    background-size: cover, cover; /* 兩個背景都覆蓋 */
+    background-position: center, center; /* 兩個背景都居中 */
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay, normal; /* 紙紋淡淡混合，漸層正常 */
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-card);
     padding: var(--space-6) var(--space-5) var(--space-5);
