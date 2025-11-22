@@ -247,6 +247,7 @@
     .quiz {
       min-height: 100vh;
       padding: var(--space-12) var(--space-4);
+      padding-top: calc(var(--space-12) + 6px); /* Add space for fixed progress bar */
       background: var(--color-surface-2);
       
       .container {
@@ -254,7 +255,29 @@
       }
     }
     
-    /* Progress Bar */
+    /* Progress Bar - Fixed at top */
+    .progress-bar-fixed {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--color-neutral-100);
+      z-index: var(--z-index-header-nav);
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-brand-cta) 0%, var(--color-brand-cta-hover) 100%);
+      transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      width: 0%;
+      box-shadow: 0 0 8px rgba(208, 215, 241, 0.6);
+    }
+    
+    /* Progress Bar Container (legacy - inside container) */
     .progress-container {
       width: 100%;
       height: 8px;
@@ -263,15 +286,6 @@
       overflow: hidden;
       margin-bottom: var(--space-12);
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(135deg, var(--color-brand-cta) 0%, var(--color-brand-cta-hover) 100%);
-      border-radius: var(--radius-full);
-      transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-      width: 0%;
-      box-shadow: var(--shadow-button);
     }
     
     /* Question Container */
