@@ -1,0 +1,309 @@
+/* ==================================================
+ * Portfolio Gallery Component - "Warm × Enterprise" Design System
+ * 
+ * Professional, curated gallery with:
+ * - Preserves original image aspect ratios (portrait & landscape)
+ * - Clean grid layout with proper spacing
+ * - Filter buttons with clear active/hover states
+ * - Smooth hover effects on gallery items
+ * ==================================================
+ */
+
+@layer components {
+  
+  /* Portfolio Filter Bar - Tag-style filter buttons */
+  .portfolio-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block: var(--space-6) var(--space-8);
+    padding: 0;
+    
+    @media (min-width: 768px) {
+      gap: var(--space-3);
+      margin-block: var(--space-8) var(--space-10);
+    }
+  }
+  
+  /* Filter Button - Tag-style button with active state */
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-main);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    /* Optimize transitions - prioritize GPU-accelerated properties */
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+    /* Use pseudo-element for background-color to avoid layout repaint */
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-neutral-100);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+    outline-offset: 2px;
+    user-select: none;
+    
+    /* GPU acceleration for smooth animations */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    
+    /* Hover state - Subtle lift and background change */
+    &:hover {
+      border-color: var(--color-brand-accent);
+      color: var(--color-brand-primary);
+      transform: translate3d(0, -1px, 0);
+    }
+    
+    /* Focus state - Clear focus ring for accessibility */
+    &:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+    
+    /* Active state - Selected filter button */
+    &.is-active {
+      background-color: var(--color-brand-cta);
+      color: var(--color-brand-primary);
+      border-color: var(--color-brand-cta);
+      box-shadow: var(--shadow-md);
+      transform: translate3d(0, -1px, 0);
+      font-weight: var(--font-weight-bold);
+      
+      &::before {
+        background-color: var(--color-brand-cta-hover);
+        opacity: 0;
+      }
+      
+      &:hover {
+        border-color: var(--color-brand-cta-hover);
+        color: var(--color-brand-primary);
+        transform: translate3d(0, -2px, 0);
+        box-shadow: var(--shadow-lg);
+        
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  
+  /* Portfolio Gallery Grid - Centered flex layout, responsive columns */
+  .portfolio-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    align-content: center; /* Center wrapped rows vertically */
+    gap: var(--space-4);
+    margin-block: 0 var(--space-10);
+    min-height: 0; /* Allow flex items to shrink */
+    
+    @media (min-width: 768px) {
+      gap: var(--space-5);
+    }
+    
+    @media (min-width: 992px) {
+      gap: var(--space-6);
+      /* Ensure exactly 4 columns on desktop */
+      max-width: 100%;
+    }
+  }
+  
+  /* Gallery Item - Individual portfolio image card */
+  .gallery-item {
+    position: relative;
+    flex: 0 0 calc(50% - var(--space-2)); /* Mobile: 2 columns */
+    /* No fixed aspect-ratio - let images maintain their original proportions */
+    height: auto; /* Height adapts to image's natural aspect ratio */
+    border-radius: var(--radius-card);
+    overflow: hidden; /* Hide any overflow, no visible borders */
+    background-color: transparent;
+    background: transparent; /* Ensure no background shows through */
+    border: none; /* No border to avoid visible frame */
+    outline: none; /* Remove any default outline */
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s ease, 
+                box-shadow 0.3s ease,
+                opacity 0.2s ease;
+    cursor: pointer;
+    max-width: 100%;
+    /* Ensure container clips everything */
+    isolation: isolate; /* Create new stacking context */
+    display: flex; /* Use flex to center image */
+    align-items: center;
+    justify-content: center;
+    
+    @media (min-width: 768px) {
+      flex: 0 0 calc(33.333% - var(--space-3)); /* Tablet: 3 columns */
+    }
+    
+    @media (min-width: 992px) {
+      /* Desktop: exactly 4 columns, accounting for 3 gaps between 4 items */
+      /* Formula: (100% - 3 gaps) / 4 */
+      flex: 0 0 calc((100% - var(--space-6) * 3) / 4);
+      max-width: calc((100% - var(--space-6) * 3) / 4);
+    }
+    
+    /* Hidden state - For filtered items
+     * Uses display: none to remove from layout flow for graceful grid collapse */
+    &[hidden] {
+      display: none;
+    }
+    
+    /* Gradient overlay mask - Bottom to center fade */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.45) 0%,
+        transparent 55%
+      );
+      opacity: 0;
+      z-index: 1; /* Above image, below any content */
+      pointer-events: none; /* Don't block interactions */
+      transition: opacity 0.22s ease-out;
+      /* GPU acceleration for smooth animation */
+      transform: translateZ(0);
+      will-change: opacity;
+    }
+    
+    /* Hover state - Subtle lift with enhanced shadow and gradient overlay */
+    &:hover {
+      transform: translate3d(0, -4px, 0);
+      box-shadow: var(--shadow-card-hover);
+      
+      /* Show gradient overlay on hover */
+      &::after {
+        opacity: 1;
+      }
+    }
+    
+    /* Focus state - For keyboard navigation */
+    &:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+  }
+  
+  /* Gallery Item Image - Preserve original aspect ratios
+   * Portrait images stay portrait, landscape images stay landscape */
+  .gallery-item img,
+  .gallery-item picture,
+  .gallery-item picture img {
+    width: 100%;
+    height: auto; /* Maintain original aspect ratio */
+    object-fit: contain; /* Show full image without cropping, maintain aspect ratio */
+    object-position: center center; /* Center horizontally and vertically */
+    display: block;
+    transition: transform 0.35s ease-out, opacity 0.35s ease-out;
+    /* Ensure no gaps, borders, or visible edges */
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    /* Let image maintain its natural dimensions */
+    max-width: 100%;
+    /* GPU acceleration for smooth animations */
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+  
+  /* Enhanced hover effect on image - subtle zoom and opacity change */
+  .gallery-item:hover img,
+  .gallery-item:hover picture img {
+    transform: scale3d(1.03, 1.03, 1) translateZ(0);
+    opacity: 0.96;
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-item {
+      transition: box-shadow 0.3s ease;
+      transform: none;
+      will-change: auto;
+      
+      &:hover {
+        transform: none;
+      }
+      
+      &::after {
+        transition: opacity 0.22s ease-out;
+      }
+    }
+    
+    .gallery-item img,
+    .gallery-item picture,
+    .gallery-item picture img {
+      transition: opacity 0.35s ease-out;
+      transform: none;
+      will-change: auto;
+    }
+    
+    .gallery-item:hover img,
+    .gallery-item:hover picture img {
+      transform: none;
+      /* Keep opacity change for visual feedback */
+      opacity: 0.96;
+    }
+    
+    .filter-btn {
+      transition: box-shadow 0.2s ease,
+                  border-color 0.2s ease,
+                  color 0.2s ease;
+      transform: none;
+      will-change: auto;
+      
+      &:hover,
+      &.is-active,
+      &.is-active:hover {
+        transform: none;
+      }
+    }
+  }
+  
+  /* Empty state - When no items match filter */
+  .portfolio-gallery:empty::after {
+    content: '目前沒有符合此分類的作品';
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: var(--space-10);
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-lg);
+  }
+  
+}
+

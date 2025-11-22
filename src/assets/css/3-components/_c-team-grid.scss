@@ -1,0 +1,143 @@
+//
+// 檔案：css/3-components/_k-02-team-grid.scss
+// 說明：一個響應式的團隊介紹網格組件
+// (版本 2：維持原始圖片比例)
+//
+
+.team-grid {
+  display: grid;
+  gap: var(--space-6);
+  
+  // 【新增】
+  // 讓不同高度的卡片從頂部對齊，而不是拉伸
+  align-items: start; 
+
+  // Mobile: 預設 2 欄
+  grid-template-columns: repeat(2, 1fr);
+
+  // Tablet: 3 欄
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // --- 佈局變化 (Modifier Classes) ---
+
+  // 3 欄式 (桌機)
+  &.team-grid-3 {
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // 5 欄式 (桌機)
+  &.team-grid-5 {
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
+
+.team-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  border-radius: var(--radius-md);
+  overflow: hidden; // 確保圖片圓角
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* GPU acceleration for smooth animations */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+
+  &:hover,
+  &:focus {
+    transform: translate3d(0, -5px, 0);
+    box-shadow: var(--shadow-card-hover);
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .team-card {
+      transition: box-shadow 0.3s ease;
+      transform: none;
+      will-change: auto;
+      
+      &:hover,
+      &:focus {
+        transform: none;
+      }
+    }
+  }
+
+  // 圖片容器
+  .team-card-image {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      
+      // 【已移除】
+      // aspect-ratio: 1 / 1; 
+      // object-fit: cover; 
+      
+      background-color: var(--color-neutral-100); // 圖片載入前的底色
+    }
+  }
+
+  // 成員姓名
+  h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin: var(--space-3) 0 var(--space-1);
+  }
+
+  // 職稱
+  .team-title {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-subtle);
+    margin: 0;
+  }
+}
+
+// 您可能已經有的通用類別
+.text-center {
+  text-align: center;
+}
+
+// ... (您原有的 .team-card, .text-center 等樣式) ...
+
+//
+// 針對「關於我們」頁面的創辦人區塊進行佈局微調
+//
+.layout-split-founder {
+  // 範例：讓圖片變小 (佔 40%)，文字變多 (佔 60%)
+  // 您可以隨意調整 40% 這個數字
+  grid-template-columns: 30% 1fr;
+
+  // 附註：您可能也會想改變垂直對齊方式
+  // 'start' 代表頂部對齊 (如截圖所示)
+  // 'center' 代表垂直置中
+  align-items: start;
+}
+
+// ... (您原有的 .team-card, .text-center 等樣式) ...
+
+//
+// 輔助 class：
+// 用於修正 3 欄網格的寬度，使其在桌機上
+// 與 5 欄網格的卡片大小一致。
+//
+.grid-container-3of5 {
+  
+  // 僅在桌機斷點（與 team-grid-5 相同）才生效
+  @media (min-width: 1024px) {
+    
+    // 總寬度設為 60% (3/5)
+    max-width: 60%;
+    
+    // 水平置中
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

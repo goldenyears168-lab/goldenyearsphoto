@@ -1,0 +1,31 @@
+/* [1] 🧱 全站基礎設定（Base） */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+/* Smooth Scrolling - Global setting for anchor jumps and wheel scroll
+ * Applies to all anchor links (#section) and native browser scrolling
+ * Do not override this in component styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: var(--header-h);
+  background-color: var(--color-light-bg);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; padding: 0; margin: 0; }
+a { text-decoration: none; color: var(--color-primary-accent); }
+a:hover { color: var(--color-cta); }
+h1, h2, h3, h4 { color: var(--color-dark); line-height: 1.3; }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+.container-md { max-width: 900px; }
+.text-align-center { text-align: center; }

@@ -1,8 +1,0 @@
-@layer pages {
-  .page-graduation {
-    --hero-pad: clamp(3rem, 6vw, 6rem);
-    .page-hero { padding-block: var(--hero-pad); background: var(--surface-3); color: var(--text-on-dark); }
-    .intro { text-align: center; }
-    .quotes { padding: clamp(1.5rem, 3vw, 2.5rem); }
-  }
-}

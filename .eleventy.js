@@ -112,7 +112,7 @@ module.exports = function (eleventyConfig) {
   });
 
   // 4.4 Sass 編譯（Eleventy v2 的 addExtension 寫法）
-  const scssInputPath = "assets/css";
+  const scssInputPath = "src/assets/css";
   eleventyConfig.addTemplateFormats("scss");
   eleventyConfig.addExtension("scss", {
     outputFileExtension: "css",
@@ -131,14 +131,15 @@ module.exports = function (eleventyConfig) {
   });
 
   // 4.5 靜態檔案複製
-  eleventyConfig.addPassthroughCopy("_redirects");
-  eleventyConfig.addPassthroughCopy("assets/images/ui");
-  eleventyConfig.addPassthroughCopy("assets/js");
-  eleventyConfig.addPassthroughCopy("robots.txt");
-  eleventyConfig.addPassthroughCopy("favicon.ico");
+  // Note: Passthrough paths are relative to project root, not input directory
+  eleventyConfig.addPassthroughCopy("src/_redirects");
+  eleventyConfig.addPassthroughCopy("src/assets/images/ui");
+  eleventyConfig.addPassthroughCopy("src/assets/js");
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
 
   // 4.6 監聽 SCSS 變更
-  eleventyConfig.addWatchTarget("assets/css/");
+  eleventyConfig.addWatchTarget("src/assets/css/");
 
   // 4.7 提供給 sitemap.xml.njk 使用的日期 Filter
   eleventyConfig.addFilter("dateToISO", function (value) {
@@ -161,18 +162,18 @@ module.exports = function (eleventyConfig) {
       cleanPath = `assets/css/${cleanPath}`;
     }
 
-    // Map CSS path to SCSS source file
-    // e.g., /assets/css/main.css -> assets/css/main.scss
-    // e.g., /assets/css/4-pages/p-home.css -> assets/css/4-pages/p-home.scss
+    // Map CSS path to SCSS source file (now in src/)
+    // e.g., /assets/css/main.css -> src/assets/css/main.scss
+    // e.g., /assets/css/4-pages/p-home.css -> src/assets/css/4-pages/p-home.scss
     const scssPath = cleanPath.replace(/\.css$/, ".scss");
-    const scssPathFull = path.join(".", scssPath);
+    const scssPathFull = path.join("src", scssPath);
 
     try {
       // Primary strategy: Compile SCSS directly from source
       if (fs.existsSync(scssPathFull)) {
         const sourceContent = fs.readFileSync(scssPathFull, "utf8");
         const result = sass.compileString(sourceContent, {
-          loadPaths: ["assets/css"],
+          loadPaths: ["src/assets/css"],
           style: "compressed",
         });
         // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
@@ -219,7 +220,7 @@ module.exports = function (eleventyConfig) {
   // 4.8 Eleventy 輸出設定
   return {
     dir: {
-      input: ".",
+      input: "src",
       includes: "_includes",
       layouts: "_includes",
       data: "_data",

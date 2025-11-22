@@ -1,0 +1,494 @@
+---
+layout: "base-layout.njk"
+title: "好時有影｜台北專業形象照攝影（韓式證件照、形象照、畢業照）"
+pageStyles: |
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/4-pages/p-home.css">
+seo:
+  description: "位於台北中山/公館，韓式證件照、專業形象照、畢業寫真。立即查看價目表。"
+  keywords: "韓式證件照, 專業形象照, 畢業照, 台北攝影"
+---
+
+{% from "macros/portfolio.njk" import portfolioImg %}
+
+<section class="module module-dark page-hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <p class="hero-kicker">台北專業攝影工作室</p>
+        <h1 id="hero-title" class="hero-title">好時有影</h1>
+        <p class="hero-subtitle">
+          讓每一個「好時」，都有你我的「身影」
+        </p>
+        <p class="hero-description">
+          台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
+        </p>
+        <div class="hero-actions">
+          <a href="/booking/" class="button button--primary hero-cta-primary">
+            立即預約
+          </a>
+          <a href="/price-list/" class="button button--secondary hero-cta-secondary">
+            查看價目
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img 
+          src="{{ 'content/home/hero/Hero_Images_16x9.jpg' | r2img }}" 
+          alt="好時有影專業攝影工作室 - 專業形象照、韓式證件照、畢業照服務"
+          loading="eager"
+          decoding="async"
+          width="1200"
+          height="675"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="module">
+  <div class="container">
+    <h2 class="text-align-center">找到你的專屬風格</h2>
+    
+    <nav class="portfolio-filter" role="tablist" aria-label="作品分類篩選">
+      <button class="filter-btn is-active" type="button" data-filter="passport-korea" aria-pressed="true" role="tab">韓式證件照</button>
+      <button class="filter-btn" type="button" data-filter="linkedin-portrait" aria-pressed="false" role="tab">專業形象照</button>
+      <button class="filter-btn" type="button" data-filter="full-body-portrait" aria-pressed="false" role="tab">全身形象照</button>
+      <button class="filter-btn" type="button" data-filter="lawyer-portrait" aria-pressed="false" role="tab">律師形象照</button>
+      <button class="filter-btn" type="button" data-filter="doctor-coat" aria-pressed="false" role="tab">醫師袍照</button>
+      <button class="filter-btn" type="button" data-filter="corporate-group" aria-pressed="false" role="tab">企業團體照</button>
+      <button class="filter-btn" type="button" data-filter="musician-portrait" aria-pressed="false" role="tab">樂器演奏照</button>
+      <button class="filter-btn" type="button" data-filter="campaign-portrait" aria-pressed="false" role="tab">競選照</button>
+      <button class="filter-btn" type="button" data-filter="grad-id" aria-pressed="false" role="tab">畢業證件照</button>
+      <button class="filter-btn" type="button" data-filter="grad-happy-id" aria-pressed="false" role="tab">畢業學士服</button>
+      <button class="filter-btn" type="button" data-filter="grad-portrait" aria-pressed="false" role="tab">畢業寫真</button>
+      <button class="filter-btn" type="button" data-filter="student-group" aria-pressed="false" role="tab">學生團體照</button>
+      <button class="filter-btn" type="button" data-filter="couple" aria-pressed="false" role="tab">情侶寫真</button>
+      <button class="filter-btn" type="button" data-filter="bestie-portrait" aria-pressed="false" role="tab">閨蜜寫真</button>
+      <button class="filter-btn" type="button" data-filter="friends-portrait" aria-pressed="false" role="tab">朋友合照</button>
+      <button class="filter-btn" type="button" data-filter="family" aria-pressed="false" role="tab">全家福</button>
+      <button class="filter-btn" type="button" data-filter="maternity" aria-pressed="false" role="tab">好孕照</button>
+      <button class="filter-btn" type="button" data-filter="body-profile" aria-pressed="false" role="tab">體態寫真</button>
+      <button class="filter-btn" type="button" data-filter="emo" aria-pressed="false" role="tab">情緒寫真</button>
+    </nav>
+
+    <!-- (此處是已清理 &nbsp; 和拼寫錯誤的 HTML) -->
+    <div class="portfolio-gallery">
+      <!-- 韓式證件照 -->
+      <div class="gallery-item" data-category="passport-korea">
+        {{ portfolioImg("korean-id/korean-id-1.jpg", "韓式證件照範例 1") }}
+      </div>
+
+      <div class="gallery-item" data-category="passport-korea">
+        {{ portfolioImg("korean-id/korean-id-2.jpg", "韓式證件照範例 2") }}
+      </div>
+
+      <div class="gallery-item" data-category="passport-korea">
+        {{ portfolioImg("korean-id/korean-id-3.jpg", "韓式證件照範例 3") }}
+      </div>
+
+      <div class="gallery-item" data-category="passport-korea">
+        {{ portfolioImg("korean-id/korean-id-4.jpg", "韓式證件照範例 4") }}
+      </div>
+      <!-- 專業形象照 (LinkedIn) -->
+      <div class="gallery-item" data-category="linkedin-portrait">
+        {{ portfolioImg("linkedin-portrait/linkedin-portrait-1.jpg", "專業形象照範例 1") }}
+      </div>
+      <div class="gallery-item" data-category="linkedin-portrait">
+        {{ portfolioImg("linkedin-portrait/linkedin-portrait-2.jpg", "專業形象照範例 2") }}
+      </div>
+      <div class="gallery-item" data-category="linkedin-portrait">
+        <img src="{{ 'portfolio/linkedin-portrait/linkedin-portrait-3.jpg' | r2img }}" alt="專業形象照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="linkedin-portrait">
+        <img src="{{ 'portfolio/linkedin-portrait/linkedin-portrait-4.jpg' | r2img }}" alt="專業形象照範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 全身形象照 -->
+      <div class="gallery-item" data-category="full-body-portrait">
+        <img src="{{ 'portfolio/full-body-portrait/full-body-portrait-1.jpg' | r2img }}" alt="全身形象照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="full-body-portrait">
+        <img src="{{ 'portfolio/full-body-portrait/full-body-portrait-2.jpg' | r2img }}" alt="全身形象照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="full-body-portrait">
+        <img src="{{ 'portfolio/full-body-portrait/full-body-portrait-3.jpg' | r2img }}" alt="全身形象照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="full-body-portrait">
+        <img src="{{ 'portfolio/full-body-portrait/full-body-portrait-4.jpg' | r2img }}" alt="全身形象照範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 律師形象照 -->
+      <div class="gallery-item" data-category="lawyer-portrait">
+        <img src="{{ 'portfolio/lawyer-portrait/lawyer-portrait-1.jpg' | r2img }}" alt="律師形象照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="lawyer-portrait">
+        <img src="{{ 'portfolio/lawyer-portrait/lawyer-portrait-2.jpg' | r2img }}" alt="律師形象照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="lawyer-portrait">
+        <img src="{{ 'portfolio/lawyer-portrait/lawyer-portrait-3.jpg' | r2img }}" alt="律師形象照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 醫師袍照 -->
+      <div class="gallery-item" data-category="doctor-coat">
+        <img src="{{ 'portfolio/doctor-coat/doctor-coat-1.jpg' | r2img }}" alt="醫師袍照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="doctor-coat">
+        <img src="{{ 'portfolio/doctor-coat/doctor-coat-2.jpg' | r2img }}" alt="醫師袍照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="doctor-coat">
+        <img src="{{ 'portfolio/doctor-coat/doctor-coat-3.jpg' | r2img }}" alt="醫師袍照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 企業團體照 -->
+      <div class="gallery-item" data-category="corporate-group">
+        <img src="{{ 'portfolio/corporate-group/corporate-group-1.jpg' | r2img }}" alt="企業團體照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="corporate-group">
+        <img src="{{ 'portfolio/corporate-group/corporate-group-2.jpg' | r2img }}" alt="企業團體照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="corporate-group">
+        <img src="{{ 'portfolio/corporate-group/corporate-group-3.jpg' | r2img }}" alt="企業團體照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 樂器演奏照 -->
+      <div class="gallery-item" data-category="musician-portrait">
+        <img src="{{ 'portfolio/musician-portrait/musician-portrait-1.jpg' | r2img }}" alt="樂器演奏照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="musician-portrait">
+        <img src="{{ 'portfolio/musician-portrait/musician-portrait-2.jpg' | r2img }}" alt="樂器演奏照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="musician-portrait">
+        <img src="{{ 'portfolio/musician-portrait/musician-portrait-3.jpg' | r2img }}" alt="樂器演奏照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="musician-portrait">
+        <img src="{{ 'portfolio/musician-portrait/musician-portrait-4.jpg' | r2img }}" alt="樂器演奏照範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 競選照 -->
+      <div class="gallery-item" data-category="campaign-portrait">
+        <img src="{{ 'portfolio/campaign-portrait/campaign-portrait-1.jpg' | r2img }}" alt="競選照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="campaign-portrait">
+        <img src="{{ 'portfolio/campaign-portrait/campaign-portrait-2.jpg' | r2img }}" alt="競選照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="campaign-portrait">
+        <img src="{{ 'portfolio/campaign-portrait/campaign-portrait-3.jpg' | r2img }}" alt="競選照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="campaign-portrait">
+        <img src="{{ 'portfolio/campaign-portrait/campaign-portrait-4.jpg' | r2img }}" alt="競選照範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 畢業證件照 -->
+      <div class="gallery-item" data-category="grad-id">
+        <img src="{{ 'portfolio/grad-id/grad-id-1.jpg' | r2img }}" alt="畢業證件照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-id">
+        <img src="{{ 'portfolio/grad-id/grad-id-2.jpg' | r2img }}" alt="畢業證件照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-id">
+        <img src="{{ 'portfolio/grad-id/grad-id-3.jpg' | r2img }}" alt="畢業證件照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 畢業學士服 (活潑) -->
+      <div class="gallery-item" data-category="grad-happy-id">
+        <img src="{{ 'portfolio/grad-happy-id/grad-happy-id-1.jpg' | r2img }}" alt="畢業學士服照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-happy-id">
+        <img src="{{ 'portfolio/grad-happy-id/grad-happy-id-2.jpg' | r2img }}" alt="畢業學士服照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-happy-id">
+        <img src="{{ 'portfolio/grad-happy-id/grad-happy-id-3.jpg' | r2img }}" alt="畢業學士服照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 畢業寫真 -->
+      <div class="gallery-item" data-category="grad-portrait">
+        <img src="{{ 'portfolio/grad-portrait/grad-portrait-2.jpg' | r2img }}" alt="畢業寫真範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-portrait">
+        <img src="{{ 'portfolio/grad-portrait/grad-portrait-3.jpg' | r2img }}" alt="畢業寫真範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-portrait">
+        <img src="{{ 'portfolio/grad-portrait/grad-portrait-4.jpg' | r2img }}" alt="畢業寫真範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="grad-portrait">
+        <img src="{{ 'portfolio/grad-portrait/grad-portrait-5.jpg' | r2img }}" alt="畢業寫真範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 學生團體照 -->
+      <div class="gallery-item" data-category="student-group">
+        <img src="{{ 'portfolio/student-group/student-group-1.jpg' | r2img }}" alt="學生團體照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="student-group">
+        <img src="{{ 'portfolio/student-group/student-group-2.jpg' | r2img }}" alt="學生團體照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 情侶寫真 -->
+      <div class="gallery-item" data-category="couple">
+        <img src="{{ 'portfolio/couple/couple-1.jpg' | r2img }}" alt="情侶寫真範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="couple">
+        <img src="{{ 'portfolio/couple/couple-2.jpg' | r2img }}" alt="情侶寫真範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="couple">
+        <img src="{{ 'portfolio/couple/couple-3.jpg' | r2img }}" alt="情侶寫真範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="couple">
+        <img src="{{ 'portfolio/couple/couple-4.jpg' | r2img }}" alt="情侶寫真範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 閨蜜寫真 -->
+      <div class="gallery-item" data-category="bestie-portrait">
+        <img src="{{ 'portfolio/bestie-portrait/bestie-portrait-1.jpg' | r2img }}" alt="閨蜜寫真範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="bestie-portrait">
+        <img src="{{ 'portfolio/bestie-portrait/bestie-portrait-2.jpg' | r2img }}" alt="閨蜜寫真範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="bestie-portrait">
+        <img src="{{ 'portfolio/bestie-portrait/bestie-portrait-3.jpg' | r2img }}" alt="閨蜜寫真範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 朋友合照 -->
+      <div class="gallery-item" data-category="friends-portrait">
+        <img src="{{ 'portfolio/friends-portrait/friends-portrait-1.jpg' | r2img }}" alt="朋友合照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="friends-portrait">
+        <img src="{{ 'portfolio/friends-portrait/friends-portrait-2.jpg' | r2img }}" alt="朋友合照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="friends-portrait">
+        <img src="{{ 'portfolio/friends-portrait/friends-portrait-3.jpg' | r2img }}" alt="朋友合照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="friends-portrait">
+        <img src="{{ 'portfolio/family/family-1.jpg' | r2img }}" alt="全家福範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 全家福 -->
+      <div class="gallery-item" data-category="family">
+        <img src="{{ 'portfolio/family/family-4.jpg' | r2img }}" alt="全家福範例 4" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="family">
+        <img src="{{ 'portfolio/family/family-3.jpg' | r2img }}" alt="全家福範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="family">
+        <img src="{{ 'portfolio/family/family-2.jpg' | r2img }}" alt="全家福範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 好孕照 -->
+      <div class="gallery-item" data-category="maternity">
+        <img src="{{ 'portfolio/maternity/maternity-1.jpg' | r2img }}" alt="好孕照範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="maternity">
+        <img src="{{ 'portfolio/maternity/maternity-2.jpg' | r2img }}" alt="好孕照範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="maternity">
+        <img src="{{ 'portfolio/maternity/maternity-3.jpg' | r2img }}" alt="好孕照範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- 體態寫真 -->
+      <div class="gallery-item" data-category="body-profile">
+        <img src="{{ 'portfolio/body-profile/body-profile-1.jpg' | r2img }}" alt="體態寫真範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="body-profile">
+        <img src="{{ 'portfolio/body-profile/body-profile-2.jpg' | r2img }}" alt="體態寫真範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="body-profile">
+        <img src="{{ 'portfolio/body-profile/body-profile-3.jpg' | r2img }}" alt="體態寫真範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <!-- Emo -->
+      <div class="gallery-item" data-category="emo">
+        <img src="{{ 'portfolio/emo/emo-1.jpg' | r2img }}" alt="Emo 風範例 1" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="emo">
+        <img src="{{ 'portfolio/emo/emo-2.jpg' | r2img }}" alt="Emo 風範例 2" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="emo">
+        <img src="{{ 'portfolio/emo/emo-3.jpg' | r2img }}" alt="Emo 風範例 3" loading="lazy" decoding="async" class="">
+      </div>
+      <div class="gallery-item" data-category="emo">
+        <img src="{{ 'portfolio/emo/emo-4.jpg' | r2img }}" alt="Emo 風範例 4" loading="lazy" decoding="async" class="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="module module-gray">
+  <div class="container text-align-center">
+    <h2>歷年代表客戶</h2>
+    <p>感謝各界專業人士與組織的信任，選擇好時有影留下影像。</p>
+    <h3>代表企業客戶：</h3>
+    <p>
+      Amazon亞馬遜、MSD美商默沙東藥廠、鵬耀法律事務所、遠雄集團、智選科技、技鋼科技、聖邦科技、CHARLES &amp; KEITH、萬寶華、資生堂、微軟、雅培、IBM、Inline樂排、foodpanda、英美菸草、Happy hair、白蘭氏、生洋網路、Garmin、臺大醫院。
+    </p>
+    <h3>代表校園客戶：</h3>
+    <p>
+      台大醫、台大牙醫、台大物治、陽明醫、陽明物治、中山醫、馬偕醫、馬偕聽語、輔大醫、政大EMBA、交大GMBA。
+    </p>
+  </div>
+</div>
+
+<!--
+ * =========================================
+ * [!!] 篩選器功能 (Filter Function)
+ * =========================================
+ *
+ * 策略：
+ * 1. 將篩選器 JS 直接嵌入，確保它 100% 會執行。
+ * 2. 這會實現您要的「天真藍」範例功能：
+ * 點擊按鈕 -> 隱藏其他 -> 只顯示該分類。
+ -->
+
+
+{# ========== Block 6：拍攝流程（Process） ========== #}
+<section class="module" id="process">
+<div class="container">
+<h2 class="section-title u-text-center">拍攝流程</h2>
+<p class="page-intro u-text-center">
+
+每一步流程都清楚，讓你不用擔心。
+</p>
+
+<ol class="step-list">
+  <li>
+    <h3>線上預約與</h3>
+    <p>先在網站上選擇拍攝項目與時間，收到預約信就代表預約成功了。</p>
+  </li>
+  <li>
+    <h3>到棚拍攝與現場引導</h3>
+    <p>從站姿、坐姿、表情開始慢慢帶，不需要自己想姿勢。</p>
+  </li>
+  <li>
+    <h3>精選照片與專業修圖</h3>
+    <p>拍完可在現場挑片，我們會針對使用目的給予您最佳建議。</p>
+  </li>
+  <li>
+    <h3>成品交付</h3>
+    <p>完成後以Email寄出雲端電子檔給你，收到成品還可以再改稿2次。</p>
+  </li>
+</ol>
+
+
+</div>
+
+
+
+<section class="module module-dark">
+<div class="container final-cta">
+<div>
+<h2 class="section-title">準備好，讓自己被好好看見了嗎？</h2>
+<p class="page-intro">
+不用先想好要怎麼笑、怎麼站，只要帶著你現在的樣子來就好。
+其他的，我們一起慢慢找到。
+</p>
+</div>
+<a href="/booking/" class="btn btn--primary btn--lg">預約下一個好時刻</a>
+</div>
+</section>
+
+
+<script>
+/**
+ * Portfolio Gallery Filter
+ * 
+ * Simple, accessible filtering for portfolio gallery items.
+ * Uses data-filter and data-category attributes for clean separation.
+ */
+(function() {
+  'use strict';
+  
+  const filterContainer = document.querySelector('.portfolio-filter');
+  if (!filterContainer) return;
+  
+  const buttons = document.querySelectorAll('.portfolio-filter .filter-btn');
+  const items = document.querySelectorAll('.portfolio-gallery .gallery-item');
+  
+  /**
+   * Apply filter to gallery items
+   * @param {string} category - Category to filter by, or 'all' to show all
+   */
+  function applyFilter(category) {
+    // Update gallery items visibility
+    items.forEach(item => {
+      const shouldShow = category === 'all' || item.dataset.category === category;
+      item.hidden = !shouldShow;
+    });
+    
+    // Update button states
+    buttons.forEach(button => {
+      const isActive = button.dataset.filter === category;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+  
+  /**
+   * Handle filter button clicks
+   */
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.dataset.filter;
+      applyFilter(category);
+      
+      // Update URL hash for shareable links
+      if (category === 'all') {
+        history.replaceState(null, '', window.location.pathname);
+      } else {
+        history.replaceState(null, '', `#filter=${category}`);
+      }
+    });
+  });
+  
+  /**
+   * Initialize filter from URL hash or default to 'passport-korea'
+   */
+  function initializeFilter() {
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, '')).get('filter');
+    // Default to 'passport-korea' instead of 'all' - only show Korean passport items on load
+    const defaultCategory = hash || 'passport-korea';
+    applyFilter(defaultCategory);
+  }
+  
+  // Initialize on page load - will automatically filter to passport-korea
+  initializeFilter();
+  
+  // Handle browser back/forward navigation
+  window.addEventListener('hashchange', initializeFilter);
+})();
+</script>
+
+<script>
+/**
+ * Hero Image Float Animation
+ * 
+ * Gentle fade-in and float-up animation for hero image on page load.
+ * Aligned with "Warm × Enterprise" design system - subtle and professional.
+ */
+(function() {
+  'use strict';
+  
+  // Wait for DOM and images to be ready
+  function initHeroAnimation() {
+    const heroImage = document.querySelector('.hero-image');
+    if (!heroImage) return;
+    
+    // Check if image is already loaded
+    const img = heroImage.querySelector('img');
+    if (img && img.complete) {
+      // Image already loaded, trigger animation immediately
+      requestAnimationFrame(() => {
+        heroImage.classList.add('is-loaded');
+      });
+    } else if (img) {
+      // Wait for image to load
+      img.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          heroImage.classList.add('is-loaded');
+        });
+      }, { once: true });
+      
+      // Fallback: trigger after a short delay if image takes too long
+      setTimeout(() => {
+        if (!heroImage.classList.contains('is-loaded')) {
+          heroImage.classList.add('is-loaded');
+        }
+      }, 500);
+    } else {
+      // No image found, trigger animation anyway
+      requestAnimationFrame(() => {
+        heroImage.classList.add('is-loaded');
+      });
+    }
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroAnimation);
+  } else {
+    // DOM already ready
+    initHeroAnimation();
+  }
+})();
+</script>

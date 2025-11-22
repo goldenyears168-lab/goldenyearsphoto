@@ -1,0 +1,100 @@
+{# --- [ V9.0 升級 ] --- #}
+<header class="global-header">
+    <nav class="container nav-container">
+        <!-- 子元素 1：Logo -->
+        <a href="/" class="header-logo">
+            <img
+            src="/assets/images/ui/logo.jpg"
+            alt="好時有影 Golden Years Logo"
+            width="355"
+            height="295"
+            />
+        </a>
+        
+        <!-- 子元素 2：導覽列 Wrapper -->
+        <div class="header-navigation-wrapper">
+
+            <!-- Wrapper 內項目 1：選單 -->
+            {# [ V9.0 ] 新增 id="primary-nav" 並預設 hidden #}
+            <ul class="header-nav" id="primary-nav" hidden>
+                <li><a href="/price-list/"> 價目表</a></li>
+                
+                {# [!!] 策略：將 .dropdown--guide 升級為 .megamenu 結構 #}
+                <li class="dropdown dropdown--guide megamenu">
+                    
+                    <button class="nav-dropdown-trigger" 
+                            type="button"
+                            aria-expanded="false" 
+                            aria-controls="menu-guide">
+                        拍攝指南
+                    </button>
+                    
+                    {# [!!] 結構變更：使用與「專欄文章」相同的 div.megamenu-container #}
+                    <div class="dropdown-menu megamenu-container" id="menu-guide" hidden>
+                        <div class="megamenu-column">
+                            
+                            <h5 class="megamenu-heading">拍攝指南</h5>
+                            
+                            <ul>
+                                <li><a href="/guide/makeup-and-hair/"> 妝髮服務介紹</a></li>
+                                <li><a href="/guide/faq/"> 常見問題 (FAQ)</a></li>
+                                <li><a href="/guide/crop-tool/"> 自助裁切工具</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </li>
+
+                <li class="dropdown megamenu">
+                    {# [ V9.0 ] 改為 <button> 並添加 ARIA #}
+                    <button class="nav-dropdown-trigger" 
+                            type="button"
+                            aria-expanded="false" 
+                            aria-controls="menu-mega">
+                        作品分類
+                    </button>
+                    {# [ V9.0 ] 新增 id="menu-mega" 並預設 hidden #}
+                    <div class="dropdown-menu megamenu-container" id="menu-mega" hidden>
+                        <div class="megamenu-column">
+                            <h5 class="megamenu-heading">攝影項目</h5>
+                            <ul>
+                                <li><a href="/blog/profile/"> 形象照</a></li>
+                                <li><a href="/blog/korean-id/"> 韓式證件照</a></li>
+                                <li><a href="/blog/graduation/"> 畢業儀式</a></li>
+                                <li><a href="/blog/couples/"> 情侶里程碑</a></li>
+                                <li><a href="/blog/family/"> 全家福</a></li>
+                                <li><a href="/blog/pet/"> 寵物寫真</a></li>
+                                <li><a href="/blog/medical/"> 醫師袍形象照</a></li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-column">
+                            <h5 class="megamenu-heading">體驗與總覽</h5>
+                            <ul>
+                                <li><a href="/blog/workshop/"> 體驗工作坊</a></li>
+                                <li><hr></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/about/"> 關於我們</a></li>
+                
+                {# [ V9.0 ] CTA-Mobile 位於 <ul> 內部，確保會跟著展開 #}
+                <li class="header-cta-mobile"><a href="/booking/">線上預約</a></li>
+            </ul>
+
+            <!-- Wrapper 內項目 2：CTA (桌面版) -->
+            <a href="/booking/" class="header-cta">線上預約</a>
+
+        </div> <!-- 結束 .header-navigation-wrapper -->
+        
+        <!-- 行動版漢堡選單 -->
+        {# [ V9.0 ] 補全 ARIA 屬性，指向 primary-nav #}
+        <button class="mobile-nav-toggle" 
+                aria-label="開關導覽" 
+                aria-expanded="false" 
+                aria-controls="primary-nav">
+            &#9776;
+        </button>
+    </nav>
+</header>
+
