@@ -1,9 +1,30 @@
 # Technical Health Check & Performance Optimization
 ## 好時有影 - 專業攝影工作室網站
 
-**版本**: 1.0  
-**日期**: 2024-11  
-**狀態**: Post-Refactor Analysis
+**版本**: 1.1  
+**日期**: 2024-11-22  
+**狀態**: Post-Refactor Analysis & High Priority Tasks Completed
+
+---
+
+## 執行摘要 (Executive Summary)
+
+### 最新更新 (2024-11-22)
+
+**已完成的高優先級任務**:
+1. ✅ **ESLint 配置清理**: 移除重複的 `.eslintrc.json`，統一使用 `eslint.config.js`
+2. ✅ **檔案命名修復**: 重命名 `gongguan .njk` → `gongguan.njk`，所有引用已更新
+
+**當前狀態**:
+- ✅ 所有高優先級技術債務已清理
+- ✅ 建置流程正常運作
+- ✅ 代碼品質檢查通過（ESLint 正常）
+- ⚠️ Stylelint 發現 41 個格式問題（24 個可自動修復）
+
+**下一步行動**:
+- ✅ 執行 `npm run lint:css:fix` 自動修復 CSS 格式問題（已完成 2024-11-22）
+- ⏳ 手動修復剩餘的 14-16 個 stylelint 錯誤（邏輯問題）
+- ⏳ 執行 Lighthouse 測試獲得效能基準數據
 
 ---
 
@@ -42,20 +63,23 @@ goldenyearsphoto/
 
 ### Files to Remove or Archive
 
-#### 1. Duplicate ESLint Configuration ⚠️
+#### 1. Duplicate ESLint Configuration ✅
 - **問題**: 同時存在 `.eslintrc.json` 和 `eslint.config.js`
 - **建議**: 移除 `.eslintrc.json`，統一使用 `eslint.config.js`
-- **狀態**: 待處理
+- **狀態**: ✅ **已解決** (2024-11-22)
+- **驗證**: `.eslintrc.json` 已刪除，`eslint.config.js` 為唯一配置源，ESLint 運作正常
 
-#### 2. Filename with Space ⚠️
+#### 2. Filename with Space ✅
 - **問題**: `src/booking/gongguan .njk` 檔名包含空格
 - **建議**: 重命名為 `src/booking/gongguan.njk`
-- **狀態**: 待處理
+- **狀態**: ✅ **已解決** (2024-11-22)
+- **驗證**: 檔案已重命名為 `gongguan.njk`，所有引用使用 URL 路徑 `/booking/gongguan/`，建置正常
 
 #### 3. Unused Layout Fix File ⚠️
 - **問題**: `src/assets/css/2-layout/_l-03-layout-fix.scss` 在 `main.scss` 中已被註解
 - **建議**: 如果確認不再需要，可移至 `docs/archive/` 或刪除
 - **狀態**: 待確認
+- **備註**: 根據 `main.scss` 註解，此檔案因 `position: sticky` 解決了佈局問題而不再需要
 
 ---
 
@@ -73,16 +97,17 @@ goldenyearsphoto/
 
 ### Potentially Unused Files
 
-#### 1. scroll-animations.js
+#### 1. scroll-animations.js ✅
 - **位置**: `src/assets/js/scroll-animations.js`
-- **狀態**: 需要確認是否在所有頁面使用
-- **檢查**: 在 `base-layout.njk` 中檢查引用
-- **建議**: 如果未使用，考慮移除或移至 `docs/archive/`
-
-**檢查結果**: 
-- ✅ 在 `main.scss` 中引用了 `k-scroll-animations` 組件
-- ✅ 組件樣式存在，JavaScript 功能可能在使用
-- **建議**: 保留，但需要確認實際使用情況
+- **狀態**: ✅ **正在使用** (2024-11-22)
+- **檢查結果**: 
+  - ✅ 在 `base-layout.njk` 第 145 行被加載：`<script src="/assets/js/scroll-animations.js"></script>`
+  - ✅ 對應的 CSS 組件 `_k-scroll-animations.scss` 在 `main.scss` 第 24 行被引用
+  - ✅ 提供滾動觸發動畫功能（fade-in, slide-up 等）
+  - ✅ 所有頁面都會載入此腳本
+- **建議**: **KEEP** - 繼續使用，提供重要的用戶體驗功能
+- **未來優化**: 可考慮與 `main.js` 合併以減少 HTTP 請求（低優先級）
+- **詳細報告**: 見 `docs/dependency-analysis-report.md`
 
 ---
 
@@ -238,11 +263,18 @@ goldenyearsphoto/
 
 ---
 
-#### 3. Unused SCSS File ⚠️
+#### 3. Unused SCSS File ✅
 - **問題**: `_l-03-layout-fix.scss` 在 `main.scss` 中已被註解
 - **影響**: 增加維護負擔
 - **優先級**: 低
-- **建議**: 如果確認不再需要，移至 `docs/archive/`
+- **狀態**: ✅ **已分析** (2024-11-22)
+- **分析結果**:
+  - ✅ 在 `main.scss` 第 17 行被明確註解
+  - ✅ 註解說明：V8.0 升級後不再需要（`position: sticky` 已解決佈局問題）
+  - ✅ 全局搜索無其他引用
+  - ✅ 功能已被替代方案取代
+- **建議**: **ARCHIVE/DELETE** - 可安全移至 `docs/archive/` 或刪除
+- **詳細報告**: 見 `docs/dependency-analysis-report.md`
 
 ---
 
@@ -251,6 +283,40 @@ goldenyearsphoto/
 - **影響**: 可能導致使用者體驗問題
 - **優先級**: 中
 - **建議**: 添加 try-catch 和 fallback 機制
+
+#### 5. Stylelint Code Quality Issues ⚠️
+- **問題**: 發現 stylelint 錯誤
+- **影響**: 代碼風格不一致和邏輯問題
+- **優先級**: 低
+- **狀態**: 部分修復（2024-11-22）
+- **修復結果**:
+  - ✅ 已執行 `npm run lint:css:fix` 自動修復
+  - ✅ 修復了 **25-27 個格式錯誤**（從 41 個減少到 14-16 個）
+  - ⚠️ 剩餘 **14-16 個錯誤**需要手動修復（非格式問題）
+- **剩餘錯誤分類**:
+  1. **SCSS Import 規則** (4 個): `scss/load-no-partial-leading-underscore`
+     - 位置: `main.scss` 中的 `@use` 語句
+     - 問題: stylelint 不允許 import 時使用前導底線（但這是 SCSS partial 的標準做法）
+     - 建議: 可考慮調整 stylelint 配置或忽略此規則
+  2. **重複選擇器** (3 個): `no-duplicate-selectors`
+     - 位置: `_l-01-header.scss`, `_k-card.scss`
+     - 問題: 同一個選擇器在檔案中重複定義
+     - 建議: 合併重複的選擇器規則
+  3. **重複屬性** (2 個): `declaration-block-no-duplicate-properties`
+     - 位置: `_l-01-header.scss`, `_c-components-base.scss`
+     - 問題: 同一個屬性在選擇器中重複定義
+     - 建議: 移除重複的屬性定義
+  4. **空註釋** (6 個): `scss/comment-no-empty`
+     - 位置: `_c-team-grid.scss`
+     - 問題: 存在空的註釋行
+     - 建議: 移除空註釋或添加內容
+  5. **屬性覆蓋** (1 個): `declaration-block-no-shorthand-property-overrides`
+     - 位置: `_k-gallery.scss`
+     - 問題: 使用簡寫屬性覆蓋了之前的詳細屬性
+     - 建議: 統一使用簡寫或詳細屬性
+- **建議**: 
+  - 對於 SCSS import 規則，可考慮在 `.stylelintrc.json` 中禁用 `scss/load-no-partial-leading-underscore`
+  - 其他錯誤需要手動修復以確保代碼品質
 
 ---
 
@@ -267,6 +333,12 @@ npm run build
 
 **狀態**: 流程清晰，運作正常 ✅
 
+**驗證結果** (2024-11-22):
+- ✅ ESLint 配置正常，無衝突
+- ✅ 檔案命名符合規範，無空格問題
+- ✅ Eleventy 建置驗證通過（`--dryrun` 無錯誤）
+- ✅ 所有頁面模板正常（22 個 .njk 檔案）
+
 ---
 
 ### Deployment Checklist
@@ -277,6 +349,7 @@ npm run build
 - ✅ 圖片載入正常（R2 或本地 fallback）
 - ✅ 導覽功能正常
 - ✅ 響應式設計正常
+- ✅ 高優先級技術債務已清理
 
 ---
 
@@ -345,9 +418,10 @@ npm run build
 ### Immediate Actions (This Week)
 
 1. ✅ 完成文檔建立（已完成）
-2. ⏳ 移除重複的 ESLint 配置
-3. ⏳ 重命名包含空格的檔案
+2. ✅ 移除重複的 ESLint 配置（已完成 2024-11-22）
+3. ✅ 重命名包含空格的檔案（已完成 2024-11-22）
 4. ⏳ 執行 Lighthouse 測試獲得基準數據
+5. ⏳ 修復 stylelint 格式問題（執行 `npm run lint:css:fix`）
 
 ### Short-term (This Month)
 
@@ -364,7 +438,44 @@ npm run build
 
 ---
 
+## 7.10 Project Statistics
+
+### Codebase Metrics (2024-11-22)
+
+| 類型 | 數量 | 備註 |
+|------|------|------|
+| Nunjucks 模板 | 22 個 | 包含頁面和組件 |
+| SCSS 檔案 | 24 個 | ITCSS 架構，分層組織 |
+| JavaScript 檔案 | 2 個 | main.js, scroll-animations.js |
+| 圖片檔案 | ~300+ | 已壓縮並上傳 R2 CDN |
+| 文檔檔案 | 7 個 | 完整的專案文檔 |
+
+### Code Quality Status
+
+- **ESLint**: ✅ 正常運作（僅 1 個預期的 console 警告）
+- **Stylelint**: ⚠️ 41 個格式錯誤（24 個可自動修復）
+  - 主要問題：缺少空行（declaration-empty-line-before, at-rule-empty-line-before）
+  - 建議：執行 `npm run lint:css:fix` 自動修復
+- **檔案命名**: ✅ 符合規範（無空格）
+- **配置檔案**: ✅ 單一配置源（無衝突）
+
+### Verification Results (2024-11-22)
+
+#### Task 1: ESLint Configuration
+- ✅ `.eslintrc.json` 不存在（已確認刪除）
+- ✅ `eslint.config.js` 存在且為唯一配置
+- ✅ `npm run lint:js` 執行成功
+- ✅ 無配置衝突
+
+#### Task 2: Filename Sanitization
+- ✅ `src/booking/gongguan.njk` 存在且無空格
+- ✅ 所有引用使用 URL 路徑 `/booking/gongguan/`
+- ✅ Eleventy 建置驗證通過（`--dryrun` 無錯誤）
+- ✅ 無損壞的連結
+
+---
+
 **文件維護者**: 開發團隊  
-**最後更新**: 2024-11  
-**下次審查**: 2024-12
+**最後更新**: 2024-11-22  
+**下次審查**: 2024-12-22
 

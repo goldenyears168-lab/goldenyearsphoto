@@ -41,7 +41,7 @@
     --color-neutral-950: #353242;         /* Darkest neutral (matches brand primary) */
     
     /* Surface Colors - Backgrounds for content areas */
-    --color-surface: #ffffff;              /* Primary surface (cards, modals) */
+    --color-surface: #fff;              /* Primary surface (cards, modals) */
     --color-surface-alt: var(--color-neutral-100); /* Alternative surface (hover) */
     --color-surface-2: #f1edeb;            /* Secondary surface (warm off-white) */
     --color-surface-3: var(--color-brand-primary); /* Dark surface (hero, footer) */
@@ -57,9 +57,9 @@
     /* Text Colors - Semantic text color tokens */
     --color-text: var(--color-neutral-900);        /* Primary/main text (WCAG AA) */
     --color-text-main: var(--color-text);          /* Alias for primary text */
-    --color-text-subtle: #555555;                  /* Secondary text (muted) */
+    --color-text-subtle: #555;                  /* Secondary text (muted) */
     --color-text-on-dark: #ede6e2;                 /* Text on dark surfaces */
-    --color-text-on-accent: #ffffff;               /* Text on accent (WCAG AA) */
+    --color-text-on-accent: #fff;               /* Text on accent (WCAG AA) */
     --color-text-link: var(--color-brand-accent);  /* Link color */
     --color-text-link-hover: var(--color-brand-cta); /* Link hover */
     
@@ -108,9 +108,9 @@
      * ============================================ */
     
     /* Font Families - System font stack for optimal performance */
-    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-family-base: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
     --font-family-heading: var(--font-family-base); /* Same as base for consistency */
-    --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace; /* For code if needed */
+    --font-family-mono: "SF Mono", monaco, "Cascadia Code", monospace; /* For code if needed */
     
     /* Font Sizes - Type scale for consistent typography
      * Based on 16px base (1rem = 16px) */

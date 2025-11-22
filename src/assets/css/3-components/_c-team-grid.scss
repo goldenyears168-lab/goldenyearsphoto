@@ -129,10 +129,8 @@
 // 與 5 欄網格的卡片大小一致。
 //
 .grid-container-3of5 {
-  
   // 僅在桌機斷點（與 team-grid-5 相同）才生效
   @media (min-width: 1024px) {
-    
     // 總寬度設為 60% (3/5)
     max-width: 60%;
     

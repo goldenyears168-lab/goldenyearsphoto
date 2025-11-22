@@ -57,7 +57,6 @@
   .btn--primary:hover {
     /* Darken background by ~12% for hover state */
     /* Fallback for browsers without color-mix support */
-    background-color: var(--color-brand-cta-hover);
     border-color: var(--color-brand-cta-hover);
     /* Modern browsers with color-mix support */
     background-color: color-mix(in srgb, var(--color-brand-cta) 88%, black);
@@ -240,6 +239,7 @@
   .split {
     display: grid; gap: var(--space-6);
     grid-template-columns: 1fr; align-items: center;
+
     @container (min-width: 50rem) { grid-template-columns: 1.1fr .9fr; }
     &.image-right { @container (min-width: 50rem) { grid-auto-flow: column; } }
     &-img img { width: 100%; height: auto; display: block; border-radius: var(--radius-2); }
@@ -257,6 +257,7 @@
   .btn-row {
     display: grid; gap: var(--space-3);
     grid-template-columns: 1fr; justify-items: center; margin-top: var(--space-4);
+
     @container (min-width: 34rem) { grid-template-columns: repeat(2, minmax(12rem, 1fr)); }
   }
   /* Button styles are now defined above in the main button component section */

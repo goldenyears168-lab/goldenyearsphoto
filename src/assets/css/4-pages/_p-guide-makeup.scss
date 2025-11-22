@@ -47,6 +47,7 @@
 .module.page-hero .container {
   max-width: 800px; /* 限制頁首內容最大寬度 */
 }
+
 @media (max-width: 767px) { /* 手機板加強 */
   .module.page-hero {
     padding: var(--space-10) var(--space-4); /* 手機版內距可以更小一點 */
@@ -72,7 +73,6 @@
 .service-package {
   display: grid;
   grid-template-columns: 1fr; /* Mobile: 單欄 */
-  
   border: 1px solid var(--color-border);
   background: var(--color-white);
   border-radius: var(--radius-lg);

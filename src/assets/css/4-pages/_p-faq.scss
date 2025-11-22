@@ -59,6 +59,7 @@
 
     .faq-q {
       --faq-icon: "＋"; /* 1. 優化點：定義預設圖示變數 */
+
       list-style: none; /* 2. 優化點：隱藏 Firefox 預設圖示 */
       cursor: pointer;
       font-weight: 700;
@@ -97,6 +98,7 @@
 
     /* 容器查詢：寬容器強化節奏 */
     .container { container-type: inline-size; }
+
     @container (min-width: 56rem) {
       .faq-category { padding: var(--space-8) var(--space-7); }
       .faq-q { font-size: var(--fs-3); }

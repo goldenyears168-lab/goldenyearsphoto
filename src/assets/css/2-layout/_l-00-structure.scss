@@ -31,7 +31,6 @@
 .module-dark,
 .module--dark {
   /* 純色背景（推薦） */
-  background-color: var(--color-surface-3);
   
   /* 可選：徑向漸層背景（增加深度感，但無過渡線條） */
   
@@ -41,8 +40,6 @@
     var(--color-brand-primary) 100%
   );
   background-color: var(--color-surface-3);
- 
-  
   color: var(--color-text-on-dark);
 }
 
@@ -61,14 +58,14 @@
 }
 
 /* Module Dark 內的連結顏色 */
-.module-dark a:not(.button):not(.btn),
-.module--dark a:not(.button):not(.btn) {
+.module-dark a:not(.button, .btn),
+.module--dark a:not(.button, .btn) {
   color: var(--color-brand-cta);
 }
 
 /* Module Dark 內的連結 hover 狀態 */
-.module-dark a:not(.button):not(.btn):hover,
-.module--dark a:not(.button):not(.btn):hover {
+.module-dark a:not(.button, .btn):hover,
+.module--dark a:not(.button, .btn):hover {
   color: var(--color-text-on-dark);
   opacity: 0.9;
 }

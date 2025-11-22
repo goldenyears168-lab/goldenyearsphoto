@@ -28,6 +28,7 @@
       var(--shadow-soft),                    /* Outer shadow - main depth */
       inset 0 1px 0 rgba(255, 255, 255, 0.1), /* Inner highlight - subtle top edge */
       0 0 0 1px rgba(0, 0, 0, 0.02);        /* Border shadow - subtle edge definition */
+
     overflow: hidden;
     transition: transform var(--transition-hover), box-shadow var(--transition-hover);
     /* GPU acceleration for smooth animations */
@@ -380,6 +381,7 @@
       var(--shadow-soft),                    /* Outer shadow - main depth */
       inset 0 1px 0 rgba(255, 255, 255, 0.1), /* Inner highlight - subtle top edge */
       0 0 0 1px rgba(0, 0, 0, 0.02);        /* Border shadow - subtle edge definition */
+
     overflow: hidden;
     transition: transform var(--transition-hover), box-shadow var(--transition-hover);
     /* GPU acceleration for smooth animations */
