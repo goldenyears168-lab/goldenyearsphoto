@@ -477,13 +477,24 @@
     const keyMeta = document.querySelector('meta[name="supabase-anon-key"]');
     
     if (urlMeta && keyMeta) {
+      const url = urlMeta.content.trim();
+      const key = keyMeta.content.trim();
+      
+      // 验证配置是否有效
+      if (!url || url === '{{ metadata.supabaseUrl }}' || !key || key === '{{ metadata.supabaseAnonKey }}') {
+        console.warn('Supabase configuration appears to be template variables, not actual values');
+        return null;
+      }
+      
       return {
-        url: urlMeta.content,
-        anonKey: keyMeta.content
+        url: url,
+        anonKey: key
       };
     }
     
     console.warn('Supabase configuration not found in meta tags');
+    console.warn('URL meta:', urlMeta);
+    console.warn('Key meta:', keyMeta);
     return null;
   }
 
@@ -567,11 +578,22 @@
         referrer: document.referrer || null
       };
 
-      const response = await fetch(`${config.url}/rest/v1/identity_test_results`, {
+      const apiUrl = `${config.url}/rest/v1/identity_test_results`;
+      
+      console.log('📤 Saving to Supabase:', {
+        url: apiUrl,
+        hasData: !!resultData,
+        resultType: resultData.result_type,
+        hasEmail: !!resultData.email,
+        hasName: !!resultData.name
+      });
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': config.anonKey,
+          'Authorization': `Bearer ${config.anonKey}`,
           'Prefer': 'return=minimal'
         },
         body: JSON.stringify(resultData)
@@ -579,6 +601,19 @@
 
       if (!response.ok) {
         const errorText = await response.text();
+        console.error('❌ Supabase API Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorText,
+          url: apiUrl,
+          configUrl: config.url,
+          configKeyLength: config.anonKey ? config.anonKey.length : 0,
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': config.anonKey ? '***' + config.anonKey.slice(-4) : 'missing',
+            'Authorization': config.anonKey ? 'Bearer ***' + config.anonKey.slice(-4) : 'missing'
+          }
+        });
         throw new Error(`HTTP ${response.status}: ${errorText}`);
       }
 
