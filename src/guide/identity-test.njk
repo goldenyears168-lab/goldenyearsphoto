@@ -1,0 +1,135 @@
+---
+layout: "base-layout.njk"
+title: "身份原型測驗｜好時有影"
+pageStyles: |
+  <link rel="stylesheet" href="/assets/css/4-pages/p-identity-test.css">
+seo:
+  description: "7 題找出你的專業氣質，發現你的身份原型。RIASEC 六種人格類型 身份原型測驗。"
+permalink: "/guide/identity-test/"
+---
+
+{# Access data from _data/identityTest.json #}
+{# Force using readJSON filter to ensure data loads #}
+{% set data = 'identityTest.json' | readJSON %}
+{% if not data or not data.hero %}
+  {# Fallback: Try global variable #}
+  {% if identityTest and identityTest.hero %}
+    {% set data = identityTest %}
+  {% endif %}
+{% endif %}
+
+<main class="identity-test">
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      {% if data and data.hero %}
+      <h1 class="hero-title">{{ data.hero.title }}</h1>
+      <p class="hero-subtitle">{{ data.hero.subtitle }}</p>
+      <p class="hero-description">{{ data.hero.description }}</p>
+      
+      <button id="start-btn" class="btn-primary" type="button">{{ data.hero.cta }}</button>
+      
+      <!-- Type Cards Preview -->
+      <div class="type-cards-preview">
+        {% for typeKey, typeData in data.types %}
+        <div class="type-card-mini" data-type="{{ typeKey }}">
+          <span class="type-icon">{{ typeData.icon }}</span>
+          <span class="type-name">{{ typeData.name }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div style="color: red; padding: 20px; text-align: center;">
+        <p>錯誤：無法載入測驗資料。請檢查資料檔案。</p>
+        <p>Debug: data = {{ data | tojson }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Quiz Section -->
+  <section id="quiz" class="quiz hidden">
+    <div class="container">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      
+      <!-- Question Container -->
+      <div class="question-container" id="question-container">
+        <h2 class="question-title" id="question-title"></h2>
+        <div class="options-grid" id="options-grid"></div>
+      </div>
+      
+      <!-- Navigation -->
+      <div class="quiz-nav">
+        <button id="prev-btn" class="btn-secondary" disabled>上一題</button>
+        <span class="question-counter">
+          <span id="current-question">1</span> / <span id="total-questions">7</span>
+        </span>
+        <button id="next-btn" class="btn-primary" disabled>下一題</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Result Section -->
+  <section id="result" class="result hidden">
+    <div class="container">
+      <!-- Result Card -->
+      <div class="result-card" id="result-card">
+        <div class="result-header">
+          <div class="result-icon" id="result-icon"></div>
+          <h2 class="result-title" id="result-title"></h2>
+          <p class="result-subtitle" id="result-subtitle"></p>
+        </div>
+        
+        <div class="result-content">
+          <div class="result-section stagger-item">
+            <h3>身份敘事</h3>
+            <p class="result-narrative" id="result-narrative"></p>
+          </div>
+          
+          <div class="result-section stagger-item">
+            <h3>動作建議</h3>
+            <p class="result-action" id="result-action"></p>
+          </div>
+          
+          <div class="result-section stagger-item">
+            <h3>職涯建議</h3>
+            <p class="result-career" id="result-career"></p>
+          </div>
+          
+          <div class="result-section stagger-item">
+            <h3>分數總覽與人格組合</h3>
+            <div class="score-overview" id="score-overview"></div>
+            <div class="combination-description" id="combination-description"></div>
+          </div>
+        </div>
+        
+        <!-- CTA Buttons -->
+        <div class="result-cta stagger-item">
+          <a href="/booking/" class="btn-primary">預約拍攝</a>
+          <a href="/about/" class="btn-outline">了解更多</a>
+        </div>
+      </div>
+      
+      <!-- Restart Button -->
+      <button id="restart-btn" class="btn-text">重新開始測驗</button>
+    </div>
+  </section>
+</main>
+
+<!-- Hidden JSON data for JavaScript -->
+{% if data and data.hero %}
+<script type="application/json" id="quiz-data">{{ data | tojson | safe }}</script>
+{% else %}
+<script type="application/json" id="quiz-data">null</script>
+<script>
+  console.error('❌ Quiz data not loaded in template!');
+  console.error('Has data:', {{ data != null }});
+  console.error('Has hero:', {{ data and data.hero }});
+</script>
+{% endif %}
+
+<!-- JavaScript -->
+<script src="/assets/js/identity-test.js"></script>

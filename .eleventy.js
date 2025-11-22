@@ -148,6 +148,33 @@ module.exports = function (eleventyConfig) {
     return date.toISOString();
   });
 
+  // 4.7.0 將資料轉換為 JSON 字串的 Filter
+  eleventyConfig.addNunjucksFilter("tojson", function (value) {
+    try {
+      return JSON.stringify(value);
+    } catch (error) {
+      console.error('[tojson] Error stringifying value:', error);
+      return 'null';
+    }
+  });
+
+  // 4.7.1 讀取 JSON 文件內容的 Filter（用於身份測驗）
+  // 直接從 _data 目錄讀取 JSON 文件，避免變數名訪問問題
+  eleventyConfig.addNunjucksFilter("readJSON", function (filePath) {
+    try {
+      const fullPath = path.join('src', '_data', filePath);
+      if (fs.existsSync(fullPath)) {
+        const content = fs.readFileSync(fullPath, 'utf8');
+        return JSON.parse(content);
+      }
+      console.warn(`[readJSON] File not found: ${fullPath}`);
+      return null;
+    } catch (error) {
+      console.error(`[readJSON] Error reading JSON file ${filePath}:`, error);
+      return null;
+    }
+  });
+
   // 4.9 CSS Inlining Filter: Compiles SCSS on-the-fly for inlining
   // This eliminates render-blocking resources by inlining CSS in <style> tags
   // Strategy: Map CSS paths to SCSS source files and compile directly (more reliable than reading _site/)
