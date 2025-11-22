@@ -6,11 +6,11 @@ pageStyles: |
 seo:
   description: "7 題找出你的專業氣質，發現你的身份原型。RIASEC 六種人格類型 身份原型測驗。"
 permalink: "/guide/identity-test/"
+extraHead: |
+  <!-- Supabase 配置 -->
+  <meta name="supabase-url" content="{{ metadata.supabaseUrl }}">
+  <meta name="supabase-anon-key" content="{{ metadata.supabaseAnonKey }}">
 ---
-
-<!-- Supabase 配置 -->
-<meta name="supabase-url" content="{{ metadata.supabaseUrl }}">
-<meta name="supabase-anon-key" content="{{ metadata.supabaseAnonKey }}">
 
 {# Access data from _data/identityTest.json #}
 {# Force using readJSON filter to ensure data loads #}
