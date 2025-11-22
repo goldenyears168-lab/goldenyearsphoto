@@ -470,18 +470,16 @@
   }
 
   /**
-   * Get Supabase configuration from meta tags
+   * Get Supabase configuration from window object (injected by template)
    */
   function getSupabaseConfig() {
-    const urlMeta = document.querySelector('meta[name="supabase-url"]');
-    const keyMeta = document.querySelector('meta[name="supabase-anon-key"]');
-    
-    if (urlMeta && keyMeta) {
-      const url = urlMeta.content.trim();
-      const key = keyMeta.content.trim();
+    // Check if config is available on window object (injected by Eleventy template)
+    if (window.supabaseConfig && window.supabaseConfig.url && window.supabaseConfig.anonKey) {
+      const url = window.supabaseConfig.url.trim();
+      const key = window.supabaseConfig.anonKey.trim();
       
-      // 验证配置是否有效
-      if (!url || url === '{{ metadata.supabaseUrl }}' || !key || key === '{{ metadata.supabaseAnonKey }}') {
+      // Validate that values are actual strings, not template variables
+      if (!url || url.startsWith('{{') || !key || key.startsWith('{{')) {
         console.warn('Supabase configuration appears to be template variables, not actual values');
         return null;
       }
@@ -492,9 +490,8 @@
       };
     }
     
-    console.warn('Supabase configuration not found in meta tags');
-    console.warn('URL meta:', urlMeta);
-    console.warn('Key meta:', keyMeta);
+    console.warn('Supabase configuration not found on window.supabaseConfig');
+    console.warn('Available window.supabaseConfig:', window.supabaseConfig);
     return null;
   }
 
