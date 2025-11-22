@@ -12,7 +12,11 @@
     answers: [], // 每題答案為陣列，例如 [0, 2] 表示選了第 1、3 個選項
     scores: { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 },
     data: null,
-    selectedOptions: [] // 目前題目被勾選的選項 index 陣列
+    selectedOptions: [], // 目前題目被勾選的選項 index 陣列
+    // 用户信息
+    userEmail: null,
+    userName: null,
+    userPhone: null
   };
 
   // DOM Elements (will be initialized in initQuiz)
@@ -38,7 +42,13 @@
     resultAction: null,
     resultCareer: null,
     scoreOverview: null,
-    combinationDescription: null
+    combinationDescription: null,
+    userInfoForm: null,
+    userInfoFormElement: null,
+    userNameInput: null,
+    userEmailInput: null,
+    userPhoneInput: null,
+    skipUserInfoBtn: null
   };
 
   /**
@@ -68,6 +78,12 @@
     elements.resultCareer = document.getElementById('result-career');
     elements.scoreOverview = document.getElementById('score-overview');
     elements.combinationDescription = document.getElementById('combination-description');
+    elements.userInfoForm = document.getElementById('user-info-form');
+    elements.userInfoFormElement = document.getElementById('user-info-form-element');
+    elements.userNameInput = document.getElementById('user-name');
+    elements.userEmailInput = document.getElementById('user-email');
+    elements.userPhoneInput = document.getElementById('user-phone');
+    elements.skipUserInfoBtn = document.getElementById('skip-user-info');
 
     // Load data from JSON
     try {
@@ -129,6 +145,15 @@
     if (elements.restartBtn) {
       elements.restartBtn.addEventListener('click', restartQuiz);
     }
+    
+    // User info form handlers
+    if (elements.userInfoFormElement) {
+      elements.userInfoFormElement.addEventListener('submit', handleUserInfoSubmit);
+    }
+    
+    if (elements.skipUserInfoBtn) {
+      elements.skipUserInfoBtn.addEventListener('click', handleSkipUserInfo);
+    }
   }
 
   /**
@@ -140,6 +165,14 @@
     state.answers = [];
     state.scores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
     state.selectedOptions = [];
+    state.userEmail = null;
+    state.userName = null;
+    state.userPhone = null;
+    
+    // Reset user info form if exists
+    if (elements.userInfoFormElement) {
+      elements.userInfoFormElement.reset();
+    }
 
     // Hide hero, show quiz
     hideSection(elements.hero);
@@ -441,6 +474,135 @@
   }
 
   /**
+   * Get Supabase configuration from meta tags
+   */
+  function getSupabaseConfig() {
+    const urlMeta = document.querySelector('meta[name="supabase-url"]');
+    const keyMeta = document.querySelector('meta[name="supabase-anon-key"]');
+    
+    if (urlMeta && keyMeta) {
+      return {
+        url: urlMeta.content,
+        anonKey: keyMeta.content
+      };
+    }
+    
+    console.warn('Supabase configuration not found in meta tags');
+    return null;
+  }
+
+  /**
+   * Handle user info form submission
+   */
+  function handleUserInfoSubmit(e) {
+    e.preventDefault();
+    
+    // Get form values
+    state.userName = elements.userNameInput?.value.trim() || null;
+    state.userEmail = elements.userEmailInput?.value.trim() || null;
+    state.userPhone = elements.userPhoneInput?.value.trim() || null;
+    
+    // If no data provided, just hide the form
+    if (!state.userName && !state.userEmail && !state.userPhone) {
+      hideUserInfoForm();
+      return;
+    }
+    
+    // Validate email if provided
+    if (state.userEmail && !isValidEmail(state.userEmail)) {
+      showNotification('請輸入有效的 Email 地址', 'error');
+      return;
+    }
+    
+    // Save with updated user info
+    const result = findWinnerType();
+    saveResult(result).then(() => {
+      showNotification('資訊已儲存！', 'success');
+      hideUserInfoForm();
+    }).catch(err => {
+      console.error('Failed to save user info:', err);
+      showNotification('儲存失敗，請稍後再試', 'error');
+    });
+  }
+  
+  /**
+   * Handle skip user info
+   */
+  function handleSkipUserInfo() {
+    hideUserInfoForm();
+  }
+  
+  /**
+   * Hide user info form
+   */
+  function hideUserInfoForm() {
+    if (elements.userInfoForm) {
+      elements.userInfoForm.style.display = 'none';
+    }
+  }
+  
+  /**
+   * Validate email format
+   */
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  
+  /**
+   * Save quiz result to Supabase
+   */
+  async function saveResult(result) {
+    try {
+      const config = getSupabaseConfig();
+      
+      if (!config || !config.url || !config.anonKey) {
+        console.warn('Supabase config not found, skipping save');
+        return;
+      }
+
+      const resultData = {
+        result_type: result.resultType,
+        secondary_type: result.secondaryType || null,
+        scores: state.scores,
+        answers: state.answers,
+        email: state.userEmail || null,
+        name: state.userName || null,
+        phone: state.userPhone || null,
+        user_agent: navigator.userAgent,
+        referrer: document.referrer || null
+      };
+
+      const response = await fetch(`${config.url}/rest/v1/identity_test_results`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': config.anonKey,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(resultData)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+
+      console.log('✅ Quiz result saved to Supabase successfully');
+      
+      // 触发自定义事件，可用于分析或通知
+      window.dispatchEvent(new CustomEvent('quizResultSaved', {
+        detail: resultData
+      }));
+      
+    } catch (error) {
+      console.error('❌ Error saving quiz result to Supabase:', error);
+      // 如果是在用户提交表单时出错，需要抛出错误以便显示提示
+      throw error;
+    }
+  }
+
+  /**
    * Finish quiz and show result
    */
   function finishQuiz() {
@@ -449,6 +611,12 @@
 
     // Find winner
     const result = findWinnerType();
+
+    // 先保存基本信息（不包含用户信息）
+    // 用户信息会在表单提交时再次保存更新
+    saveResult(result).catch(err => {
+      console.error('Failed to save initial result:', err);
+    });
 
     // Render result
     renderResult(result);
@@ -690,10 +858,10 @@
   /**
    * Show notification
    */
-  function showNotification(message) {
+  function showNotification(message, type = 'info') {
     // Simple notification (can be enhanced)
     const notification = document.createElement('div');
-    notification.className = 'notification';
+    notification.className = `notification notification-${type}`;
     notification.textContent = message;
     document.body.appendChild(notification);
 
@@ -704,9 +872,11 @@
     setTimeout(() => {
       notification.classList.remove('show');
       setTimeout(() => {
-        document.body.removeChild(notification);
+        if (document.body.contains(notification)) {
+          document.body.removeChild(notification);
+        }
       }, 300);
-    }, 2000);
+    }, 3000);
   }
 
   /**

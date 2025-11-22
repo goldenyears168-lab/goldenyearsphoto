@@ -8,6 +8,10 @@ seo:
 permalink: "/guide/identity-test/"
 ---
 
+<!-- Supabase 配置 -->
+<meta name="supabase-url" content="{{ metadata.supabaseUrl }}">
+<meta name="supabase-anon-key" content="{{ metadata.supabaseAnonKey }}">
+
 {# Access data from _data/identityTest.json #}
 {# Force using readJSON filter to ensure data loads #}
 {% set data = 'identityTest.json' | readJSON %}
@@ -103,6 +107,49 @@ permalink: "/guide/identity-test/"
             <h3>分數總覽與人格組合</h3>
             <div class="score-overview" id="score-overview"></div>
             <div class="combination-description" id="combination-description"></div>
+          </div>
+          
+          <!-- User Info Collection Form -->
+          <div class="result-section stagger-item user-info-form" id="user-info-form">
+            <h3>留下聯絡方式（選填）</h3>
+            <p class="form-description">填寫後我們會為您保存測驗結果，方便日後查詢</p>
+            <form id="user-info-form-element" class="user-info-form-element">
+              <div class="form-group">
+                <label for="user-name">姓名</label>
+                <input 
+                  type="text" 
+                  id="user-name" 
+                  name="name" 
+                  placeholder="您的姓名"
+                  class="form-input"
+                />
+              </div>
+              
+              <div class="form-group">
+                <label for="user-email">Email</label>
+                <input 
+                  type="email" 
+                  id="user-email" 
+                  name="email" 
+                  placeholder="your@email.com"
+                  class="form-input"
+                />
+              </div>
+              
+              <div class="form-group">
+                <label for="user-phone">電話</label>
+                <input 
+                  type="tel" 
+                  id="user-phone" 
+                  name="phone" 
+                  placeholder="09XX-XXX-XXX"
+                  class="form-input"
+                />
+              </div>
+              
+              <button type="submit" class="btn-primary form-submit">儲存資訊</button>
+              <button type="button" class="btn-text form-skip" id="skip-user-info">跳過</button>
+            </form>
           </div>
         </div>
         
