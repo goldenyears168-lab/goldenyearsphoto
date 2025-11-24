@@ -38,8 +38,13 @@
     resultTitle: null,
     resultSubtitle: null,
     resultNarrative: null,
+    resultCoreDrive: null,
+    resultBehaviors: null,
+    resultTeamRole: null,
+    resultSuitableSituations: null,
+    resultGrowthDirection: null,
+    resultBlindSpots: null,
     resultAction: null,
-    resultCareer: null,
     scoreOverview: null,
     combinationDescription: null,
     userInfoForm: null,
@@ -72,8 +77,13 @@
     elements.resultTitle = document.getElementById('result-title');
     elements.resultSubtitle = document.getElementById('result-subtitle');
     elements.resultNarrative = document.getElementById('result-narrative');
+    elements.resultCoreDrive = document.getElementById('result-core-drive');
+    elements.resultBehaviors = document.getElementById('result-behaviors');
+    elements.resultTeamRole = document.getElementById('result-team-role');
+    elements.resultSuitableSituations = document.getElementById('result-suitable-situations');
+    elements.resultGrowthDirection = document.getElementById('result-growth-direction');
+    elements.resultBlindSpots = document.getElementById('result-blind-spots');
     elements.resultAction = document.getElementById('result-action');
-    elements.resultCareer = document.getElementById('result-career');
     elements.scoreOverview = document.getElementById('score-overview');
     elements.combinationDescription = document.getElementById('combination-description');
     elements.userInfoForm = document.getElementById('user-info-form');
@@ -686,19 +696,60 @@
       elements.resultSubtitle.textContent = subtitle;
     }
 
-    // Set narrative
+    // Set narrative (核心本質)
     if (elements.resultNarrative) {
       elements.resultNarrative.textContent = primaryType.narrative;
     }
 
-    // Set action advice (動作建議)
-    if (elements.resultAction) {
-      elements.resultAction.textContent = primaryType.actionAdvice || primaryType.photoAdvice || '';
+    // Set core drive (深層心理動力)
+    if (elements.resultCoreDrive) {
+      elements.resultCoreDrive.textContent = primaryType.coreDrive || '';
     }
 
-    // Set career advice
-    if (elements.resultCareer) {
-      elements.resultCareer.textContent = primaryType.careerAdvice;
+    // Set behaviors (行為特徵)
+    if (elements.resultBehaviors && primaryType.behaviors && Array.isArray(primaryType.behaviors)) {
+      const behaviorsHTML = primaryType.behaviors.map(behavior => 
+        `<li>${behavior}</li>`
+      ).join('');
+      elements.resultBehaviors.innerHTML = `<ul>${behaviorsHTML}</ul>`;
+    }
+
+    // Set team role (團隊角色原型)
+    if (elements.resultTeamRole) {
+      let teamRoleText = primaryType.teamRole || '';
+      if (primaryType.teamRoleDescription) {
+        teamRoleText += `：${primaryType.teamRoleDescription}`;
+      }
+      elements.resultTeamRole.textContent = teamRoleText;
+    }
+
+    // Set suitable situations (最適合你的情境)
+    if (elements.resultSuitableSituations && primaryType.suitableSituations && Array.isArray(primaryType.suitableSituations)) {
+      const situationsHTML = primaryType.suitableSituations.map(situation => 
+        `<li>${situation}</li>`
+      ).join('');
+      elements.resultSuitableSituations.innerHTML = `<ul>${situationsHTML}</ul>`;
+    }
+
+    // Set growth direction (成長方向)
+    if (elements.resultGrowthDirection && primaryType.growthDirection && Array.isArray(primaryType.growthDirection)) {
+      const growthHTML = primaryType.growthDirection.map(direction => 
+        `<li>${direction}</li>`
+      ).join('');
+      elements.resultGrowthDirection.innerHTML = `<ul>${growthHTML}</ul>`;
+    }
+
+    // Set blind spots (盲點提醒)
+    if (elements.resultBlindSpots && primaryType.blindSpots && Array.isArray(primaryType.blindSpots)) {
+      const blindSpotsHTML = primaryType.blindSpots.map(spot => 
+        `<li>${spot}</li>`
+      ).join('');
+      elements.resultBlindSpots.innerHTML = `<ul>${blindSpotsHTML}</ul>`;
+    }
+
+    // Set action advice (影像姿勢建議)
+    if (elements.resultAction) {
+      elements.resultAction.textContent = primaryType.actionAdvice || '';
     }
 
     // Render score overview and combination description
@@ -791,21 +842,8 @@
 
     if (!primaryData || !secondaryData) return;
 
-    // 組合描述規則
-    const combinationMap = {
-      'I+C': '穩定型分析者，適合長期、結構化任務。你既有深度思考的能力，又能建立可靠的系統，是團隊中值得信賴的規劃者。',
-      'A+E': '有表達力的創意型，適合對外曝光與創作結合。你既能用獨特視角創作，又擅長將作品推廣出去，是兼具創意與影響力的類型。',
-      'S+E': '溫暖的影響者，擅長透過人際連結推動改變。你既能理解他人需求，又能帶領團隊前進，是理想的領導者與教練。',
-      'R+I': '實作型研究者，能將理論轉化為實際成果。你既有動手能力，又有分析思維，適合技術研發與工程創新。',
-      'A+S': '創意支持者，用美感與溫暖幫助他人。你既能創作有感的作品，又能透過人際互動傳達價值，適合教育與創作結合的領域。',
-      'E+C': '策略組織者，能建立系統並推動執行。你既有領導力，又有組織能力，適合專案管理與營運優化。',
-      'R+E': '行動領導者，能帶領團隊完成實務目標。你既有執行力，又有影響力，適合現場管理與業務拓展。',
-      'I+S': '理性支持者，用邏輯與同理心幫助他人。你既能深度分析問題，又能溫暖地陪伴成長，適合諮商與研究結合的領域。',
-      'A+C': '創意組織者，能將靈感轉化為可執行的系統。你既有美感，又有條理，適合設計管理與創意企劃。',
-      'R+S': '實作支持者，用實際行動幫助他人。你既有動手能力，又有同理心，適合技術教學與實務輔導。',
-      'I+E': '分析影響者，用深度見解推動決策。你既有研究能力，又有說服力，適合策略顧問與知識型創業。',
-      'R+C': '實作組織者，能建立可靠的實務系統。你既有執行力，又有組織力，適合製造管理與品質控制。'
-    };
+    // 從 JSON 資料中讀取組合描述規則（專業職涯諮詢＋心理敘事版）
+    const combinationMap = state.data.combinations || {};
 
     const combinationKey1 = `${primaryType}+${secondaryType}`;
     const combinationKey2 = `${secondaryType}+${primaryType}`;
