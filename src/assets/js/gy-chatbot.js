@@ -49,7 +49,7 @@
               <div class="gy-chatbot-subtitle">
                 ${
                   this.config.pageType === 'home'
-                    ? '幫你選方案、解釋流程、抓預算'
+                    ? '選方案、解釋流程'
                     : '找不到答案？可以直接問我'
                 }
               </div>
@@ -140,10 +140,23 @@
         this.els.input.value = '';
       });
 
+      // 處理中文輸入法：使用 compositionend 事件檢測輸入完成
+      let isComposing = false;
+      this.els.input.addEventListener('compositionstart', () => {
+        isComposing = true;
+      });
+      this.els.input.addEventListener('compositionend', () => {
+        isComposing = false;
+      });
+
       this.els.input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        // 如果是 Enter 鍵且不在輸入法組合狀態中，才發送
+        if (e.key === 'Enter' && !isComposing) {
           e.preventDefault();
-          this.els.send.click();
+          const text = this.els.input.value.trim();
+          if (text) {
+            this.els.send.click();
+          }
         }
         // Escape 鍵關閉聊天窗
         if (e.key === 'Escape' && this.state.isOpen) {
@@ -187,17 +200,203 @@
     },
 
     /**
+     * 將 Markdown 轉換為 HTML
+     * 支援：粗体 (**text**)、链接 ([text](url))、换行、列表
+     */
+    markdownToHTML(text) {
+      if (!text) return '';
+      
+      let html = String(text);
+      
+      // 檢查是否已經包含 HTML 標籤（如 <br/>、<br>）
+      const hasHTMLTags = /<[^>]+>/.test(html);
+      
+      // 轉義現有的 HTML 標籤（防止 XSS，但保留我們要處理的格式）
+      // 先標記我們要處理的特殊格式，避免被轉義
+      const placeholders = {
+        boldTriple: [],
+        boldDouble: [],
+        links: [],
+        existingHTML: []
+      };
+      
+      // 如果已經包含 HTML 標籤，先暫時替換它們
+      if (hasHTMLTags) {
+        html = html.replace(/<br\s*\/?>/gi, (match) => {
+          const id = `__HTML_BR_${placeholders.existingHTML.length}__`;
+          placeholders.existingHTML.push('<br>');
+          return id;
+        });
+      }
+      
+      // 暫時替換粗體標記（三顆星）
+      html = html.replace(/\*\*\*([^*]+)\*\*\*/g, (match, content) => {
+        const id = `__BOLD_TRIPLE_${placeholders.boldTriple.length}__`;
+        placeholders.boldTriple.push(content);
+        return id;
+      });
+      
+      // 暫時替換粗體標記（兩顆星）
+      html = html.replace(/\*\*([^*]+)\*\*/g, (match, content) => {
+        const id = `__BOLD_DOUBLE_${placeholders.boldDouble.length}__`;
+        placeholders.boldDouble.push(content);
+        return id;
+      });
+      
+      // 暫時替換連結
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+        const id = `__LINK_${placeholders.links.length}__`;
+        placeholders.links.push({ text: linkText, url: url.trim() });
+        return id;
+      });
+      
+      // 轉義 HTML（防止 XSS）
+      const tempDiv = document.createElement('div');
+      tempDiv.textContent = html;
+      html = tempDiv.innerHTML;
+      
+      // 恢復已存在的 HTML 標籤
+      placeholders.existingHTML.forEach((tag, index) => {
+        html = html.replace(`__HTML_BR_${index}__`, tag);
+      });
+      
+      // 恢復粗體（三顆星）
+      placeholders.boldTriple.forEach((content, index) => {
+        html = html.replace(`__BOLD_TRIPLE_${index}__`, `<strong>${content}</strong>`);
+      });
+      
+      // 恢復粗體（兩顆星）
+      placeholders.boldDouble.forEach((content, index) => {
+        html = html.replace(`__BOLD_DOUBLE_${index}__`, `<strong>${content}</strong>`);
+      });
+      
+      // 恢復連結
+      placeholders.links.forEach((link, index) => {
+        let actualUrl = link.url;
+        
+        // 處理描述性連結文字（例如："link to 方案頁面"）
+        const urlLower = actualUrl.toLowerCase();
+        
+        // 檢查是否為描述性文字
+        if (urlLower.includes('link to') || urlLower.includes('link to ')) {
+          // 移除 "link to" 前綴並提取關鍵字
+          const cleanUrl = actualUrl.replace(/^link to /i, '').trim();
+          const cleanUrlLower = cleanUrl.toLowerCase();
+          
+          if (cleanUrlLower.includes('方案') || cleanUrlLower.includes('plan') || cleanUrlLower.includes('拍攝') || cleanUrlLower.includes('價格') || cleanUrlLower.includes('price')) {
+            actualUrl = '/price-list';
+          } else if (cleanUrlLower.includes('預約') || cleanUrlLower.includes('booking')) {
+            actualUrl = '/booking/';
+          } else if (cleanUrlLower.includes('中山') || cleanUrlLower.includes('zhongshan')) {
+            actualUrl = '/booking/zhongshan';
+          } else if (cleanUrlLower.includes('公館') || cleanUrlLower.includes('gongguan')) {
+            actualUrl = '/booking/gongguan';
+          } else {
+            actualUrl = '#'; // 預設為空連結
+          }
+        }
+        // 直接包含關鍵字的情況
+        else if (urlLower.includes('方案') || urlLower.includes('plan') || urlLower.includes('拍攝方案') || urlLower.includes('價格') || urlLower.includes('price')) {
+          actualUrl = '/price-list';
+        } else if (urlLower.includes('預約') || urlLower.includes('booking')) {
+          actualUrl = '/booking/';
+        } else if (urlLower.includes('中山') || urlLower.includes('zhongshan')) {
+          actualUrl = '/booking/zhongshan';
+        } else if (urlLower.includes('公館') || urlLower.includes('gongguan')) {
+          actualUrl = '/booking/gongguan';
+        }
+        // 如果不是完整 URL 且不是相對路徑
+        else if (!actualUrl.startsWith('http://') && !actualUrl.startsWith('https://') && !actualUrl.startsWith('/') && !actualUrl.startsWith('#')) {
+          actualUrl = '#'; // 預設為空連結
+        }
+        
+        // 在同一窗口打開連結（不使用 target="_blank"）
+        html = html.replace(`__LINK_${index}__`, `<a href="${actualUrl}">${link.text}</a>`);
+      });
+      
+      // 處理換行：\n 轉換為 <br>
+      html = html.replace(/\n/g, '<br>');
+      
+      // 處理列表（按行處理）
+      const lines = html.split('<br>');
+      const processedLines = [];
+      let inOrderedList = false;
+      let inUnorderedList = false;
+      
+      lines.forEach((line, index) => {
+        const trimmedLine = line.trim();
+        
+        // 有序列表：1. text
+        if (/^\d+\.\s+/.test(trimmedLine)) {
+          const content = trimmedLine.replace(/^\d+\.\s+/, '');
+          if (!inOrderedList) {
+            processedLines.push('<ol>');
+            inOrderedList = true;
+            if (inUnorderedList) {
+              processedLines.push('</ul>');
+              inUnorderedList = false;
+            }
+          }
+          processedLines.push(`<li>${content}</li>`);
+        }
+        // 無序列表：- text 或 * text
+        else if (/^[-*]\s+/.test(trimmedLine)) {
+          const content = trimmedLine.replace(/^[-*]\s+/, '');
+          if (!inUnorderedList) {
+            processedLines.push('<ul>');
+            inUnorderedList = true;
+            if (inOrderedList) {
+              processedLines.push('</ol>');
+              inOrderedList = false;
+            }
+          }
+          processedLines.push(`<li>${content}</li>`);
+        }
+        // 普通行
+        else {
+          if (inOrderedList) {
+            processedLines.push('</ol>');
+            inOrderedList = false;
+          }
+          if (inUnorderedList) {
+            processedLines.push('</ul>');
+            inUnorderedList = false;
+          }
+          if (trimmedLine) {
+            processedLines.push(trimmedLine);
+          } else if (index < lines.length - 1) {
+            // 空行保留為 <br>
+            processedLines.push('<br>');
+          }
+        }
+      });
+      
+      // 關閉未關閉的列表
+      if (inOrderedList) {
+        processedLines.push('</ol>');
+      }
+      if (inUnorderedList) {
+        processedLines.push('</ul>');
+      }
+      
+      return processedLines.join('');
+    },
+
+    /**
      * 新增訊息到對話區
      */
     appendMessage(text, role) {
       const div = document.createElement('div');
       div.className = `gy-chatbot-message ${role}`;
-      // 支援 HTML（用於換行和簡單格式）
-      if (text.includes('<br/>') || text.includes('<br>')) {
-        div.innerHTML = text;
+      
+      // Bot 訊息：轉換 Markdown 為 HTML
+      if (role === 'bot') {
+        div.innerHTML = this.markdownToHTML(text);
       } else {
+        // 使用者訊息：純文字（防止 XSS）
         div.textContent = text;
       }
+      
       this.els.messages.appendChild(div);
       // 滾動到底部
       this.els.messages.scrollTop = this.els.messages.scrollHeight;

@@ -265,15 +265,15 @@ function getSuggestedQuickReplies(
       return ['我想拍形象照', '我想拍證件照', '我想拍全家福'];
     }
   } else if (state === 'RECOMMENDING') {
-    return ['我想了解更多', '如何預約', '聯絡真人'];
+    return ['我想了解更多', '如何預約', '拍攝流程'];
   } else if (intent === 'service_inquiry') {
     return ['想知道價格', '如何預約', '拍攝流程'];
   } else if (intent === 'price_inquiry') {
-    return ['我想了解更多', '如何預約', '聯絡真人'];
+    return ['我想了解更多', '如何預約', '拍攝流程'];
   } else if (intent === 'greeting') {
     return ['我想拍形象照', '想知道價格', '如何預約'];
   }
-  return ['我想了解更多', '如何預約', '聯絡真人'];
+  return ['我想了解更多', '如何預約', '拍攝流程'];
 }
 
 /**
@@ -524,6 +524,7 @@ export async function onRequestPost(context: {
         history,
       },
       mode,
+      knowledgeBase: kb, // 傳入知識庫實例，用於獲取價格資訊
     });
 
     const timeoutPromise = new Promise<string>((_, reject) => {

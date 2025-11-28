@@ -380,7 +380,7 @@ window.GYChatbot = (function () {
             <div class="gy-chatbot-subtitle">
               ${
                 config.pageType === "home"
-                  ? "幫你選方案、解釋流程、抓預算"
+                  ? "選方案、解釋流程"
                   : "找不到答案？可以直接問我"
               }
             </div>

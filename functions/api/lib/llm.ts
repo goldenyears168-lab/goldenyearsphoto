@@ -25,6 +25,7 @@ export interface GenerateReplyParams {
   entities: Record<string, any>;
   context: ConversationContext;
   mode: 'auto' | 'decision_recommendation' | 'faq_flow_price';
+  knowledgeBase?: any; // KnowledgeBase 实例，用于获取价格等信息
 }
 
 export class LLMService {
@@ -46,10 +47,10 @@ export class LLMService {
    * 生成回覆
    */
   async generateReply(params: GenerateReplyParams): Promise<string> {
-    const { message, intent, entities, context, mode } = params;
+    const { message, intent, entities, context, mode, knowledgeBase } = params;
 
     // 構建 System Prompt
-    const systemPrompt = this.buildSystemPrompt(mode, intent, entities, context);
+    const systemPrompt = this.buildSystemPrompt(mode, intent, entities, context, knowledgeBase);
 
     // 構建用戶訊息
     const userMessage = this.buildUserMessage(message, context);
@@ -79,10 +80,9 @@ export class LLMService {
     mode: string,
     intent: string,
     entities: Record<string, any>,
-    context: ConversationContext
+    context: ConversationContext,
+    knowledgeBase?: any
   ): string {
-    // 動態載入知識庫（需要傳入實例）
-    // 這裡簡化處理，實際使用時需要傳入 knowledgeBase 實例
     let prompt = `你是「好時有影」攝影工作室的 AI 形象顧問，負責協助客戶選擇拍攝方案、說明流程與價格。
 
 ## 品牌定位
@@ -91,10 +91,14 @@ export class LLMService {
 - 不推銷、不承諾無法達成的價格、不給不確定資訊
 
 ## 關鍵約束（必須嚴格遵守）
-1. **禁止猜測**：若知識庫沒有相關資料，禁止自己猜測或引用外部資訊，請用「目前沒有相關規則，建議你聯絡真人」這類句子。
-2. **價格必須出自 JSON**：所有價格數字皆須出自 JSON/FAQ，不得憑空估算。若找不到價格資訊，請說明「實際金額以現場與當季公告為準」，並引導至真人確認。
-3. **政策類問題強制從 FAQ 回答**：政策類問題（價格、取消、隱私、授權）必須從 FAQ/JSON 回答，禁止 LLM 獨立生成。若 FAQ 沒找到，請明講「這個問題超出目前機器人範圍，請聯絡真人」。
+1. **禁止猜測**：若知識庫沒有相關資料，禁止自己猜測或引用外部資訊。**只有在知識庫真的沒有相關資料時，才建議聯絡真人**。
+2. **價格必須出自 JSON**：所有價格數字皆須出自 JSON/FAQ，不得憑空估算。若找不到價格資訊，請說明「實際金額以現場與當季公告為準」，並提供預約連結讓客戶自行查詢。
+3. **政策類問題強制從 FAQ 回答**：政策類問題（價格、取消、隱私、授權）必須從 FAQ/JSON 回答，禁止 LLM 獨立生成。若 FAQ 沒找到，才建議聯絡真人。
 4. **投訴處理使用模板**：投訴處理（complaint intent）必須使用嚴格模板，不允許自行決定補償方案。所有補償決策都落在真人客服。
+5. **減少轉真人選項**：盡量用知識庫回答問題，不要輕易建議轉真人。只有在以下情況才建議轉真人：
+   - 知識庫真的沒有相關資料
+   - 客戶明確要求找真人
+   - 企業/團體報價等需要客製化的服務
 
 ## 當前模式
 ${this.getModeDescription(mode)}
@@ -109,13 +113,42 @@ ${this.formatEntities(entities)}
 ${this.formatContext(context)}
 `;
 
-    prompt += `\n## 回應要求
+    // 如果是價格詢問，加入價格資訊
+    if (intent === 'price_inquiry' && knowledgeBase) {
+      try {
+        const services = knowledgeBase.getAllServices();
+        if (services && services.length > 0) {
+          prompt += `\n## 價格資訊（必須使用以下資料）
+`;
+          services.forEach(service => {
+            prompt += `- ${service.name}：${service.price_range}（${service.pricing_model}）\n`;
+          });
+        }
+      } catch (error) {
+        console.error('[LLM] Failed to get services from knowledge base:', error);
+      }
+    }
+
+    // 根據意圖調整回應要求
+    if (intent === 'price_inquiry') {
+      prompt += `\n## 回應要求（價格詢問）
+- **直接回答價格資訊，不要繞彎或先問用途**
+- 使用上面提供的價格資訊回答
+- 明確說明計價方式（按張計費、低消等）
+- 若上下文已有 service_type，直接給該服務的價格
+- 若沒有明確服務類型，列出主要服務的價格範圍
+- 結尾可提供「想了解更多」或「如何預約」的選項
+`;
+    } else {
+      prompt += `\n## 回應要求
 - 回覆要溫暖、專業、真誠
 - 每次回覆不只回答問題，還要「給一個下一步選項」
 - 優先協助釐清目的（用途），再談方案與價格
 - 若資訊不足，追問關鍵 1-3 題
 - 結尾提供 CTA（預約 / 看方案 / 問下一題）
+- **不要輕易建議轉真人**，盡量用知識庫回答。只有在知識庫真的沒有資料時才建議轉真人
 `;
+    }
 
     return prompt;
   }
