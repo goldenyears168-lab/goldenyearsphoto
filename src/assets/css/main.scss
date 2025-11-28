@@ -31,6 +31,7 @@
 @use '4-pages/_p-blog-pages';     // 載入「寵物/全家福/醫師袍」的共用樣式
 @use '4-pages/_p-price-list'; // 載入「價目表」專用樣式
 @use '4-pages/_p-identity-test'; // 載入「身分測試」專用樣式
+@use '4-pages/_p-faq'; // 載入「常見問題」專用樣式
 
 
 /* * 2) @layer 宣告層級順序

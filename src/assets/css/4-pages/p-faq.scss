@@ -8,6 +8,110 @@
     background: var(--color-surface-2);
     padding-block: var(--space-9);
 
+    // Chatbot 在 FAQ 頁面的特殊樣式（內嵌模式）
+    #gy-chatbot-widget {
+      position: relative !important; // 改為 relative，讓 toggle button 可以 absolute 定位
+      bottom: auto !important;
+      right: auto !important;
+      z-index: auto !important;
+    }
+
+    // Toggle button 在 FAQ 頁面仍然固定在右下角
+    #gy-chatbot-toggle {
+      position: fixed !important; // 保持 fixed 定位
+      bottom: 24px !important;
+      right: 24px !important;
+      z-index: 9999 !important;
+    }
+
+    #gy-chatbot-window {
+      position: static !important; // 改為正常文檔流，不再是 absolute
+      bottom: auto !important;
+      right: auto !important;
+      width: 100% !important;
+      max-width: 800px !important;
+      margin: 2rem auto !important;
+      min-height: 600px !important;
+      height: auto !important;
+      max-height: none !important;
+      opacity: 1 !important; // 預設顯示
+      visibility: visible !important; // 預設顯示
+      transform: none !important; // 移除動畫變換
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+      border-radius: 16px !important;
+      display: flex !important; // 確保顯示
+    }
+
+    // Toggle button 保留，但調整位置和行為
+    // 點擊後會滾動到內嵌的 chatbot（在 JavaScript 中處理）
+
+    // FAQ chatbot 容器
+    .faq-chatbot-container {
+      margin: 2rem 0;
+    }
+
+    .faq-hero-chatbot {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      margin-block-end: 1rem;
+
+      h1 {
+        font-size: var(--fs-6);
+        line-height: var(--lh-tight);
+        color: var(--color-ink);
+        text-wrap: balance;
+        margin-block-end: var(--space-3);
+      }
+      .lead {
+        max-inline-size: 68ch;
+        margin-inline: auto;
+        color: var(--color-ink-2);
+        font-size: var(--fs-2);
+        line-height: var(--lh-normal);
+      }
+    }
+
+    .faq-fallback {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+      
+      > details {
+        summary {
+          cursor: pointer;
+          color: var(--color-ink-2);
+          font-size: var(--fs-1);
+          padding: var(--space-3) var(--space-4);
+          background: var(--color-surface);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-2);
+          list-style: none;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            background: var(--color-surface-2);
+            border-color: var(--color-accent-weak);
+          }
+          
+          &::-webkit-details-marker {
+            display: none;
+          }
+          
+          &::marker {
+            display: none;
+          }
+        }
+        
+        &[open] summary {
+          margin-block-end: var(--space-4);
+        }
+      }
+      
+      .faq-content {
+        padding: var(--space-4) 0;
+      }
+    }
+
     .faq-hero {
       text-align: center;
       margin-block-end: var(--space-8);
@@ -109,11 +213,34 @@
       .faq-q { font-size: var(--fs-3); }
     }
 
+    // 響應式設計
+    @media (max-width: 768px) {
+      #gy-chatbot-window {
+        max-width: 100%;
+        margin: 1rem 0;
+        min-height: 500px;
+        max-height: 70vh;
+      }
+      
+      .faq-hero-chatbot {
+        padding: 1.5rem 0 0.5rem;
+        
+        h1 {
+          font-size: var(--fs-5);
+        }
+        
+        .lead {
+          font-size: var(--fs-1);
+        }
+      }
+    }
+
     @media print {
       background: white;
       .faq-toc { display: none; }
       .faq-category { box-shadow: none; border-color: #000; }
       .faq-item { background: #fff; }
+      #gy-chatbot-widget { display: none; }
     }
   }
 }

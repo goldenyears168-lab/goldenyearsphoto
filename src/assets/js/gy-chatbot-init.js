@@ -20,6 +20,11 @@
     const urlParams = new URLSearchParams(window.location.search);
     const hash = window.location.hash;
     
+    // FAQ 頁面（pageType === 'qa'）預設自動開啟
+    if (pageType === 'qa') {
+      return true;
+    }
+    
     return (
       urlParams.get('chat') === 'open' || 
       urlParams.get('chatbot') === 'open' ||

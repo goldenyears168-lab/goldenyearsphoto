@@ -108,6 +108,50 @@ export interface EmotionTemplate {
   next_best_actions: string[];
 }
 
+export interface FAQQuestion {
+  id: string;
+  question: string;
+  answer: string;
+  keywords: string[];
+  critical_note?: string;
+  handling_guideline?: string;
+}
+
+export interface FAQCategory {
+  title: string;
+  phone_handling?: {
+    title: string;
+    guidelines: Array<{
+      situation: string;
+      steps?: string[];
+      response?: string;
+    }>;
+  };
+  questions: FAQQuestion[];
+  internal_operations?: {
+    title: string;
+    items: Array<{
+      id: string;
+      topic: string;
+      instructions: string;
+      link?: string;
+      sample_responses?: string[];
+    }>;
+  };
+}
+
+export interface FAQDetailed {
+  version: string;
+  last_updated: string;
+  data_source: string;
+  categories: {
+    booking?: FAQCategory;
+    delivery?: FAQCategory;
+    shooting?: FAQCategory;
+    other?: FAQCategory;
+  };
+}
+
 export class KnowledgeBase {
   private services: Service[] = [];
   private personas: Persona[] = [];
@@ -117,6 +161,7 @@ export class KnowledgeBase {
   private serviceSummaries: Record<string, ServiceSummary> = {};
   private emotionTemplates: Record<string, EmotionTemplate> = {};
   private intentNBAMapping: Record<string, string[]> = {};
+  private faqDetailed: FAQDetailed | null = null;
   private loaded = false;
 
   /**
@@ -140,6 +185,7 @@ export class KnowledgeBase {
         const serviceSummariesModule = await import('../../../knowledge/service_summaries.json');
         const emotionTemplatesModule = await import('../../../knowledge/emotion_templates.json');
         const intentNBAMappingModule = await import('../../../knowledge/intent_nba_mapping.json');
+        const faqDetailedModule = await import('../../../knowledge/faq_detailed.json');
 
         this.services = (servicesModule.default || servicesModule).services || [];
         this.personas = (personasModule.default || personasModule).personas || [];
@@ -178,6 +224,9 @@ export class KnowledgeBase {
         const intentNBAMappingData = (intentNBAMappingModule.default || intentNBAMappingModule);
         this.intentNBAMapping = intentNBAMappingData.mappings || {};
 
+        const faqDetailedData = (faqDetailedModule.default || faqDetailedModule);
+        this.faqDetailed = faqDetailedData || null;
+
         console.log('[Knowledge] Dynamic import successful');
       } catch (importError) {
         // 如果動態 import 失敗，嘗試使用 fetch（適用於生產環境）
@@ -209,12 +258,13 @@ export class KnowledgeBase {
           'knowledge/response_templates.json',
           'knowledge/service_summaries.json',
           'knowledge/emotion_templates.json',
-          'knowledge/intent_nba_mapping.json'
+          'knowledge/intent_nba_mapping.json',
+          'knowledge/faq_detailed.json'
         ];
         
         console.log('[Knowledge] Fetching knowledge files from:', fetchBaseUrl || 'relative path');
         
-        const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes] = await Promise.all([
+        const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes] = await Promise.all([
           fetch(`${fetchBaseUrl}knowledge/services.json`),
           fetch(`${fetchBaseUrl}knowledge/personas.json`),
           fetch(`${fetchBaseUrl}knowledge/policies.json`),
@@ -222,7 +272,8 @@ export class KnowledgeBase {
           fetch(`${fetchBaseUrl}knowledge/response_templates.json`),
           fetch(`${fetchBaseUrl}knowledge/service_summaries.json`),
           fetch(`${fetchBaseUrl}knowledge/emotion_templates.json`),
-          fetch(`${fetchBaseUrl}knowledge/intent_nba_mapping.json`)
+          fetch(`${fetchBaseUrl}knowledge/intent_nba_mapping.json`),
+          fetch(`${fetchBaseUrl}knowledge/faq_detailed.json`)
         ]);
 
         // 檢查響應狀態（新檔案如果載入失敗，使用空物件，不中斷流程）
@@ -239,7 +290,7 @@ export class KnowledgeBase {
           throw new Error(`Failed to fetch contact_info.json: ${contactInfoRes.status} ${contactInfoRes.statusText}`);
         }
 
-        const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData] = await Promise.all([
+        const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData] = await Promise.all([
           servicesRes.json(),
           personasRes.json(),
           policiesRes.json(),
@@ -247,7 +298,8 @@ export class KnowledgeBase {
           responseTemplatesRes.ok ? responseTemplatesRes.json() : Promise.resolve({ templates: {} }),
           serviceSummariesRes.ok ? serviceSummariesRes.json() : Promise.resolve({ summaries: {} }),
           emotionTemplatesRes.ok ? emotionTemplatesRes.json() : Promise.resolve({ templates: {} }),
-          intentNBAMappingRes.ok ? intentNBAMappingRes.json() : Promise.resolve({ mappings: {} })
+          intentNBAMappingRes.ok ? intentNBAMappingRes.json() : Promise.resolve({ mappings: {} }),
+          faqDetailedRes.ok ? faqDetailedRes.json() : Promise.resolve(null)
         ]);
 
         this.services = servicesData.services || [];
@@ -278,6 +330,7 @@ export class KnowledgeBase {
         this.serviceSummaries = serviceSummariesData.summaries || {};
         this.emotionTemplates = emotionTemplatesData.templates || {};
         this.intentNBAMapping = intentNBAMappingData.mappings || {};
+        this.faqDetailed = faqDetailedData || null;
 
         console.log('[Knowledge] Fetch successful');
       }
@@ -438,6 +491,99 @@ export class KnowledgeBase {
       throw new Error('Knowledge base not loaded. Call load() first.');
     }
     return this.intentNBAMapping[intent] || [];
+  }
+
+  /**
+   * 取得詳細FAQ資料
+   */
+  getFAQDetailed(): FAQDetailed | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.faqDetailed;
+  }
+
+  /**
+   * 根據類別取得FAQ問題
+   */
+  getFAQByCategory(category: 'booking' | 'delivery' | 'shooting' | 'other'): FAQCategory | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.faqDetailed?.categories[category] || null;
+  }
+
+  /**
+   * 根據關鍵字搜尋FAQ問題
+   */
+  searchFAQDetailed(query: string): FAQQuestion[] {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    if (!this.faqDetailed) {
+      return [];
+    }
+
+    const lowerQuery = query.toLowerCase();
+    const results: Array<{ question: FAQQuestion; score: number }> = [];
+
+    // 遍歷所有類別
+    for (const category of Object.values(this.faqDetailed.categories)) {
+      if (!category || !category.questions) continue;
+
+      for (const question of category.questions) {
+        let score = 0;
+
+        // 關鍵字匹配
+        for (const keyword of question.keywords) {
+          if (lowerQuery.includes(keyword.toLowerCase())) {
+            score += 2;
+          }
+        }
+
+        // 問題內容匹配
+        if (question.question.toLowerCase().includes(lowerQuery)) {
+          score += 3;
+        }
+
+        // 答案內容匹配
+        if (question.answer.toLowerCase().includes(lowerQuery)) {
+          score += 1;
+        }
+
+        if (score > 0) {
+          results.push({ question, score });
+        }
+      }
+    }
+
+    // 按分數排序，回傳前 5 個
+    return results
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5)
+      .map(r => r.question);
+  }
+
+  /**
+   * 根據ID取得FAQ問題
+   */
+  getFAQQuestionById(id: string): FAQQuestion | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    if (!this.faqDetailed) {
+      return null;
+    }
+
+    for (const category of Object.values(this.faqDetailed.categories)) {
+      if (!category || !category.questions) continue;
+      const question = category.questions.find(q => q.id === id);
+      if (question) {
+        return question;
+      }
+    }
+
+    return null;
   }
 }
 

@@ -88,7 +88,16 @@
           </div>
         </div>
       `;
-      document.body.appendChild(container);
+      
+      // 檢查是否在 FAQ 頁面（內嵌模式）
+      const faqContainer = document.getElementById('faq-chatbot-container');
+      if (faqContainer) {
+        // FAQ 頁面：插入到指定容器
+        faqContainer.appendChild(container);
+      } else {
+        // 其他頁面：插入到 body
+        document.body.appendChild(container);
+      }
 
       this.els.container = container;
       this.els.toggle = container.querySelector('#gy-chatbot-toggle');
@@ -123,7 +132,30 @@
      * 綁定事件
      */
     bindEvents() {
-      this.els.toggle.addEventListener('click', () => this.open());
+      this.els.toggle.addEventListener('click', () => {
+        // 檢查是否在 FAQ 頁面（內嵌模式）
+        const isFAQPage = document.querySelector('.faq-page') !== null;
+        if (isFAQPage) {
+          // 在 FAQ 頁面：滾動到 chatbot 位置
+          const chatbotWindow = document.getElementById('gy-chatbot-window');
+          if (chatbotWindow) {
+            chatbotWindow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // 確保 chatbot 是開啟狀態
+            if (!this.state.isOpen) {
+              this.open();
+            }
+            // 聚焦到輸入框
+            setTimeout(() => {
+              if (this.els.input) {
+                this.els.input.focus();
+              }
+            }, 500);
+          }
+        } else {
+          // 其他頁面：正常打開浮動視窗
+          this.open();
+        }
+      });
       this.els.close.addEventListener('click', () => this.close());
 
       this.els.quickActions.addEventListener('click', (e) => {
@@ -168,7 +200,28 @@
       this.els.toggle.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          this.open();
+          // 檢查是否在 FAQ 頁面（內嵌模式）
+          const isFAQPage = document.querySelector('.faq-page') !== null;
+          if (isFAQPage) {
+            // 在 FAQ 頁面：滾動到 chatbot 位置
+            const chatbotWindow = document.getElementById('gy-chatbot-window');
+            if (chatbotWindow) {
+              chatbotWindow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // 確保 chatbot 是開啟狀態
+              if (!this.state.isOpen) {
+                this.open();
+              }
+              // 聚焦到輸入框
+              setTimeout(() => {
+                if (this.els.input) {
+                  this.els.input.focus();
+                }
+              }, 500);
+            }
+          } else {
+            // 其他頁面：正常打開浮動視窗
+            this.open();
+          }
         }
       });
     },
@@ -184,12 +237,21 @@
       }
 
       this.state.isOpen = true;
-      this.els.window.classList.add('open');
       this.els.window.setAttribute('aria-hidden', 'false');
       this.els.toggle.setAttribute('aria-expanded', 'true');
       
-      // 強制觸發重排，確保 CSS 過渡動畫生效
-      this.els.window.offsetHeight;
+      // 檢查是否在 FAQ 頁面（內嵌模式）
+      const isFAQPage = document.querySelector('.faq-page') !== null;
+      if (!isFAQPage) {
+        // 非 FAQ 頁面：使用浮動視窗的動畫
+        this.els.window.classList.add('open');
+        // 強制觸發重排，確保 CSS 過渡動畫生效
+        this.els.window.offsetHeight;
+      } else {
+        // FAQ 頁面：內嵌模式，不需要動畫類別
+        // 但確保 window 是顯示的
+        this.els.window.style.display = 'flex';
+      }
       
       // 焦點移到輸入框
       setTimeout(() => {
