@@ -49,8 +49,8 @@ export class LLMService {
   async generateReply(params: GenerateReplyParams): Promise<string> {
     const { message, intent, entities, context, mode, knowledgeBase } = params;
 
-    // 構建 System Prompt
-    const systemPrompt = this.buildSystemPrompt(mode, intent, entities, context, knowledgeBase);
+    // 構建 System Prompt（傳入用戶訊息以便檢查情緒）
+    const systemPrompt = this.buildSystemPrompt(mode, intent, entities, context, knowledgeBase, message);
 
     // 構建用戶訊息
     const userMessage = this.buildUserMessage(message, context);
@@ -81,7 +81,8 @@ export class LLMService {
     intent: string,
     entities: Record<string, any>,
     context: ConversationContext,
-    knowledgeBase?: any
+    knowledgeBase?: any,
+    userMessage?: string
   ): string {
     let prompt = `你是「好時有影」攝影工作室的 AI 形象顧問，負責協助客戶選擇拍攝方案、說明流程與價格。
 
@@ -100,6 +101,27 @@ export class LLMService {
    - 客戶明確要求找真人
    - 企業/團體報價等需要客製化的服務
 6. **服務項目限制**：只能推薦知識庫中實際存在的服務。若客戶詢問不存在的服務（例如：寶寶寫真、抓周、孕婦寫真等），必須明確說明「我們目前沒有提供這個服務」，並引導客戶選擇現有的服務項目。
+
+## 回覆格式要求（嚴格遵守三段式結構）
+每次回覆必須採用三段式結構，讓客戶獲得「足夠資訊」而無需反覆詢問：
+
+1. **主回答（main_answer）**：
+   - 直接回答客戶問題，清楚、完整、不冗長
+   - 優先使用知識庫中的 response_template 或 service_summary
+   - 如果知識庫有對應的模板，必須使用模板中的 main_answer
+   - 語氣：溫暖、透明、不中推銷，一律使用「您」
+
+2. **補充資訊（supplementary_info）**：
+   - 只補充最關鍵、最常被追問的 1-2 點細節
+   - 使用知識庫中的 supplementary_info
+   - 不要長篇大論，保持簡潔
+
+3. **智慧預測選單（next_best_actions）**：
+   - 提供 2-4 個常見下一步選項
+   - 使用知識庫中的 intent_nba_mapping 或 response_template 中的 next_best_actions
+   - 這些選項會自動顯示為快速回覆按鈕
+
+**重要**：如果知識庫中有對應的 response_template，必須優先使用模板內容，不要自行發揮。
 
 ## 當前模式
 ${this.getModeDescription(mode)}
@@ -131,6 +153,42 @@ ${this.formatContext(context)}
       }
     }
 
+    // 加入回覆模板（如果有的話）
+    if (knowledgeBase) {
+      try {
+        const responseTemplate = knowledgeBase.getResponseTemplate(intent);
+        if (responseTemplate) {
+          prompt += `\n## 回覆模板（必須優先使用）
+**主回答**：${responseTemplate.main_answer}
+**補充資訊**：${responseTemplate.supplementary_info || '無'}
+**智慧選單**：${responseTemplate.next_best_actions.join('、')}
+
+**重要**：你必須使用上述模板的內容作為回覆基礎，可以根據客戶的具體問題稍作調整，但核心內容必須保持一致。
+`;
+        }
+      } catch (error) {
+        console.error('[LLM] Failed to get response template from knowledge base:', error);
+      }
+    }
+
+    // 檢查是否有情緒模板
+    if (knowledgeBase && userMessage) {
+      try {
+        const emotionTemplate = knowledgeBase.findEmotionTemplateByKeywords(userMessage);
+        if (emotionTemplate) {
+          prompt += `\n## 情緒場景模板（偵測到 ${emotionTemplate.emotion}）
+**溫暖安撫**：${emotionTemplate.warm_comfort}
+**協助說明**：${emotionTemplate.assistance_explanation}
+**智慧選單**：${emotionTemplate.next_best_actions.join('、')}
+
+**重要**：你必須使用上述情緒模板的內容，優先展現同理心和協助意願。
+`;
+        }
+      } catch (error) {
+        console.error('[LLM] Failed to get emotion template from knowledge base:', error);
+      }
+    }
+
     // 如果是價格詢問，加入價格資訊
     if (intent === 'price_inquiry' && knowledgeBase) {
       try {
@@ -144,6 +202,26 @@ ${this.formatContext(context)}
         }
       } catch (error) {
         console.error('[LLM] Failed to get services from knowledge base:', error);
+      }
+    }
+
+    // 如果有服務類型，加入服務摘要
+    if (entities.service_type && knowledgeBase) {
+      try {
+        const serviceSummary = knowledgeBase.getServiceSummary(entities.service_type);
+        if (serviceSummary) {
+          prompt += `\n## 服務摘要（${entities.service_type}）
+**核心用途**：${serviceSummary.core_purpose}
+**價格與計費**：${serviceSummary.price_pricing}
+**拍攝時長/挑圖**：${serviceSummary.shooting_time_selection}
+**交件速度**：${serviceSummary.delivery_speed}
+**常見加購/限制**：${serviceSummary.add_ons_limitations}
+
+**重要**：回答時可以使用上述服務摘要的資訊，讓回答更具體實用。
+`;
+        }
+      } catch (error) {
+        console.error('[LLM] Failed to get service summary from knowledge base:', error);
       }
     }
 

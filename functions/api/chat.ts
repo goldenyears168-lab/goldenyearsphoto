@@ -258,12 +258,37 @@ function extractEntities(message: string): Record<string, any> {
 
 /**
  * 取得建議的快速回覆
+ * 優先使用 intent_nba_mapping.json 的定義，如果找不到才使用 fallback 邏輯
  */
 function getSuggestedQuickReplies(
   intent: string,
   entities: Record<string, any>,
-  state?: string
+  state?: string,
+  knowledgeBase?: any
 ): string[] {
+  // 優先使用知識庫中的 intent_nba_mapping
+  if (knowledgeBase) {
+    try {
+      const nbaActions = knowledgeBase.getNextBestActions(intent);
+      if (nbaActions && nbaActions.length > 0) {
+        return nbaActions;
+      }
+    } catch (error) {
+      console.error('[Chat] Failed to get next best actions from knowledge base:', error);
+    }
+
+    // 如果 intent_nba_mapping 沒有，嘗試從 response_template 取得
+    try {
+      const responseTemplate = knowledgeBase.getResponseTemplate(intent);
+      if (responseTemplate && responseTemplate.next_best_actions && responseTemplate.next_best_actions.length > 0) {
+        return responseTemplate.next_best_actions;
+      }
+    } catch (error) {
+      console.error('[Chat] Failed to get response template from knowledge base:', error);
+    }
+  }
+
+  // Fallback 邏輯（如果知識庫沒有對應的定義）
   if (state === 'COLLECTING_INFO') {
     if (entities.service_type) {
       return ['想知道價格', '如何預約', '拍攝流程'];
@@ -487,7 +512,7 @@ export async function onRequestPost(context: {
             last_intent: intent,
             slots: mergedEntities,
           },
-          suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities),
+          suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
         };
 
         return new Response(
@@ -531,7 +556,7 @@ export async function onRequestPost(context: {
               last_intent: intent,
               slots: mergedEntities,
             },
-            suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities),
+            suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
           };
 
           return new Response(

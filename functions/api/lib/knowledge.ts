@@ -86,11 +86,37 @@ export interface ContactInfo {
   };
 }
 
+export interface ResponseTemplate {
+  main_answer: string;
+  supplementary_info: string;
+  next_best_actions: string[];
+}
+
+export interface ServiceSummary {
+  core_purpose: string;
+  price_pricing: string;
+  shooting_time_selection: string;
+  delivery_speed: string;
+  add_ons_limitations: string;
+}
+
+export interface EmotionTemplate {
+  emotion: string;
+  keywords: string[];
+  warm_comfort: string;
+  assistance_explanation: string;
+  next_best_actions: string[];
+}
+
 export class KnowledgeBase {
   private services: Service[] = [];
   private personas: Persona[] = [];
   private policies: Policy[] = [];
   private contactInfo: ContactInfo | null = null;
+  private responseTemplates: Record<string, ResponseTemplate> = {};
+  private serviceSummaries: Record<string, ServiceSummary> = {};
+  private emotionTemplates: Record<string, EmotionTemplate> = {};
+  private intentNBAMapping: Record<string, string[]> = {};
   private loaded = false;
 
   /**
@@ -110,6 +136,10 @@ export class KnowledgeBase {
         const personasModule = await import('../../../knowledge/personas.json');
         const policiesModule = await import('../../../knowledge/policies.json');
         const contactInfoModule = await import('../../../knowledge/contact_info.json');
+        const responseTemplatesModule = await import('../../../knowledge/response_templates.json');
+        const serviceSummariesModule = await import('../../../knowledge/service_summaries.json');
+        const emotionTemplatesModule = await import('../../../knowledge/emotion_templates.json');
+        const intentNBAMappingModule = await import('../../../knowledge/intent_nba_mapping.json');
 
         this.services = (servicesModule.default || servicesModule).services || [];
         this.personas = (personasModule.default || personasModule).personas || [];
@@ -134,6 +164,20 @@ export class KnowledgeBase {
             },
           },
         };
+
+        // 載入新的資料結構
+        const responseTemplatesData = (responseTemplatesModule.default || responseTemplatesModule);
+        this.responseTemplates = responseTemplatesData.templates || {};
+
+        const serviceSummariesData = (serviceSummariesModule.default || serviceSummariesModule);
+        this.serviceSummaries = serviceSummariesData.summaries || {};
+
+        const emotionTemplatesData = (emotionTemplatesModule.default || emotionTemplatesModule);
+        this.emotionTemplates = emotionTemplatesData.templates || {};
+
+        const intentNBAMappingData = (intentNBAMappingModule.default || intentNBAMappingModule);
+        this.intentNBAMapping = intentNBAMappingData.mappings || {};
+
         console.log('[Knowledge] Dynamic import successful');
       } catch (importError) {
         // 如果動態 import 失敗，嘗試使用 fetch（適用於生產環境）
@@ -161,19 +205,27 @@ export class KnowledgeBase {
           'knowledge/services.json',
           'knowledge/personas.json',
           'knowledge/policies.json',
-          'knowledge/contact_info.json'
+          'knowledge/contact_info.json',
+          'knowledge/response_templates.json',
+          'knowledge/service_summaries.json',
+          'knowledge/emotion_templates.json',
+          'knowledge/intent_nba_mapping.json'
         ];
         
         console.log('[Knowledge] Fetching knowledge files from:', fetchBaseUrl || 'relative path');
         
-        const [servicesRes, personasRes, policiesRes, contactInfoRes] = await Promise.all([
+        const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes] = await Promise.all([
           fetch(`${fetchBaseUrl}knowledge/services.json`),
           fetch(`${fetchBaseUrl}knowledge/personas.json`),
           fetch(`${fetchBaseUrl}knowledge/policies.json`),
-          fetch(`${fetchBaseUrl}knowledge/contact_info.json`)
+          fetch(`${fetchBaseUrl}knowledge/contact_info.json`),
+          fetch(`${fetchBaseUrl}knowledge/response_templates.json`),
+          fetch(`${fetchBaseUrl}knowledge/service_summaries.json`),
+          fetch(`${fetchBaseUrl}knowledge/emotion_templates.json`),
+          fetch(`${fetchBaseUrl}knowledge/intent_nba_mapping.json`)
         ]);
 
-        // 檢查響應狀態
+        // 檢查響應狀態（新檔案如果載入失敗，使用空物件，不中斷流程）
         if (!servicesRes.ok) {
           throw new Error(`Failed to fetch services.json: ${servicesRes.status} ${servicesRes.statusText}`);
         }
@@ -187,11 +239,15 @@ export class KnowledgeBase {
           throw new Error(`Failed to fetch contact_info.json: ${contactInfoRes.status} ${contactInfoRes.statusText}`);
         }
 
-        const [servicesData, personasData, policiesData, contactInfoData] = await Promise.all([
+        const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData] = await Promise.all([
           servicesRes.json(),
           personasRes.json(),
           policiesRes.json(),
-          contactInfoRes.json()
+          contactInfoRes.json(),
+          responseTemplatesRes.ok ? responseTemplatesRes.json() : Promise.resolve({ templates: {} }),
+          serviceSummariesRes.ok ? serviceSummariesRes.json() : Promise.resolve({ summaries: {} }),
+          emotionTemplatesRes.ok ? emotionTemplatesRes.json() : Promise.resolve({ templates: {} }),
+          intentNBAMappingRes.ok ? intentNBAMappingRes.json() : Promise.resolve({ mappings: {} })
         ]);
 
         this.services = servicesData.services || [];
@@ -216,6 +272,13 @@ export class KnowledgeBase {
             },
           },
         };
+
+        // 載入新的資料結構
+        this.responseTemplates = responseTemplatesData.templates || {};
+        this.serviceSummaries = serviceSummariesData.summaries || {};
+        this.emotionTemplates = emotionTemplatesData.templates || {};
+        this.intentNBAMapping = intentNBAMappingData.mappings || {};
+
         console.log('[Knowledge] Fetch successful');
       }
 
@@ -318,6 +381,63 @@ export class KnowledgeBase {
    */
   isLoaded(): boolean {
     return this.loaded;
+  }
+
+  /**
+   * 取得回覆模板
+   */
+  getResponseTemplate(intent: string): ResponseTemplate | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.responseTemplates[intent] || null;
+  }
+
+  /**
+   * 取得服務摘要
+   */
+  getServiceSummary(serviceId: string): ServiceSummary | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.serviceSummaries[serviceId] || null;
+  }
+
+  /**
+   * 取得情緒模板
+   */
+  getEmotionTemplate(emotion: string): EmotionTemplate | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.emotionTemplates[emotion] || null;
+  }
+
+  /**
+   * 根據關鍵字搜尋情緒模板
+   */
+  findEmotionTemplateByKeywords(message: string): EmotionTemplate | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    const lowerMessage = message.toLowerCase();
+    
+    for (const template of Object.values(this.emotionTemplates)) {
+      if (template.keywords.some(keyword => lowerMessage.includes(keyword.toLowerCase()))) {
+        return template;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * 取得意圖對應的 Next Best Actions
+   */
+  getNextBestActions(intent: string): string[] {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.intentNBAMapping[intent] || [];
   }
 }
 
