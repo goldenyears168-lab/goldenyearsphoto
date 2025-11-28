@@ -61,7 +61,7 @@
               ${
                 this.config.pageType === 'home'
                   ? `嗨，我是好時有影的 AI 顧問。<br/>
-                    可以幫你推薦方案、說明流程、抓一個大約的預算。<br/>
+                    可以幫你推薦方案、說明流程、解說價格。<br/>
                     你可以直接跟我說你的狀況，或先用下面的快速選項開始。`
                   : `找不到你要的答案嗎？<br/>
                     你可以直接問我流程、價格或預約相關的問題。<br/>
@@ -108,7 +108,7 @@
         return `
           <button class="gy-chatbot-quick-action" data-mode="decision_recommendation" data-template="我想請你幫我推薦適合的拍攝方案。">🧭 不知道選哪個方案</button>
           <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="請跟我說一般拍攝的流程，大概要多久？">📷 想知道拍攝流程</button>
-          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="我想大概了解不同拍攝的價位與計價方式。">💰 想知道大約預算</button>
+          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="我想大概了解不同拍攝的價位與計價方式。">💰 想知道價格</button>
         `;
       } else {
         return `
