@@ -15,7 +15,8 @@
     "lint:js": "eslint \"src/assets/js/**/*.js\"",
     "lint:js:fix": "eslint \"src/assets/js/**/*.js\" --fix",
     "lint:css": "stylelint \"src/assets/css/**/*.scss\"",
-    "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix"
+    "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix",
+    "validate-knowledge": "node scripts/validate-knowledge.mjs"
   },
   "keywords": [],
   "author": "",

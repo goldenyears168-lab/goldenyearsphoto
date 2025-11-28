@@ -1,0 +1,51 @@
+name: Knowledge Base Validation
+
+on:
+  pull_request:
+    paths:
+      - 'knowledge/**'
+      - 'scripts/validate-knowledge.mjs'
+      - 'knowledge/schema_ids.md'
+  push:
+    branches:
+      - main
+    paths:
+      - 'knowledge/**'
+      - 'scripts/validate-knowledge.mjs'
+      - 'knowledge/schema_ids.md'
+
+jobs:
+  validate:
+    name: Validate Knowledge Base
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Validate knowledge base
+        run: npm run validate-knowledge
+      
+      - name: Check JSON syntax
+        run: |
+          for file in knowledge/*.json; do
+            if [ -f "$file" ]; then
+              echo "Validating $file..."
+              node -e "JSON.parse(require('fs').readFileSync('$file', 'utf8'))" || exit 1
+            fi
+          done
+      
+      - name: Check schema IDs consistency
+        run: |
+          echo "Checking if all JSON IDs are defined in schema_ids.md..."
+          npm run validate-knowledge
+
