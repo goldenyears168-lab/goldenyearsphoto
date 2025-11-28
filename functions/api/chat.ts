@@ -32,9 +32,10 @@ async function loadKnowledgeBase() {
 }
 
 // 初始化 LLM 服務
-function initLLMService() {
+function initLLMService(env: any) {
   if (!llmService) {
-    const apiKey = (globalThis as any).GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    // 在 Cloudflare Pages Functions 中，环境变量通过 env 参数访问
+    const apiKey = env?.GEMINI_API_KEY;
     if (apiKey) {
       llmService = new LLMService(apiKey);
     }
@@ -312,7 +313,7 @@ export async function onRequestPost(context: {
     setKnowledgeBase(kb);
 
     // 初始化服務
-    const llm = initLLMService();
+    const llm = initLLMService(env);
     const cm = initContextManager();
 
     const mode = body.mode || 'auto';

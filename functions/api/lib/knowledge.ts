@@ -101,10 +101,7 @@ export class KnowledgeBase {
     try {
       // 動態載入 JSON 文件
       // 在 Cloudflare Pages Functions 中，需要確保這些文件在構建輸出中
-      const baseUrl = typeof globalThis !== 'undefined' && (globalThis as any).__CF_PAGES_BASE_URL 
-        ? (globalThis as any).__CF_PAGES_BASE_URL 
-        : '';
-
+      
       // 嘗試使用動態 import（如果支持）
       try {
         const servicesModule = await import('../../../knowledge/services.json');
@@ -139,11 +136,12 @@ export class KnowledgeBase {
         // 如果動態 import 失敗，嘗試使用 fetch（適用於生產環境）
         console.warn('Dynamic import failed, trying fetch:', importError);
         
-        // 在 Cloudflare Pages 中，可以通過相對路徑 fetch JSON
-        const servicesRes = await fetch(`${baseUrl}/knowledge/services.json`);
-        const personasRes = await fetch(`${baseUrl}/knowledge/personas.json`);
-        const policiesRes = await fetch(`${baseUrl}/knowledge/policies.json`);
-        const contactInfoRes = await fetch(`${baseUrl}/knowledge/contact_info.json`);
+        // 在 Cloudflare Pages 中，knowledge 文件在 _site/knowledge/ 目錄下
+        // 使用相對路徑 fetch，Cloudflare Pages 會自動解析到正確的位置
+        const servicesRes = await fetch('/knowledge/services.json');
+        const personasRes = await fetch('/knowledge/personas.json');
+        const policiesRes = await fetch('/knowledge/policies.json');
+        const contactInfoRes = await fetch('/knowledge/contact_info.json');
 
         const servicesData = await servicesRes.json();
         const personasData = await personasRes.json();
