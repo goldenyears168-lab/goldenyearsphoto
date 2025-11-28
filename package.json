@@ -16,7 +16,9 @@
     "lint:js:fix": "eslint \"src/assets/js/**/*.js\" --fix",
     "lint:css": "stylelint \"src/assets/css/**/*.scss\"",
     "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix",
-    "validate-knowledge": "node scripts/validate-knowledge.mjs"
+    "validate-knowledge": "node scripts/validate-knowledge.mjs",
+    "diagnose-chatbot": "node scripts/diagnose-chatbot.mjs",
+    "logs": "wrangler pages deployment tail --project-name=goldenyearsphoto"
   },
   "keywords": [],
   "author": "",
@@ -43,7 +45,8 @@
     "sitemap-stream-parser": "^1.7.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
-    "stylelint-config-standard-scss": "^13.1.0"
+    "stylelint-config-standard-scss": "^13.1.0",
+    "wrangler": "^4.51.0"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^4.0.2",

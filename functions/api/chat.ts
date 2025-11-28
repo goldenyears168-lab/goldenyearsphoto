@@ -47,6 +47,10 @@ function initLLMService(env: any) {
     console.log('[Init LLM] API Key exists:', !!apiKey);
     console.log('[Init LLM] API Key length:', apiKey?.length || 0);
     if (apiKey) {
+      // 显示 API key 的前 8 个字符用于验证（不显示完整 key）
+      const keyPreview = apiKey.length >= 8 ? `${apiKey.substring(0, 8)}...` : 'too short';
+      console.log('[Init LLM] API Key preview:', keyPreview);
+      console.log('[Init LLM] API Key starts with "AIza":', apiKey.startsWith('AIza'));
       try {
         llmService = new LLMService(apiKey);
         console.log('[Init LLM] LLM service initialized successfully');
