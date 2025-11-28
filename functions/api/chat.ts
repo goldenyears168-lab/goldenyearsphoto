@@ -139,6 +139,12 @@ function classifyIntent(
     return 'price_inquiry';
   }
 
+  // 檢查是否為地址/地點詢問
+  const locationKeywords = ['地址', '地點', '在哪裡', '在哪', '位置', '怎麼去', '交通', '捷運', '分店', '店址'];
+  if (locationKeywords.some(keyword => lowerMessage.includes(keyword))) {
+    return 'location_inquiry';
+  }
+
   // 檢查是否為預約相關
   const bookingKeywords = ['預約', '改期', '取消', '時間', '時段', '什麼時候'];
   if (bookingKeywords.some(keyword => lowerMessage.includes(keyword))) {
@@ -270,6 +276,8 @@ function getSuggestedQuickReplies(
     return ['想知道價格', '如何預約', '拍攝流程'];
   } else if (intent === 'price_inquiry') {
     return ['我想了解更多', '如何預約', '拍攝流程'];
+  } else if (intent === 'location_inquiry') {
+    return ['想知道價格', '如何預約', '拍攝流程'];
   } else if (intent === 'greeting') {
     return ['我想拍形象照', '想知道價格', '如何預約'];
   }
@@ -458,7 +466,7 @@ export async function onRequestPost(context: {
     }
 
     // 檢查 Critical FAQ
-    if (intent === 'price_inquiry' || intent === 'booking_inquiry') {
+    if (intent === 'price_inquiry' || intent === 'booking_inquiry' || intent === 'location_inquiry') {
       const faqResults = kb.searchFAQ(body.message);
       const criticalFAQ = faqResults.find(faq => faq.critical);
       if (criticalFAQ) {

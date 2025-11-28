@@ -177,13 +177,25 @@
      * 開啟聊天窗
      */
     open() {
+      // 確保元素存在
+      if (!this.els.window || !this.els.toggle) {
+        console.warn('[GYChatbot] Cannot open: elements not ready');
+        return;
+      }
+
       this.state.isOpen = true;
       this.els.window.classList.add('open');
       this.els.window.setAttribute('aria-hidden', 'false');
       this.els.toggle.setAttribute('aria-expanded', 'true');
+      
+      // 強制觸發重排，確保 CSS 過渡動畫生效
+      this.els.window.offsetHeight;
+      
       // 焦點移到輸入框
       setTimeout(() => {
-        this.els.input.focus();
+        if (this.els.input) {
+          this.els.input.focus();
+        }
       }, 100);
     },
 

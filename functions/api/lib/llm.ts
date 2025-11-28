@@ -147,24 +147,64 @@ ${this.formatContext(context)}
       }
     }
 
-    // 如果是預約詢問，加入預約連結資訊
+    // 取得聯絡資訊（地址、電話等）- 所有意圖都需要
     let bookingLink = '/booking/';
-    if (intent === 'booking_inquiry' && knowledgeBase) {
+    let contactInfo: any = null;
+    if (knowledgeBase) {
       try {
-        const contactInfo = knowledgeBase.getContactInfo();
+        contactInfo = knowledgeBase.getContactInfo();
         if (contactInfo && contactInfo.contact_channels.booking_link) {
           bookingLink = contactInfo.contact_channels.booking_link;
-          prompt += `\n## 預約連結資訊
-預約頁面連結：${bookingLink}
-`;
         }
       } catch (error) {
         console.error('[LLM] Failed to get contact info from knowledge base:', error);
       }
     }
 
+    // 如果是地址/地點詢問，加入詳細地址資訊
+    if (intent === 'location_inquiry' && contactInfo) {
+      prompt += `\n## 分店地址資訊（必須使用以下資料，嚴禁編造）
+`;
+      contactInfo.branches.forEach((branch: any) => {
+        prompt += `- ${branch.name}：
+  - 地址：${branch.address}（${branch.address_note}）
+  - 電話：${branch.phone}
+  - 營業時間：${branch.hours.weekday}（${branch.hours.note}）
+  - 停車資訊：${branch.parking.available ? branch.parking.locations.join('、') : '無停車場'}。${branch.parking.recommendation || ''}
+`;
+      });
+      prompt += `\n**重要**：必須使用上述地址資訊回答，嚴禁編造任何地址。若客戶詢問特定分店，請提供該分店的完整資訊。\n`;
+    } else if (contactInfo) {
+      // 其他意圖也加入基本聯絡資訊，防止編造
+      prompt += `\n## 聯絡資訊（僅供參考，回答地址相關問題時必須使用）
+`;
+      contactInfo.branches.forEach((branch: any) => {
+        prompt += `- ${branch.name}：${branch.address}（${branch.address_note}），電話：${branch.phone}\n`;
+      });
+      prompt += `\n**重要**：若客戶詢問地址、地點、分店等問題，必須使用上述地址資訊，嚴禁編造。\n`;
+    }
+
+    // 如果是預約詢問，加入預約連結資訊
+    if (intent === 'booking_inquiry') {
+      prompt += `\n## 預約連結資訊
+預約頁面連結：${bookingLink}
+`;
+    }
+
     // 根據意圖調整回應要求
-    if (intent === 'price_inquiry') {
+    if (intent === 'location_inquiry') {
+      prompt += `\n## 回應要求（地址/地點詢問）
+- **直接回答地址資訊，使用上面提供的分店地址資料**
+- 如果客戶沒有指定分店，可以列出所有分店資訊
+- 如果客戶指定了分店（中山或公館），只回答該分店的資訊
+- 可以補充交通資訊（捷運站、停車場等）
+- 結尾可提供「想知道價格」或「如何預約」的選項
+- **嚴禁編造地址**，只能使用上面提供的地址資訊
+- **連結文字規範**：
+  - 預約連結請使用「線上預約」：[線上預約](${bookingLink})
+  - 方案/價格連結請使用「方案與價目表」：[方案與價目表](/price-list)
+`;
+    } else if (intent === 'price_inquiry') {
       prompt += `\n## 回應要求（價格詢問）
 - **直接回答價格資訊，不要繞彎或先問用途**
 - 使用上面提供的價格資訊回答
@@ -233,6 +273,7 @@ ${this.formatContext(context)}
       service_inquiry: '服務諮詢',
       price_inquiry: '價格詢問',
       booking_inquiry: '預約相關',
+      location_inquiry: '地址/地點詢問',
       comparison: '方案比較',
       complaint: '抱怨/投訴',
       handoff_to_human: '轉真人',
