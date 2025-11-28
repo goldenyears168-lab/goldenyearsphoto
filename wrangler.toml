@@ -1,0 +1,12 @@
+# Cloudflare Pages Functions 配置
+# 此文件用於本地開發和構建配置
+
+name = "goldenyears-chatbot"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "goldenyears-chatbot-production"
+
+[env.preview]
+name = "goldenyears-chatbot-preview"
+

@@ -39,9 +39,12 @@ eleventyConfig.addPassthroughCopy("knowledge");
 
 1. 進入 "Settings" → "Builds & deployments"
 2. 設定：
-   - **Build command**: `npm run build`
+   - **Build command**: `npm install && npm run build`
    - **Build output directory**: `_site`
    - **Root directory**: `/` (專案根目錄)
+   - **Node.js version**: `18` 或更高版本
+
+**重要**：確保構建命令包含 `npm install`，這樣 Cloudflare Pages Functions 才能找到 `@google/generative-ai` 依賴。
 
 ### 4. 部署
 
