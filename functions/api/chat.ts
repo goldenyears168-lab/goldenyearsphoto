@@ -466,7 +466,8 @@ export async function onRequestPost(context: {
     }
 
     // 檢查 Critical FAQ
-    if (intent === 'price_inquiry' || intent === 'booking_inquiry' || intent === 'location_inquiry') {
+    // 注意：對於「如何預約」這類問題，不直接使用 FAQ，而是讓 LLM 處理以確保提供預約連結
+    if (intent === 'price_inquiry' || intent === 'location_inquiry') {
       const faqResults = kb.searchFAQ(body.message);
       const criticalFAQ = faqResults.find(faq => faq.critical);
       if (criticalFAQ) {
@@ -494,6 +495,52 @@ export async function onRequestPost(context: {
           { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
+    }
+
+    // 對於 booking_inquiry，只有在明確問到「改期」或「取消」時才使用 FAQ
+    // 「如何預約」這類問題必須經過 LLM 處理，確保第一句話就提供預約連結
+    if (intent === 'booking_inquiry') {
+      const lowerMessage = body.message.toLowerCase();
+      const isRescheduleCancel = lowerMessage.includes('改期') || 
+                                  lowerMessage.includes('取消') || 
+                                  lowerMessage.includes('reschedule') || 
+                                  lowerMessage.includes('cancel');
+      
+      // 只有明確問改期/取消時，才檢查 FAQ
+      if (isRescheduleCancel) {
+        const faqResults = kb.searchFAQ(body.message);
+        const criticalFAQ = faqResults.find(faq => faq.critical && 
+          (faq.id === 'policy_reschedule_cancel' || faq.keywords.some((k: string) => 
+            lowerMessage.includes(k.toLowerCase())
+          ))
+        );
+        if (criticalFAQ) {
+          const reply = criticalFAQ.answer;
+          cm.updateContext(context_obj.conversationId, {
+            last_intent: intent,
+            slots: mergedEntities,
+            userMessage: body.message,
+            assistantMessage: reply,
+          });
+
+          const response: ChatResponse = {
+            reply,
+            intent,
+            conversationId: context_obj.conversationId,
+            updatedContext: {
+              last_intent: intent,
+              slots: mergedEntities,
+            },
+            suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities),
+          };
+
+          return new Response(
+            JSON.stringify(response),
+            { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+      }
+      // 如果是「如何預約」這類問題，繼續執行到 LLM 處理，確保提供預約連結
     }
 
     // 使用 LLM 生成回覆

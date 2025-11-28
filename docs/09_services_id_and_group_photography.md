@@ -49,6 +49,8 @@ src/
     └── _p-service-group.scss      # 新：合照服務頁專屬樣式（如需要）
 ```
 
+**注意：** Eleventy 會自動處理 `src/services/` 目錄下的 `.njk` 檔案，無需額外配置。生成的 URL 路徑為 `/services/id-photo/` 和 `/services/group-photo/`。
+
 ---
 
 ## 服務頁面 1：韓式證件照服務
@@ -183,8 +185,29 @@ src/
 - 強調「不需要自己想姿勢，攝影師會引導您」
 
 **視覺：**
-- 使用 `.step-list` 組件（如果存在）
-- 或使用 `.layout-split` 展示每個步驟
+- 使用 `.step-list` 組件（已存在，參考 `src/index.njk`）
+- HTML 結構：
+```html
+<ol class="step-list">
+  <li>
+    <h3>預約拍攝</h3>
+    <p>線上預約，選擇時間和地點（中山/公館）</p>
+  </li>
+  <li>
+    <h3>現場拍攝</h3>
+    <p>專業攝影師引導，自然放鬆</p>
+  </li>
+  <li>
+    <h3>精修校稿</h3>
+    <p>專業自然精修，可校稿兩次</p>
+  </li>
+  <li>
+    <h3>一週交件</h3>
+    <p>高畫質電子檔，立即使用</p>
+  </li>
+</ol>
+```
+- 注意：必須使用 `<ol>`（有序列表），每個 `<li>` 內需包含 `<h3>` 標題和 `<p>` 描述
 
 ---
 
@@ -225,9 +248,26 @@ src/
 **內容：**
 - 客戶見證（使用現有 `.card--testimonial` 結構）
 - 作品集展示（使用 `.portfolio-wall-grid`）
-- 數據證明：「90% 客戶在拍攝後立即更新履歷表頭像」
+- 數據證明：「90% 客戶在拍攝後立即更新履歷表頭像」（需確認實際數據來源）
 
-**客戶見證範例：**
+**客戶見證實作方式：**
+- 目前採用硬編碼方式，直接在模板中寫入見證內容
+- HTML 結構：
+```html
+<div class="card card--testimonial">
+  <div class="card__body">
+    <p class="card__content">「護照快到期，想趁機換個美美大頭照。
+    原本貪圖省錢結果慘不忍睹⋯看圖應該就知道我多崩潰。
+    只好跑去學妹大推的店家。攝影師態度那是真的好，重點是很專業。
+    從引導到最後修圖的成品都自然又讚。」</p>
+  </div>
+  <div class="card__footer">
+    <p class="card__author">- 客戶真實回饋</p>
+  </div>
+</div>
+```
+
+**客戶見證範例內容：**
 ```
 「護照快到期，想趁機換個美美大頭照。
 原本貪圖省錢結果慘不忍睹⋯看圖應該就知道我多崩潰。
@@ -268,16 +308,27 @@ src/
 
 **使用的現有組件：**
 - `.module`, `.module-gray`, `.module-dark` - 區塊容器
-- `.button--primary`, `.button--secondary` - CTA 按鈕
-- `.layout-split` - 圖文並排佈局
-- `.portfolio-wall-grid` - 作品集展示
+- `.button`, `.button--primary`, `.button--secondary` - CTA 按鈕（注意：需同時使用 `button` 基礎類別）
+- `.layout-split` - 圖文並排佈局（支援 `image-left` 和 `image-right` 修飾符）
+- `.portfolio-wall-grid` - 作品集展示（網格佈局）
+- `.masonry-layout` - 作品集展示（瀑布流佈局，適合合照）
 - `.card`, `.card--testimonial` - 卡片組件
-- `.step-list` - 流程步驟組件（如果存在）
+- `.step-list` - 流程步驟組件（已存在，使用 `<ol class="step-list">`）
 
 **圖片資源：**
-- 使用現有的 `content/blog/korean-id/` 圖片
-- 使用現有的 `content/price-list/ID_Card_Example_*.jpg` 圖片
-- 使用 `r2img` filter 處理圖片路徑
+- **內容圖片**（用於頁面內容展示）：
+  - `content/blog/korean-id/korean-id.jpg` - 主圖
+  - `content/blog/korean-id/portfolio-wall/korean-id-*.jpg` - 作品集牆（8 張）
+- **價格展示圖片**（用於價格區塊）：
+  - `content/price-list/ID_Card_Example_1.jpg` - 正式證件/大頭照
+  - `content/price-list/ID_Card_Example_2.jpg` - 履歷證件/大頭照
+  - `content/price-list/ID_Card_Example_3.jpg` - 畢業證件
+  - `content/price-list/ID_Card_Example_4.jpg` - 畢業紀念
+- **作品集圖片**（用於首頁作品集，可選）：
+  - `portfolio/korean-id/korean-id-*.jpg` - 首頁作品集縮圖
+- **圖片使用方式：**
+  - 使用 `r2img` filter：`{{ 'content/blog/korean-id/korean-id.jpg' | r2img }}`
+  - 路徑說明：`r2img` filter 會自動處理路徑，無需包含 `/assets/images/` 前綴
 
 **內容深度：**
 - 至少 2000-2500 字，確保 SEO 價值
@@ -433,8 +484,29 @@ src/
 - 特別說明：「小孩也能自在，爸媽也能放鬆」
 
 **視覺：**
-- 使用 `.step-list` 組件（如果存在）
-- 或使用 `.layout-split` 展示每個步驟
+- 使用 `.step-list` 組件（已存在，參考 `src/index.njk`）
+- HTML 結構：
+```html
+<ol class="step-list">
+  <li>
+    <h3>預約拍攝</h3>
+    <p>線上預約，選擇時間和地點（中山/公館）</p>
+  </li>
+  <li>
+    <h3>現場拍攝</h3>
+    <p>專業攝影師引導，自然互動</p>
+  </li>
+  <li>
+    <h3>精修校稿</h3>
+    <p>專業自然精修，可校稿兩次</p>
+  </li>
+  <li>
+    <h3>一週交件</h3>
+    <p>高畫質電子檔，立即分享</p>
+  </li>
+</ol>
+```
+- 注意：必須使用 `<ol>`（有序列表），每個 `<li>` 內需包含 `<h3>` 標題和 `<p>` 描述
 
 ---
 
@@ -475,9 +547,25 @@ src/
 **內容：**
 - 客戶見證（使用現有 `.card--testimonial` 結構）
 - 作品集展示（使用 `.masonry-layout`）
-- 數據證明：「95% 客戶在拍攝後立即分享到社群媒體」
+- 數據證明：「95% 客戶在拍攝後立即分享到社群媒體」（需確認實際數據來源）
 
-**客戶見證範例：**
+**客戶見證實作方式：**
+- 目前採用硬編碼方式，直接在模板中寫入見證內容
+- HTML 結構：
+```html
+<div class="card card--testimonial">
+  <div class="card__body">
+    <p class="card__content">「拍一組全家福，是讓大家在同一刻慢下來，只專注在彼此身上。
+    在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆。
+    而你們的互動會自然浮現——牽手、相視、擁抱、一起大笑。」</p>
+  </div>
+  <div class="card__footer">
+    <p class="card__author">- 客戶真實回饋</p>
+  </div>
+</div>
+```
+
+**客戶見證範例內容：**
 ```
 「拍一組全家福，是讓大家在同一刻慢下來，只專注在彼此身上。
 在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆。
@@ -517,18 +605,29 @@ src/
 
 **使用的現有組件：**
 - `.module`, `.module-gray`, `.module-dark` - 區塊容器
-- `.button--primary`, `.button--secondary` - CTA 按鈕
-- `.layout-split` - 圖文並排佈局
-- `.masonry-layout` - 作品集展示（適合合照）
-- `.portfolio-wall-grid` - 作品集展示（備選）
+- `.button`, `.button--primary`, `.button--secondary` - CTA 按鈕（注意：需同時使用 `button` 基礎類別）
+- `.layout-split` - 圖文並排佈局（支援 `image-left` 和 `image-right` 修飾符）
+- `.masonry-layout` - 作品集展示（瀑布流佈局，適合合照）
+- `.portfolio-wall-grid` - 作品集展示（網格佈局，備選）
 - `.card`, `.card--testimonial` - 卡片組件
-- `.step-list` - 流程步驟組件（如果存在）
+- `.step-list` - 流程步驟組件（已存在，使用 `<ol class="step-list">`）
 
 **圖片資源：**
-- 使用現有的 `content/blog/couples/` 圖片
-- 使用現有的 `content/blog/family/` 圖片
-- 使用現有的 `content/price-list/Group_Example_*.jpg` 圖片
-- 使用 `r2img` filter 處理圖片路徑
+- **內容圖片**（用於頁面內容展示）：
+  - `content/blog/couples/couples_Main.jpg` - 情侶寫真主圖
+  - `content/blog/couples/portfolio-wall/couples-*.jpg` - 情侶寫真作品集（49 張）
+  - `content/blog/family/family-*.jpg` - 全家福圖片（4 張）
+- **價格展示圖片**（用於價格區塊）：
+  - `content/price-list/Group_Example_1.jpg` - 情侶寫真
+  - `content/price-list/Group_Example_2.jpg` - 畢業紀念
+  - `content/price-list/Group_Example_3.jpg` - 親子寫真
+  - `content/price-list/Group_Example_4.jpg` - 寵物合照
+- **作品集圖片**（用於首頁作品集，可選）：
+  - `portfolio/couple/couple-*.jpg` - 情侶寫真作品集
+  - `portfolio/family/family-*.jpg` - 全家福作品集
+- **圖片使用方式：**
+  - 使用 `r2img` filter：`{{ 'content/blog/couples/couples_Main.jpg' | r2img }}`
+  - 路徑說明：`r2img` filter 會自動處理路徑，無需包含 `/assets/images/` 前綴
 
 **內容深度：**
 - 至少 2000-2500 字，確保 SEO 價值
@@ -541,12 +640,20 @@ src/
 
 ### SEO 最佳實踐
 
-- 每個頁面都有唯一的 title 和 description
-- H1 只出現一次，使用語義化的 H2-H4 結構
-- 圖片 alt 文字描述具體且包含關鍵字
-- 內部連結使用描述性的錨點文字
-- 確保所有頁面都有 canonical URL
-- 內容深度：至少 2000-2500 字
+- **頁面 Meta 資訊：**
+  - 每個頁面都有唯一的 `title` 和 `seo.description`（在 front matter 中設定）
+  - 使用 `seo.keywords` 加入相關關鍵字（可選）
+- **內容結構：**
+  - H1 只出現一次，使用語義化的 H2-H4 結構
+  - 內容深度：至少 2000-2500 字，確保 SEO 價值
+- **圖片優化：**
+  - 圖片 alt 文字描述具體且包含關鍵字
+  - 範例：`台北韓式證件照-求職履歷照-好時有影作品`（而非 `證件照範例 1`）
+- **內部連結：**
+  - 使用描述性的錨點文字（如「了解專業形象照服務」而非「點這裡」）
+- **Canonical URL：**
+  - 已在 `base-layout.njk` 中自動實作：`<link rel="canonical" href="{{ metadata.url }}{{ page.url }}">`
+  - 無需額外設定，系統會自動生成
 
 ### CX 最佳實踐
 
@@ -558,11 +665,23 @@ src/
 
 ### 設計系統一致性
 
-- 遵循現有的 ITCSS 結構
-- 使用設計系統的 tokens（顏色、間距、字體等）
-- 保持「Warm × Enterprise」的視覺風格
-- 確保 CTA 按鈕有足夠的視覺重量
-- 優化閱讀體驗（行高、段落間距、最大寬度）
+- **CSS 架構：**
+  - 遵循現有的 ITCSS 結構（1-core, 2-layout, 3-components, 4-pages）
+  - 頁面專屬樣式放在 `src/assets/css/4-pages/` 目錄
+  - 如需建立專屬樣式，檔案命名：`_p-service-id.scss` 和 `_p-service-group.scss`
+- **樣式導入方式：**
+  - 在頁面 front matter 中使用 `pageStyles`：
+  ```yaml
+  pageStyles: |
+    <link rel="stylesheet" href="/assets/css/4-pages/p-service-id.css">
+  ```
+  - 注意：SCSS 檔案名以 `_` 開頭（如 `_p-service-id.scss`），編譯後的 CSS 檔案名不含 `_`（如 `p-service-id.css`）
+- **設計 Tokens：**
+  - 使用設計系統的 tokens（顏色、間距、字體等），定義在 `1-core/_c-00-tokens.scss`
+- **視覺風格：**
+  - 保持「Warm × Enterprise」的視覺風格
+  - 確保 CTA 按鈕有足夠的視覺重量
+  - 優化閱讀體驗（行高、段落間距、最大寬度約 900px）
 
 ---
 
@@ -571,8 +690,11 @@ src/
 ### 從其他頁面連結到服務頁
 
 **1. 導覽列「服務」下拉選單**
-- 韓式證件照 → `/services/id-photo/`
-- 合照服務 → `/services/group-photo/`
+- 韓式證件照 → `/services/id-photo/`（新頁面，SEO 著陸頁）
+- 合照服務 → `/services/group-photo/`（新頁面，SEO 著陸頁）
+- **注意：** 與 `/blog/korean-id/` 和 `/blog/couples/` 的區別：
+  - `/services/` 目錄：服務介紹頁（SEO 優化、轉化導向、AIDA 框架）
+  - `/blog/` 目錄：內容頁（故事、案例、指南、情感連結）
 
 **2. 首頁推薦區塊**
 - 在作品集區塊之後，加入服務推薦區塊
@@ -585,6 +707,10 @@ src/
 **4. 價目表頁面**
 - 在價格卡片下方加入「了解更多」連結
 - 連結到對應的服務頁面
+- **重要：** 需要在 `src/price-list.njk` 中為價格區塊添加 `id` 屬性：
+  - 韓式證件照區塊：`<div class="card card--service" id="id-photo">`
+  - 合照區塊：`<div class="c-card c-card--price" id="group-photo">`
+  - 這樣錨點連結（如 `/price-list/#id-photo`）才能正確跳轉
 
 **5. 相關文章內部連結**
 - 在 `src/blog/korean-id.njk` 加入「延伸閱讀」
@@ -597,7 +723,8 @@ src/
 - 主 CTA 連結到 `/booking/`
 
 **2. 價目表頁面**
-- 次 CTA 連結到 `/price-list/`
+- 次 CTA 連結到 `/price-list/` 或 `/price-list/#id-photo`（證件照頁面）
+- 次 CTA 連結到 `/price-list/` 或 `/price-list/#group-photo`（合照頁面）
 
 **3. 作品集**
 - 連結到首頁 portfolio 區塊
@@ -624,6 +751,11 @@ src/
 7. ✅ 建立頁面專屬樣式（如需要）
 8. ✅ 優化響應式設計
 
+### Phase 4: 價目表錨點設定（中優先級）
+9. ✅ 在 `src/price-list.njk` 中為價格區塊添加 `id` 屬性
+   - 韓式證件照區塊：`id="id-photo"`
+   - 合照區塊：`id="group-photo"`
+
 ---
 
 ## 成功指標（KPI）
@@ -645,6 +777,43 @@ src/
 
 ---
 
+---
+
+## 技術實作檢查清單
+
+### 前置準備
+- [ ] 確認 `src/services/` 目錄存在（如不存在需建立）
+- [ ] 確認所有圖片資源路徑正確（`content/blog/`, `content/price-list/`, `portfolio/`）
+- [ ] 確認客戶見證內容已準備（文字內容）
+
+### 頁面實作
+- [ ] 建立 `src/services/id-photo.njk`（韓式證件照服務頁）
+- [ ] 建立 `src/services/group-photo.njk`（合照服務頁）
+- [ ] 確認 front matter 設定正確（title, seo, pageStyles）
+- [ ] 確認所有按鈕使用正確類別（`button button--primary`）
+
+### 組件使用
+- [ ] 確認 `.step-list` 使用正確 HTML 結構（`<ol>` + `<h3>` + `<p>`）
+- [ ] 確認 `.card--testimonial` 結構正確
+- [ ] 確認圖片使用 `r2img` filter
+
+### 連結設定
+- [ ] 在 `src/price-list.njk` 中添加錨點 ID（`id="id-photo"`, `id="group-photo"`）
+- [ ] 更新導覽列「服務」選單（`src/_includes/partials/navigation.njk`）
+- [ ] 在相關 blog 頁面加入「延伸閱讀」區塊
+
+### SEO 優化
+- [ ] 確認每個頁面都有唯一的 title 和 description
+- [ ] 確認圖片 alt 文字包含關鍵字
+- [ ] 確認 canonical URL 自動生成（已在 base-layout.njk 中實作）
+
+### 樣式（可選）
+- [ ] 如需要，建立 `_p-service-id.scss` 和 `_p-service-group.scss`
+- [ ] 確認頁面專屬樣式正確導入（使用 `pageStyles` front matter）
+
+---
+
 **最後更新：** 2025-01  
-**計劃狀態：** Planning → Ready for Implementation
+**計劃狀態：** Planning → Ready for Implementation  
+**技術審查：** ✅ 已完成
 

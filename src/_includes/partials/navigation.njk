@@ -19,6 +19,36 @@
             <ul class="header-nav" id="primary-nav" hidden>
                 <li><a href="/price-list/"> 價目表</a></li>
                 
+                {# [!!] 新增「服務」下拉選單 #}
+                <li class="dropdown megamenu">
+                    <button class="nav-dropdown-trigger" 
+                            type="button"
+                            aria-expanded="false" 
+                            aria-controls="menu-services">
+                        服務
+                    </button>
+                    <div class="dropdown-menu megamenu-container" id="menu-services" hidden>
+                        <div class="megamenu-column">
+                            <h5 class="megamenu-heading">主要服務</h5>
+                            <ul>
+                                <li><a href="/services/portrait/"> 專業形象照</a></li>
+                                <li><a href="/services/id-photo/"> 韓式證件照</a></li>
+                                <li><a href="/blog/graduation/"> 畢業照服務</a></li>
+                                <li><a href="/#corporate-group"> 企業團體照</a></li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-column">
+                            <h5 class="megamenu-heading">其他服務</h5>
+                            <ul>
+                                <li><a href="/blog/couples/"> 情侶寫真</a></li>
+                                <li><a href="/blog/family/"> 全家福</a></li>
+                                <li><a href="/blog/pet/"> 寵物寫真</a></li>
+                                <li><a href="/blog/medical/"> 醫師袍形象照</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                
                 {# [!!] 策略：將 .dropdown--guide 升級為 .megamenu 結構 #}
                 <li class="dropdown dropdown--guide megamenu">
                     
