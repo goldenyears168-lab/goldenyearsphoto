@@ -38,9 +38,8 @@ export class LLMService {
     }
     this.apiKey = apiKey;
     this.genAI = new GoogleGenerativeAI(apiKey);
-    // 根据错误信息，v1beta API 不支持 gemini-1.5-flash
-    // 使用 gemini-pro 作为替代（更稳定且广泛支持）
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // 使用 gemini-2.0-flash（已验证可用，性能更好）
+    this.model = this.genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
   }
 
   /**
