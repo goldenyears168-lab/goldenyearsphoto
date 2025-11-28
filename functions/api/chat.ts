@@ -135,8 +135,17 @@ function classifyIntent(
 
   // 檢查是否為價格詢問
   const priceKeywords = ['多少錢', '價格', '費用', '預算', '價位', '收費', '要多少'];
-  if (priceKeywords.some(keyword => lowerMessage.includes(keyword))) {
+  // 排除政策類問題（例如「AI 客服可以跟我說到多細的價格資訊」）
+  const policyPriceKeywords = ['可以跟我說到', '說到多細', '哪些一定要', '再問真人', '報價範圍'];
+  if (priceKeywords.some(keyword => lowerMessage.includes(keyword)) && 
+      !policyPriceKeywords.some(keyword => lowerMessage.includes(keyword))) {
     return 'price_inquiry';
+  }
+
+  // 檢查是否為交件時間詢問
+  const deliveryKeywords = ['多久會好', '多久收到', '交件時間', '交件', '何時交件', '什麼時候好', '幾天', '交件速度'];
+  if (deliveryKeywords.some(keyword => lowerMessage.includes(keyword))) {
+    return 'delivery_inquiry';
   }
 
   // 檢查是否為地址/地點詢問
@@ -430,6 +439,7 @@ export async function onRequestPost(context: {
           last_intent: intent,
           slots: mergedEntities,
         },
+        suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
       };
 
       return new Response(
@@ -456,6 +466,7 @@ export async function onRequestPost(context: {
           last_intent: intent,
           slots: mergedEntities,
         },
+        suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
       };
 
       return new Response(
@@ -482,6 +493,7 @@ export async function onRequestPost(context: {
           last_intent: intent,
           slots: mergedEntities,
         },
+        suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
       };
 
       return new Response(
@@ -492,7 +504,8 @@ export async function onRequestPost(context: {
 
     // 檢查 Critical FAQ
     // 注意：對於「如何預約」這類問題，不直接使用 FAQ，而是讓 LLM 處理以確保提供預約連結
-    if (intent === 'price_inquiry' || intent === 'location_inquiry') {
+    // 對於「價格詢問」，只有明確問政策時才用 FAQ，一般「多少錢」直接回答價格
+    if (intent === 'location_inquiry') {
       const faqResults = kb.searchFAQ(body.message);
       const criticalFAQ = faqResults.find(faq => faq.critical);
       if (criticalFAQ) {
@@ -520,6 +533,47 @@ export async function onRequestPost(context: {
           { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
+    }
+
+    // 對於價格詢問，只有明確問「AI 可以說到多細」這類政策問題才用 FAQ
+    if (intent === 'price_inquiry') {
+      const lowerMessage = body.message.toLowerCase();
+      const isPolicyQuestion = lowerMessage.includes('可以跟我說到') || 
+                               lowerMessage.includes('說到多細') || 
+                               lowerMessage.includes('哪些一定要') ||
+                               lowerMessage.includes('再問真人') ||
+                               lowerMessage.includes('報價範圍');
+      
+      if (isPolicyQuestion) {
+        const faqResults = kb.searchFAQ(body.message);
+        const criticalFAQ = faqResults.find(faq => faq.critical && faq.id === 'policy_price_scope');
+        if (criticalFAQ) {
+          const reply = criticalFAQ.answer;
+          cm.updateContext(context_obj.conversationId, {
+            last_intent: intent,
+            slots: mergedEntities,
+            userMessage: body.message,
+            assistantMessage: reply,
+          });
+
+          const response: ChatResponse = {
+            reply,
+            intent,
+            conversationId: context_obj.conversationId,
+            updatedContext: {
+              last_intent: intent,
+              slots: mergedEntities,
+            },
+            suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
+          };
+
+          return new Response(
+            JSON.stringify(response),
+            { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+      }
+      // 一般價格詢問（「多少錢」）直接交給 LLM 處理，使用 response_template
     }
 
     // 對於 booking_inquiry，只有在明確問到「改期」或「取消」時才使用 FAQ
@@ -638,7 +692,7 @@ export async function onRequestPost(context: {
         last_intent: intent,
         slots: mergedEntities,
       },
-      suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities),
+      suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
     };
 
     const responseTime = Date.now() - startTime;

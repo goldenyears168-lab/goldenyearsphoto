@@ -374,6 +374,7 @@ ${this.formatContext(context)}
       price_inquiry: '價格詢問',
       booking_inquiry: '預約相關',
       location_inquiry: '地址/地點詢問',
+      delivery_inquiry: '交件時間詢問',
       comparison: '方案比較',
       complaint: '抱怨/投訴',
       handoff_to_human: '轉真人',
