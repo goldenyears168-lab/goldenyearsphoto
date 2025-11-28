@@ -36,6 +36,8 @@
   {# Page-specific extra head content (e.g., meta tags) #}
   {% if extraHead %}{{ extraHead | safe }}{% endif %}
 
+  {# AI 客服 Widget - 在 body 結束前加載，見下方 #}
+
   {# Lighthouse 用的隱藏 heading 樣式 #}
   <style>
     .visually-hidden {
@@ -146,6 +148,12 @@
     <script src="/assets/js/main.js"></script>
     {# Scroll-triggered animations module #}
     <script src="/assets/js/scroll-animations.js"></script>
+    
+    {# AI 客服 Widget #}
+    {# 使用 data attribute 傳遞 pageType，避免內聯腳本觸發 CSP 警告 #}
+    <div data-chatbot-config data-page-type="{{ pageType | default('home') }}" style="display: none;" aria-hidden="true"></div>
+    <script src="/assets/js/gy-chatbot.js" defer></script>
+    <script src="/assets/js/gy-chatbot-init.js" defer></script>
     
 </body>
 </html>

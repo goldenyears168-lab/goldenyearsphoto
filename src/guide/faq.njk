@@ -1,29 +1,14 @@
 ---
 layout: "base-layout.njk"
 title: "常見問題（FAQ）｜好時有影"
+pageType: "qa"
+pageStyles: |
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/4-pages/p-faq.css">
 seo:
   description: "預約、拍攝、修圖、取件等常見問題一次看懂。"
 permalink: "/guide/faq/"
 ---
-
-{% block head %}
-  <link rel="stylesheet" href="/assets/css/4-pages/p-faq.css">
-  
-  {# 建議：sr-only 應放在全域 CSS，若無，可在此暫時加入 #}
-  <style>
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-  </style>
-{% endblock %}
 
 <section class="faq-page">
   <div class="container container-md">

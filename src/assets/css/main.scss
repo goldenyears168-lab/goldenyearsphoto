@@ -24,7 +24,8 @@
 @use '3-components/k-scroll-animations';
 @use '3-components/k-process-steps';
 @use '3-components/c-team-grid';
-@use '3-components/k-masonry'; 
+@use '3-components/k-masonry';
+@use '3-components/c-gy-chatbot'; 
 @use '4-pages/_p-graduation';     // 載入「畢業照」的獨特樣式
 @use '4-pages/_p-guide-makeup'; // 載入「妝髮服務」的獨特樣式
 @use '4-pages/_p-blog-pages';     // 載入「寵物/全家福/醫師袍」的共用樣式
