@@ -96,14 +96,16 @@ export class KnowledgeBase {
   /**
    * 載入所有知識庫資料
    * 使用動態 import 載入 JSON 文件
+   * @param baseUrl 可選的基礎 URL，用於構建完整的文件路徑
    */
-  async load(): Promise<void> {
+  async load(baseUrl?: string): Promise<void> {
     try {
       // 動態載入 JSON 文件
       // 在 Cloudflare Pages Functions 中，需要確保這些文件在構建輸出中
       
       // 嘗試使用動態 import（如果支持）
       try {
+        console.log('[Knowledge] Attempting dynamic import...');
         const servicesModule = await import('../../../knowledge/services.json');
         const personasModule = await import('../../../knowledge/personas.json');
         const policiesModule = await import('../../../knowledge/policies.json');
@@ -132,21 +134,65 @@ export class KnowledgeBase {
             },
           },
         };
+        console.log('[Knowledge] Dynamic import successful');
       } catch (importError) {
         // 如果動態 import 失敗，嘗試使用 fetch（適用於生產環境）
-        console.warn('Dynamic import failed, trying fetch:', importError);
+        console.warn('[Knowledge] Dynamic import failed, trying fetch:', importError);
         
-        // 在 Cloudflare Pages 中，knowledge 文件在 _site/knowledge/ 目錄下
-        // 使用相對路徑 fetch，Cloudflare Pages 會自動解析到正確的位置
-        const servicesRes = await fetch('/knowledge/services.json');
-        const personasRes = await fetch('/knowledge/personas.json');
-        const policiesRes = await fetch('/knowledge/policies.json');
-        const contactInfoRes = await fetch('/knowledge/contact_info.json');
+        // 構建基礎 URL
+        // 如果提供了 baseUrl，使用它；否則嘗試從環境變數或使用默認路徑
+        let fetchBaseUrl = baseUrl;
+        if (!fetchBaseUrl) {
+          // 嘗試從環境變數獲取
+          if (typeof globalThis !== 'undefined' && (globalThis as any).CF_PAGES_URL) {
+            fetchBaseUrl = (globalThis as any).CF_PAGES_URL;
+          } else {
+            // 使用相對路徑（在 Cloudflare Pages 中應該能工作）
+            fetchBaseUrl = '';
+          }
+        }
+        
+        // 確保 baseUrl 以 / 結尾（如果有的話）
+        if (fetchBaseUrl && !fetchBaseUrl.endsWith('/')) {
+          fetchBaseUrl += '/';
+        }
+        
+        const knowledgePaths = [
+          'knowledge/services.json',
+          'knowledge/personas.json',
+          'knowledge/policies.json',
+          'knowledge/contact_info.json'
+        ];
+        
+        console.log('[Knowledge] Fetching knowledge files from:', fetchBaseUrl || 'relative path');
+        
+        const [servicesRes, personasRes, policiesRes, contactInfoRes] = await Promise.all([
+          fetch(`${fetchBaseUrl}knowledge/services.json`),
+          fetch(`${fetchBaseUrl}knowledge/personas.json`),
+          fetch(`${fetchBaseUrl}knowledge/policies.json`),
+          fetch(`${fetchBaseUrl}knowledge/contact_info.json`)
+        ]);
 
-        const servicesData = await servicesRes.json();
-        const personasData = await personasRes.json();
-        const policiesData = await policiesRes.json();
-        const contactInfoData = await contactInfoRes.json();
+        // 檢查響應狀態
+        if (!servicesRes.ok) {
+          throw new Error(`Failed to fetch services.json: ${servicesRes.status} ${servicesRes.statusText}`);
+        }
+        if (!personasRes.ok) {
+          throw new Error(`Failed to fetch personas.json: ${personasRes.status} ${personasRes.statusText}`);
+        }
+        if (!policiesRes.ok) {
+          throw new Error(`Failed to fetch policies.json: ${policiesRes.status} ${policiesRes.statusText}`);
+        }
+        if (!contactInfoRes.ok) {
+          throw new Error(`Failed to fetch contact_info.json: ${contactInfoRes.status} ${contactInfoRes.statusText}`);
+        }
+
+        const [servicesData, personasData, policiesData, contactInfoData] = await Promise.all([
+          servicesRes.json(),
+          personasRes.json(),
+          policiesRes.json(),
+          contactInfoRes.json()
+        ]);
 
         this.services = servicesData.services || [];
         this.personas = personasData.personas || [];
@@ -170,10 +216,17 @@ export class KnowledgeBase {
             },
           },
         };
+        console.log('[Knowledge] Fetch successful');
       }
 
       this.loaded = true;
+      console.log('[Knowledge] Knowledge base loaded successfully');
     } catch (error) {
+      console.error('[Knowledge] Failed to load knowledge base:', error);
+      console.error('[Knowledge] Error details:', error instanceof Error ? {
+        message: error.message,
+        stack: error.stack
+      } : String(error));
       throw new Error(`Failed to load knowledge base: ${error instanceof Error ? error.message : String(error)}`);
     }
   }

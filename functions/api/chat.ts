@@ -23,10 +23,16 @@ let llmService: LLMService | null = null;
 let contextManager: ContextManager | null = null;
 
 // 載入知識庫（延遲載入）
-async function loadKnowledgeBase() {
+async function loadKnowledgeBase(request?: Request) {
   if (!knowledgeBase) {
     knowledgeBase = new KnowledgeBase();
-    await knowledgeBase.load();
+    // 從 request URL 構建基礎 URL
+    let baseUrl: string | undefined;
+    if (request) {
+      const url = new URL(request.url);
+      baseUrl = `${url.protocol}//${url.host}`;
+    }
+    await knowledgeBase.load(baseUrl);
   }
   return knowledgeBase;
 }
@@ -36,8 +42,21 @@ function initLLMService(env: any) {
   if (!llmService) {
     // 在 Cloudflare Pages Functions 中，环境变量通过 env 参数访问
     const apiKey = env?.GEMINI_API_KEY;
+    console.log('[Init LLM] Checking API key...');
+    console.log('[Init LLM] env object exists:', !!env);
+    console.log('[Init LLM] API Key exists:', !!apiKey);
+    console.log('[Init LLM] API Key length:', apiKey?.length || 0);
     if (apiKey) {
-      llmService = new LLMService(apiKey);
+      try {
+        llmService = new LLMService(apiKey);
+        console.log('[Init LLM] LLM service initialized successfully');
+      } catch (error) {
+        console.error('[Init LLM] Failed to initialize LLM service:', error);
+        throw error;
+      }
+    } else {
+      console.error('[Init LLM] GEMINI_API_KEY not found in env');
+      console.log('[Init LLM] Available env keys:', env ? Object.keys(env) : 'env is null/undefined');
     }
   }
   return llmService;
@@ -307,14 +326,24 @@ export async function onRequestPost(context: {
     }
 
     // 載入知識庫
-    const kb = await loadKnowledgeBase();
+    console.log('[Chat] Loading knowledge base...');
+    let kb;
+    try {
+      kb = await loadKnowledgeBase(request);
+      console.log('[Chat] Knowledge base loaded successfully');
+    } catch (error) {
+      console.error('[Chat] Failed to load knowledge base:', error);
+      throw error;
+    }
     
     // 設置 responseTemplates 的 knowledgeBase 實例
     setKnowledgeBase(kb);
 
     // 初始化服務
+    console.log('[Chat] Initializing services...');
     const llm = initLLMService(env);
     const cm = initContextManager();
+    console.log('[Chat] Services initialized. LLM available:', !!llm);
 
     const mode = body.mode || 'auto';
 
@@ -537,6 +566,10 @@ export async function onRequestPost(context: {
 
   } catch (error) {
     console.error('[Chat Error]', error);
+    console.error('[Chat Error] Error type:', error instanceof Error ? error.constructor.name : typeof error);
+    console.error('[Chat Error] Error message:', error instanceof Error ? error.message : String(error));
+    console.error('[Chat Error] Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+    
     const response: ChatResponse = {
       reply: getApiErrorTemplate(),
       intent: 'handoff_to_human',
