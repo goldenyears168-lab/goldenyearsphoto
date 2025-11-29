@@ -150,13 +150,19 @@ function classifyIntent(
   }
 
   // 檢查是否為地址/地點詢問
-  const locationKeywords = ['地址', '地點', '在哪裡', '在哪', '位置', '怎麼去', '交通', '捷運', '分店', '店址'];
+  const locationKeywords = ['地址', '地點', '在哪裡', '在哪', '位置', '怎麼去', '交通', '捷運', '分店', '店址', '停車', '停車場', '停車位', '哪裡停車', '附近停車', '電話', '聯絡電話', '聯繫電話', '電話號碼', '營業時間', '開門時間', '幾點開', '幾點關', '開店時間', '關店時間', '聯絡', '聯繫', '聯絡方式', '聯繫方式', '怎麼聯絡', '怎麼聯繫', 'email', '信箱', 'ig', 'instagram', 'line'];
   if (locationKeywords.some(keyword => lowerMessage.includes(keyword))) {
     return 'location_inquiry';
   }
 
+  // 檢查是否為妝髮詢問
+  const makeupKeywords = ['妝髮', '化妝', '髮型', '造型', 'makeup', '彩妝', '妝容', '髮型設計', '造型師'];
+  if (makeupKeywords.some(keyword => lowerMessage.includes(keyword))) {
+    return 'makeup_inquiry';
+  }
+
   // 檢查是否為預約相關
-  const bookingKeywords = ['預約', '改期', '取消', '時間', '時段', '什麼時候'];
+  const bookingKeywords = ['預約', '改期', '取消', '時間', '時段', '什麼時候', '延後', '提前', '變更', '更改', '調整時間', '重新預約'];
   if (bookingKeywords.some(keyword => lowerMessage.includes(keyword))) {
     return 'booking_inquiry';
   }
