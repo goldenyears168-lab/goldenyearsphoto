@@ -48,7 +48,7 @@ export class LLMService {
    */
   async generateReply(params: GenerateReplyParams): Promise<string> {
     const { message, intent, entities, context, mode, knowledgeBase } = params;
-
+ 
     // 構建 System Prompt（傳入用戶訊息以便檢查情緒）
     const systemPrompt = this.buildSystemPrompt(mode, intent, entities, context, knowledgeBase, message);
 
@@ -66,7 +66,9 @@ export class LLMService {
       });
 
       const response = result.response;
-      return response.text();
+      const rawReply = response.text();
+      const cleanedReply = this.cleanReply(rawReply);
+      return cleanedReply;
     } catch (error) {
       console.error('[LLM Error]', error);
       throw new Error(`Failed to generate reply: ${error instanceof Error ? error.message : String(error)}`);
@@ -101,6 +103,16 @@ export class LLMService {
    - 客戶明確要求找真人
    - 企業/團體報價等需要客製化的服務
 6. **服務項目限制**：只能推薦知識庫中實際存在的服務。若客戶詢問不存在的服務（例如：寶寶寫真、抓周、孕婦寫真等），必須明確說明「我們目前沒有提供這個服務」，並引導客戶選擇現有的服務項目。
+
+## 輸出格式要求（嚴格遵守）
+1. **禁止輸出 JSON 格式**：絕對不要輸出任何 JSON 內容，包括：
+   - 不要輸出 {"key": "value"} 這類物件文字
+   - 不要輸出包含多層的大括號或中括號結構
+   - 不要輸出任何類似程式碼或資料結構的內容（例如以 { 開頭、以 } 結尾的大段文字）
+2. **禁止輸出程式碼區塊**：不要輸出任何程式碼區塊或標示（例如以三個反引號標記的區塊），所有內容都必須是自然語言。
+3. **只輸出自然語言**：所有回覆必須是自然的中文句子，直接回答客戶問題，不要出現 JSON、物件、陣列或欄位名稱等技術細節。
+4. **模板資料僅供參考**：下面提供的回覆模板、服務摘要與其他資料，僅供你理解與參考，請用自己的話重寫成自然語言，不要原封不動貼上，也不要轉成 JSON。
+5. **禁止輸出原始資料**：不要把原始 JSON、ID、欄位名稱、鍵值對等直接給客戶，只能輸出客戶看得懂的自然語言說明。
 
 ## 回覆格式要求（嚴格遵守三段式結構）
 每次回覆必須採用三段式結構，讓客戶獲得「足夠資訊」而無需反覆詢問：
@@ -159,11 +171,14 @@ ${this.formatContext(context)}
         const responseTemplate = knowledgeBase.getResponseTemplate(intent);
         if (responseTemplate) {
           prompt += `\n## 回覆模板（必須優先使用）
-**主回答**：${responseTemplate.main_answer}
-**補充資訊**：${responseTemplate.supplementary_info || '無'}
-**智慧選單**：${responseTemplate.next_best_actions.join('、')}
+**主回答（範例）**：${responseTemplate.main_answer}
+**補充資訊（範例）**：${responseTemplate.supplementary_info || '無'}
+**智慧選單（範例）**：${responseTemplate.next_best_actions.join('、')}
 
-**重要**：你必須使用上述模板的內容作為回覆基礎，可以根據客戶的具體問題稍作調整，但核心內容必須保持一致。
+**重要**：上述內容是「範例模板」，只供你理解語氣與重點。你必須：
+- 用自然語言重新表達，不要原樣貼上
+- 不要把這些資料轉成 JSON 或程式碼格式
+- 不要輸出任何欄位名稱或結構，只輸出給客戶看的自然語言回覆。
 `;
         }
       } catch (error) {
@@ -211,13 +226,16 @@ ${this.formatContext(context)}
         const serviceSummary = knowledgeBase.getServiceSummary(entities.service_type);
         if (serviceSummary) {
           prompt += `\n## 服務摘要（${entities.service_type}）
-**核心用途**：${serviceSummary.core_purpose}
-**價格與計費**：${serviceSummary.price_pricing}
-**拍攝時長/挑圖**：${serviceSummary.shooting_time_selection}
-**交件速度**：${serviceSummary.delivery_speed}
-**常見加購/限制**：${serviceSummary.add_ons_limitations}
+**核心用途（說明用）**：${serviceSummary.core_purpose}
+**價格與計費（說明用）**：${serviceSummary.price_pricing}
+**拍攝時長/挑圖（說明用）**：${serviceSummary.shooting_time_selection}
+**交件速度（說明用）**：${serviceSummary.delivery_speed}
+**常見加購/限制（說明用）**：${serviceSummary.add_ons_limitations}
 
-**重要**：回答時可以使用上述服務摘要的資訊，讓回答更具體實用。
+**重要**：上述內容是給你參考用的摘要，請：
+- 用自然語言整理給客戶聽，不要原封不動貼上
+- 不要輸出任何內部欄位名稱或技術細節
+- 嚴禁以 JSON 或程式碼格式輸出，只能輸出自然語言。
 `;
         }
       } catch (error) {
@@ -340,6 +358,49 @@ ${this.formatContext(context)}
     }
 
     return prompt;
+  }
+
+  /**
+   * 清理回覆內容，移除 JSON / 程式碼等非自然語言片段
+   */
+  private cleanReply(reply: string): string {
+    if (!reply) return '';
+
+    let cleaned = reply;
+
+    // 1. 移除 ```json ... ``` 或任何 ``` ... ``` 代碼區塊
+    cleaned = cleaned.replace(/```json[\s\S]*?```/gi, '');
+    cleaned = cleaned.replace(/```[\s\S]*?```/gi, '');
+
+    // 2. 移除包含 response_template 或 service_summary 的 JSON 物件片段
+    cleaned = cleaned.replace(/\{[^{}]*"response_template"[\s\S]*?\}/gi, '');
+    cleaned = cleaned.replace(/\{[^{}]*"service_summary"[\s\S]*?\}/gi, '');
+
+    // 3. 移除可能包含上述欄位的陣列片段
+    cleaned = cleaned.replace(/\[[^\]]*"response_template"[^\]]*\]/gi, '');
+    cleaned = cleaned.replace(/\[[^\]]*"service_summary"[^\]]*\]/gi, '');
+
+    // 4. 移除看起來像純資料結構的大段 JSON（保守處理，僅在行中幾乎全是 { 或 } 時移除）
+    cleaned = cleaned
+      .split('\n')
+      .filter(line => {
+        const trimmed = line.trim();
+        if (!trimmed) return true;
+        // 如果一行幾乎都是大括號或中括號，視為資料結構行，移除
+        if (/^[{}\[\],":0-9\s]+$/.test(trimmed)) {
+          return false;
+        }
+        return true;
+      })
+      .join('\n');
+
+    // 5. 合併多餘空行
+    cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+
+    // 6. 最後修剪首尾空白
+    cleaned = cleaned.trim();
+
+    return cleaned;
   }
 
   /**

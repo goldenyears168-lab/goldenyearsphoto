@@ -76,6 +76,11 @@ $chatbot-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 
   transform: translateY(20px) scale(0.95);
   transition: all 0.2s ease-out;
   overflow: hidden;
+  
+  // 防止触摸事件穿透到背景（手机版）
+  @media (max-width: 480px) {
+    touch-action: pan-y;
+  }
 
   &[aria-hidden='false'] {
     opacity: 1;
@@ -85,9 +90,40 @@ $chatbot-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 
 
   @media (max-width: 480px) {
     width: calc(100vw - 24px);
-    height: calc(100vh - 100px);
+    // 使用 dvh (dynamic viewport height) 替代 vh，自动适应键盘
+    height: calc(100dvh - 100px);
+    height: calc(100vh - 100px); // fallback for older browsers
+    max-height: calc(100dvh - 100px);
+    max-height: calc(100vh - 100px); // fallback
     bottom: 72px;
     right: 12px;
+    
+    // 当键盘弹出时，调整视窗位置和高度
+    &.keyboard-open {
+      bottom: 0;
+      height: calc(100dvh - env(keyboard-inset-height, 0px));
+      height: calc(100vh - 50%); // fallback
+      max-height: calc(100dvh - env(keyboard-inset-height, 0px));
+      max-height: calc(100vh - 50%); // fallback
+      border-radius: 16px 16px 0 0;
+    }
+  }
+}
+
+// 背景滚动锁定（手机版）
+body.chatbot-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  
+  // 防止 iOS Safari 的滚动问题
+  @supports (-webkit-touch-callout: none) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
 
@@ -147,6 +183,12 @@ $chatbot-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 
   
   // 確保最後有足夠空間，避免被輸入框遮住
   padding-bottom: 24px;
+  
+  // 手机版触摸滚动优化
+  @media (max-width: 480px) {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch; // iOS 平滑滚动
+  }
 }
 
 // 訊息

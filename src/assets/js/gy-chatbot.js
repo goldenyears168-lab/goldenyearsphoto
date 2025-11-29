@@ -23,6 +23,8 @@
       maxRetries: 2,
       faqMenu: null,  // 存储FAQ菜单数据
       expandedCategory: null,  // 当前展开的分类ID
+      scrollY: 0,  // 保存背景滚动位置（手机版）
+      handleKeyboard: null,  // 键盘监听器（手机版）
     },
 
     els: {},
@@ -350,6 +352,12 @@
         this.els.window.style.display = 'flex';
       }
       
+      // 手机版：阻止背景滚动
+      if (window.innerWidth <= 480 && !isFAQPage) {
+        this.lockBackgroundScroll();
+        this.setupKeyboardHandling();
+      }
+      
       // 焦點移到輸入框
       setTimeout(() => {
         if (this.els.input) {
@@ -364,10 +372,124 @@
     close() {
       this.state.isOpen = false;
       this.els.window.classList.remove('open');
+      this.els.window.classList.remove('keyboard-open');
       this.els.window.setAttribute('aria-hidden', 'true');
       this.els.toggle.setAttribute('aria-expanded', 'false');
+      
+      // 手机版：恢复背景滚动
+      const isFAQPage = document.querySelector('.faq-page') !== null;
+      if (window.innerWidth <= 480 && !isFAQPage) {
+        this.unlockBackgroundScroll();
+        this.removeKeyboardHandling();
+      }
+      
       // 焦點回到 toggle 按鈕
       this.els.toggle.focus();
+    },
+
+    /**
+     * 锁定背景滚动（手机版）
+     */
+    lockBackgroundScroll() {
+      // 保存当前滚动位置
+      this.state.scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      
+      // 添加锁定类
+      document.body.classList.add('chatbot-open');
+      document.body.style.top = `-${this.state.scrollY}px`;
+    },
+
+    /**
+     * 解锁背景滚动（手机版）
+     */
+    unlockBackgroundScroll() {
+      // 移除锁定类
+      document.body.classList.remove('chatbot-open');
+      const scrollY = document.body.style.top;
+      document.body.style.top = '';
+      
+      // 恢复滚动位置
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      } else if (this.state.scrollY) {
+        window.scrollTo(0, this.state.scrollY);
+      }
+      
+      this.state.scrollY = 0;
+    },
+
+    /**
+     * 设置键盘处理（手机版）
+     */
+    setupKeyboardHandling() {
+      // 使用 Visual Viewport API 检测键盘
+      if (window.visualViewport) {
+        this.handleKeyboard = () => {
+          const viewport = window.visualViewport;
+          const keyboardHeight = window.innerHeight - viewport.height;
+          
+          if (keyboardHeight > 150) {
+            // 键盘弹出
+            this.els.window.classList.add('keyboard-open');
+            // 滚动输入框到可见区域
+            setTimeout(() => {
+              if (this.els.input) {
+                this.els.input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }, 100);
+          } else {
+            // 键盘收起
+            this.els.window.classList.remove('keyboard-open');
+          }
+        };
+        
+        window.visualViewport.addEventListener('resize', this.handleKeyboard);
+      }
+      
+      // 监听输入框焦点（备用方案）
+      if (this.els.input) {
+        this.handleInputFocus = () => {
+          setTimeout(() => {
+            if (this.els.input) {
+              this.els.input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              this.els.window.classList.add('keyboard-open');
+            }
+          }, 300); // 等待键盘动画
+        };
+        
+        this.handleInputBlur = () => {
+          // 延迟移除，避免键盘收起动画时的闪烁
+          setTimeout(() => {
+            this.els.window.classList.remove('keyboard-open');
+          }, 200);
+        };
+        
+        this.els.input.addEventListener('focus', this.handleInputFocus);
+        this.els.input.addEventListener('blur', this.handleInputBlur);
+      }
+    },
+
+    /**
+     * 移除键盘处理（手机版）
+     */
+    removeKeyboardHandling() {
+      // 移除 Visual Viewport 监听
+      if (window.visualViewport && this.handleKeyboard) {
+        window.visualViewport.removeEventListener('resize', this.handleKeyboard);
+        this.handleKeyboard = null;
+      }
+      
+      // 移除输入框监听
+      if (this.els.input) {
+        if (this.handleInputFocus) {
+          this.els.input.removeEventListener('focus', this.handleInputFocus);
+          this.handleInputFocus = null;
+        }
+        if (this.handleInputBlur) {
+          this.els.input.removeEventListener('blur', this.handleInputBlur);
+          this.handleInputBlur = null;
+        }
+      }
     },
 
     /**
