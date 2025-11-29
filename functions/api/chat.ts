@@ -77,6 +77,7 @@ function initContextManager() {
 // 介面定義
 interface ChatRequestBody {
   message: string;
+  source?: 'menu' | 'input';  // 新增字段：消息来源（菜单选择或手动输入）
   mode?: 'auto' | 'decision_recommendation' | 'faq_flow_price';
   pageType?: 'home' | 'qa';
   conversationId?: string;
@@ -620,6 +621,46 @@ export async function onRequestPost(context: {
         }
       }
       // 如果是「如何預約」這類問題，繼續執行到 LLM 處理，確保提供預約連結
+    }
+
+    // 處理菜單選擇的消息：優先使用 FAQ 匹配
+    // 當 source === 'menu' 時，優先使用 FAQ 匹配，匹配成功直接返回，不調用 LLM
+    if (body.source === 'menu') {
+      console.log('[Chat] Menu source detected, prioritizing FAQ match');
+      const faqResults = kb.searchFAQDetailed(body.message);
+      
+      if (faqResults && faqResults.length > 0) {
+        // 找到匹配的 FAQ，直接返回答案
+        const matchedFAQ = faqResults[0]; // 取分數最高的
+        console.log('[Chat] FAQ matched:', matchedFAQ.id);
+        
+        const reply = matchedFAQ.answer;
+        cm.updateContext(context_obj.conversationId, {
+          last_intent: intent,
+          slots: mergedEntities,
+          userMessage: body.message,
+          assistantMessage: reply,
+        });
+
+        const response: ChatResponse = {
+          reply,
+          intent,
+          conversationId: context_obj.conversationId,
+          updatedContext: {
+            last_intent: intent,
+            slots: mergedEntities,
+          },
+          suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
+        };
+
+        return new Response(
+          JSON.stringify(response),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      } else {
+        // FAQ 匹配失敗，繼續使用 LLM 處理（作為 fallback）
+        console.log('[Chat] FAQ match failed, falling back to LLM');
+      }
     }
 
     // 使用 LLM 生成回覆

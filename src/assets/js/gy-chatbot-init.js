@@ -89,8 +89,8 @@
     }
   }
 
-  // 初始化函數
-  function initializeChatbot() {
+  // 初始化函數（現在是 async）
+  async function initializeChatbot() {
     if (!window.GYChatbot) {
       console.error('[GYChatbot] GYChatbot not found. Make sure gy-chatbot.js is loaded.');
       return;
@@ -111,7 +111,8 @@
     }
 
     try {
-      window.GYChatbot.init({
+      // init 現在是 async 方法，需要 await
+      await window.GYChatbot.init({
         apiEndpoint: '/api/chat',
         pageType: pageType,
         locale: 'zh-TW',

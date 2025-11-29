@@ -292,6 +292,138 @@ $chatbot-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 
   }
 }
 
+// FAQ 菜單樣式
+.gy-chatbot-faq-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.gy-chatbot-faq-menu-loading {
+  padding: 12px;
+  text-align: center;
+  color: $chatbot-text-muted;
+  font-size: 13px;
+}
+
+.gy-chatbot-faq-menu-fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// FAQ 分類
+.gy-chatbot-faq-category {
+  background: $chatbot-surface;
+  border: 1px solid $chatbot-border;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease-out;
+
+  &.expanded {
+    border-color: $chatbot-primary;
+    box-shadow: 0 2px 4px rgba($chatbot-primary, 0.1);
+  }
+}
+
+.gy-chatbot-faq-category-header {
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  font-size: 14px;
+  color: $chatbot-text;
+  transition: all 0.15s ease-out;
+
+  &:hover {
+    background: darken($chatbot-surface, 2%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $chatbot-primary;
+    outline-offset: -2px;
+  }
+}
+
+.gy-chatbot-faq-category-title {
+  font-weight: 500;
+  flex: 1;
+}
+
+.gy-chatbot-faq-category-icon {
+  font-size: 12px;
+  color: $chatbot-text-muted;
+  transition: transform 0.2s ease-out;
+  margin-left: 8px;
+}
+
+.gy-chatbot-faq-category.expanded .gy-chatbot-faq-category-icon {
+  transform: rotate(0deg);
+}
+
+.gy-chatbot-faq-category:not(.expanded) .gy-chatbot-faq-category-icon {
+  transform: rotate(-90deg);
+}
+
+// FAQ 問題列表
+.gy-chatbot-faq-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+
+  .gy-chatbot-faq-category.expanded & {
+    max-height: 500px;
+    padding: 8px;
+  }
+}
+
+.gy-chatbot-faq-questions-empty {
+  padding: 12px;
+  text-align: center;
+  color: $chatbot-text-muted;
+  font-size: 13px;
+}
+
+.gy-chatbot-faq-question {
+  padding: 10px 12px;
+  background: white;
+  border: 1px solid $chatbot-border;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  color: $chatbot-text;
+  transition: all 0.15s ease-out;
+  line-height: 1.4;
+
+  &:hover {
+    background: $chatbot-surface;
+    border-color: $chatbot-primary;
+    transform: translateX(2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $chatbot-primary;
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateX(1px);
+    background: darken($chatbot-surface, 2%);
+  }
+}
+
 // 快速回覆建議
 .gy-chatbot-quick-replies {
   display: flex;

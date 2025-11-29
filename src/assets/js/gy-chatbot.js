@@ -21,6 +21,8 @@
       conversationId: null,
       retryCount: 0,
       maxRetries: 2,
+      faqMenu: null,  // 存储FAQ菜单数据
+      expandedCategory: null,  // 当前展开的分类ID
     },
 
     els: {},
@@ -28,10 +30,16 @@
     /**
      * 初始化 Widget
      */
-    init(userConfig) {
+    async init(userConfig) {
       this.config = { ...this.config, ...userConfig };
       this.createDOM();
       this.bindEvents();
+      // 載入 FAQ 菜單
+      await this.loadFAQMenu();
+      // 重新渲染菜單（如果已創建）
+      if (this.els.quickActions) {
+        this.els.quickActions.innerHTML = this.renderFAQMenu();
+      }
     },
 
     /**
@@ -110,22 +118,92 @@
     },
 
     /**
-     * 渲染快速選項按鈕
+     * 載入 FAQ 菜單
      */
-    renderQuickActions(pageType) {
-      if (pageType === 'home') {
+    async loadFAQMenu() {
+      try {
+        const response = await fetch('/api/faq-menu');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.state.faqMenu = data.categories || [];
+        console.log('[GYChatbot] FAQ menu loaded:', this.state.faqMenu.length, 'categories');
+        return this.state.faqMenu;
+      } catch (error) {
+        console.error('[GYChatbot] Failed to load FAQ menu:', error);
+        // 如果API失敗，返回空數組，使用fallback
+        return [];
+      }
+    },
+
+    /**
+     * 渲染 FAQ 分類菜單
+     */
+    renderFAQMenu() {
+      if (!this.state.faqMenu || this.state.faqMenu.length === 0) {
+        // 如果菜單未載入，顯示載入中或使用fallback
         return `
-          <button class="gy-chatbot-quick-action" data-mode="decision_recommendation" data-template="我想請你幫我推薦適合的拍攝方案。">🧭 不知道選哪個方案</button>
-          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="請跟我說一般拍攝的流程，大概要多久？">📷 想知道拍攝流程</button>
-          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="我想大概了解不同拍攝的價位與計價方式。">💰 想知道價格</button>
-        `;
-      } else {
-        return `
-          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="請幫我整理一下從預約到拿到照片的流程。">📋 拍攝流程說明</button>
-          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="不同拍攝類型大概要多少錢？怎麼計價？">💵 價格與計價方式</button>
-          <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="如果我要改期或取消預約，原則是什麼？">📆 改期 / 取消規則</button>
+          <div class="gy-chatbot-faq-menu-loading">載入常見問題中...</div>
+          <div class="gy-chatbot-faq-menu-fallback">
+            <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="我想大概了解不同拍攝的價位與計價方式。">💰 想知道價格</button>
+            <button class="gy-chatbot-quick-action" data-mode="faq_flow_price" data-template="請跟我說一般拍攝的流程，大概要多久？">📷 想知道拍攝流程</button>
+            <button class="gy-chatbot-quick-action" data-mode="decision_recommendation" data-template="我想請你幫我推薦適合的拍攝方案。">🧭 不知道選哪個方案</button>
+          </div>
         `;
       }
+
+      let html = '<div class="gy-chatbot-faq-menu">';
+      this.state.faqMenu.forEach(category => {
+        const isExpanded = this.state.expandedCategory === category.id;
+        html += `
+          <div class="gy-chatbot-faq-category ${isExpanded ? 'expanded' : ''}">
+            <button class="gy-chatbot-faq-category-header" data-category-id="${category.id}">
+              <span class="gy-chatbot-faq-category-title">${category.title}</span>
+              <span class="gy-chatbot-faq-category-icon">${isExpanded ? '▼' : '▶'}</span>
+            </button>
+            ${isExpanded ? this.renderFAQQuestions(category.questions) : ''}
+          </div>
+        `;
+      });
+      html += '</div>';
+      return html;
+    },
+
+    /**
+     * 渲染 FAQ 問題列表
+     */
+    renderFAQQuestions(questions) {
+      if (!questions || questions.length === 0) {
+        return '<div class="gy-chatbot-faq-questions-empty">暫無問題</div>';
+      }
+      let html = '<div class="gy-chatbot-faq-questions">';
+      questions.forEach(question => {
+        html += `
+          <button class="gy-chatbot-faq-question" data-question="${this.escapeHtml(question.question)}" data-question-id="${question.id}">
+            ${this.escapeHtml(question.question)}
+          </button>
+        `;
+      });
+      html += '</div>';
+      return html;
+    },
+
+    /**
+     * HTML 轉義
+     */
+    escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    },
+
+    /**
+     * 渲染快速選項按鈕（改為 FAQ 分類菜單）
+     */
+    renderQuickActions(pageType) {
+      // 使用 FAQ 分類菜單
+      return this.renderFAQMenu();
     },
 
     /**
@@ -159,16 +237,34 @@
       this.els.close.addEventListener('click', () => this.close());
 
       this.els.quickActions.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('gy-chatbot-quick-action')) return;
-        const mode = e.target.getAttribute('data-mode');
-        const template = e.target.getAttribute('data-template');
-        this.sendMessage(template, mode);
+        // 處理分類展開/收合
+        if (e.target.classList.contains('gy-chatbot-faq-category-header') || 
+            e.target.closest('.gy-chatbot-faq-category-header')) {
+          const header = e.target.closest('.gy-chatbot-faq-category-header') || e.target;
+          const categoryId = header.getAttribute('data-category-id');
+          this.toggleFAQCategory(categoryId);
+          return;
+        }
+
+        // 處理問題點擊
+        if (e.target.classList.contains('gy-chatbot-faq-question')) {
+          const question = e.target.getAttribute('data-question');
+          this.sendMessage(question, 'auto', 'menu');
+          return;
+        }
+
+        // 處理舊的快速選項按鈕（fallback）
+        if (e.target.classList.contains('gy-chatbot-quick-action')) {
+          const mode = e.target.getAttribute('data-mode');
+          const template = e.target.getAttribute('data-template');
+          this.sendMessage(template, mode, 'menu');
+        }
       });
 
       this.els.send.addEventListener('click', () => {
         const text = this.els.input.value.trim();
         if (!text) return;
-        this.sendMessage(text, 'auto');
+        this.sendMessage(text, 'auto', 'input');
         this.els.input.value = '';
       });
 
@@ -187,7 +283,8 @@
           e.preventDefault();
           const text = this.els.input.value.trim();
           if (text) {
-            this.els.send.click();
+            this.sendMessage(text, 'auto', 'input');
+            this.els.input.value = '';
           }
         }
         // Escape 鍵關閉聊天窗
@@ -502,9 +599,26 @@
     },
 
     /**
+     * 切換 FAQ 分類展開/收合
+     */
+    toggleFAQCategory(categoryId) {
+      if (this.state.expandedCategory === categoryId) {
+        // 收合
+        this.state.expandedCategory = null;
+      } else {
+        // 展開
+        this.state.expandedCategory = categoryId;
+      }
+      // 重新渲染菜單
+      if (this.els.quickActions) {
+        this.els.quickActions.innerHTML = this.renderFAQMenu();
+      }
+    },
+
+    /**
      * 發送訊息
      */
-    async sendMessage(message, mode = 'auto') {
+    async sendMessage(message, mode = 'auto', source = 'input') {
       // 顯示使用者訊息
       this.appendMessage(message, 'user');
       this.hideLoading();
@@ -532,6 +646,7 @@
           },
           body: JSON.stringify({
             message,
+            source,  // 添加 source 字段
             mode,
             pageType: this.config.pageType,
             conversationId: this.state.conversationId,
@@ -591,7 +706,7 @@
         button.className = 'gy-chatbot-quick-reply';
         button.textContent = reply;
         button.addEventListener('click', () => {
-          this.sendMessage(reply, 'auto');
+          this.sendMessage(reply, 'auto', 'input');
           quickRepliesDiv.remove();
         });
         quickRepliesDiv.appendChild(button);

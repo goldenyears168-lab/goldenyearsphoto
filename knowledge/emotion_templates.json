@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "last_updated": "2025-01-15",
-  "data_source": "docs/客服知識庫 gemini.md",
+  "data_source": "knowledge/emotion_templates.json (單一事實來源)",
   "templates": {
     "nervous_anxious": {
       "emotion": "緊張/焦慮",

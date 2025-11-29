@@ -514,7 +514,7 @@ export class KnowledgeBase {
   }
 
   /**
-   * 根據關鍵字搜尋FAQ問題
+   * 根據關鍵字搜尋FAQ問題（優化版）
    */
   searchFAQDetailed(query: string): FAQQuestion[] {
     if (!this.loaded) {
@@ -524,8 +524,16 @@ export class KnowledgeBase {
       return [];
     }
 
-    const lowerQuery = query.toLowerCase();
+    const lowerQuery = query.toLowerCase().trim();
     const results: Array<{ question: FAQQuestion; score: number }> = [];
+
+    // 如果查詢為空，返回空數組
+    if (!lowerQuery) {
+      return [];
+    }
+
+    // 將查詢拆分成詞彙（處理中文和英文）
+    const queryWords = this.extractWords(lowerQuery);
 
     // 遍歷所有類別
     for (const category of Object.values(this.faqDetailed.categories)) {
@@ -533,24 +541,60 @@ export class KnowledgeBase {
 
       for (const question of category.questions) {
         let score = 0;
+        const lowerQuestion = question.question.toLowerCase();
+        const lowerAnswer = question.answer.toLowerCase();
 
-        // 關鍵字匹配
+        // 1. 精確問題匹配（最高分）
+        if (lowerQuestion === lowerQuery) {
+          score += 10;
+        } else if (lowerQuestion.includes(lowerQuery)) {
+          score += 5;
+        }
+
+        // 2. 關鍵字匹配（提高權重）
+        let keywordMatches = 0;
         for (const keyword of question.keywords) {
-          if (lowerQuery.includes(keyword.toLowerCase())) {
+          const lowerKeyword = keyword.toLowerCase();
+          if (lowerQuery.includes(lowerKeyword)) {
+            score += 3;
+            keywordMatches++;
+          }
+          // 反向匹配：如果關鍵字包含查詢詞
+          if (lowerKeyword.includes(lowerQuery) && lowerQuery.length >= 2) {
             score += 2;
           }
         }
 
-        // 問題內容匹配
-        if (question.question.toLowerCase().includes(lowerQuery)) {
-          score += 3;
+        // 3. 詞彙匹配（提高準確性）
+        let wordMatches = 0;
+        for (const word of queryWords) {
+          if (word.length < 2) continue; // 跳過單字符
+          if (lowerQuestion.includes(word)) {
+            score += 2;
+            wordMatches++;
+          }
+          if (lowerAnswer.includes(word)) {
+            score += 1;
+          }
         }
 
-        // 答案內容匹配
-        if (question.answer.toLowerCase().includes(lowerQuery)) {
+        // 4. 問題開頭匹配（提高相關性）
+        if (lowerQuestion.startsWith(lowerQuery.substring(0, Math.min(5, lowerQuery.length)))) {
+          score += 2;
+        }
+
+        // 5. 答案內容匹配（較低權重）
+        if (lowerAnswer.includes(lowerQuery)) {
           score += 1;
         }
 
+        // 6. 匹配詞彙比例（提高準確性）
+        if (queryWords.length > 0) {
+          const matchRatio = wordMatches / queryWords.length;
+          score += Math.round(matchRatio * 2);
+        }
+
+        // 只返回有匹配的問題
         if (score > 0) {
           results.push({ question, score });
         }
@@ -559,9 +603,43 @@ export class KnowledgeBase {
 
     // 按分數排序，回傳前 5 個
     return results
-      .sort((a, b) => b.score - a.score)
+      .sort((a, b) => {
+        // 先按分數排序
+        if (b.score !== a.score) {
+          return b.score - a.score;
+        }
+        // 分數相同時，優先返回問題長度較短的（更精確）
+        return a.question.question.length - b.question.question.length;
+      })
       .slice(0, 5)
       .map(r => r.question);
+  }
+
+  /**
+   * 提取查詢中的詞彙（支援中文和英文）
+   */
+  private extractWords(text: string): string[] {
+    const words: string[] = [];
+    
+    // 提取中文字符（連續的中文字符作為一個詞）
+    const chineseWords = text.match(/[\u4e00-\u9fa5]+/g);
+    if (chineseWords) {
+      words.push(...chineseWords);
+    }
+    
+    // 提取英文單詞
+    const englishWords = text.match(/[a-z]+/g);
+    if (englishWords) {
+      words.push(...englishWords);
+    }
+    
+    // 提取數字
+    const numbers = text.match(/\d+/g);
+    if (numbers) {
+      words.push(...numbers);
+    }
+    
+    return words;
   }
 
   /**

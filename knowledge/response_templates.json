@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "last_updated": "2025-01-15",
-  "data_source": "docs/客服知識庫 gemini.md",
+  "data_source": "knowledge/response_templates.json (單一事實來源)",
   "templates": {
     "price_inquiry": {
       "main_answer": "我們的服務按張計費，價格範圍如下：\n\n- **韓式證件照**：約 NT$399 / 張（低消 1 張）\n- **專業形象照**：約 NT$999 / 張（低消 1 張）\n- **個人寫真／畢業寫真**：約 NT$999–1,199 / 張\n- **多人合照／全家福**：約 NT$1,199 / 張（低消 1 張／每組合）\n- **一日攝影師工作坊**：約 NT$6,000 / 5–6 人（包場）\n\n實際金額以現場與當季公告為準。",

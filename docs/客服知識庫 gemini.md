@@ -1,8 +1,10 @@
 好時有影 AI 客服核心知識庫 (Comprehensive Knowledge Base)
 
-文件說明：
-本文件為好時有影 AI 客服系統的「唯一事實來源」。內容包含所有服務細節、FAQ 問答、品牌語氣、價格政策與工程邏輯。
-AI 模型在回答問題時，必須嚴格遵守此文件中的定義與邊界。
+**重要說明**：
+- **JSON 檔案為單一事實來源**：所有實際數據和FAQ內容存儲在 `knowledge/*.json` 檔案中
+- **本 MD 文件為參考文檔**：本文檔僅供閱讀參考，實際系統使用的數據來源為 JSON 檔案
+- **更新數據請直接編輯 JSON**：如需更新知識庫內容，請直接編輯對應的 JSON 檔案，而非本 MD 文件
+- AI 模型在回答問題時，必須嚴格遵守 JSON 檔案中的定義與邊界
 
 目錄 (Table of Contents)
 
@@ -1917,51 +1919,60 @@ NLU 成功率：
 - `knowledge/emotion_templates.json` - 情緒場景模板（新增）
 - `knowledge/intent_nba_mapping.json` - 意圖對應表（新增）
 
-**原始資料來源**：`docs/客服知識庫 gemini.md`（本文件）
+**單一事實來源**：`knowledge/*.json` 檔案
 
-所有 JSON 檔案都應從本文件生成，確保單一事實來源。
+**重要變更（2025-01-15）**：
+- JSON 檔案現在是單一事實來源，所有數據更新應直接在 JSON 檔案中進行
+- 本 MD 文件僅作為參考文檔，供閱讀和理解系統架構使用
+- 如需更新知識庫，請直接編輯對應的 JSON 檔案，並執行 `npm run validate-knowledge` 驗證
 
 ---
 
 ## 營運變更更新流程
 
+**重要**：JSON 檔案是單一事實來源，所有數據更新應直接在 JSON 檔案中進行。
+
 每次價格/政策/營業時間變更時，請依序完成以下步驟：
 
 ### 更新 Checklist
 
-1. ✅ **更新 `knowledge/services.json`** (價格)
-   - 修改對應服務的 `price_range`、`price_min`、`price_max` 等欄位
-   - 更新 `last_updated` 日期
+1. ✅ **更新對應的 JSON 檔案**（必須）
+   - **價格變更**：更新 `knowledge/services.json`
+     - 修改對應服務的 `price_range`、`price_min`、`price_max` 等欄位
+     - 更新 `last_updated` 日期
+   - **營業時間/地址變更**：更新 `knowledge/contact_info.json`
+     - 修改對應分店的 `hours` 資訊
+     - 如有地址變更，更新 `address` 欄位
+     - 更新 `last_updated` 日期
+   - **FAQ 變更**：更新 `knowledge/faq_detailed.json` 或 `knowledge/policies.json`
+     - 修改對應的問題和答案
+     - 更新 `last_updated` 日期
 
-2. ✅ **更新 `knowledge/contact_info.json`** (營業時間/地址)
-   - 修改對應分店的 `hours` 資訊
-   - 如有地址變更，更新 `address` 欄位
-   - 更新 `last_updated` 日期
-
-3. ✅ **更新 `docs/客服知識庫 gemini.md`** (政策描述)
-   - 更新對應章節的政策說明
-   - 確保價格/時間段落標註「**資料來源：knowledge/*.json**」
-
-4. ✅ **執行驗證**
-   - 執行 `npm run validate-knowledge` 驗證一致性
+2. ✅ **執行驗證**（必須）
+   - 執行 `npm run validate-knowledge` 驗證 JSON 格式和結構
    - 確認所有 ID 引用正確
 
-5. ✅ **執行測試**
+3. ✅ **執行測試**（建議）
    - 執行 `npm run test-scenarios` 測試價格/流程相關問答
    - 確認 AI 回覆正確
 
-6. ✅ **更新官網相關頁面**
+4. ✅ **更新官網相關頁面**（如適用）
    - 同步更新官網價格頁面
    - 更新預約頁面的營業時間資訊
 
-7. ✅ **記錄變更**
+5. ✅ **記錄變更**（必須）
    - 記錄變更日期到 JSON 的 `last_updated` 欄位
    - 在版本控制系統中留下清楚的 commit message
+
+6. ✅ **（可選）更新 MD 文件**
+   - 本 MD 文件為參考文檔，可選更新以保持同步
+   - 實際數據以 JSON 檔案為準
 
 ### 重要提醒
 
 - **單一真相來源原則**：所有價格、營業時間、地址等數字資料必須統一存在 JSON 檔案中
-- **禁止手動修改 JSON**：若需要從 MD 生成 JSON，請使用 `scripts/generate-md-from-json.mjs`
+- **JSON 為數據源**：所有知識庫內容應直接在 JSON 檔案中編輯，JSON 是系統的唯一數據源
+- **MD 文件為參考**：本 MD 文件僅供參考，不應作為數據更新的來源
 - **驗證優先**：任何變更都必須通過 `validate-knowledge.mjs` 檢查
 - **測試覆蓋**：價格/政策變更必須通過相關測試場景
 
