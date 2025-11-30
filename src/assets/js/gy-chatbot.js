@@ -356,13 +356,11 @@
         this.els.window.style.display = 'flex';
       }
       
-      // 阻止背景滚动（所有設備，除了 FAQ 頁面內嵌模式）
-      if (!isFAQPage) {
+      // 阻止背景滚动（只在手机版，除了 FAQ 頁面內嵌模式）
+      if (!isFAQPage && window.innerWidth <= 480) {
         this.lockBackgroundScroll();
         // 手机版：額外處理鍵盤
-        if (window.innerWidth <= 480) {
-          this.setupKeyboardHandling();
-        }
+        this.setupKeyboardHandling();
       }
       
       // 焦點移到輸入框
@@ -384,14 +382,12 @@
       this.els.toggle.setAttribute('aria-expanded', 'false');
       // 文字顯示/隱藏由 CSS 根據 aria-expanded 屬性控制
       
-      // 恢复背景滚动（所有設備，除了 FAQ 頁面內嵌模式）
+      // 恢复背景滚动（只在手机版，除了 FAQ 頁面內嵌模式）
       const isFAQPage = document.querySelector('.faq-page') !== null;
-      if (!isFAQPage) {
+      if (!isFAQPage && window.innerWidth <= 480) {
         this.unlockBackgroundScroll();
         // 手机版：移除鍵盤處理
-        if (window.innerWidth <= 480) {
-          this.removeKeyboardHandling();
-        }
+        this.removeKeyboardHandling();
       }
       
       // 焦點回到 toggle 按鈕
