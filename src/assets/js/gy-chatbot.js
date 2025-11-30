@@ -51,7 +51,10 @@
       const container = document.createElement('div');
       container.id = 'gy-chatbot-widget';
       container.innerHTML = `
-        <button id="gy-chatbot-toggle" aria-label="打開 AI 顧問" aria-expanded="false">💬</button>
+        <button id="gy-chatbot-toggle" aria-label="打開 AI 顧問" aria-expanded="false">
+          <span class="gy-chatbot-toggle-icon">💬</span>
+          <span class="gy-chatbot-toggle-text">AI形象顧問</span>
+        </button>
         <div id="gy-chatbot-window" aria-hidden="true" role="dialog" aria-labelledby="gy-chatbot-title" aria-modal="true">
           <div class="gy-chatbot-header">
             <div>
@@ -338,6 +341,7 @@
       this.state.isOpen = true;
       this.els.window.setAttribute('aria-hidden', 'false');
       this.els.toggle.setAttribute('aria-expanded', 'true');
+      // 文字顯示/隱藏由 CSS 根據 aria-expanded 屬性控制
       
       // 檢查是否在 FAQ 頁面（內嵌模式）
       const isFAQPage = document.querySelector('.faq-page') !== null;
@@ -378,6 +382,7 @@
       this.els.window.classList.remove('keyboard-open');
       this.els.window.setAttribute('aria-hidden', 'true');
       this.els.toggle.setAttribute('aria-expanded', 'false');
+      // 文字顯示/隱藏由 CSS 根據 aria-expanded 屬性控制
       
       // 恢复背景滚动（所有設備，除了 FAQ 頁面內嵌模式）
       const isFAQPage = document.querySelector('.faq-page') !== null;

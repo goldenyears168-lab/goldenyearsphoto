@@ -1,0 +1,277 @@
+{
+  "test_info": {
+    "base_url": "https://www.goldenyearsphoto.com",
+    "api_url": "https://www.goldenyearsphoto.com/api/chat",
+    "test_time": "2025-11-29T22:39:47.799298",
+    "total_questions": 15
+  },
+  "summary": {
+    "total": 15,
+    "success": 15,
+    "errors": 0,
+    "timeouts": 0,
+    "success_rate": "100.0%",
+    "average_response_time": 1.95,
+    "intent_distribution": {
+      "handoff_to_human": 1,
+      "complaint": 2,
+      "service_inquiry": 10,
+      "booking_inquiry": 1,
+      "price_inquiry": 1
+    }
+  },
+  "results": [
+    {
+      "question_id": "critical_008",
+      "question": "我公司需要50個人的團體照，今天可以拍嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 0.085,
+      "reply": "這類問題比較適合由真人夥伴來協助，會比較精準、也更貼近你的狀況 🙏\n\n建議你可以透過以下方式聯絡我們：\n- Email：goldenyears166@gmail.com\n- 電話：中山店 02-2709-2224 / 公館店 02-2936-5460\n- IG：@goldenyears_studio\n- 預約連結：https://www.goldenyearsphoto.com/booking/",
+      "intent": "handoff_to_human",
+      "conversation_id": "conv_1764427183303_9oxtcax",
+      "suggested_replies": [
+        "我想了解更多",
+        "如何預約",
+        "拍攝流程"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_002",
+      "question": "我朋友說你們的服務很差，真的嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 0.087,
+      "reply": "非常抱歉讓你遇到這樣的情況，我完全理解你的感受。為了能更準確地協助你，我建議你直接聯絡我們的真人夥伴，他們會立即處理並提供最適合的解決方案。\n\n聯絡方式：\n- Email：goldenyears166@gmail.com\n- 電話：中山店 02-2709-2224 / 公館店 02-2936-5460\n- IG：@goldenyears_studio\n\n我們會盡快回覆並協助你解決問題。\n\n**重要提醒：所有補償決策都由真人客服處理，以確保公平與準確。**",
+      "intent": "complaint",
+      "conversation_id": "conv_1764427183306_l899oqi",
+      "suggested_replies": [
+        "提供具體資訊",
+        "轉真人客服",
+        "看補救方案"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_001",
+      "question": "我對你們的照片很不滿意，可以退費嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 0.094,
+      "reply": "非常抱歉讓你遇到這樣的情況，我完全理解你的感受。為了能更準確地協助你，我建議你直接聯絡我們的真人夥伴，他們會立即處理並提供最適合的解決方案。\n\n聯絡方式：\n- Email：goldenyears166@gmail.com\n- 電話：中山店 02-2709-2224 / 公館店 02-2936-5460\n- IG：@goldenyears_studio\n\n我們會盡快回覆並協助你解決問題。\n\n**重要提醒：所有補償決策都由真人客服處理，以確保公平與準確。**",
+      "intent": "complaint",
+      "conversation_id": "conv_1764427183314_j6ydxep",
+      "suggested_replies": [
+        "提供具體資訊",
+        "轉真人客服",
+        "看補救方案"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_006",
+      "question": "我一次拍10張可以算便宜一點嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.031,
+      "reply": "您好，很榮幸能為您服務！想請問您拍攝照片的用途是什麼呢？例如履歷、形象宣傳，或是個人紀念？不同的用途，我們推薦的拍攝方案也會略有不同喔！\n\n由於大量拍攝的需求比較特殊，實際金額會依拍攝內容與張數而有所調整，建議您提供詳細的需求，例如用途、風格、是否需要妝髮等，以便我們更準確地評估。\n\n您可以參考我們的[方案與價目表](/price-list)，或是直接與我們聯繫洽詢，我們會盡快為您服務。",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183297_v0uzw3p",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_009",
+      "question": "我人在國外，可以線上修圖嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.117,
+      "reply": "您好，很榮幸能為您服務！\n\n關於您人在國外是否能線上修圖的問題，由於修圖需要與您充分溝通，確認細節，目前我們都是採取現場修圖的方式，暫時沒有提供純線上修圖的服務喔。\n\n不過，您可以參考我們的服務項目，或許有其他適合您的方案。目前我們提供韓式證件照、專業形象照、個人寫真、多人合照，以及一日攝影師工作坊等服務。\n\n您有興趣了解哪方面的服務呢？\n\n*   我想了解形象照\n*   我想了解證件照\n*   查看方案與價目表\n*   聯絡真人客服",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183300_816a0nm",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_007",
+      "question": "我明天早上8點就要用照片，可以現在拍嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.215,
+      "reply": "您好，很高興為您服務！想請問您明天早上需要用到什麼樣的照片呢？例如證件照、形象照或是其他用途的照片？\n\n由於拍攝後還需要挑片和精修，整體流程大約需要30分鐘，建議您預留足夠的時間喔！\n\n請問您想拍攝哪種照片呢？\n- 韓式證件照\n- 專業形象照\n- 個人寫真\n- 線上預約",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183302_2kf05g1",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_012",
+      "question": "照片檔案損壞打不開，可以重拍嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.219,
+      "reply": "您好，很抱歉聽到您的照片檔案損壞無法開啟。\n\n關於您詢問是否能重拍，這部分需要先瞭解您的拍攝方案與時間，才能確認後續處理方式。請問您還記得是何時拍攝的、拍攝的是哪種方案呢？\n\n為了保障您的權益，以及提供更完善的協助，建議您提供詳細資訊後，直接聯繫我們的真人客服，我們會盡快為您處理。",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183347_bc2w0ff",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_010",
+      "question": "你們把我的照片寄錯人了，怎麼辦？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.489,
+      "reply": "您好，非常抱歉造成您的困擾！我們會盡快協助您處理照片寄錯的問題。\n\n為了能更有效率地為您處理，想先確認：\n1. 您的姓名與拍攝日期？\n2. 您是在哪間分店拍攝的呢？（中山店或公館店）\n\n收到您的資訊後，我們會立即與您聯繫並確認後續處理方式。\n\n您可以先參考我們的常見問題，也許能找到您想知道的資訊：[方案與價目表](/price-list)",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183312_bxot0uj",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_011",
+      "question": "我預約了但你們忘記了，讓我白跑一趟，要怎麼賠償？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.495,
+      "reply": "這聽起來真的很讓人失望，非常抱歉讓您有不愉快的體驗。\n\n您可以透過我們的[線上預約](https://www.goldenyearsphoto.com/booking/)選擇拍攝項目和時段。預約完成後會收到確認信，裡面有詳細資訊。\n\n針對這次的狀況，由於我無法直接決定賠償方案，建議您提供詳細的預約資訊（例如預約姓名、電話、日期時間）給我們的客服團隊，我們會盡快了解並妥善處理。\n\n您可以選擇：聯絡客服處理、查看改期規則。",
+      "intent": "booking_inquiry",
+      "conversation_id": "conv_1764427183350_1fco0z6",
+      "suggested_replies": [
+        "營業時間",
+        "改期規則",
+        "拍攝注意事項",
+        "分店地址"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_004",
+      "question": "可以打折嗎？我預算只有200元",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.674,
+      "reply": "您好，關於折扣的部分，好時有影的價格都是公開透明的，目前沒有提供額外的折扣喔！\n\n我們的服務是按張計費，各項目的價格範圍如下：\n\n- 韓式證件照：約 NT$399 / 張（低消 1 張）\n- 專業形象照：約 NT$999 / 張（低消 1 張）\n- 個人寫真／畢業寫真：約 NT$999–1,199 / 張\n- 多人合照／全家福：約 NT$1,199 / 張（低消 1 張／每組合）\n- 一日攝影師工作坊：約 NT$6,000 / 5–6 人（包場）\n\n由於您的預算較低，或許可以考慮先拍攝一張韓式證件照，或是參考我們的[方案與價目表](/price-list)，看看有沒有更符合您需求的選擇。\n\n要提醒您，實際金額以現場與當季公告為準喔！若想進一步了解細節，歡迎隨時提出。\n\n您想了解拍攝流程，或是直接[線上預約](https://www.goldenyearsphoto.com/booking/)呢？",
+      "intent": "price_inquiry",
+      "conversation_id": "conv_1764427183289_u0dc2ey",
+      "suggested_replies": [
+        "拍攝流程",
+        "妝髮建議",
+        "交件時間",
+        "線上預約"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_005",
+      "question": "為什麼你們比別家貴這麼多？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.677,
+      "reply": "您好，關於價格的問題，這可能是因為我們在服務上有些不同之處。\n\n好時有影提供精緻修容，以及能適用於各種場合的照片風格。攝影師會引導您擺出最佳姿勢，確保您在鏡頭前展現出自信和魅力。此外，我們也提供舒適的拍攝環境和親切的服務，希望能讓您有美好的拍攝體驗。\n\n實際金額會依據您選擇的方案與當季活動而有所不同，建議您可以參考我們的方案與價目表，選擇最符合您需求的方案。\n\n您想先看看我們的方案與價目表，還是直接線上預約呢？\n[方案與價目表](/price-list)\n[線上預約](https://www.goldenyearsphoto.com/booking/)",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183312_fkfny8z",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_003",
+      "question": "我上次來拍的照片修圖修得很假，很不自然",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.677,
+      "reply": "您好，非常抱歉讓您有不愉快的體驗。我們非常重視每位客人的感受，也很希望能瞭解詳細情況，以便改進。\n\n針對修圖不自然的部分，想先請問您上次拍攝的是哪種方案呢？另外，您還記得大約的拍攝時間嗎？這些資訊可以幫助我們更快釐清狀況。\n\n為了確保您後續的拍攝體驗，我們想邀請您提供更多具體的回饋，或者與我們的客服團隊聯繫，讓我們有機會瞭解細節並提供協助。請您放心，我們會盡力補償，並確保未來能提供更完善的服務。\n\n您希望直接與客服聯繫，還是想先提供更多關於上次拍攝的資訊呢？",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183297_hfizypl",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_013",
+      "question": "你們跟海馬體、天真藍比起來有什麼優勢？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.762,
+      "reply": "您好，很高興為您服務！\n\n關於「好時有影」與海馬體、天真藍的差異，我們認為最大的優勢在於更注重客製化與細膩的情感連結。我們不只追求快速複製，更希望透過攝影捕捉您獨特的故事與個人風格。在好時有影，每一次拍攝都是一次深入的交流，我們會花時間了解您的需求與想法，打造專屬於您的影像作品。\n\n同時，我們在修圖上也更為精緻，追求自然、耐看的風格，讓您在多年後回顧照片，依然能感受到當下的美好。\n\n想更了解我們的拍攝風格嗎？歡迎參考我們的作品集，或許能讓您更了解我們的特色喔！\n\n您接下來想看看哪種服務的詳細介紹呢？\n\n1.  想看看韓式證件照\n2.  想看看專業形象照\n3.  其他問題",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427183360_umjo4je",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_014",
+      "question": "為什麼我要選你們而不是路邊快照店？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.272,
+      "reply": "您好，很高興為您服務！選擇好時有影，不只是拍一張照片，而是為您打造更美好的自己。\n\n路邊快照店可能快速方便，但我們更注重照片的質感與呈現的效果。好時有影提供精緻的修容和引導，能讓您在自然柔光下展現自信美麗的一面。我們希望讓您拿到照片時，覺得「The Same but Better」，擁有更棒的自己。\n\n想請問您拍攝證件照的主要用途是什麼呢？例如：履歷、身分證、還是其他用途？我可以根據您的需求，推薦更適合您的方案喔！\n\n您也可以先參考我們的[方案與價目表](/price-list)，或是直接[線上預約](https://www.goldenyearsphoto.com/booking/)。",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427185306_vkjzrwz",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    },
+    {
+      "question_id": "critical_015",
+      "question": "如果照片被盜用，你們要負責嗎？",
+      "status": "success",
+      "status_code": 200,
+      "response_time": 2.362,
+      "reply": "您好，關於照片被盜用的問題，我來詳細說明一下。\n\n好時有影非常重視客戶的隱私權，我們有嚴格的措施來保護您的照片。但由於網路環境複雜，我們無法保證照片在傳輸或儲存過程中百分之百不被盜用。因此，在拍攝前，我們會與您簽訂肖像權使用協議，詳細載明雙方的權利義務。如果發生照片被盜用的情況，您可以檢視肖像權使用協議，了解相關條款。\n\n**補充說明：** 我們的肖像權使用協議中，會明確規範照片的使用範圍與授權方式，您可以放心。\n\n**您可以選擇以下操作：**\n*  想了解更多肖像權使用協議的細節\n*  想了解更多隱私權政策\n*  想直接線上預約",
+      "intent": "service_inquiry",
+      "conversation_id": "conv_1764427185390_7r8wsmo",
+      "suggested_replies": [
+        "我想拍形象照",
+        "我想拍證件照",
+        "我想拍全家福",
+        "想知道價格"
+      ],
+      "error": null
+    }
+  ]
+}

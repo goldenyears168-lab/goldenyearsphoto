@@ -20,17 +20,25 @@
     const urlParams = new URLSearchParams(window.location.search);
     const hash = window.location.hash;
     
-    // FAQ 頁面（pageType === 'qa'）預設自動開啟
-    if (pageType === 'qa') {
-      return true;
+    // 手機版（寬度 <= 480px）預設關閉
+    if (window.innerWidth <= 480) {
+      // 如果 URL 參數明確要求打開，則打開
+      return (
+        urlParams.get('chat') === 'open' || 
+        urlParams.get('chatbot') === 'open' ||
+        hash === '#chat' ||
+        hash === '#chatbot'
+      );
     }
     
-    return (
-      urlParams.get('chat') === 'open' || 
-      urlParams.get('chatbot') === 'open' ||
-      hash === '#chat' ||
-      hash === '#chatbot'
-    );
+    // 網頁版預設自動開啟
+    // 如果 URL 參數明確要求關閉，則不自動打開
+    if (urlParams.get('chat') === 'close' || urlParams.get('chatbot') === 'close') {
+      return false;
+    }
+    
+    // 預設自動開啟（網頁版）
+    return true;
   }
 
   // 自動打開 chatbot 的函數（帶重試機制）
