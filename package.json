@@ -18,7 +18,10 @@
     "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix",
     "validate-knowledge": "node scripts/validate-knowledge.mjs",
     "diagnose-chatbot": "node scripts/diagnose-chatbot.mjs",
-    "logs": "wrangler pages deployment tail --project-name=goldenyearsphoto"
+    "logs": "wrangler pages deployment tail --project-name=goldenyearsphoto",
+    "test:pipeline": "node scripts/test-pipeline-comparison.mjs && node scripts/verify-mvp.mjs",
+    "test:backend": "node scripts/test-chatbot-api.mjs",
+    "test:all": "npm run test:pipeline && npm run lint"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,69 @@
+name: Test Workflow Syntax
+
+on:
+  workflow_dispatch:  # 允許手動觸發
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/**'
+
+jobs:
+  validate-workflows:
+    name: Validate Workflow Syntax
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate YAML syntax
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const workflowsDir = '.github/workflows';
+            const files = fs.readdirSync(workflowsDir).filter(f => f.endsWith('.yml') || f.endsWith('.yaml'));
+            
+            console.log(`找到 ${files.length} 個 workflow 文件`);
+            
+            for (const file of files) {
+              const filePath = path.join(workflowsDir, file);
+              try {
+                const content = fs.readFileSync(filePath, 'utf-8');
+                
+                // 基本檢查
+                if (!content.includes('name:')) {
+                  throw new Error('缺少 name 欄位');
+                }
+                if (!content.includes('on:')) {
+                  throw new Error('缺少 on 觸發條件');
+                }
+                if (!content.includes('jobs:')) {
+                  throw new Error('缺少 jobs 定義');
+                }
+                
+                console.log(`✅ ${file} - 語法正確`);
+              } catch (error) {
+                console.error(`❌ ${file} - 錯誤: ${error.message}`);
+                core.setFailed(`Workflow ${file} 語法錯誤: ${error.message}`);
+              }
+            }
+      
+      - name: List all workflows
+        run: |
+          echo "📋 所有 Workflow 文件:"
+          ls -la .github/workflows/
+          echo ""
+          echo "📝 Workflow 文件內容摘要:"
+          for file in .github/workflows/*.yml; do
+            echo ""
+            echo "=== $(basename $file) ==="
+            head -5 "$file"
+          done
+
