@@ -171,169 +171,163 @@ export class KnowledgeBase {
    */
   async load(baseUrl?: string): Promise<void> {
     try {
-      // 動態載入 JSON 文件
-      // 在 Cloudflare Pages Functions 中，需要確保這些文件在構建輸出中
+      // 在 Cloudflare Pages Functions 中，優先使用 fetch 載入 JSON 文件
+      // 因為動態 import 在生產環境中可能無法正確解析路徑
       
-      // 嘗試使用動態 import（如果支持）
-      try {
-        console.log('[Knowledge] Attempting dynamic import...');
-        const servicesModule = await import('../../../knowledge/services.json');
-        const personasModule = await import('../../../knowledge/personas.json');
-        const policiesModule = await import('../../../knowledge/policies.json');
-        const contactInfoModule = await import('../../../knowledge/contact_info.json');
-        const responseTemplatesModule = await import('../../../knowledge/response_templates.json');
-        const serviceSummariesModule = await import('../../../knowledge/service_summaries.json');
-        const emotionTemplatesModule = await import('../../../knowledge/emotion_templates.json');
-        const intentNBAMappingModule = await import('../../../knowledge/intent_nba_mapping.json');
-        const faqDetailedModule = await import('../../../knowledge/faq_detailed.json');
-
-        this.services = (servicesModule.default || servicesModule).services || [];
-        this.personas = (personasModule.default || personasModule).personas || [];
-        this.policies = (policiesModule.default || policiesModule).policies || [];
-        
-        const contactData = (contactInfoModule.default || contactInfoModule);
-        this.contactInfo = {
-          branches: contactData.branches || [],
-          contact_channels: contactData.contact_channels || {
-            email: '',
-            ig: '',
-            line: { available: false, message: '' },
-            booking_link: '',
-          },
-          ai_response_rules: contactData.ai_response_rules || {
-            line_inquiry: '',
-            handoff_to_human: {
-              email: '',
-              phone: { zhongshan: '', gongguan: '' },
-              ig: '',
-              booking_link: '',
-            },
-          },
-        };
-
-        // 載入新的資料結構
-        const responseTemplatesData = (responseTemplatesModule.default || responseTemplatesModule);
-        this.responseTemplates = responseTemplatesData.templates || {};
-
-        const serviceSummariesData = (serviceSummariesModule.default || serviceSummariesModule);
-        this.serviceSummaries = serviceSummariesData.summaries || {};
-
-        const emotionTemplatesData = (emotionTemplatesModule.default || emotionTemplatesModule);
-        this.emotionTemplates = emotionTemplatesData.templates || {};
-
-        const intentNBAMappingData = (intentNBAMappingModule.default || intentNBAMappingModule);
-        this.intentNBAMapping = intentNBAMappingData.mappings || {};
-
-        const faqDetailedData = (faqDetailedModule.default || faqDetailedModule);
-        this.faqDetailed = faqDetailedData || null;
-
-        console.log('[Knowledge] Dynamic import successful');
-      } catch (importError) {
-        // 如果動態 import 失敗，嘗試使用 fetch（適用於生產環境）
-        console.warn('[Knowledge] Dynamic import failed, trying fetch:', importError);
-        
-        // 構建基礎 URL
-        // 如果提供了 baseUrl，使用它；否則嘗試從環境變數或使用默認路徑
-        let fetchBaseUrl = baseUrl;
-        if (!fetchBaseUrl) {
-          // 嘗試從環境變數獲取
-          if (typeof globalThis !== 'undefined' && (globalThis as any).CF_PAGES_URL) {
-            fetchBaseUrl = (globalThis as any).CF_PAGES_URL;
-          } else {
-            // 使用相對路徑（在 Cloudflare Pages 中應該能工作）
-            fetchBaseUrl = '';
-          }
-        }
-        
-        // 確保 baseUrl 以 / 結尾（如果有的話）
-        if (fetchBaseUrl && !fetchBaseUrl.endsWith('/')) {
-          fetchBaseUrl += '/';
-        }
-        
-        const knowledgePaths = [
-          'knowledge/services.json',
-          'knowledge/personas.json',
-          'knowledge/policies.json',
-          'knowledge/contact_info.json',
-          'knowledge/response_templates.json',
-          'knowledge/service_summaries.json',
-          'knowledge/emotion_templates.json',
-          'knowledge/intent_nba_mapping.json',
-          'knowledge/faq_detailed.json'
-        ];
-        
-        console.log('[Knowledge] Fetching knowledge files from:', fetchBaseUrl || 'relative path');
-        
-        const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes] = await Promise.all([
-          fetch(`${fetchBaseUrl}knowledge/services.json`),
-          fetch(`${fetchBaseUrl}knowledge/personas.json`),
-          fetch(`${fetchBaseUrl}knowledge/policies.json`),
-          fetch(`${fetchBaseUrl}knowledge/contact_info.json`),
-          fetch(`${fetchBaseUrl}knowledge/response_templates.json`),
-          fetch(`${fetchBaseUrl}knowledge/service_summaries.json`),
-          fetch(`${fetchBaseUrl}knowledge/emotion_templates.json`),
-          fetch(`${fetchBaseUrl}knowledge/intent_nba_mapping.json`),
-          fetch(`${fetchBaseUrl}knowledge/faq_detailed.json`)
-        ]);
-
-        // 檢查響應狀態（新檔案如果載入失敗，使用空物件，不中斷流程）
-        if (!servicesRes.ok) {
-          throw new Error(`Failed to fetch services.json: ${servicesRes.status} ${servicesRes.statusText}`);
-        }
-        if (!personasRes.ok) {
-          throw new Error(`Failed to fetch personas.json: ${personasRes.status} ${personasRes.statusText}`);
-        }
-        if (!policiesRes.ok) {
-          throw new Error(`Failed to fetch policies.json: ${policiesRes.status} ${policiesRes.statusText}`);
-        }
-        if (!contactInfoRes.ok) {
-          throw new Error(`Failed to fetch contact_info.json: ${contactInfoRes.status} ${contactInfoRes.statusText}`);
-        }
-
-        const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData] = await Promise.all([
-          servicesRes.json(),
-          personasRes.json(),
-          policiesRes.json(),
-          contactInfoRes.json(),
-          responseTemplatesRes.ok ? responseTemplatesRes.json() : Promise.resolve({ templates: {} }),
-          serviceSummariesRes.ok ? serviceSummariesRes.json() : Promise.resolve({ summaries: {} }),
-          emotionTemplatesRes.ok ? emotionTemplatesRes.json() : Promise.resolve({ templates: {} }),
-          intentNBAMappingRes.ok ? intentNBAMappingRes.json() : Promise.resolve({ mappings: {} }),
-          faqDetailedRes.ok ? faqDetailedRes.json() : Promise.resolve(null)
-        ]);
-
-        this.services = servicesData.services || [];
-        this.personas = personasData.personas || [];
-        this.policies = policiesData.policies || [];
-        
-        this.contactInfo = {
-          branches: contactInfoData.branches || [],
-          contact_channels: contactInfoData.contact_channels || {
-            email: '',
-            ig: '',
-            line: { available: false, message: '' },
-            booking_link: '',
-          },
-          ai_response_rules: contactInfoData.ai_response_rules || {
-            line_inquiry: '',
-            handoff_to_human: {
-              email: '',
-              phone: { zhongshan: '', gongguan: '' },
-              ig: '',
-              booking_link: '',
-            },
-          },
-        };
-
-        // 載入新的資料結構
-        this.responseTemplates = responseTemplatesData.templates || {};
-        this.serviceSummaries = serviceSummariesData.summaries || {};
-        this.emotionTemplates = emotionTemplatesData.templates || {};
-        this.intentNBAMapping = intentNBAMappingData.mappings || {};
-        this.faqDetailed = faqDetailedData || null;
-
-        console.log('[Knowledge] Fetch successful');
+      // 構建基礎 URL（添加安全驗證）
+      let fetchBaseUrl = baseUrl;
+      if (!fetchBaseUrl) {
+        // 嘗試從 request URL 構建（應該在 chat.ts 中傳入）
+        // 如果沒有，嘗試使用相對路徑
+        fetchBaseUrl = '';
       }
+      
+      // 驗證 baseUrl 格式（防止 SSRF）
+      if (fetchBaseUrl) {
+        try {
+          const url = new URL(fetchBaseUrl);
+          // 只允許 http/https 協議
+          if (!['http:', 'https:'].includes(url.protocol)) {
+            throw new Error(`Invalid protocol: ${url.protocol}`);
+          }
+          // 驗證主機名（可選：限制為特定域名）
+          // 這裡允許任何域名，但可以根據需要限制
+        } catch (error) {
+          console.error('[Knowledge] Invalid baseUrl:', fetchBaseUrl);
+          throw new Error(`Invalid baseUrl format: ${error instanceof Error ? error.message : String(error)}`);
+        }
+      }
+      
+      // 確保 baseUrl 不以 / 結尾（因為路徑已經包含 /）
+      if (fetchBaseUrl && fetchBaseUrl.endsWith('/')) {
+        fetchBaseUrl = fetchBaseUrl.slice(0, -1);
+      }
+      
+      // 構建完整的知識庫文件路徑
+      const knowledgeBasePath = `${fetchBaseUrl}/knowledge`;
+      
+      console.log('[Knowledge] Loading knowledge files from:', knowledgeBasePath || '/knowledge (relative)');
+      
+      // 使用 fetch 載入所有 JSON 文件
+      const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes] = await Promise.all([
+        fetch(`${knowledgeBasePath}/services.json`).catch(err => {
+          console.error('[Knowledge] Failed to fetch services.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/personas.json`).catch(err => {
+          console.error('[Knowledge] Failed to fetch personas.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/policies.json`).catch(err => {
+          console.error('[Knowledge] Failed to fetch policies.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/contact_info.json`).catch(err => {
+          console.error('[Knowledge] Failed to fetch contact_info.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/response_templates.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch response_templates.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/service_summaries.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch service_summaries.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/emotion_templates.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch emotion_templates.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/intent_nba_mapping.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch intent_nba_mapping.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/faq_detailed.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch faq_detailed.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        })
+      ]);
+
+      // 檢查關鍵文件的響應狀態
+      if (!servicesRes.ok) {
+        const errorMsg = `Failed to fetch services.json: ${servicesRes.status} ${servicesRes.statusText}. URL: ${knowledgeBasePath}/services.json`;
+        console.error('[Knowledge]', errorMsg);
+        throw new Error(errorMsg);
+      }
+      if (!personasRes.ok) {
+        const errorMsg = `Failed to fetch personas.json: ${personasRes.status} ${personasRes.statusText}. URL: ${knowledgeBasePath}/personas.json`;
+        console.error('[Knowledge]', errorMsg);
+        throw new Error(errorMsg);
+      }
+      if (!policiesRes.ok) {
+        const errorMsg = `Failed to fetch policies.json: ${policiesRes.status} ${policiesRes.statusText}. URL: ${knowledgeBasePath}/policies.json`;
+        console.error('[Knowledge]', errorMsg);
+        throw new Error(errorMsg);
+      }
+      if (!contactInfoRes.ok) {
+        const errorMsg = `Failed to fetch contact_info.json: ${contactInfoRes.status} ${contactInfoRes.statusText}. URL: ${knowledgeBasePath}/contact_info.json`;
+        console.error('[Knowledge]', errorMsg);
+        throw new Error(errorMsg);
+      }
+
+      // 解析 JSON（可選文件如果失敗，使用空物件）
+      const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData] = await Promise.all([
+        servicesRes.json().catch(err => {
+          console.error('[Knowledge] Failed to parse services.json:', err);
+          throw new Error(`Failed to parse services.json: ${err instanceof Error ? err.message : String(err)}`);
+        }),
+        personasRes.json().catch(err => {
+          console.error('[Knowledge] Failed to parse personas.json:', err);
+          throw new Error(`Failed to parse personas.json: ${err instanceof Error ? err.message : String(err)}`);
+        }),
+        policiesRes.json().catch(err => {
+          console.error('[Knowledge] Failed to parse policies.json:', err);
+          throw new Error(`Failed to parse policies.json: ${err instanceof Error ? err.message : String(err)}`);
+        }),
+        contactInfoRes.json().catch(err => {
+          console.error('[Knowledge] Failed to parse contact_info.json:', err);
+          throw new Error(`Failed to parse contact_info.json: ${err instanceof Error ? err.message : String(err)}`);
+        }),
+        responseTemplatesRes.ok ? responseTemplatesRes.json().catch(() => ({ templates: {} })) : Promise.resolve({ templates: {} }),
+        serviceSummariesRes.ok ? serviceSummariesRes.json().catch(() => ({ summaries: {} })) : Promise.resolve({ summaries: {} }),
+        emotionTemplatesRes.ok ? emotionTemplatesRes.json().catch(() => ({ templates: {} })) : Promise.resolve({ templates: {} }),
+        intentNBAMappingRes.ok ? intentNBAMappingRes.json().catch(() => ({ mappings: {} })) : Promise.resolve({ mappings: {} }),
+        faqDetailedRes.ok ? faqDetailedRes.json().catch(() => null) : Promise.resolve(null)
+      ]);
+
+      // 載入資料
+      this.services = servicesData.services || [];
+      this.personas = personasData.personas || [];
+      this.policies = policiesData.policies || [];
+      
+      this.contactInfo = {
+        branches: contactInfoData.branches || [],
+        contact_channels: contactInfoData.contact_channels || {
+          email: '',
+          ig: '',
+          line: { available: false, message: '' },
+          booking_link: '',
+        },
+        ai_response_rules: contactInfoData.ai_response_rules || {
+          line_inquiry: '',
+          handoff_to_human: {
+            email: '',
+            phone: { zhongshan: '', gongguan: '' },
+            ig: '',
+            booking_link: '',
+          },
+        },
+      };
+
+      // 載入新的資料結構
+      this.responseTemplates = responseTemplatesData.templates || {};
+      this.serviceSummaries = serviceSummariesData.summaries || {};
+      this.emotionTemplates = emotionTemplatesData.templates || {};
+      this.intentNBAMapping = intentNBAMappingData.mappings || {};
+      this.faqDetailed = faqDetailedData || null;
+
+      console.log('[Knowledge] Knowledge base loaded successfully');
+      console.log(`[Knowledge] Loaded ${this.services.length} services, ${this.personas.length} personas, ${this.policies.length} policies`);
 
       this.loaded = true;
       console.log('[Knowledge] Knowledge base loaded successfully');

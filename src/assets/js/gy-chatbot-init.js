@@ -19,9 +19,11 @@
   function shouldAutoOpen() {
     const urlParams = new URLSearchParams(window.location.search);
     const hash = window.location.hash;
+    const isMobile = window.innerWidth <= 480;
+    const isHomePage = pageType === 'home';
     
     // 手機版（寬度 <= 480px）預設關閉
-    if (window.innerWidth <= 480) {
+    if (isMobile) {
       // 如果 URL 參數明確要求打開，則打開
       return (
         urlParams.get('chat') === 'open' || 
@@ -31,14 +33,24 @@
       );
     }
     
-    // 網頁版預設自動開啟
+    // 電腦版邏輯
+    // 如果 URL 參數明確要求打開，則打開（無論頁面類型）
+    if (urlParams.get('chat') === 'open' || 
+        urlParams.get('chatbot') === 'open' ||
+        hash === '#chat' ||
+        hash === '#chatbot') {
+      return true;
+    }
+    
     // 如果 URL 參數明確要求關閉，則不自動打開
     if (urlParams.get('chat') === 'close' || urlParams.get('chatbot') === 'close') {
       return false;
     }
     
-    // 預設自動開啟（網頁版）
-    return true;
+    // 電腦版預設行為：
+    // - 首頁（pageType === 'home'）：預設自動開啟
+    // - 其他頁面：預設關閉
+    return isHomePage;
   }
 
   // 自動打開 chatbot 的函數（帶重試機制）

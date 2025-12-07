@@ -45,12 +45,10 @@ function initLLMService(env: any) {
     console.log('[Init LLM] Checking API key...');
     console.log('[Init LLM] env object exists:', !!env);
     console.log('[Init LLM] API Key exists:', !!apiKey);
-    console.log('[Init LLM] API Key length:', apiKey?.length || 0);
+    // 不記錄 API Key 長度，避免泄露信息
     if (apiKey) {
-      // 显示 API key 的前 8 个字符用于验证（不显示完整 key）
-      const keyPreview = apiKey.length >= 8 ? `${apiKey.substring(0, 8)}...` : 'too short';
-      console.log('[Init LLM] API Key preview:', keyPreview);
-      console.log('[Init LLM] API Key starts with "AIza":', apiKey.startsWith('AIza'));
+      // 只記錄是否以正確前綴開頭，不記錄任何實際字符
+      console.log('[Init LLM] API Key format valid:', apiKey.startsWith('AIza'));
       try {
         llmService = new LLMService(apiKey);
         console.log('[Init LLM] LLM service initialized successfully');
@@ -337,11 +335,24 @@ export async function onRequestPost(context: {
   const startTime = Date.now();
   const TIMEOUT_MS = 10000; // 10 秒超時
 
-  // CORS headers
+  // CORS headers - 限制允許的來源
+  const allowedOrigins = [
+    'https://goldenyearsphoto.pages.dev',
+    'https://www.goldenyearsphoto.com',
+    'https://goldenyearsphoto.com',
+    // 開發環境
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+  ];
+  
+  const origin = request.headers.get('Origin');
+  const allowedOrigin = origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+  
   const corsHeaders = {
-    'Access-Control-Allow-Origin': request.headers.get('Origin') || '*',
+    'Access-Control-Allow-Origin': allowedOrigin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400', // 24 hours
   };
 
   // 處理 OPTIONS 請求
@@ -359,8 +370,17 @@ export async function onRequestPost(context: {
       );
     }
 
-    // 解析請求體
-    const body: ChatRequestBody = await request.json();
+    // 解析請求體（添加錯誤處理）
+    let body: ChatRequestBody;
+    try {
+      body = await request.json();
+    } catch (error) {
+      console.error('[Chat] Failed to parse request body:', error);
+      return new Response(
+        JSON.stringify({ error: 'Invalid JSON', message: '請求體必須是有效的 JSON 格式' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     // 驗證必要欄位
     if (!body.message || typeof body.message !== 'string' || body.message.trim().length === 0) {
@@ -378,14 +398,58 @@ export async function onRequestPost(context: {
       );
     }
 
+    // 驗證 conversationId 格式（如果提供）
+    if (body.conversationId) {
+      if (typeof body.conversationId !== 'string' || 
+          body.conversationId.length > 100 ||
+          !/^conv_[a-zA-Z0-9_]+$/.test(body.conversationId)) {
+        return new Response(
+          JSON.stringify({ error: 'Invalid request', message: 'conversationId 格式不正確' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
+    // 驗證 mode 值
+    if (body.mode && !['auto', 'decision_recommendation', 'faq_flow_price'].includes(body.mode)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request', message: 'mode 值不正確' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // 驗證 source 值
+    if (body.source && !['menu', 'input'].includes(body.source)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request', message: 'source 值不正確' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // 驗證 pageType 值
+    if (body.pageType && !['home', 'qa'].includes(body.pageType)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request', message: 'pageType 值不正確' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     // 載入知識庫
     console.log('[Chat] Loading knowledge base...');
+    // 不記錄完整 URL，避免泄露敏感信息
+    const url = new URL(request.url);
+    console.log('[Chat] Request host:', url.host);
     let kb;
     try {
       kb = await loadKnowledgeBase(request);
       console.log('[Chat] Knowledge base loaded successfully');
     } catch (error) {
       console.error('[Chat] Failed to load knowledge base:', error);
+      console.error('[Chat] Error details:', error instanceof Error ? {
+        message: error.message,
+        stack: error.stack?.substring(0, 500) // 限制 stack 長度
+      } : String(error));
+      // 重新拋出錯誤，讓上層 catch 處理
       throw error;
     }
     
@@ -694,7 +758,7 @@ export async function onRequestPost(context: {
       content: msg.text,
     }));
 
-    // 使用 Promise.race 實現超時
+    // 使用 Promise.race 實現超時（修復內存泄漏）
     const replyPromise = llm.generateReply({
       message: body.message,
       intent,
@@ -708,14 +772,25 @@ export async function onRequestPost(context: {
       knowledgeBase: kb, // 傳入知識庫實例，用於獲取價格資訊
     });
 
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     const timeoutPromise = new Promise<string>((_, reject) => {
-      setTimeout(() => reject(new Error('Timeout')), TIMEOUT_MS);
+      timeoutId = setTimeout(() => reject(new Error('Timeout')), TIMEOUT_MS);
     });
 
     let reply: string;
     try {
       reply = await Promise.race([replyPromise, timeoutPromise]) as string;
+      // 清理定時器（如果還在運行）
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
     } catch (error) {
+      // 確保清理定時器
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
       if (error instanceof Error && error.message === 'Timeout') {
         reply = getTimeoutTemplate();
       } else {
@@ -751,10 +826,33 @@ export async function onRequestPost(context: {
     );
 
   } catch (error) {
-    console.error('[Chat Error]', error);
+    // 詳細的錯誤日誌
+    console.error('[Chat Error] ========== ERROR START ==========');
     console.error('[Chat Error] Error type:', error instanceof Error ? error.constructor.name : typeof error);
     console.error('[Chat Error] Error message:', error instanceof Error ? error.message : String(error));
-    console.error('[Chat Error] Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+    // 不記錄完整堆棧，避免泄露內部實現細節
+    if (error instanceof Error && error.stack) {
+      // 只記錄堆棧的前 200 個字符
+      const stackPreview = error.stack.substring(0, 200);
+      console.error('[Chat Error] Error stack preview:', stackPreview);
+    }
+    
+    // 檢查是否是知識庫載入錯誤
+    if (error instanceof Error && error.message.includes('Failed to load knowledge base')) {
+      console.error('[Chat Error] Knowledge base loading failed - this is likely the root cause');
+      console.error('[Chat Error] Please check:');
+      console.error('[Chat Error] 1. Knowledge files exist in _site/knowledge/ after build');
+      console.error('[Chat Error] 2. Knowledge files are accessible via HTTP');
+      console.error('[Chat Error] 3. Base URL is correctly constructed');
+    }
+    
+    // 檢查是否是 LLM 初始化錯誤
+    if (error instanceof Error && (error.message.includes('GEMINI_API_KEY') || error.message.includes('LLM'))) {
+      console.error('[Chat Error] LLM service initialization failed');
+      console.error('[Chat Error] Please check GEMINI_API_KEY environment variable in Cloudflare Pages');
+    }
+    
+    console.error('[Chat Error] ========== ERROR END ==========');
     
     const response: ChatResponse = {
       reply: getApiErrorTemplate(),

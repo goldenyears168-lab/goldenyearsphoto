@@ -30,12 +30,38 @@ export interface ConversationContext {
 // 注意：這在 Cloudflare Pages Functions 中可能不會持久化，建議後續使用 KV
 const contexts: Map<string, ConversationContext> = new Map();
 const CONTEXT_TTL = 30 * 60 * 1000; // 30 分鐘
+const MAX_CONTEXTS = 1000; // 最大上下文數量，防止內存耗盡
+const CLEANUP_INTERVAL = 5 * 60 * 1000; // 每 5 分鐘清理一次
+
+// 定期清理過期上下文（防止內存泄漏）
+let lastCleanup = Date.now();
+function autoCleanup() {
+  const now = Date.now();
+  // 每 5 分鐘清理一次
+  if (now - lastCleanup > CLEANUP_INTERVAL) {
+    lastCleanup = now;
+    const manager = new ContextManager();
+    manager.cleanupExpiredContexts();
+    
+    // 如果上下文數量超過限制，清理最舊的
+    if (contexts.size > MAX_CONTEXTS) {
+      const sorted = Array.from(contexts.entries())
+        .sort((a, b) => a[1].lastActivityAt - b[1].lastActivityAt);
+      const toDelete = sorted.slice(0, contexts.size - MAX_CONTEXTS);
+      toDelete.forEach(([id]) => contexts.delete(id));
+      console.log(`[ContextManager] Cleaned up ${toDelete.length} old contexts`);
+    }
+  }
+}
 
 export class ContextManager {
   /**
    * 取得上下文
    */
   getContext(conversationId: string): ConversationContext | null {
+    // 自動清理過期上下文
+    autoCleanup();
+    
     const context = contexts.get(conversationId);
     if (!context) {
       return null;
@@ -54,6 +80,18 @@ export class ContextManager {
    * 建立新上下文
    */
   createContext(conversationId?: string): ConversationContext {
+    // 自動清理過期上下文
+    autoCleanup();
+    
+    // 如果達到最大數量，清理最舊的
+    if (contexts.size >= MAX_CONTEXTS) {
+      const sorted = Array.from(contexts.entries())
+        .sort((a, b) => a[1].lastActivityAt - b[1].lastActivityAt);
+      const toDelete = sorted.slice(0, Math.floor(MAX_CONTEXTS * 0.1)); // 清理 10%
+      toDelete.forEach(([id]) => contexts.delete(id));
+      console.log(`[ContextManager] Cleaned up ${toDelete.length} contexts to make room`);
+    }
+    
     const id = conversationId || this.generateConversationId();
     const now = Date.now();
 
