@@ -1,0 +1,84 @@
+{
+  "executionId": "exec_1765111610800",
+  "startTime": 1765111608855,
+  "endTime": 1765111610799,
+  "totalDuration": 1944,
+  "nodes": [
+    {
+      "node": "validateRequest",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608860,
+      "duration": 5
+    },
+    {
+      "node": "initializeServices",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608980,
+      "duration": 120
+    },
+    {
+      "node": "contextManagement",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608982,
+      "duration": 2
+    },
+    {
+      "node": "intentExtraction",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608990,
+      "duration": 8
+    },
+    {
+      "node": "stateTransition",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608993,
+      "duration": 3
+    },
+    {
+      "node": "specialIntents",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608994,
+      "duration": 1
+    },
+    {
+      "node": "faqCheck",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111608996,
+      "duration": 2
+    },
+    {
+      "node": "llmGeneration",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111610796,
+      "duration": 1800
+    },
+    {
+      "node": "buildResponse",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111610799,
+      "duration": 3
+    }
+  ],
+  "statistics": {
+    "totalNodes": 9,
+    "successNodes": 9,
+    "errorNodes": 0,
+    "avgDuration": 216,
+    "slowestNode": {
+      "node": "llmGeneration",
+      "level": "SUCCESS",
+      "message": "節點執行完成",
+      "timestamp": 1765111610796,
+      "duration": 1800
+    }
+  }
+}

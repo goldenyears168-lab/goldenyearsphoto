@@ -1,0 +1,45 @@
+
+┌─────────────────────────────────────────────────────────┐
+│              Pipeline 執行流程追蹤                       │
+└─────────────────────────────────────────────────────────┘
+
+   ✅ [validateRequest] 節點執行完成 (5ms)
+   │
+   │
+   ✅ [initializeServices] 節點執行完成 (120ms)
+   │
+   │
+   ✅ [contextManagement] 節點執行完成 (2ms)
+   │
+   │
+   ✅ [intentExtraction] 節點執行完成 (8ms)
+   │
+   │
+   ✅ [stateTransition] 節點執行完成 (3ms)
+   │
+   │
+   ✅ [specialIntents] 節點執行完成 (1ms)
+   │
+   │
+   ✅ [faqCheck] 節點執行完成 (2ms)
+   │
+   │
+   ✅ [llmGeneration] 節點執行完成 (1800ms)
+   │
+   │
+   ✅ [buildResponse] 節點執行完成 (3ms)
+
+
+┌─────────────────────────────────────────────────────────┐
+│              執行時間軸（總耗時: 1944ms）    │
+└─────────────────────────────────────────────────────────┘
+
+validateRequest:          [█] 5ms
+initializeServices:       [████] 120ms
+contextManagement:        [█] 2ms
+intentExtraction:         [█] 8ms
+stateTransition:          [█] 3ms
+specialIntents:           [█] 1ms
+faqCheck:                 [█] 2ms
+llmGeneration:            [████████████████████████████████████████████████████████] 1800ms
+buildResponse:            [█] 3ms
