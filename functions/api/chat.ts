@@ -23,7 +23,8 @@ let llmService: LLMService | null = null;
 let contextManager: ContextManager | null = null;
 
 // 載入知識庫（延遲載入）
-async function loadKnowledgeBase(request?: Request) {
+// ⚠️ 導出供 Pipeline 節點使用
+export async function loadKnowledgeBase(request?: Request) {
   if (!knowledgeBase) {
     knowledgeBase = new KnowledgeBase();
     // 從 request URL 構建基礎 URL
@@ -38,7 +39,8 @@ async function loadKnowledgeBase(request?: Request) {
 }
 
 // 初始化 LLM 服務
-function initLLMService(env: any) {
+// ⚠️ 導出供 Pipeline 節點使用
+export function initLLMService(env: any) {
   if (!llmService) {
     // 在 Cloudflare Pages Functions 中，环境变量通过 env 参数访问
     const apiKey = env?.GEMINI_API_KEY;
@@ -65,7 +67,8 @@ function initLLMService(env: any) {
 }
 
 // 初始化 Context Manager
-function initContextManager() {
+// ⚠️ 導出供 Pipeline 節點使用
+export function initContextManager() {
   if (!contextManager) {
     contextManager = new ContextManager();
   }
@@ -108,171 +111,287 @@ interface ChatResponse {
 }
 
 /**
- * 意圖分類
+ * 統一響應構建函數
+ * 減少重複的響應構建代碼（減少 ~35 個條件判斷）
  */
-function classifyIntent(
-  message: string,
-  context?: { last_intent?: string; slots?: Record<string, any> }
-): string {
-  const lowerMessage = message.toLowerCase();
+function buildResponse(
+  reply: string,
+  intent: string,
+  conversationId: string,
+  mergedEntities: Record<string, any>,
+  cm: ContextManager,
+  kb: KnowledgeBase,
+  userMessage: string,
+  corsHeaders: Record<string, string>,
+  nextState?: ConversationContext['state']
+): Response {
+  cm.updateContext(conversationId, {
+    last_intent: intent,
+    slots: mergedEntities,
+    userMessage,
+    assistantMessage: reply,
+    state: nextState,
+  });
 
-  // 檢查是否為投訴
-  const complaintKeywords = ['不滿意', '生氣', '投訴', '抱怨', '很差', '很糟', '後悔'];
-  if (complaintKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'complaint';
-  }
+  const response: ChatResponse = {
+    reply,
+    intent,
+    conversationId,
+    updatedContext: {
+      last_intent: intent,
+      slots: mergedEntities,
+    },
+    suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, nextState, kb),
+  };
 
-  // 檢查是否要轉真人
-  const handoffKeywords = ['真人', '人工', '客服', '人員', '員工'];
-  const handoffContexts = ['企業', '公司', '團體', '20人', '報價', '合作', '大量'];
-  if (
-    handoffKeywords.some(keyword => lowerMessage.includes(keyword)) ||
-    handoffContexts.some(ctx => lowerMessage.includes(ctx))
-  ) {
-    return 'handoff_to_human';
-  }
-
-  // 檢查是否為價格詢問
-  const priceKeywords = ['多少錢', '價格', '費用', '預算', '價位', '收費', '要多少'];
-  // 排除政策類問題（例如「AI 客服可以跟我說到多細的價格資訊」）
-  const policyPriceKeywords = ['可以跟我說到', '說到多細', '哪些一定要', '再問真人', '報價範圍'];
-  if (priceKeywords.some(keyword => lowerMessage.includes(keyword)) && 
-      !policyPriceKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'price_inquiry';
-  }
-
-  // 檢查是否為交件時間詢問
-  const deliveryKeywords = ['多久會好', '多久收到', '交件時間', '交件', '何時交件', '什麼時候好', '幾天', '交件速度'];
-  if (deliveryKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'delivery_inquiry';
-  }
-
-  // 檢查是否為地址/地點詢問
-  const locationKeywords = ['地址', '地點', '在哪裡', '在哪', '位置', '怎麼去', '交通', '捷運', '分店', '店址', '停車', '停車場', '停車位', '哪裡停車', '附近停車', '電話', '聯絡電話', '聯繫電話', '電話號碼', '營業時間', '開門時間', '幾點開', '幾點關', '開店時間', '關店時間', '聯絡', '聯繫', '聯絡方式', '聯繫方式', '怎麼聯絡', '怎麼聯繫', 'email', '信箱', 'ig', 'instagram', 'line'];
-  if (locationKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'location_inquiry';
-  }
-
-  // 檢查是否為妝髮詢問
-  const makeupKeywords = ['妝髮', '化妝', '髮型', '造型', 'makeup', '彩妝', '妝容', '髮型設計', '造型師'];
-  if (makeupKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'makeup_inquiry';
-  }
-
-  // 檢查是否為預約相關
-  const bookingKeywords = ['預約', '改期', '取消', '時間', '時段', '什麼時候', '延後', '提前', '變更', '更改', '調整時間', '重新預約'];
-  if (bookingKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'booking_inquiry';
-  }
-
-  // 檢查是否為比較
-  const comparisonKeywords = ['差', '比較', '哪個好', '哪個適合', '有什麼不同', '差別'];
-  if (comparisonKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'comparison';
-  }
-
-  // 檢查是否為結束
-  const goodbyeKeywords = ['謝謝', '先這樣', '再見', 'bye', '結束', '好了'];
-  if (goodbyeKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'goodbye';
-  }
-
-  // 檢查是否為打招呼
-  const greetingKeywords = ['嗨', '你好', '在嗎', '哈囉', 'hello', 'hi'];
-  if (greetingKeywords.some(keyword => lowerMessage.includes(keyword)) || lowerMessage.length < 5) {
-    return 'greeting';
-  }
-
-  // 檢查是否為服務諮詢
-  const serviceKeywords = ['拍', '照', '形象', '證件', '寫真', '全家福', '工作坊'];
-  if (serviceKeywords.some(keyword => lowerMessage.includes(keyword))) {
-    return 'service_inquiry';
-  }
-
-  // 使用上次的意圖
-  if (context?.last_intent && lowerMessage.length < 10) {
-    return context.last_intent;
-  }
-
-  return 'service_inquiry';
+  return new Response(
+    JSON.stringify(response),
+    { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+  );
 }
 
 /**
- * 實體提取
+ * FAQ 處理規則配置
  */
-function extractEntities(message: string): Record<string, any> {
+interface FAQRule {
+  shouldCheckFAQ: (message: string) => boolean;
+  faqFilter?: (faq: any, message?: string) => boolean;
+  }
+
+const faqHandlingRules: Record<string, FAQRule> = {
+  location_inquiry: {
+    shouldCheckFAQ: () => true,
+  },
+  price_inquiry: {
+    shouldCheckFAQ: (msg) => {
+      const lower = msg.toLowerCase();
+      return ['可以跟我說到', '說到多細', '哪些一定要', '再問真人', '報價範圍']
+        .some(k => lower.includes(k));
+    },
+    faqFilter: (faq) => faq.critical && faq.id === 'policy_price_scope',
+  },
+  booking_inquiry: {
+    shouldCheckFAQ: (msg) => {
+      const lower = msg.toLowerCase();
+      return ['改期', '取消', 'reschedule', 'cancel'].some(k => lower.includes(k));
+    },
+    faqFilter: (faq, message) => {
+      if (!faq.critical) return false;
+      if (faq.id === 'policy_reschedule_cancel') return true;
+      if (message && faq.keywords && faq.keywords.some((k: string) => 
+        message.toLowerCase().includes(k.toLowerCase())
+      )) return true;
+      return false;
+    },
+  },
+};
+
+/**
+ * 統一 FAQ 檢查處理函數
+ * 減少重複的 FAQ 檢查邏輯（減少 ~12 個條件判斷）
+ */
+function handleFAQIfNeeded(
+  intent: string,
+  message: string,
+  kb: KnowledgeBase,
+  context_obj: ConversationContext,
+  mergedEntities: Record<string, any>,
+  cm: ContextManager,
+  corsHeaders: Record<string, string>,
+  nextState?: ConversationContext['state']
+): Response | null {
+  const rule = faqHandlingRules[intent];
+  if (!rule || !rule.shouldCheckFAQ(message)) {
+    return null; // 不需要檢查 FAQ
+  }
+  
+  const faqResults = kb.searchFAQ(message);
+  let criticalFAQ: any;
+  
+  if (rule.faqFilter) {
+    // 如果有自定義過濾器，傳入 message 參數（如果過濾器需要）
+    criticalFAQ = faqResults.find((faq: any) => rule.faqFilter!(faq, message));
+  } else {
+    criticalFAQ = faqResults.find((faq: any) => faq.critical);
+  }
+  
+  if (criticalFAQ) {
+    return buildResponse(
+      criticalFAQ.answer,
+      intent,
+      context_obj.conversationId,
+      mergedEntities,
+      cm,
+      kb,
+      message,
+      corsHeaders,
+      nextState
+    );
+  }
+
+  return null; // FAQ 未匹配，繼續 LLM 處理
+}
+
+/**
+ * 意圖分類（配置驅動版本）
+ * 使用 intent_config.json 配置文件，減少硬編碼（減少 ~12 個條件判斷）
+ */
+function classifyIntent(
+  message: string,
+  context?: { last_intent?: string; slots?: Record<string, any> },
+  knowledgeBase?: KnowledgeBase
+): string {
+  const lowerMessage = message.toLowerCase();
+
+  // 嘗試從知識庫獲取配置
+  let intentConfig = null;
+  if (knowledgeBase) {
+    try {
+      intentConfig = knowledgeBase.getIntentConfig();
+    } catch (error) {
+      console.warn('[Chat] Failed to get intent config from knowledge base:', error);
+    }
+  }
+
+  // 如果沒有配置，使用 fallback 邏輯
+  if (!intentConfig || !intentConfig.intents) {
+    // Fallback: 使用上次的意圖（如果上下文存在且訊息很短）
+    if (context?.last_intent && lowerMessage.length < 10) {
+      return context.last_intent;
+    }
+    return 'service_inquiry'; // 預設意圖
+  }
+
+  // 按優先級排序意圖配置
+  const sortedIntents = [...intentConfig.intents].sort((a, b) => a.priority - b.priority);
+
+  // 遍歷配置，找到匹配的意圖
+  for (const intent of sortedIntents) {
+    // 檢查關鍵字匹配
+    const hasKeyword = intent.keywords.some(keyword => lowerMessage.includes(keyword));
+
+    // 檢查上下文關鍵字匹配
+    const hasContextKeyword = intent.contextKeywords.length > 0 && 
+      intent.contextKeywords.some(ctx => lowerMessage.includes(ctx));
+    
+    // 檢查排除關鍵字
+    const hasExcludeKeyword = intent.excludeKeywords.length > 0 &&
+      intent.excludeKeywords.some(exclude => lowerMessage.includes(exclude));
+
+    // 特殊條件檢查（例如：短訊息）
+    let matchesSpecialCondition = false;
+    if (intent.specialConditions) {
+      if (intent.specialConditions.shortMessage && 
+          lowerMessage.length < (intent.specialConditions.shortMessageThreshold || 5)) {
+        matchesSpecialCondition = true;
+      }
+    }
+
+    // 如果匹配關鍵字或上下文關鍵字，且沒有排除關鍵字，則返回該意圖
+    if ((hasKeyword || hasContextKeyword || matchesSpecialCondition) && !hasExcludeKeyword) {
+      return intent.id;
+    }
+  }
+
+  // 如果沒有匹配，使用 fallback 邏輯
+  if (intentConfig.fallback.useContextIntent && 
+      context?.last_intent && 
+      lowerMessage.length < intentConfig.fallback.contextIntentThreshold) {
+    return context.last_intent;
+  }
+
+  return intentConfig.fallback.defaultIntent;
+}
+
+/**
+ * 統一實體提取函數（配置驅動版本）
+ * 使用 entity_patterns.json 配置文件，減少硬編碼（減少 ~15 個條件判斷）
+ */
+function extractEntityByPatterns(
+  message: string,
+  patterns: Array<{ keywords: string[]; id: string }>
+): string | undefined {
+  const lowerMessage = message.toLowerCase();
+  for (const pattern of patterns) {
+    if (pattern.keywords.some(keyword => lowerMessage.includes(keyword))) {
+      return pattern.id;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * 實體提取（配置驅動版本）
+ */
+function extractEntities(
+  message: string,
+  knowledgeBase?: KnowledgeBase
+): Record<string, any> {
   const lowerMessage = message.toLowerCase();
   const entities: Record<string, any> = {};
 
-  // 提取 service_type
-  const servicePatterns = [
-    { keywords: ['證件照', '證照', '護照照', '簽證照', 'headshot', '韓式'], id: 'headshot_korean' },
-    { keywords: ['形象照', 'linkedin照', '履歷照', '職場照', '專業照', 'professional'], id: 'portrait_pro' },
-    { keywords: ['寫真', '個人寫真', '畢業寫真', '畢業照', 'artistic'], id: 'portrait_grad_personal' },
-    { keywords: ['全家福', '家庭照', '家庭合照', '朋友合照', '團體照', 'group'], id: 'group_family' },
-    { keywords: ['一日攝影師', '攝影體驗', '攝影課', '工作坊', 'workshop'], id: 'workshop_challenge' },
-  ];
-
-  for (const pattern of servicePatterns) {
-    if (pattern.keywords.some(keyword => lowerMessage.includes(keyword))) {
-      entities.service_type = pattern.id;
-      break;
+  // 嘗試從知識庫獲取配置
+  let entityPatterns = null;
+  if (knowledgeBase) {
+    try {
+      entityPatterns = knowledgeBase.getEntityPatterns();
+    } catch (error) {
+      console.warn('[Chat] Failed to get entity patterns from knowledge base:', error);
     }
+  }
+
+  // 如果沒有配置，使用 fallback 邏輯（簡單匹配）
+  if (!entityPatterns || !entityPatterns.patterns) {
+    // Fallback: 基本的實體提取邏輯
+    if (lowerMessage.includes('預約') || lowerMessage.includes('book')) {
+      entities.booking_action = 'book';
+    }
+    return entities;
+    }
+
+  const patterns = entityPatterns.patterns;
+
+  // 提取 service_type（使用統一函數）
+  if (patterns.service_type) {
+    entities.service_type = extractEntityByPatterns(message, patterns.service_type);
   }
 
   // 提取 use_case
-  const useCasePatterns = [
-    { keywords: ['履歷', 'linkedin', '求職', '面試', '轉職', 'resume'], id: 'linkedin_resume' },
-    { keywords: ['護照', '簽證', '身分證', '駕照', '證照', 'official'], id: 'official_document' },
-    { keywords: ['紀念', '生日', '畢業', '紀錄', '里程碑', 'memorial'], id: 'memorial' },
-    { keywords: ['ig', '社群', '粉專', '個人品牌', '自媒體', 'social'], id: 'social_media' },
-    { keywords: ['全家福', '親子', '情侶', '家人', '小孩', 'family'], id: 'family_couple' },
-  ];
-
-  for (const pattern of useCasePatterns) {
-    if (pattern.keywords.some(keyword => lowerMessage.includes(keyword))) {
-      entities.use_case = pattern.id;
-      break;
-    }
+  if (patterns.use_case) {
+    entities.use_case = extractEntityByPatterns(message, patterns.use_case);
   }
 
   // 提取 persona
-  const personaPatterns = [
-    { keywords: ['學生', '畢業', '大學', '碩士', 'freshman'], id: 'student_graduating' },
-    { keywords: ['轉職', '上班族', '工程師', '顧問', '律師', 'professional'], id: 'pro_switching_job' },
-    { keywords: ['家庭', '媽媽', '爸爸', '長輩', '主理人', 'family'], id: 'family_keeper' },
-    { keywords: ['企業', '公司', '人資', '福委', '團體', 'corporate'], id: 'hr_corporate' },
-  ];
+  if (patterns.persona) {
+    entities.persona = extractEntityByPatterns(message, patterns.persona);
+  }
 
-  for (const pattern of personaPatterns) {
-    if (pattern.keywords.some(keyword => lowerMessage.includes(keyword))) {
-      entities.persona = pattern.id;
+  // 提取 branch（特殊處理：對象結構）
+  if (patterns.branch) {
+    for (const [branchId, branchConfig] of Object.entries(patterns.branch)) {
+      if (branchConfig.keywords.some(keyword => lowerMessage.includes(keyword))) {
+        entities.branch = branchId;
       break;
     }
   }
-
-  // 提取 branch
-  if (lowerMessage.includes('中山') || lowerMessage.includes('zhongshan')) {
-    entities.branch = 'zhongshan';
-  } else if (lowerMessage.includes('公館') || lowerMessage.includes('gongguan') || lowerMessage.includes('台大')) {
-    entities.branch = 'gongguan';
   }
 
-  // 提取 booking_action
-  if (lowerMessage.includes('預約') || lowerMessage.includes('book')) {
-    entities.booking_action = 'book';
-  } else if (lowerMessage.includes('改期') || lowerMessage.includes('reschedule')) {
-    entities.booking_action = 'reschedule';
-  } else if (lowerMessage.includes('取消') || lowerMessage.includes('cancel')) {
-    entities.booking_action = 'cancel';
+  // 提取 booking_action（特殊處理：對象結構）
+  if (patterns.booking_action) {
+    for (const [actionId, actionConfig] of Object.entries(patterns.booking_action)) {
+      if (actionConfig.keywords.some(keyword => lowerMessage.includes(keyword))) {
+        entities.booking_action = actionId;
+        break;
+      }
+    }
   }
 
   return entities;
 }
 
 /**
- * 取得建議的快速回覆
- * 優先使用 intent_nba_mapping.json 的定義，如果找不到才使用 fallback 邏輯
+ * 取得建議的快速回覆（優化版）
+ * 優先使用知識庫，簡化 fallback 邏輯（減少 ~6 個條件判斷）
  */
 function getSuggestedQuickReplies(
   intent: string,
@@ -280,7 +399,7 @@ function getSuggestedQuickReplies(
   state?: string,
   knowledgeBase?: any
 ): string[] {
-  // 優先使用知識庫中的 intent_nba_mapping
+  // 優先級 1: intent_nba_mapping
   if (knowledgeBase) {
     try {
       const nbaActions = knowledgeBase.getNextBestActions(intent);
@@ -291,10 +410,10 @@ function getSuggestedQuickReplies(
       console.error('[Chat] Failed to get next best actions from knowledge base:', error);
     }
 
-    // 如果 intent_nba_mapping 沒有，嘗試從 response_template 取得
+    // 優先級 2: response_template
     try {
       const responseTemplate = knowledgeBase.getResponseTemplate(intent);
-      if (responseTemplate && responseTemplate.next_best_actions && responseTemplate.next_best_actions.length > 0) {
+      if (responseTemplate?.next_best_actions?.length > 0) {
         return responseTemplate.next_best_actions;
       }
     } catch (error) {
@@ -302,31 +421,31 @@ function getSuggestedQuickReplies(
     }
   }
 
-  // Fallback 邏輯（如果知識庫沒有對應的定義）
-  if (state === 'COLLECTING_INFO') {
-    if (entities.service_type) {
-      return ['想知道價格', '如何預約', '拍攝流程'];
-    } else {
-      return ['我想拍形象照', '我想拍證件照', '我想拍全家福'];
-    }
-  } else if (state === 'RECOMMENDING') {
-    return ['我想了解更多', '如何預約', '拍攝流程'];
-  } else if (intent === 'service_inquiry') {
-    return ['想知道價格', '如何預約', '拍攝流程'];
-  } else if (intent === 'price_inquiry') {
-    return ['我想了解更多', '如何預約', '拍攝流程'];
-  } else if (intent === 'location_inquiry') {
-    return ['想知道價格', '如何預約', '拍攝流程'];
-  } else if (intent === 'greeting') {
-    return ['我想拍形象照', '想知道價格', '如何預約'];
-  }
-  return ['我想了解更多', '如何預約', '拍攝流程'];
+  // 統一的 fallback（簡化邏輯）
+  return ['我想了解更多', '如何預約', '聯絡真人'];
 }
 
 /**
  * Cloudflare Pages Function Handler
+ * 
+ * ⚠️ 注意：此函數已重構為使用 Pipeline 模式
+ * 使用動態導入以避免循環依賴
  */
 export async function onRequestPost(context: {
+  request: Request;
+  env: any;
+  waitUntil: (promise: Promise<any>) => void;
+}): Promise<Response> {
+  // 使用 Pipeline 版本（動態導入避免循環依賴）
+  const { onRequestPostPipeline } = await import('./chat-pipeline.js');
+  return onRequestPostPipeline(context);
+}
+
+/**
+ * 舊版本的 onRequestPost（作為備份）
+ * 保留用於對比測試和回滾
+ */
+async function onRequestPost_legacy(context: {
   request: Request;
   env: any;
   waitUntil: (promise: Promise<any>) => void;
@@ -477,14 +596,14 @@ export async function onRequestPost(context: {
       context_obj = cm.createContext();
     }
 
-    // 意圖分類
+    // 意圖分類（使用配置驅動）
     const intent = classifyIntent(body.message, {
       last_intent: context_obj.last_intent,
       slots: context_obj.slots,
-    });
+    }, kb);
 
-    // 實體提取
-    const entities = extractEntities(body.message);
+    // 實體提取（使用配置驅動）
+    const entities = extractEntities(body.message, kb);
 
     // 合併上下文中的實體
     const mergedEntities = {
@@ -492,205 +611,96 @@ export async function onRequestPost(context: {
       ...entities,
     };
 
-    // 檢查 Line 官方帳號詢問
+    // 決定下一個狀態（使用配置驅動）
+    let nextState: ConversationContext['state'] = context_obj.state;
+    try {
+      const stateTransitionsConfig = kb.getStateTransitionsConfig();
+      if (stateTransitionsConfig) {
+        // 檢查是否有必需的 slots（使用配置中的規則）
+        const requiredSlotsCheck = stateTransitionsConfig.requiredSlotsCheck;
+        let hasRequiredSlots = false;
+        if (requiredSlotsCheck) {
+          if (requiredSlotsCheck.requireAny) {
+            // 需要任意一個字段
+            hasRequiredSlots = requiredSlotsCheck.fields.some(field => mergedEntities[field]);
+          } else {
+            // 需要所有字段
+            hasRequiredSlots = requiredSlotsCheck.fields.every(field => mergedEntities[field]);
+          }
+        } else {
+          // 默認邏輯：至少需要 service_type 或 use_case
+          hasRequiredSlots = !!(mergedEntities.service_type || mergedEntities.use_case);
+        }
+
+        nextState = cm.determineNextState(
+          context_obj.state,
+        intent,
+          hasRequiredSlots,
+          {
+            transitions: stateTransitionsConfig.transitions,
+            requiredSlotsCheck: stateTransitionsConfig.requiredSlotsCheck,
+          }
+        );
+      } else {
+        // 如果沒有配置，使用 fallback 邏輯
+        const hasRequiredSlots = !!(mergedEntities.service_type || mergedEntities.use_case);
+        nextState = cm.determineNextState(context_obj.state, intent, hasRequiredSlots);
+    }
+    } catch (error) {
+      console.warn('[Chat] Failed to determine next state, using current state:', error);
+      // 使用當前狀態作為 fallback
+    }
+
+    // 檢查 Line 官方帳號詢問（使用統一響應構建函數）
     if (body.message.includes('line') || body.message.includes('Line') || body.message.includes('LINE')) {
-      const reply = getLineInquiryTemplate();
-      cm.updateContext(context_obj.conversationId, {
-        last_intent: intent,
-        slots: mergedEntities,
-        userMessage: body.message,
-        assistantMessage: reply,
-      });
-
-      const response: ChatResponse = {
-        reply,
+      return buildResponse(
+        getLineInquiryTemplate(),
         intent,
-        conversationId: context_obj.conversationId,
-        updatedContext: {
-          last_intent: intent,
-          slots: mergedEntities,
-        },
-        suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-      };
-
-      return new Response(
-        JSON.stringify(response),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        context_obj.conversationId,
+        mergedEntities,
+        cm,
+        kb,
+        body.message,
+        corsHeaders,
+        nextState
       );
     }
 
-    // 處理投訴
-    if (intent === 'complaint') {
-      const reply = getComplaintTemplate();
-      cm.updateContext(context_obj.conversationId, {
-        last_intent: intent,
-        slots: mergedEntities,
-        userMessage: body.message,
-        assistantMessage: reply,
-      });
+    // 意圖處理器映射表（使用統一響應構建函數）
+    const intentHandlers: Record<string, () => string> = {
+      complaint: getComplaintTemplate,
+      handoff_to_human: getHandoffTemplate,
+    };
 
-      const response: ChatResponse = {
-        reply,
+    if (intentHandlers[intent]) {
+      return buildResponse(
+        intentHandlers[intent](),
         intent,
-        conversationId: context_obj.conversationId,
-        updatedContext: {
-          last_intent: intent,
-          slots: mergedEntities,
-        },
-        suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-      };
-
-      return new Response(
-        JSON.stringify(response),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        context_obj.conversationId,
+        mergedEntities,
+        cm,
+        kb,
+        body.message,
+        corsHeaders,
+        nextState
       );
     }
 
-    // 處理轉真人
-    if (intent === 'handoff_to_human') {
-      const reply = getHandoffTemplate();
-      cm.updateContext(context_obj.conversationId, {
-        last_intent: intent,
-        slots: mergedEntities,
-        userMessage: body.message,
-        assistantMessage: reply,
-      });
-
-      const response: ChatResponse = {
-        reply,
-        intent,
-        conversationId: context_obj.conversationId,
-        updatedContext: {
-          last_intent: intent,
-          slots: mergedEntities,
-        },
-        suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-      };
-
-      return new Response(
-        JSON.stringify(response),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // 檢查 Critical FAQ
+    // 統一 FAQ 檢查處理（減少重複代碼）
     // 注意：對於「如何預約」這類問題，不直接使用 FAQ，而是讓 LLM 處理以確保提供預約連結
     // 對於「價格詢問」，只有明確問政策時才用 FAQ，一般「多少錢」直接回答價格
-    if (intent === 'location_inquiry') {
-      const faqResults = kb.searchFAQ(body.message);
-      const criticalFAQ = faqResults.find(faq => faq.critical);
-      if (criticalFAQ) {
-        const reply = criticalFAQ.answer;
-        cm.updateContext(context_obj.conversationId, {
-          last_intent: intent,
-          slots: mergedEntities,
-          userMessage: body.message,
-          assistantMessage: reply,
-        });
-
-        const response: ChatResponse = {
-          reply,
+    const faqResponse = handleFAQIfNeeded(
           intent,
-          conversationId: context_obj.conversationId,
-          updatedContext: {
-            last_intent: intent,
-            slots: mergedEntities,
-          },
-          suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-        };
-
-        return new Response(
-          JSON.stringify(response),
-          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
-      }
-    }
-
-    // 對於價格詢問，只有明確問「AI 可以說到多細」這類政策問題才用 FAQ
-    if (intent === 'price_inquiry') {
-      const lowerMessage = body.message.toLowerCase();
-      const isPolicyQuestion = lowerMessage.includes('可以跟我說到') || 
-                               lowerMessage.includes('說到多細') || 
-                               lowerMessage.includes('哪些一定要') ||
-                               lowerMessage.includes('再問真人') ||
-                               lowerMessage.includes('報價範圍');
-      
-      if (isPolicyQuestion) {
-        const faqResults = kb.searchFAQ(body.message);
-        const criticalFAQ = faqResults.find(faq => faq.critical && faq.id === 'policy_price_scope');
-        if (criticalFAQ) {
-          const reply = criticalFAQ.answer;
-          cm.updateContext(context_obj.conversationId, {
-            last_intent: intent,
-            slots: mergedEntities,
-            userMessage: body.message,
-            assistantMessage: reply,
-          });
-
-          const response: ChatResponse = {
-            reply,
-            intent,
-            conversationId: context_obj.conversationId,
-            updatedContext: {
-              last_intent: intent,
-              slots: mergedEntities,
-            },
-            suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-          };
-
-          return new Response(
-            JSON.stringify(response),
-            { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-          );
-        }
-      }
-      // 一般價格詢問（「多少錢」）直接交給 LLM 處理，使用 response_template
-    }
-
-    // 對於 booking_inquiry，只有在明確問到「改期」或「取消」時才使用 FAQ
-    // 「如何預約」這類問題必須經過 LLM 處理，確保第一句話就提供預約連結
-    if (intent === 'booking_inquiry') {
-      const lowerMessage = body.message.toLowerCase();
-      const isRescheduleCancel = lowerMessage.includes('改期') || 
-                                  lowerMessage.includes('取消') || 
-                                  lowerMessage.includes('reschedule') || 
-                                  lowerMessage.includes('cancel');
-      
-      // 只有明確問改期/取消時，才檢查 FAQ
-      if (isRescheduleCancel) {
-        const faqResults = kb.searchFAQ(body.message);
-        const criticalFAQ = faqResults.find(faq => faq.critical && 
-          (faq.id === 'policy_reschedule_cancel' || faq.keywords.some((k: string) => 
-            lowerMessage.includes(k.toLowerCase())
-          ))
-        );
-        if (criticalFAQ) {
-          const reply = criticalFAQ.answer;
-          cm.updateContext(context_obj.conversationId, {
-            last_intent: intent,
-            slots: mergedEntities,
-            userMessage: body.message,
-            assistantMessage: reply,
-          });
-
-          const response: ChatResponse = {
-            reply,
-            intent,
-            conversationId: context_obj.conversationId,
-            updatedContext: {
-              last_intent: intent,
-              slots: mergedEntities,
-            },
-            suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-          };
-
-          return new Response(
-            JSON.stringify(response),
-            { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-          );
-        }
-      }
-      // 如果是「如何預約」這類問題，繼續執行到 LLM 處理，確保提供預約連結
+      body.message,
+      kb,
+      context_obj,
+      mergedEntities,
+      cm,
+      corsHeaders,
+      nextState
+    );
+    if (faqResponse) {
+      return faqResponse;
     }
 
     // 處理菜單選擇的消息：優先使用 FAQ 匹配
@@ -700,32 +710,20 @@ export async function onRequestPost(context: {
       const faqResults = kb.searchFAQDetailed(body.message);
       
       if (faqResults && faqResults.length > 0) {
-        // 找到匹配的 FAQ，直接返回答案
+        // 找到匹配的 FAQ，使用統一響應構建函數
         const matchedFAQ = faqResults[0]; // 取分數最高的
         console.log('[Chat] FAQ matched:', matchedFAQ.id);
         
-        const reply = matchedFAQ.answer;
-        cm.updateContext(context_obj.conversationId, {
-          last_intent: intent,
-          slots: mergedEntities,
-          userMessage: body.message,
-          assistantMessage: reply,
-        });
-
-        const response: ChatResponse = {
-          reply,
+        return buildResponse(
+          matchedFAQ.answer,
           intent,
-          conversationId: context_obj.conversationId,
-          updatedContext: {
-            last_intent: intent,
-            slots: mergedEntities,
-          },
-          suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-        };
-
-        return new Response(
-          JSON.stringify(response),
-          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          context_obj.conversationId,
+          mergedEntities,
+          cm,
+          kb,
+          body.message,
+          corsHeaders,
+          nextState
         );
       } else {
         // FAQ 匹配失敗，繼續使用 LLM 處理（作為 fallback）
@@ -735,8 +733,10 @@ export async function onRequestPost(context: {
 
     // 使用 LLM 生成回覆
     if (!llm) {
+      // LLM 服務不可用時的特殊處理（503 狀態碼，無 suggestedQuickReplies）
       const reply = getApiErrorTemplate();
-      const response: ChatResponse = {
+      return new Response(
+        JSON.stringify({
         reply,
         intent: 'handoff_to_human',
         conversationId: context_obj.conversationId,
@@ -744,10 +744,7 @@ export async function onRequestPost(context: {
           last_intent: 'handoff_to_human',
           slots: mergedEntities,
         },
-      };
-
-      return new Response(
-        JSON.stringify(response),
+        }),
         { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -798,31 +795,20 @@ export async function onRequestPost(context: {
       }
     }
 
-    // 更新上下文
-    cm.updateContext(context_obj.conversationId, {
-      last_intent: intent,
-      slots: mergedEntities,
-      userMessage: body.message,
-      assistantMessage: reply,
-    });
-
-    const response: ChatResponse = {
-      reply,
-      intent,
-      conversationId: context_obj.conversationId,
-      updatedContext: {
-        last_intent: intent,
-        slots: mergedEntities,
-      },
-      suggestedQuickReplies: getSuggestedQuickReplies(intent, mergedEntities, undefined, kb),
-    };
-
+    // 使用統一響應構建函數處理 LLM 生成的回覆
     const responseTime = Date.now() - startTime;
     console.log(`[Chat] ${intent} - ${responseTime}ms`);
 
-    return new Response(
-      JSON.stringify(response),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    return buildResponse(
+      reply,
+      intent,
+      context_obj.conversationId,
+      mergedEntities,
+      cm,
+      kb,
+      body.message,
+      corsHeaders,
+      nextState
     );
 
   } catch (error) {

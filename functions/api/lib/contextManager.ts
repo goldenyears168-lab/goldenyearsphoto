@@ -183,5 +183,107 @@ export class ContextManager {
       }
     }
   }
+
+  /**
+   * 檢查是否有足夠的資訊進行推薦
+   */
+  hasRequiredSlotsForRecommendation(context: ConversationContext): boolean {
+    // 至少需要 service_type 或 use_case
+    return !!(context.slots.service_type || context.slots.use_case);
+  }
+
+  /**
+   * 根據意圖和當前狀態決定下一個狀態（配置驅動版本）
+   * @param currentState 當前狀態
+   * @param intent 意圖
+   * @param hasRequiredSlots 是否有必需的 slots
+   * @param stateTransitionsConfig 可選的狀態轉換配置（如果提供則使用配置，否則使用 fallback）
+   */
+  determineNextState(
+    currentState: ConversationContext['state'],
+    intent: string,
+    hasRequiredSlots: boolean,
+    stateTransitionsConfig?: {
+      transitions: Record<string, Record<string, string>>;
+      requiredSlotsCheck?: {
+        fields: string[];
+        requireAny: boolean;
+      };
+    }
+  ): ConversationContext['state'] {
+    // 如果沒有配置，使用 fallback 邏輯
+    if (!stateTransitionsConfig || !stateTransitionsConfig.transitions) {
+      return this.determineNextStateFallback(currentState, intent, hasRequiredSlots);
+    }
+
+    const transitions = stateTransitionsConfig.transitions[currentState];
+    if (!transitions) {
+      // 如果當前狀態沒有配置，保持當前狀態
+      return currentState;
+    }
+
+    // 優先檢查特殊條件（hasRequiredSlots）
+    if (transitions.hasRequiredSlots && hasRequiredSlots) {
+      return transitions.hasRequiredSlots as ConversationContext['state'];
+    }
+
+    // 檢查精確匹配
+    if (transitions[intent]) {
+      return transitions[intent] as ConversationContext['state'];
+    }
+
+    // 檢查模式匹配（支持 | 分隔的多個意圖）
+    for (const [pattern, nextState] of Object.entries(transitions)) {
+      if (pattern === 'default' || pattern === 'hasRequiredSlots') continue;
+      if (pattern.includes('|')) {
+        const intentList = pattern.split('|');
+        if (intentList.includes(intent)) {
+          return nextState as ConversationContext['state'];
+        }
+      }
+    }
+
+    // 使用默認轉換
+    return (transitions.default || currentState) as ConversationContext['state'];
+  }
+
+  /**
+   * Fallback 狀態轉換邏輯（原始硬編碼版本，用於配置缺失時）
+   */
+  private determineNextStateFallback(
+    currentState: ConversationContext['state'],
+    intent: string,
+    hasRequiredSlots: boolean
+  ): ConversationContext['state'] {
+    // 狀態轉換邏輯（fallback）
+    if (currentState === 'INIT') {
+      if (intent === 'greeting') {
+        return 'INIT';
+      } else if (intent === 'service_inquiry' || intent === 'price_inquiry') {
+        return 'COLLECTING_INFO';
+      } else if (intent === 'handoff_to_human' || intent === 'complaint') {
+        return 'COMPLETE';
+      }
+    } else if (currentState === 'COLLECTING_INFO') {
+      if (hasRequiredSlots) {
+        return 'RECOMMENDING';
+      } else if (intent === 'handoff_to_human' || intent === 'complaint') {
+        return 'COMPLETE';
+      }
+    } else if (currentState === 'RECOMMENDING') {
+      if (intent === 'goodbye' || intent === 'handoff_to_human') {
+        return 'COMPLETE';
+      } else if (intent === 'service_inquiry' || intent === 'comparison') {
+        return 'FOLLOW_UP';
+      }
+    } else if (currentState === 'FOLLOW_UP') {
+      if (intent === 'goodbye' || intent === 'handoff_to_human') {
+        return 'COMPLETE';
+      }
+    }
+
+    // 預設保持當前狀態
+    return currentState;
+  }
 }
 

@@ -151,9 +151,9 @@
     
     {# AI 客服 Widget - 暫時隱藏 #}
     {# 使用 data attribute 傳遞 pageType，避免內聯腳本觸發 CSP 警告 #}
-    {# <div data-chatbot-config data-page-type="{{ pageType | default('home') }}" style="display: none;" aria-hidden="true"></div> #}
-    {# <script src="/assets/js/gy-chatbot.js" defer></script> #}
-    {# <script src="/assets/js/gy-chatbot-init.js" defer></script> #}
+    <div data-chatbot-config data-page-type="{{ pageType | default('home') }}" style="display: none;" aria-hidden="true"></div>
+    <script src="/assets/js/gy-chatbot.js" defer></script>
+    <script src="/assets/js/gy-chatbot-init.js" defer></script>
     
 </body>
 </html>

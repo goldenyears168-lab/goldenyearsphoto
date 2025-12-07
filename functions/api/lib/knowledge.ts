@@ -152,6 +152,53 @@ export interface FAQDetailed {
   };
 }
 
+export interface IntentConfig {
+  version: string;
+  last_updated: string;
+  data_source: string;
+  intents: Array<{
+    id: string;
+    priority: number;
+    keywords: string[];
+    excludeKeywords: string[];
+    contextKeywords: string[];
+    specialConditions?: {
+      shortMessage?: boolean;
+      shortMessageThreshold?: number;
+    };
+  }>;
+  fallback: {
+    useContextIntent: boolean;
+    contextIntentThreshold: number;
+    defaultIntent: string;
+  };
+}
+
+export interface EntityPatterns {
+  version: string;
+  last_updated: string;
+  data_source: string;
+  patterns: {
+    service_type: Array<{ id: string; keywords: string[] }>;
+    use_case: Array<{ id: string; keywords: string[] }>;
+    persona: Array<{ id: string; keywords: string[] }>;
+    branch: Record<string, { keywords: string[] }>;
+    booking_action: Record<string, { keywords: string[] }>;
+  };
+}
+
+export interface StateTransitionsConfig {
+  version: string;
+  last_updated: string;
+  data_source: string;
+  states: string[];
+  transitions: Record<string, Record<string, string>>;
+  requiredSlotsCheck?: {
+    fields: string[];
+    requireAny: boolean;
+  };
+}
+
 export class KnowledgeBase {
   private services: Service[] = [];
   private personas: Persona[] = [];
@@ -162,6 +209,9 @@ export class KnowledgeBase {
   private emotionTemplates: Record<string, EmotionTemplate> = {};
   private intentNBAMapping: Record<string, string[]> = {};
   private faqDetailed: FAQDetailed | null = null;
+  private intentConfig: IntentConfig | null = null;
+  private entityPatterns: EntityPatterns | null = null;
+  private stateTransitionsConfig: StateTransitionsConfig | null = null;
   private loaded = false;
 
   /**
@@ -209,7 +259,7 @@ export class KnowledgeBase {
       console.log('[Knowledge] Loading knowledge files from:', knowledgeBasePath || '/knowledge (relative)');
       
       // 使用 fetch 載入所有 JSON 文件
-      const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes] = await Promise.all([
+      const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes, intentConfigRes, entityPatternsRes] = await Promise.all([
         fetch(`${knowledgeBasePath}/services.json`).catch(err => {
           console.error('[Knowledge] Failed to fetch services.json:', err);
           return { ok: false, status: 0, statusText: String(err) } as Response;
@@ -245,6 +295,18 @@ export class KnowledgeBase {
         fetch(`${knowledgeBasePath}/faq_detailed.json`).catch(err => {
           console.warn('[Knowledge] Failed to fetch faq_detailed.json:', err);
           return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/intent_config.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch intent_config.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/entity_patterns.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch entity_patterns.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
+        }),
+        fetch(`${knowledgeBasePath}/state_transitions.json`).catch(err => {
+          console.warn('[Knowledge] Failed to fetch state_transitions.json:', err);
+          return { ok: false, status: 0, statusText: String(err) } as Response;
         })
       ]);
 
@@ -271,7 +333,7 @@ export class KnowledgeBase {
       }
 
       // 解析 JSON（可選文件如果失敗，使用空物件）
-      const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData] = await Promise.all([
+      const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData, intentConfigData, entityPatternsData, stateTransitionsConfigRes] = await Promise.all([
         servicesRes.json().catch(err => {
           console.error('[Knowledge] Failed to parse services.json:', err);
           throw new Error(`Failed to parse services.json: ${err instanceof Error ? err.message : String(err)}`);
@@ -292,7 +354,10 @@ export class KnowledgeBase {
         serviceSummariesRes.ok ? serviceSummariesRes.json().catch(() => ({ summaries: {} })) : Promise.resolve({ summaries: {} }),
         emotionTemplatesRes.ok ? emotionTemplatesRes.json().catch(() => ({ templates: {} })) : Promise.resolve({ templates: {} }),
         intentNBAMappingRes.ok ? intentNBAMappingRes.json().catch(() => ({ mappings: {} })) : Promise.resolve({ mappings: {} }),
-        faqDetailedRes.ok ? faqDetailedRes.json().catch(() => null) : Promise.resolve(null)
+        faqDetailedRes.ok ? faqDetailedRes.json().catch(() => null) : Promise.resolve(null),
+        intentConfigRes.ok ? intentConfigRes.json().catch(() => null) : Promise.resolve(null),
+        entityPatternsRes.ok ? entityPatternsRes.json().catch(() => null) : Promise.resolve(null),
+        stateTransitionsConfigRes.ok ? stateTransitionsConfigRes.json().catch(() => null) : Promise.resolve(null)
       ]);
 
       // 載入資料
@@ -325,9 +390,21 @@ export class KnowledgeBase {
       this.emotionTemplates = emotionTemplatesData.templates || {};
       this.intentNBAMapping = intentNBAMappingData.mappings || {};
       this.faqDetailed = faqDetailedData || null;
+      this.intentConfig = intentConfigData || null;
+      this.entityPatterns = entityPatternsData || null;
+      this.stateTransitionsConfig = stateTransitionsConfigRes || null;
 
       console.log('[Knowledge] Knowledge base loaded successfully');
       console.log(`[Knowledge] Loaded ${this.services.length} services, ${this.personas.length} personas, ${this.policies.length} policies`);
+      if (this.intentConfig) {
+        console.log(`[Knowledge] Loaded intent config with ${this.intentConfig.intents.length} intents`);
+      }
+      if (this.entityPatterns) {
+        console.log('[Knowledge] Loaded entity patterns config');
+      }
+      if (this.stateTransitionsConfig) {
+        console.log(`[Knowledge] Loaded state transitions config with ${this.stateTransitionsConfig.states.length} states`);
+      }
 
       this.loaded = true;
       console.log('[Knowledge] Knowledge base loaded successfully');
@@ -656,6 +733,36 @@ export class KnowledgeBase {
     }
 
     return null;
+  }
+
+  /**
+   * 取得意圖分類配置
+   */
+  getIntentConfig(): IntentConfig | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.intentConfig;
+  }
+
+  /**
+   * 取得實體提取配置
+   */
+  getEntityPatterns(): EntityPatterns | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.entityPatterns;
+  }
+
+  /**
+   * 取得狀態轉換配置
+   */
+  getStateTransitionsConfig(): StateTransitionsConfig | null {
+    if (!this.loaded) {
+      throw new Error('Knowledge base not loaded. Call load() first.');
+    }
+    return this.stateTransitionsConfig;
   }
 }
 
