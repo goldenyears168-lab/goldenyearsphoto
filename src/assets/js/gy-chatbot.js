@@ -242,6 +242,12 @@
       this.els.close.addEventListener('click', () => this.close());
 
       this.els.quickActions.addEventListener('click', (e) => {
+        // ⚠️ 防止重複點擊：如果正在處理中，忽略新的點擊
+        if (this.state.isLoading) {
+          console.warn('[GYChatbot] Already processing a message, ignoring click');
+          return;
+        }
+
         // 處理分類展開/收合
         if (e.target.classList.contains('gy-chatbot-faq-category-header') || 
             e.target.closest('.gy-chatbot-faq-category-header')) {
@@ -706,7 +712,10 @@
      * 顯示載入狀態
      */
     showLoading() {
-      if (this.state.isLoading) return;
+      // 如果已經有載入指示器，不重複創建
+      if (this.els.messages.querySelector('#gy-chatbot-loading')) {
+        return;
+      }
       this.state.isLoading = true;
       const loadingDiv = document.createElement('div');
       loadingDiv.className = 'gy-chatbot-message bot gy-chatbot-loading';
@@ -748,10 +757,17 @@
      * 發送訊息
      */
     async sendMessage(message, mode = 'auto', source = 'input') {
+      // ⚠️ 防止重複發送：如果正在載入中，忽略新的請求
+      if (this.state.isLoading) {
+        console.warn('[GYChatbot] Message already being processed, ignoring duplicate request');
+        return;
+      }
+
       // 顯示使用者訊息
       this.appendMessage(message, 'user');
       this.hideLoading();
       this.showLoading();
+      this.state.isLoading = true; // 設置載入狀態
 
       // 隱藏快速選項（第一次發送後）
       if (this.els.quickActions.style.display !== 'none') {
@@ -762,6 +778,7 @@
       const timeoutId = setTimeout(() => {
         if (this.state.isLoading) {
           this.hideLoading();
+          this.state.isLoading = false; // 清除載入狀態
           this.appendMessage('這次回覆花的時間有點久，我怕系統卡住了。你可以重新提問一次，或直接用 Email 或電話找真人協助。', 'bot');
           this.state.retryCount = 0;
         }
@@ -784,11 +801,14 @@
 
         clearTimeout(timeoutId);
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        // ⚠️ 重要：即使狀態碼不是 200，也要處理響應（503 等錯誤也會有 JSON 響應）
+        let data;
+        try {
+          data = await response.json();
+        } catch (parseError) {
+          // 如果無法解析 JSON，拋出原始錯誤
+          throw new Error(`HTTP error! status: ${response.status}, unable to parse response`);
         }
-
-        const data = await response.json();
 
         // 更新 conversationId
         if (data.conversationId) {
@@ -797,6 +817,7 @@
 
         // 顯示 AI 回覆
         this.hideLoading();
+        this.state.isLoading = false; // 清除載入狀態
         this.appendMessage(data.reply, 'bot');
 
         // 顯示快速回覆建議（如果有）
@@ -809,13 +830,16 @@
       } catch (error) {
         clearTimeout(timeoutId);
         this.hideLoading();
+        this.state.isLoading = false; // 清除載入狀態
 
         // 重試機制
         if (this.state.retryCount < this.state.maxRetries) {
           this.state.retryCount++;
           this.appendMessage('網路連線似乎有問題，讓我再試一次...', 'bot');
           setTimeout(() => {
-            this.sendMessage(message, mode);
+            // ⚠️ 重要：重試時必須保留 source 參數，並重置 isLoading 狀態
+            this.state.isLoading = false; // 允許重試
+            this.sendMessage(message, mode, source);
           }, 1000);
         } else {
           this.appendMessage('糟糕，後台系統現在有點忙碌，我暫時拿不到正確的資訊 😣 你可以過幾分鐘再試一次，或直接透過 Email 或電話聯絡我們的真人夥伴。', 'bot');

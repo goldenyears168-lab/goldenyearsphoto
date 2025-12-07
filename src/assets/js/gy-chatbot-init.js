@@ -13,7 +13,8 @@
     return;
   }
 
-  const pageType = widgetContainer.getAttribute('data-page-type') || 'home';
+  // 從 data attribute 讀取 pageType，如果沒有設置則默認為 'other'（不會自動打開）
+  const pageType = widgetContainer.getAttribute('data-page-type') || 'other';
 
   // 檢查 URL 參數或 hash，判斷是否需要自動打開
   function shouldAutoOpen() {
@@ -22,35 +23,36 @@
     const isMobile = window.innerWidth <= 480;
     const isHomePage = pageType === 'home';
     
-    // 手機版（寬度 <= 480px）預設關閉
+    // 調試日誌（生產環境可移除）
+    console.log('[GYChatbot] shouldAutoOpen check:', {
+      pageType: pageType,
+      isMobile: isMobile,
+      windowWidth: window.innerWidth,
+      isHomePage: isHomePage,
+      url: window.location.pathname
+    });
+    
+    // 手機版（寬度 <= 480px）：預設關閉，不自動打開
     if (isMobile) {
-      // 如果 URL 參數明確要求打開，則打開
-      return (
-        urlParams.get('chat') === 'open' || 
-        urlParams.get('chatbot') === 'open' ||
-        hash === '#chat' ||
-        hash === '#chatbot'
-      );
+      console.log('[GYChatbot] Mobile detected, auto-open disabled');
+      return false;
     }
     
     // 電腦版邏輯
-    // 如果 URL 參數明確要求打開，則打開（無論頁面類型）
-    if (urlParams.get('chat') === 'open' || 
-        urlParams.get('chatbot') === 'open' ||
-        hash === '#chat' ||
-        hash === '#chatbot') {
-      return true;
-    }
-    
     // 如果 URL 參數明確要求關閉，則不自動打開
     if (urlParams.get('chat') === 'close' || urlParams.get('chatbot') === 'close') {
+      console.log('[GYChatbot] URL parameter requests close, auto-open disabled');
       return false;
     }
     
     // 電腦版預設行為：
-    // - 首頁（pageType === 'home'）：預設自動開啟
-    // - 其他頁面：預設關閉
-    return isHomePage;
+    // - 只有首頁（pageType === 'home'）：預設自動開啟
+    // - 其他頁面：預設關閉（不自動打開）
+    // 注意：即使有 URL 參數要求打開，如果不是首頁也不會自動打開
+    // （用戶可以手動點擊按鈕打開）
+    const shouldOpen = isHomePage;
+    console.log('[GYChatbot] Auto-open decision:', shouldOpen ? 'OPEN' : 'CLOSE');
+    return shouldOpen;
   }
 
   // 自動打開 chatbot 的函數（帶重試機制）

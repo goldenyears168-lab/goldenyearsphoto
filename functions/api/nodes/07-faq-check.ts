@@ -65,8 +65,9 @@ export async function node_faqCheck(ctx: PipelineContext): Promise<PipelineConte
     if (faqResults && faqResults.length > 0) {
       // 找到匹配的 FAQ，使用統一響應構建函數
       const matchedFAQ = faqResults[0]; // 取分數最高的
-      console.log('[Chat] FAQ matched:', matchedFAQ.id);
+      console.log('[Chat] FAQ matched:', matchedFAQ.id, 'score:', matchedFAQ.score || 'N/A');
       
+      // ⚠️ 重要：菜單選擇匹配到 FAQ 時，直接返回，不調用 LLM
       return buildResponse(
         matchedFAQ.answer,
         ctx.intent,
@@ -79,8 +80,51 @@ export async function node_faqCheck(ctx: PipelineContext): Promise<PipelineConte
         ctx.nextState
       );
     } else {
-      // FAQ 匹配失敗，繼續使用 LLM 處理（作為 fallback）
-      console.log('[Chat] FAQ match failed, falling back to LLM');
+      // ⚠️ 關鍵修正：菜單選擇的 FAQ 匹配失敗時，不應該 fallback 到 LLM
+      // 因為菜單中的問題應該都有對應的 FAQ 答案
+      // 如果沒有匹配到，可能是問題表述不完全一致，嘗試更寬鬆的匹配
+      console.log('[Chat] FAQ match failed for menu selection, message:', ctx.body.message);
+      console.log('[Chat] Attempting fuzzy match...');
+      
+      // 嘗試更寬鬆的匹配：提取關鍵字
+      const keywords = ctx.body.message.toLowerCase()
+        .replace(/我想|我要|我想知道|請問|可以|嗎|呢/g, '')
+        .trim();
+      
+      if (keywords) {
+        const fuzzyResults = ctx.knowledgeBase.searchFAQDetailed(keywords);
+        if (fuzzyResults && fuzzyResults.length > 0) {
+          const matchedFAQ = fuzzyResults[0];
+          console.log('[Chat] Fuzzy FAQ matched:', matchedFAQ.id);
+          return buildResponse(
+            matchedFAQ.answer,
+            ctx.intent,
+            ctx.conversationContext.conversationId,
+            ctx.mergedEntities,
+            ctx.contextManager,
+            ctx.knowledgeBase,
+            ctx.body.message,
+            ctx.corsHeaders,
+            ctx.nextState
+          );
+        }
+      }
+      
+      // 如果還是沒有匹配到，返回友好的錯誤消息，而不是 fallback 到 LLM
+      console.warn('[Chat] No FAQ match found for menu selection, returning friendly message');
+      const friendlyMessage = `抱歉，我暫時找不到這個問題的答案。建議您：\n\n1. 查看我們的 [常見問題頁面](/guide/faq/)\n2. 直接透過 Email（goldenyears166@gmail.com）或電話聯絡我們的真人夥伴\n3. 或重新選擇其他問題`;
+      
+      return buildResponse(
+        friendlyMessage,
+        ctx.intent,
+        ctx.conversationContext.conversationId,
+        ctx.mergedEntities,
+        ctx.contextManager,
+        ctx.knowledgeBase,
+        ctx.body.message,
+        ctx.corsHeaders,
+        ctx.nextState
+      );
     }
   }
 

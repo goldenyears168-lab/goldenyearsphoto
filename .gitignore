@@ -3,3 +3,5 @@
 /assets/images-original/
 /PROJECT_MASTER_DOC.md/
 /README.md/
+/.dev.vars
+/.env

@@ -21,21 +21,62 @@ import {
 let knowledgeBase: KnowledgeBase | null = null;
 let llmService: LLMService | null = null;
 let contextManager: ContextManager | null = null;
+let knowledgeBaseLoading: Promise<KnowledgeBase> | null = null; // 載入中的 Promise
 
 // 載入知識庫（延遲載入）
 // ⚠️ 導出供 Pipeline 節點使用
-export async function loadKnowledgeBase(request?: Request) {
-  if (!knowledgeBase) {
-    knowledgeBase = new KnowledgeBase();
-    // 從 request URL 構建基礎 URL
-    let baseUrl: string | undefined;
-    if (request) {
-      const url = new URL(request.url);
-      baseUrl = `${url.protocol}//${url.host}`;
-    }
-    await knowledgeBase.load(baseUrl);
+export async function loadKnowledgeBase(request?: Request): Promise<KnowledgeBase> {
+  // 如果知識庫已存在且已載入，直接返回
+  if (knowledgeBase && knowledgeBase.isLoaded()) {
+    return knowledgeBase;
   }
-  return knowledgeBase;
+  
+  // 如果正在載入中，等待載入完成
+  if (knowledgeBaseLoading) {
+    console.log('[Chat] Knowledge base is loading, waiting...');
+    return await knowledgeBaseLoading;
+  }
+  
+  // 如果知識庫存在但未載入，可能是上次載入失敗，重新創建實例
+  if (knowledgeBase && !knowledgeBase.isLoaded()) {
+    console.log('[Chat] Knowledge base exists but not loaded, recreating...');
+    knowledgeBase = null;
+  }
+  
+  // 創建載入 Promise（防止並發載入）
+  knowledgeBaseLoading = (async () => {
+    try {
+      // 如果知識庫不存在，創建新的實例
+      if (!knowledgeBase) {
+        knowledgeBase = new KnowledgeBase();
+      }
+      
+      // 從 request URL 構建基礎 URL
+      let baseUrl: string | undefined;
+      if (request) {
+        const url = new URL(request.url);
+        baseUrl = `${url.protocol}//${url.host}`;
+      }
+      
+      // 載入知識庫（如果未載入）
+      if (!knowledgeBase.isLoaded()) {
+        await knowledgeBase.load(baseUrl);
+      }
+      
+      return knowledgeBase;
+    } catch (error) {
+      // 載入失敗時，清除實例和載入 Promise 以便下次重試
+      console.error('[Chat] Knowledge base loading failed, clearing instance:', error);
+      knowledgeBase = null;
+      knowledgeBaseLoading = null;
+      throw error;
+    } finally {
+      // 載入完成後清除載入 Promise
+      knowledgeBaseLoading = null;
+    }
+  })();
+  
+  return await knowledgeBaseLoading;
 }
 
 // 初始化 LLM 服務
@@ -114,7 +155,7 @@ interface ChatResponse {
  * 統一響應構建函數
  * 減少重複的響應構建代碼（減少 ~35 個條件判斷）
  */
-function buildResponse(
+export function buildResponse(
   reply: string,
   intent: string,
   conversationId: string,
@@ -190,7 +231,7 @@ const faqHandlingRules: Record<string, FAQRule> = {
  * 統一 FAQ 檢查處理函數
  * 減少重複的 FAQ 檢查邏輯（減少 ~12 個條件判斷）
  */
-function handleFAQIfNeeded(
+export function handleFAQIfNeeded(
   intent: string,
   message: string,
   kb: KnowledgeBase,
@@ -236,7 +277,7 @@ function handleFAQIfNeeded(
  * 意圖分類（配置驅動版本）
  * 使用 intent_config.json 配置文件，減少硬編碼（減少 ~12 個條件判斷）
  */
-function classifyIntent(
+export function classifyIntent(
   message: string,
   context?: { last_intent?: string; slots?: Record<string, any> },
   knowledgeBase?: KnowledgeBase
@@ -323,7 +364,7 @@ function extractEntityByPatterns(
 /**
  * 實體提取（配置驅動版本）
  */
-function extractEntities(
+export function extractEntities(
   message: string,
   knowledgeBase?: KnowledgeBase
 ): Record<string, any> {

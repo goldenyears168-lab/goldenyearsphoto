@@ -259,7 +259,7 @@ export class KnowledgeBase {
       console.log('[Knowledge] Loading knowledge files from:', knowledgeBasePath || '/knowledge (relative)');
       
       // 使用 fetch 載入所有 JSON 文件
-      const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes, intentConfigRes, entityPatternsRes] = await Promise.all([
+      const [servicesRes, personasRes, policiesRes, contactInfoRes, responseTemplatesRes, serviceSummariesRes, emotionTemplatesRes, intentNBAMappingRes, faqDetailedRes, intentConfigRes, entityPatternsRes, stateTransitionsConfigRes] = await Promise.all([
         fetch(`${knowledgeBasePath}/services.json`).catch(err => {
           console.error('[Knowledge] Failed to fetch services.json:', err);
           return { ok: false, status: 0, statusText: String(err) } as Response;
@@ -333,7 +333,7 @@ export class KnowledgeBase {
       }
 
       // 解析 JSON（可選文件如果失敗，使用空物件）
-      const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData, intentConfigData, entityPatternsData, stateTransitionsConfigRes] = await Promise.all([
+      const [servicesData, personasData, policiesData, contactInfoData, responseTemplatesData, serviceSummariesData, emotionTemplatesData, intentNBAMappingData, faqDetailedData, intentConfigData, entityPatternsData, stateTransitionsConfigData] = await Promise.all([
         servicesRes.json().catch(err => {
           console.error('[Knowledge] Failed to parse services.json:', err);
           throw new Error(`Failed to parse services.json: ${err instanceof Error ? err.message : String(err)}`);
@@ -392,7 +392,7 @@ export class KnowledgeBase {
       this.faqDetailed = faqDetailedData || null;
       this.intentConfig = intentConfigData || null;
       this.entityPatterns = entityPatternsData || null;
-      this.stateTransitionsConfig = stateTransitionsConfigRes || null;
+      this.stateTransitionsConfig = stateTransitionsConfigData || null;
 
       console.log('[Knowledge] Knowledge base loaded successfully');
       console.log(`[Knowledge] Loaded ${this.services.length} services, ${this.personas.length} personas, ${this.policies.length} policies`);
@@ -409,6 +409,8 @@ export class KnowledgeBase {
       this.loaded = true;
       console.log('[Knowledge] Knowledge base loaded successfully');
     } catch (error) {
+      // 如果載入失敗，重置 loaded 狀態，以便下次重試
+      this.loaded = false;
       console.error('[Knowledge] Failed to load knowledge base:', error);
       console.error('[Knowledge] Error details:', error instanceof Error ? {
         message: error.message,

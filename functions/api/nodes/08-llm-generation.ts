@@ -41,8 +41,34 @@ export async function node_llmGeneration(ctx: PipelineContext): Promise<Pipeline
   }
 
   // ⚠️ 關鍵修正 2: LLM 不可用時的特殊處理
+  // ⚠️ 重要：如果是菜單選擇，不應該到達這裡（應該在 FAQ 檢查節點就返回了）
   if (!ctx.llmService) {
-    // LLM 服務不可用時的特殊處理（503 狀態碼，無 suggestedQuickReplies）
+    // 檢查是否是菜單選擇（不應該到達這裡）
+    if (ctx.body?.source === 'menu') {
+      console.error('[Chat] ERROR: Menu selection reached LLM node without FAQ match!');
+      // 對於菜單選擇，返回友好的錯誤消息而不是 503
+      const reply = '抱歉，系統暫時無法處理這個問題。建議您查看我們的常見問題頁面，或直接聯絡我們的真人夥伴。';
+      return new Response(
+        JSON.stringify({
+          reply,
+          intent: ctx.intent || 'handoff_to_human',
+          conversationId: ctx.conversationContext.conversationId,
+          updatedContext: {
+            last_intent: ctx.intent || 'handoff_to_human',
+            slots: ctx.mergedEntities,
+          },
+        }),
+        { 
+          status: 200, // 返回 200 而不是 503，因為這是菜單選擇
+          headers: { 
+            ...ctx.corsHeaders, 
+            'Content-Type': 'application/json' 
+          } 
+        }
+      );
+    }
+    
+    // 非菜單選擇的 LLM 不可用處理（503 狀態碼，無 suggestedQuickReplies）
     const reply = getApiErrorTemplate();
     return new Response(
       JSON.stringify({

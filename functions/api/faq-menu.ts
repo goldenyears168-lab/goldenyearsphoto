@@ -7,20 +7,61 @@ import { KnowledgeBase } from './lib/knowledge.js';
 
 // 初始化知識庫（單例模式）
 let knowledgeBase: KnowledgeBase | null = null;
+let knowledgeBaseLoading: Promise<KnowledgeBase> | null = null; // 載入中的 Promise
 
 // 載入知識庫（延遲載入）
-async function loadKnowledgeBase(request?: Request) {
-  if (!knowledgeBase) {
-    knowledgeBase = new KnowledgeBase();
-    // 從 request URL 構建基礎 URL
-    let baseUrl: string | undefined;
-    if (request) {
-      const url = new URL(request.url);
-      baseUrl = `${url.protocol}//${url.host}`;
-    }
-    await knowledgeBase.load(baseUrl);
+async function loadKnowledgeBase(request?: Request): Promise<KnowledgeBase> {
+  // 如果知識庫已存在且已載入，直接返回
+  if (knowledgeBase && knowledgeBase.isLoaded()) {
+    return knowledgeBase;
   }
-  return knowledgeBase;
+  
+  // 如果正在載入中，等待載入完成
+  if (knowledgeBaseLoading) {
+    console.log('[FAQ Menu] Knowledge base is loading, waiting...');
+    return await knowledgeBaseLoading;
+  }
+  
+  // 如果知識庫存在但未載入，可能是上次載入失敗，重新創建實例
+  if (knowledgeBase && !knowledgeBase.isLoaded()) {
+    console.log('[FAQ Menu] Knowledge base exists but not loaded, recreating...');
+    knowledgeBase = null;
+  }
+  
+  // 創建載入 Promise（防止並發載入）
+  knowledgeBaseLoading = (async () => {
+    try {
+      // 如果知識庫不存在，創建新的實例
+      if (!knowledgeBase) {
+        knowledgeBase = new KnowledgeBase();
+      }
+      
+      // 從 request URL 構建基礎 URL
+      let baseUrl: string | undefined;
+      if (request) {
+        const url = new URL(request.url);
+        baseUrl = `${url.protocol}//${url.host}`;
+      }
+      
+      // 載入知識庫（如果未載入）
+      if (!knowledgeBase.isLoaded()) {
+        await knowledgeBase.load(baseUrl);
+      }
+      
+      return knowledgeBase;
+    } catch (error) {
+      // 載入失敗時，清除實例和載入 Promise 以便下次重試
+      console.error('[FAQ Menu] Knowledge base loading failed, clearing instance:', error);
+      knowledgeBase = null;
+      knowledgeBaseLoading = null;
+      throw error;
+    } finally {
+      // 載入完成後清除載入 Promise
+      knowledgeBaseLoading = null;
+    }
+  })();
+  
+  return await knowledgeBaseLoading;
 }
 
 /**
@@ -93,9 +134,16 @@ export async function onRequestGet(context: {
 
   } catch (error) {
     console.error('[FAQ Menu Error]', error);
+    console.error('[FAQ Menu Error] Error details:', error instanceof Error ? {
+      message: error.message,
+      stack: error.stack?.substring(0, 500)
+    } : String(error));
     
     return new Response(
-      JSON.stringify({ error: 'Failed to load FAQ menu' }),
+      JSON.stringify({ 
+        error: 'Failed to load FAQ menu',
+        details: error instanceof Error ? error.message : String(error)
+      }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

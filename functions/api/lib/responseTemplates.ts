@@ -19,6 +19,7 @@ export function setKnowledgeBase(kb: KnowledgeBase) {
  * 投訴處理模板
  */
 export function getComplaintTemplate(): string {
+  try {
   const contactInfo = knowledgeBaseInstance?.getContactInfo();
   if (!contactInfo) {
     return '非常抱歉讓你遇到這樣的情況。請聯絡我們的真人夥伴協助處理。';
@@ -36,6 +37,9 @@ export function getComplaintTemplate(): string {
 我們會盡快回覆並協助你解決問題。
 
 **重要提醒：所有補償決策都由真人客服處理，以確保公平與準確。**`;
+  } catch (error) {
+    return '非常抱歉讓你遇到這樣的情況。請聯絡我們的真人夥伴協助處理。';
+  }
 }
 
 /**
@@ -87,6 +91,7 @@ export function getDontUnderstandSecond(): string {
  * API 錯誤模板
  */
 export function getApiErrorTemplate(): string {
+  try {
   const contactInfo = knowledgeBaseInstance?.getContactInfo();
   if (!contactInfo) {
     return '糟糕，後台系統現在有點忙碌，我暫時拿不到正確的資訊 😣 你可以過幾分鐘再試一次，或直接透過 Email 或電話聯絡我們的真人夥伴。';
@@ -95,6 +100,10 @@ export function getApiErrorTemplate(): string {
   const { email, phone } = contactInfo.ai_response_rules.handoff_to_human;
 
   return `糟糕，後台系統現在有點忙碌，我暫時拿不到正確的資訊 😣 你可以過幾分鐘再試一次，或直接透過 Email（${email}）或電話（中山店 ${phone.zhongshan} / 公館店 ${phone.gongguan}）聯絡我們的真人夥伴。`;
+  } catch (error) {
+    // 如果知识库未加载，返回默认错误消息
+    return '糟糕，後台系統現在有點忙碌，我暫時拿不到正確的資訊 😣 你可以過幾分鐘再試一次，或直接透過 Email 或電話聯絡我們的真人夥伴。';
+  }
 }
 
 /**
