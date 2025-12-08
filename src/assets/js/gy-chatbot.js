@@ -13,6 +13,8 @@
       locale: 'zh-TW',
       theme: 'light',
       timeout: 10000, // 10 秒超時
+      // 本地开发 API 服务器端口
+      devApiPort: 8787,
     },
 
     state: {
@@ -123,11 +125,39 @@
     },
 
     /**
+     * 獲取 API 基礎 URL（支持本地開發環境）
+     */
+    getApiBaseUrl() {
+      // 檢測是否為本地開發環境
+      const isLocalDev = window.location.hostname === 'localhost' || 
+                         window.location.hostname === '127.0.0.1' ||
+                         window.location.hostname === '';
+      
+      // 檢測是否使用 wrangler（端口 8788 或其他 wrangler 端口）
+      // wrangler 在同一個端口提供靜態文件和 Functions，使用相對路徑即可
+      const isWrangler = window.location.port === '8788' || 
+                         window.location.port === '8081' ||
+                         window.location.port === '8787';
+      
+      if (isLocalDev && !isWrangler) {
+        // 本地開發（Eleventy + 獨立 API 服務器）：使用開發 API 服務器
+        return `http://localhost:${this.config.devApiPort}`;
+      }
+      
+      // wrangler 或生產環境：使用相對路徑（同一個端口）
+      return '';
+    },
+
+    /**
      * 載入 FAQ 菜單
      */
     async loadFAQMenu() {
       try {
-        const response = await fetch('/api/faq-menu');
+        const apiBaseUrl = this.getApiBaseUrl();
+        const apiUrl = `${apiBaseUrl}/api/faq-menu`;
+        console.log('[GYChatbot] Loading FAQ menu from:', apiUrl);
+        
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -785,7 +815,11 @@
       }, this.config.timeout);
 
       try {
-        const response = await fetch(this.config.apiEndpoint, {
+        // 在本地开发环境中使用完整的 API URL
+        const apiBaseUrl = this.getApiBaseUrl();
+        const apiUrl = apiBaseUrl ? `${apiBaseUrl}${this.config.apiEndpoint}` : this.config.apiEndpoint;
+        
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
