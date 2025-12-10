@@ -159,12 +159,12 @@
       <script src="/assets/js/gy-chatbot-init.js" defer></script>
     #}
 
-    {# 生產環境 - 使用多租户 Chatbot Service #}
+    {# 生產環境 - 使用 Chatbot Service #}
     <script 
-      src="https://chatbot-service-multi-tenant.pages.dev/widget/loader.js" 
+      src="https://chatbot-service-9qg.pages.dev/widget/loader.js" 
       data-company="goldenyears"
-      data-api-endpoint="https://chatbot-service-multi-tenant.pages.dev/api/goldenyears/chat"
-      data-api-base-url="https://chatbot-service-multi-tenant.pages.dev"
+      data-api-endpoint="https://chatbot-service-9qg.pages.dev/api/goldenyears/chat"
+      data-api-base-url="https://chatbot-service-9qg.pages.dev"
       data-page-type="{{ pageType | default('other') }}"
       data-auto-open="{{ 'true' if pageType == 'home' else 'false' }}"
       defer
