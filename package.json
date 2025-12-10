@@ -1,15 +1,10 @@
 {
   "name": "goldenyears_website",
   "version": "1.0.0",
-  "description": "",
+  "description": "好時有影攝影工作室官方網站 - Eleventy 靜態網站",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run upload:watch\" \"npm run dev:api\" \"npx @11ty/eleventy --serve\"",
-    "dev:api": "node scripts/dev-api-server.mjs",
-    "dev:eleventy": "npx @11ty/eleventy --serve",
-    "dev:wrangler": "npm run build && npx wrangler pages dev _site --project-name=goldenyearsphoto",
-    "test:wrangler": "node scripts/test-wrangler-api.mjs",
+    "dev": "concurrently \"npm run upload:watch\" \"npx @11ty/eleventy --serve\"",
     "start": "eleventy --serve",
     "build": "npm run compress-images && npm run upload-portfolio && eleventy",
     "compress-images": "node src/scripts/compress-images.mjs",
@@ -19,17 +14,10 @@
     "lint:js": "eslint \"src/assets/js/**/*.js\"",
     "lint:js:fix": "eslint \"src/assets/js/**/*.js\" --fix",
     "lint:css": "stylelint \"src/assets/css/**/*.scss\"",
-    "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix",
-    "validate-knowledge": "node scripts/validate-knowledge.mjs",
-    "diagnose-chatbot": "node scripts/diagnose-chatbot.mjs",
-    "test:faq-api": "node scripts/test-faq-api.mjs",
-    "logs": "wrangler pages deployment tail --project-name=goldenyearsphoto",
-    "test:pipeline": "node scripts/test-pipeline-comparison.mjs && node scripts/verify-mvp.mjs",
-    "test:backend": "node scripts/test-chatbot-api.mjs",
-    "test:all": "npm run test:pipeline && npm run lint"
+    "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["eleventy", "static-site", "photography", "portfolio"],
+  "author": "Golden Years Photo",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
@@ -53,13 +41,11 @@
     "sitemap-stream-parser": "^1.7.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
-    "stylelint-config-standard-scss": "^13.1.0",
-    "wrangler": "^4.51.0"
+    "stylelint-config-standard-scss": "^13.1.0"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^4.0.2",
     "@aws-sdk/client-s3": "^3.932.0",
-    "@google/generative-ai": "^0.21.0",
     "dotenv": "^17.2.3"
   }
 }

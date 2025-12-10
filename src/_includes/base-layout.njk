@@ -149,12 +149,54 @@
     {# Scroll-triggered animations module #}
     <script src="/assets/js/scroll-animations.js"></script>
     
-    {# AI 客服 Widget - 暫時隱藏 #}
-    {# 使用 data attribute 傳遞 pageType，避免內聯腳本觸發 CSP 警告 #}
-    {# 注意：只有明確設置 pageType: "home" 的頁面才會自動打開聊天機器人 #}
-    <div data-chatbot-config data-page-type="{{ pageType | default('other') }}" style="display: none;" aria-hidden="true"></div>
-    <script src="/assets/js/gy-chatbot.js" defer></script>
-    <script src="/assets/js/gy-chatbot-init.js" defer></script>
+    {# ========================================
+       AI 客服 Widget - 已遷移到獨立服務
+       ======================================== #}
+    {# 
+      舊版引用（已停用）:
+      <div data-chatbot-config data-page-type="{{ pageType | default('other') }}" style="display: none;" aria-hidden="true"></div>
+      <script src="/assets/js/gy-chatbot.js" defer></script>
+      <script src="/assets/js/gy-chatbot-init.js" defer></script>
+    #}
+
+    {# 生產環境 - 使用多租户 Chatbot Service #}
+    <script 
+      src="https://chatbot-service-multi-tenant.pages.dev/widget/loader.js" 
+      data-company="goldenyears"
+      data-api-endpoint="https://chatbot-service-multi-tenant.pages.dev/api/goldenyears/chat"
+      data-api-base-url="https://chatbot-service-multi-tenant.pages.dev"
+      data-page-type="{{ pageType | default('other') }}"
+      data-auto-open="{{ 'true' if pageType == 'home' else 'false' }}"
+      defer
+    ></script>
+    
+    {# 
+      自定義域名版本（當 DNS 配置完成後使用）:
+      
+      <script 
+        src="https://chatbot-api.goldenyearsphoto.com/widget/loader.js" 
+        data-company="goldenyears"
+        data-api-endpoint="https://chatbot-api.goldenyearsphoto.com/api/goldenyears/chat"
+        data-api-base-url="https://chatbot-api.goldenyearsphoto.com"
+        data-page-type="{{ pageType | default('other') }}"
+        data-auto-open="{{ 'true' if pageType == 'home' else 'false' }}"
+        defer
+      ></script>
+    #}
+
+    {# 
+      本地測試用（開發時取消註解，生產環境註解掉）:
+      
+      <script 
+        src="http://localhost:8788/widget/loader.js" 
+        data-company="goldenyears"
+        data-api-endpoint="http://localhost:8788/api/goldenyears/chat"
+        data-api-base-url="http://localhost:8788"
+        data-page-type="{{ pageType | default('other') }}"
+        data-auto-open="{{ 'true' if pageType == 'home' else 'false' }}"
+        defer
+      ></script>
+    #}
     
 </body>
 </html>

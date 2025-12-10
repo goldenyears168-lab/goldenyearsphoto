@@ -2,42 +2,37 @@
 
 台北專業形象照攝影工作室的官方網站，提供韓式證件照、專業形象照、畢業照等服務。
 
+> 📌 **架構說明**: 本專案為純靜態前端網站，AI 客服功能已遷移至獨立微服務 [chatbot-service](https://github.com/yourusername/chatbot-service)
+
 ---
 
 ## 📁 專案結構
 
 ```
 goldenyearsphoto/
-├── src/                    # 源代碼目錄
-│   ├── _data/              # Eleventy 資料檔案
-│   ├── _includes/          # 模板和組件
-│   │   ├── base-layout.njk
-│   │   ├── macros/         # Nunjucks 巨集
-│   │   └── partials/       # 部分模板
-│   ├── assets/            # 靜態資源
-│   │   ├── css/           # SCSS 樣式（ITCSS 架構）
-│   │   ├── images/        # 壓縮後的圖片（供網站使用）
-│   │   ├── images-original/  # 原始圖片（備份）
-│   │   └── js/            # JavaScript 檔案
-│   ├── blog/              # 作品集分類頁面
-│   ├── booking/           # 預約頁面
-│   ├── guide/             # 指南頁面（FAQ、妝髮指南等）
-│   └── *.njk              # 主要頁面模板
-├── docs/                   # 專案文檔
-│   ├── 01_prd.md          # 產品需求文檔
-│   ├── 02_functional_spec.md  # 功能規格
-│   ├── 03_user_flow_journey.md  # 使用者流程
-│   ├── 04_wireframes.md   # 線框圖
-│   ├── 05_acceptance_criteria.md  # 驗收標準
-│   ├── 06_api_spec.md     # API 規格
-│   ├── 07_tech_healthcheck.md  # 技術健康檢查
-│   ├── audits/            # 審計報告
-│   ├── guides/            # 開發指南
-│   └── project/           # 專案文檔
-├── reports/               # 臨時報告
-├── _site/                 # 建置輸出（自動生成）
-├── .eleventy.js           # Eleventy 配置
-└── package.json           # 專案依賴和腳本
+├── src/                      # 源代碼目錄
+│   ├── _data/                # Eleventy 資料檔案
+│   ├── _includes/            # 模板和組件
+│   │   ├── base-layout.njk   # 基礎佈局（含 Widget 引用）
+│   │   ├── macros/           # Nunjucks 巨集
+│   │   └── partials/         # 部分模板
+│   ├── assets/              # 靜態資源
+│   │   ├── css/             # SCSS 樣式（ITCSS 架構）
+│   │   ├── images/          # 壓縮後的圖片（供網站使用）
+│   │   ├── images-original/ # 原始圖片（備份）
+│   │   └── js/              # JavaScript 檔案
+│   ├── blog/                # 作品集分類頁面
+│   ├── booking/             # 預約頁面
+│   ├── guide/               # 指南頁面（FAQ、妝髮指南等）
+│   ├── services/            # 服務頁面
+│   ├── scripts/             # 建置腳本
+│   │   ├── compress-images.mjs        # 圖片壓縮
+│   │   └── upload-portfolio-to-r2.mjs # R2 上傳
+│   └── *.njk                # 主要頁面模板
+├── archive-old/             # 歷史文檔存檔
+├── _site/                   # 建置輸出（自動生成）
+├── .eleventy.js             # Eleventy 配置
+└── package.json             # 專案依賴和腳本
 ```
 
 ---
@@ -90,27 +85,46 @@ npm run build
 
 ## 🛠️ 技術棧
 
+### 前端網站
 - **靜態網站生成器**: [Eleventy (11ty)](https://www.11ty.dev/) v2.0
 - **模板引擎**: [Nunjucks](https://mozilla.github.io/nunjucks/)
 - **樣式**: SCSS (ITCSS 架構)
 - **JavaScript**: Vanilla JS (無框架)
 - **圖片處理**: [Sharp](https://sharp.pixelplumbing.com/)
 - **圖片儲存**: [Cloudflare R2](https://www.cloudflare.com/products/r2/)
-- **部署**: 靜態網站託管（Netlify / Vercel / Cloudflare Pages）
+- **部署**: Cloudflare Pages
+
+### AI 客服 Widget
+- **架構**: 獨立微服務（遠端載入）
+- **後端**: Cloudflare Pages Functions
+- **AI 模型**: Google Gemini
+- **專案**: [chatbot-service](https://github.com/yourusername/chatbot-service) (獨立部署)
 
 ---
 
-## 📚 文檔
+## 💬 AI 客服功能
 
-完整的專案文檔位於 `docs/` 目錄：
+本網站整合了 AI 客服 Widget，通過遠端腳本載入：
 
-- **[PRD](./docs/01_prd.md)** - 產品需求文檔
-- **[Functional Spec](./docs/02_functional_spec.md)** - 功能規格
-- **[User Flow](./docs/03_user_flow_journey.md)** - 使用者流程
-- **[Wireframes](./docs/04_wireframes.md)** - 線框圖
-- **[Acceptance Criteria](./docs/05_acceptance_criteria.md)** - 驗收標準
-- **[API Spec](./docs/06_api_spec.md)** - API 規格
-- **[Tech Health Check](./docs/07_tech_healthcheck.md)** - 技術健康檢查
+```html
+<!-- 在 base-layout.njk 中引用 -->
+<script 
+  src="https://chatbot-service-multi-tenant.pages.dev/widget/loader.js"
+  data-api-endpoint="https://chatbot-service-multi-tenant.pages.dev/api/goldenyears/chat"
+  data-api-base-url="https://chatbot-service-multi-tenant.pages.dev"
+  data-company="goldenyears"
+  data-page-type="{{ pageType }}"
+  defer
+></script>
+```
+
+**特點**:
+- ✅ 完全獨立部署，不影響前端網站
+- ✅ 自動識別頁面類型（首頁、FAQ、預約等）
+- ✅ 首頁自動彈出歡迎訊息
+- ✅ 支援 FAQ 菜單和智能對話
+
+**詳細資訊**: 請參考 [chatbot-service 專案](https://github.com/yourusername/chatbot-service)
 
 ---
 
@@ -251,5 +265,11 @@ ISC License
 
 ---
 
-**最後更新**: 2024-11
+## 📚 相關專案
+
+- **[chatbot-service](https://github.com/yourusername/chatbot-service)** - AI 客服微服務（獨立部署）
+
+---
+
+**最後更新**: 2025-01-28
 

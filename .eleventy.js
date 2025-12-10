@@ -137,8 +137,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
-  // 複製 knowledge 目錄供 Cloudflare Pages Functions 使用
-  eleventyConfig.addPassthroughCopy("knowledge");
+  // 知識庫已遷移到獨立 Chatbot 服務
+  // eleventyConfig.addPassthroughCopy("knowledge");
 
   // 4.6 監聽 SCSS 變更
   eleventyConfig.addWatchTarget("src/assets/css/");
