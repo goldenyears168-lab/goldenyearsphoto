@@ -20,8 +20,11 @@ const FOLDERS = [
 ];
 
 // 🚀 Image Optimization Constants
-const MAX_WIDTH = 1200; // Sufficient for retina displays, much smaller than raw 4000px photos
-const QUALITY = 80; // Balanced for photography (80% quality)
+// Optimized for actual display sizes: mobile (50vw) and desktop (25vw/20vw)
+// Max display width: ~400px on mobile, ~300px on desktop
+// Using 2x for retina: 400*2 = 800px max
+const MAX_WIDTH = 800; // Optimized for actual display sizes (was 1200, too large)
+const QUALITY = 75; // Slightly reduced for better file size (was 80)
 
 if (!ACCOUNT_ID || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY || !BUCKET_NAME) {
   console.error("❌ .env 相關 R2 設定缺一個，請再確認 .env");

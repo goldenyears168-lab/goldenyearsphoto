@@ -38,7 +38,7 @@ seo:
     
     <!-- Capability Cloud: All Buttons -->
     <div class="mb-10 text-center max-w-[1400px] mx-auto">
-        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">找到你的專屬風格</p>
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">找到你的專屬風格</p>
         <div class="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-5xl mx-auto category-pill-container">
             <!-- Default Active -->
             <button class="category-pill active" onclick="filterPortfolio('passport-korea', this)">韓式證件照</button>
@@ -83,7 +83,7 @@ seo:
         <!-- About Us -->
         <div class="bento-card p-10 bg-white relative overflow-hidden group brand-card cursor-pointer">
             <div class="relative z-10">
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Who We Are</span>
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 block">Who We Are</span>
                 <h3 class="text-3xl font-bold text-slate-900 mb-4">關於我們</h3>
                 <p class="text-slate-500 leading-relaxed mb-8 max-w-sm">
                     透過真誠與祝福與陪伴，讓我們拍的照片，陪伴著你帶到下一個人生階段。
@@ -114,7 +114,7 @@ seo:
 <section id="instagram" class="py-16 md:py-24 relative">
     <div class="flex items-center justify-between mb-8 px-2">
         <div>
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 block">Studio Life</span>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 block">Studio Life</span>
             <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
                 @goldenyears_studio
                 <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -161,7 +161,7 @@ seo:
         <div class="mb-8 border-b border-slate-100 pb-4">
             <h3 class="text-2xl font-bold text-slate-900 font-serif italic mb-2">The Ritual</h3>
             <p class="text-sm text-slate-500 font-medium mb-1">（拍攝流程）</p>
-            <p class="text-xs text-slate-400">每一步流程都清楚，讓你不用擔心。</p>
+            <p class="text-xs text-slate-500">每一步流程都清楚，讓你不用擔心。</p>
       </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
             <div>
@@ -202,11 +202,11 @@ seo:
         <div class="bg-white border border-sand-200 rounded-t-2xl p-6 relative z-10 shadow-lg group hover:-translate-y-1 transition-transform duration-300">
             <div class="flex justify-between items-start mb-6 border-b border-dashed border-slate-200 pb-4">
                 <div>
-                    <span class="font-bold text-xs text-slate-400 uppercase tracking-widest block mb-1">Boarding Pass</span>
+                    <span class="font-bold text-xs text-slate-500 uppercase tracking-widest block mb-1">Boarding Pass</span>
                     <span class="font-bold text-lg text-slate-900">GY-2026</span>
                 </div>
                 <div class="text-right">
-                     <span class="font-bold text-xs text-slate-400 uppercase tracking-widest block mb-1">Class</span>
+                     <span class="font-bold text-xs text-slate-500 uppercase tracking-widest block mb-1">Class</span>
                      <span class="font-bold text-lg text-slate-900">PREMIUM</span>
   </div>
 </div>
@@ -216,8 +216,8 @@ seo:
                 Slots Available
             </p>
             <div class="grid grid-cols-2 gap-4 mb-4">
-                <div><span class="text-xxs text-slate-400 uppercase font-bold">Date</span><div class="text-sm font-bold text-slate-800 mt-1">DEC 2025</div></div>
-                <div><span class="text-xxs text-slate-400 uppercase font-bold">Gate</span><div class="text-sm font-bold text-slate-800 mt-1">A01</div></div>
+                <div><span class="text-xxs text-slate-500 uppercase font-bold">Date</span><div class="text-sm font-bold text-slate-800 mt-1">DEC 2025</div></div>
+                <div><span class="text-xxs text-slate-500 uppercase font-bold">Gate</span><div class="text-sm font-bold text-slate-800 mt-1">A01</div></div>
   </div>
             <div class="font-barcode text-3xl text-slate-800 opacity-80 text-center tracking-widest">*GOLDEN*</div>
 </div>
@@ -275,18 +275,18 @@ seo:
 
         // Render Items with Fade Effect - No cropping, preserve aspect ratio
         // 圖片響應式優化：使用 srcset 和 sizes
+        // Note: R2 doesn't support dynamic resizing via URL params, so we use the optimized single size
+        // The image is already optimized to MAX_WIDTH (800px) during upload, which is sufficient for display
         grid.innerHTML = data.items.map((item, index) => {
-            // 生成響應式圖片尺寸（如果 CDN 支援）
             const baseSrc = item.src;
-            // 假設 CDN 支援 ?w= 參數來調整寬度，如果不支援則使用原圖
-            const srcset = `${baseSrc}?w=400 400w, ${baseSrc}?w=800 800w, ${baseSrc}?w=1200 1200w`;
+            // Use single optimized image (already resized to 800px max during upload)
+            // This matches actual display sizes: mobile ~400px, desktop ~300px, with 2x retina support
             const sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
             
             return `
             <div class="portfolio-img-card animate-fade-in group border border-slate-100" style="animation-delay: ${index * 0.1}s">
                 <img 
                     src="${baseSrc}" 
-                    srcset="${srcset}"
                     sizes="${sizes}"
                     alt="${item.sub}" 
                     loading="lazy"
@@ -331,5 +331,23 @@ seo:
             }
         });
     }
+
+    // Add title attributes to Instagram iframes for accessibility
+    function addInstagramIframeTitles() {
+        const iframes = document.querySelectorAll('.instagram-embed-wrapper iframe');
+        iframes.forEach((iframe, index) => {
+            if (!iframe.title) {
+                const permalink = iframe.getAttribute('src')?.match(/\/reel\/([^\/]+)/)?.[1];
+                iframe.title = permalink 
+                    ? `Instagram 貼文：${permalink}` 
+                    : `Instagram 嵌入內容 ${index + 1}`;
+            }
+        });
+    }
+
+    // Run after Instagram embeds are loaded
+    window.addEventListener('load', () => {
+        setTimeout(addInstagramIframeTitles, 2000); // Wait for Instagram script to create iframes
+    });
 
 </script>
