@@ -210,21 +210,6 @@ module.exports = function (eleventyConfig) {
   // Strategy: Read compiled CSS from _site directory (processed by PostCSS/Tailwind)
   // Note: This filter runs during template rendering, so CSS files should already be compiled
   eleventyConfig.addNunjucksFilter("inlineCSS", function (cssPath) {
-    // #region agent log
-    const logData = {
-      sessionId: 'debug-session',
-      runId: 'run1',
-      hypothesisId: 'A',
-      location: '.eleventy.js:203',
-      message: 'inlineCSS filter called',
-      data: { cssPath, cwd: process.cwd() },
-      timestamp: Date.now()
-    };
-    try {
-      require('fs').appendFileSync('/Users/jackm4/Documents/GitHub/goldenyearsphoto/.cursor/debug.log', JSON.stringify(logData) + '\n');
-    } catch (e) {}
-    // #endregion
-
     if (!cssPath) return "";
 
     // Remove leading slash and normalize path
@@ -244,69 +229,20 @@ module.exports = function (eleventyConfig) {
     const outputPathAbsolute = path.join(process.cwd(), "_site", cleanPath);
     const cssSourcePathAbsolute = path.join(process.cwd(), "src", cleanPath);
 
-    // #region agent log
-    const logData2 = {
-      sessionId: 'debug-session',
-      runId: 'run1',
-      hypothesisId: 'A',
-      location: '.eleventy.js:225',
-      message: 'Checking CSS file paths',
-      data: { 
-        cleanPath,
-        outputPath,
-        outputPathExists: fs.existsSync(outputPath),
-        outputPathAbsolute,
-        outputPathAbsoluteExists: fs.existsSync(outputPathAbsolute),
-        cssSourcePath,
-        cssSourcePathExists: fs.existsSync(cssSourcePath),
-        cssSourcePathAbsolute,
-        cssSourcePathAbsoluteExists: fs.existsSync(cssSourcePathAbsolute)
-      },
-      timestamp: Date.now()
-    };
-    try {
-      require('fs').appendFileSync('/Users/jackm4/Documents/GitHub/goldenyearsphoto/.cursor/debug.log', JSON.stringify(logData2) + '\n');
-    } catch (e) {}
-    // #endregion
-
     try {
       // Primary strategy: Read compiled CSS from _site (processed by PostCSS/Tailwind)
       // Try multiple paths to handle different build environments
       let cssContent = null;
-      let foundPath = null;
       if (fs.existsSync(outputPath)) {
         cssContent = fs.readFileSync(outputPath, "utf8");
-        foundPath = outputPath;
       } else if (fs.existsSync(outputPathAbsolute)) {
         cssContent = fs.readFileSync(outputPathAbsolute, "utf8");
-        foundPath = outputPathAbsolute;
       } else if (fs.existsSync(cssSourcePath)) {
         // Fallback: Try reading source CSS (for non-Tailwind CSS files)
         cssContent = fs.readFileSync(cssSourcePath, "utf8");
-        foundPath = cssSourcePath;
       } else if (fs.existsSync(cssSourcePathAbsolute)) {
         cssContent = fs.readFileSync(cssSourcePathAbsolute, "utf8");
-        foundPath = cssSourcePathAbsolute;
       }
-
-      // #region agent log
-      const logData3 = {
-        sessionId: 'debug-session',
-        runId: 'run1',
-        hypothesisId: 'A',
-        location: '.eleventy.js:250',
-        message: 'CSS file read result',
-        data: { 
-          foundPath,
-          cssContentLength: cssContent ? cssContent.length : 0,
-          cssContentPreview: cssContent ? cssContent.substring(0, 100) : null
-        },
-        timestamp: Date.now()
-      };
-      try {
-        require('fs').appendFileSync('/Users/jackm4/Documents/GitHub/goldenyearsphoto/.cursor/debug.log', JSON.stringify(logData3) + '\n');
-      } catch (e) {}
-      // #endregion
 
       if (cssContent) {
         // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
@@ -315,49 +251,10 @@ module.exports = function (eleventyConfig) {
 
       console.warn(`[inlineCSS] CSS file not found: ${cssPath}`);
       console.warn(`[inlineCSS] Tried paths: ${outputPath}, ${outputPathAbsolute}, ${cssSourcePath}, ${cssSourcePathAbsolute}`);
-      
-      // #region agent log
-      const logData4 = {
-        sessionId: 'debug-session',
-        runId: 'run1',
-        hypothesisId: 'B',
-        location: '.eleventy.js:265',
-        message: 'CSS file not found - returning empty string',
-        data: { 
-          cssPath,
-          triedPaths: [outputPath, outputPathAbsolute, cssSourcePath, cssSourcePathAbsolute]
-        },
-        timestamp: Date.now()
-      };
-      try {
-        require('fs').appendFileSync('/Users/jackm4/Documents/GitHub/goldenyearsphoto/.cursor/debug.log', JSON.stringify(logData4) + '\n');
-      } catch (e) {}
-      // #endregion
-
       return "";
     } catch (error) {
       console.error(`[inlineCSS] Error reading CSS from ${cssPath}:`, error.message);
       console.error(`[inlineCSS] Stack:`, error.stack);
-      
-      // #region agent log
-      const logData5 = {
-        sessionId: 'debug-session',
-        runId: 'run1',
-        hypothesisId: 'C',
-        location: '.eleventy.js:280',
-        message: 'Error reading CSS file',
-        data: { 
-          cssPath,
-          errorMessage: error.message,
-          errorStack: error.stack
-        },
-        timestamp: Date.now()
-      };
-      try {
-        require('fs').appendFileSync('/Users/jackm4/Documents/GitHub/goldenyearsphoto/.cursor/debug.log', JSON.stringify(logData5) + '\n');
-      } catch (e) {}
-      // #endregion
-
       return "";
     }
   });
