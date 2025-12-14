@@ -150,6 +150,7 @@ module.exports = function (eleventyConfig) {
   // 4.5 靜態檔案複製
   // Note: Passthrough paths are relative to project root, not input directory
   eleventyConfig.addPassthroughCopy("src/_redirects");
+  eleventyConfig.addPassthroughCopy("src/_headers");
   eleventyConfig.addPassthroughCopy("src/assets/images/ui");
   eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
