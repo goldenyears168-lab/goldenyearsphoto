@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run upload:watch\" \"npx @11ty/eleventy --serve\"",
     "start": "eleventy --serve",
-    "build": "npm run compress-images && npm run upload-portfolio && eleventy",
-    "compress-images": "node src/scripts/compress-images.mjs",
+    "build": "npm run upload-portfolio && eleventy",
     "upload-portfolio": "node src/scripts/upload-portfolio-to-r2.mjs",
     "upload:watch": "onchange 'src/assets/images/portfolio/**/*' 'src/assets/images/content/**/*' 'src/assets/images/booking/**/*' 'src/assets/images/home/**/*' 'src/assets/images/price-list/**/*' --initial --wait 5 -- npm run upload-portfolio",
     "lint": "npm run lint:js",
@@ -38,7 +37,6 @@
     "globals": "^16.5.0",
     "html-validate": "^10.3.1",
     "http-server": "^14.1.1",
-    "lighthouse": "^13.0.1",
     "onchange": "^7.1.0",
     "pa11y": "^9.0.1",
     "pa11y-ci": "^4.0.1",

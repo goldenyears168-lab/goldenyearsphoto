@@ -17,14 +17,15 @@ const BUCKET_NAME = process.env.R2_BUCKET_NAME;
 const FOLDERS = [
   "portfolio",        // src/assets/images/portfolio/
   "content",          // src/assets/images/content/ (包含 about, blog, booking, guide, home, price-list 等)
+  "ui",               // src/assets/images/ui/ (logo 等 UI 圖片)
 ];
 
 // 🚀 Image Optimization Constants
 // Optimized for actual display sizes: mobile (50vw) and desktop (25vw/20vw)
-// Max display width: ~400px on mobile, ~300px on desktop
-// Using 2x for retina: 400*2 = 800px max
-const MAX_WIDTH = 800; // Optimized for actual display sizes (was 1200, too large)
-const QUALITY = 75; // Slightly reduced for better file size (was 80)
+// Actual display size: ~185x238px (from Lighthouse report)
+// Using 2x for retina: 185*2 = 370px, round up to 400px for safety
+const MAX_WIDTH = 400; // Further optimized for actual display sizes (was 800, still too large)
+const QUALITY = 75; // Balanced for photography quality vs file size
 
 if (!ACCOUNT_ID || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY || !BUCKET_NAME) {
   console.error("❌ .env 相關 R2 設定缺一個，請再確認 .env");
@@ -173,10 +174,11 @@ async function fileExistsInR2(key) {
 }
 
 async function uploadFile(localPath, key) {
+  // Always re-upload to ensure cache headers are applied
+  // (R2 may not have cache headers on existing files)
   const exists = await fileExistsInR2(key);
   if (exists) {
-    console.log(`⏭️  Skipped (Already exists): ${key}`);
-    return; // Skip processing and uploading
+    console.log(`🔄 Re-uploading to update cache headers: ${key}`);
   }
 
   // Get original file size for logging
