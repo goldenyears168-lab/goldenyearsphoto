@@ -20,24 +20,20 @@
 <div class="mb-12">
     <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">{{ title }}</h2>
     <div class="overflow-x-auto">
-        <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">
-            <thead>
-                <tr class="bg-slate-100">
-                    <th class="px-6 py-4 text-left font-bold text-slate-900 border-b border-slate-200">項目</th>
-                    <th class="px-6 py-4 text-left font-bold text-slate-900 border-b border-slate-200">選項 A</th>
-                    <th class="px-6 py-4 text-left font-bold text-slate-900 border-b border-slate-200">選項 B</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr class="border-b border-slate-200 hover:bg-slate-50 transition-colors {% if loop.index % 2 == 0 %}bg-slate-50/50{% endif %}">
-                    <td class="px-6 py-4 font-semibold text-slate-700">{{ item.label }}</td>
-                    <td class="px-6 py-4 text-slate-600">{{ item.optionA }}</td>
-                    <td class="px-6 py-4 text-slate-600">{{ item.optionB }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="bg-sand-100/50 rounded-xl shadow-sm p-6 md:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="font-bold text-slate-900 text-lg">項目</div>
+                <div class="font-bold text-slate-900 text-lg">選項 A</div>
+                <div class="font-bold text-slate-900 text-lg">選項 B</div>
+            </div>
+            {% for item in items %}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 {% if not loop.last %}mb-2{% endif %} {% if loop.index % 2 == 0 %}bg-sand-50/50 rounded-lg px-4{% endif %}">
+                <div class="font-semibold text-slate-700">{{ item.label }}</div>
+                <div class="text-slate-600">{{ item.optionA }}</div>
+                <div class="text-slate-600">{{ item.optionB }}</div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endmacro %}

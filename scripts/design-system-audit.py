@@ -320,7 +320,7 @@ def load_design_tokens():
             'trust-500': '#6366F1',
             'trust-600': '#4F46E5',
             'trust-700': '#4338CA',
-            'trust-800': '#1E3A8A',
+            'trust-800': '#263C6D',
             'trust-900': '#0F172A',
             'trust-950': '#020617',
             'sand-50': '#FDFBF7',

@@ -13,7 +13,7 @@
   --color-trust-500: #0F172A; /* Changed from vibrant blue to dark */
   --color-trust-600: #0F172A; /* Changed from vibrant blue to dark */
   --color-trust-700: #0F172A; /* Changed from vibrant blue to dark */
-  --color-trust-800: #1E3A8A;
+  --color-trust-800: #263C6D;
   --color-trust-900: #0F172A;
   --color-trust-950: #020617;
 
@@ -30,10 +30,10 @@
    * Kept for backward compatibility, mapped to new system
    * ================================================== */
   --color-brand-primary: #020617; /* trust-950 */
-  --color-brand-accent: #1E3A8A; /* trust-800 - updated from old system */
+  --color-brand-accent: #263C6D; /* trust-800 - updated from old system */
   --color-brand-cta: #C7D2FE; /* trust-200 - updated from old system */
-  --color-brand-cta-hover: #1E3A8A; /* trust-800 */
-  --color-accent: #1E3A8A; /* trust-800 */
+  --color-brand-cta-hover: #263C6D; /* trust-800 */
+  --color-accent: #263C6D; /* trust-800 */
   --color-accent-weak: #0F172A; /* trust-900 - changed from vibrant blue to dark */
   --color-accent-strong: #020617; /* trust-950 */
   --color-neutral-50: #f7f7f7;
@@ -63,7 +63,7 @@
   --color-border-dark: #0F172A; /* trust-900 */
   --color-dark: #020617; /* trust-950 */
   --color-cta: #C7D2FE; /* trust-200 */
-  --color-primary-accent: #1E3A8A; /* trust-800 */
+  --color-primary-accent: #263C6D; /* trust-800 */
   --color-gray-bg: #C4C7CE;
   --color-light-bg: #FDFBF7; /* sand-50 - updated */
   --color-text-dark: #0F172A; /* trust-900 */
@@ -1399,7 +1399,13 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-.bento-card {
+/* ==================================================
+ * Bento Card Base Styles & Variants
+ * ================================================== */
+
+@layer components {
+  /* Base bento-card - default white background, can be overridden by Tailwind bg-* utilities */
+  .bento-card {
     background-color: var(--color-white);
     border: 1px solid var(--color-sand-200); /* E2DCD3 - Design System */
     border-radius: 1.5rem; /* rounded-2xl */
@@ -1407,16 +1413,14 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     position: relative;
-}
-.bento-card:hover {
+  }
+
+  .bento-card:hover {
     border-color: var(--color-trust-900); /* 0F172A - Design System */
-}
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08); /* shadow-trust-900 */
+  }
 
-/* ==================================================
- * Bento Card Variants
- * ================================================== */
-
-@layer components {
   /* Default variant - white background, sand-200 border */
   .bento-card-default {
     background-color: var(--color-white);
@@ -1426,6 +1430,17 @@ body {
   /* Sand variant - sand-50 background */
   .bento-card-sand {
     background-color: var(--color-sand-50);
+  }
+
+  /* Dark variant - trust-950 background with white text */
+  .bento-card-dark {
+    background-color: var(--color-trust-950) !important;
+    border-color: var(--color-trust-900) !important;
+    color: var(--color-white);
+  }
+
+  .bento-card-dark:hover {
+    border-color: var(--color-trust-800) !important;
   }
 
   /* Elevated variant - stronger shadow */
@@ -1443,15 +1458,16 @@ body {
   }
 }
 
-.bento-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08); /* shadow-trust-900 */
-}
+/* ==================================================
+ * Note: Tailwind bg-* utilities (in @layer utilities) will automatically
+ * override .bento-card background due to CSS layer precedence:
+ * base < components < utilities
+ * ================================================== */
 
 /* Ink Stamp Style - Updated to Design System */
 .ink-stamp {
-    border: 3px double #1E3A8A; /* trust-800 - Design System */
-    color: #1E3A8A; /* trust-800 - Design System */
+    border: 3px double #263C6D; /* trust-800 - Design System */
+    color: #263C6D; /* trust-800 - Design System */
     text-transform: uppercase;
     font-weight: bold;
     padding: 0.25rem 1rem;
@@ -2097,7 +2113,7 @@ nav a, nav button {
 .luggage-tag {
     background-color: #F0F4FF;
     border: 1px solid #C7D2FE;
-    color: #1E3A8A;
+    color: #263C6D;
     padding: 4px 12px;
     border-radius: 4px;
     font-weight: bold;
@@ -2174,12 +2190,12 @@ nav a, nav button {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1E3A8A;
+    color: #263C6D;
     margin-bottom: 1.5rem;
     transition: all 0.3s ease;
 }
 .gate-card:hover .gate-icon {
-    background-color: #1E3A8A;
+    background-color: #263C6D;
     color: var(--color-white);
 }
 

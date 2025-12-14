@@ -34,8 +34,8 @@ def get_contrast_ratio(color1, color2):
 
 # 检查关键颜色组合
 checks = [
-    ("luggage-tag", "#1E3A8A", "#F0F4FF", "深蓝色文字在浅蓝色背景"),
-    ("gate-icon", "#1E3A8A", "#F0F4FF", "深蓝色文字在浅蓝色背景"),
+    ("luggage-tag", "#263C6D", "#F0F4FF", "深蓝色文字在浅蓝色背景"),
+    ("gate-icon", "#263C6D", "#F0F4FF", "深蓝色文字在浅蓝色背景"),
     ("step-list (trust-100)", "#0F172A", "#E0E7FF", "深色文字在 trust-100 背景"),
     ("step-list (trust-600)", "#0F172A", "#E0E7FF", "深色文字在 trust-100 背景"),
     ("filter-btn active", "#020617", "#C7D2FE", "深色文字在 trust-200 背景"),

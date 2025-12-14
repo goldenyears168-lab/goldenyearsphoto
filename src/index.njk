@@ -10,27 +10,33 @@ seo:
 ---
 
 <!-- Hero Section -->
-<div class="text-center mb-16 relative">
+<div class="text-center mb-16 relative pt-24 md:pt-28 overflow-hidden">
+    <!-- Background Image - Very Subtle with Blur -->
+    <div class="absolute inset-0 -z-20 opacity-[0.04]">
+        <img src="{{ 'portfolio/family/family-2.jpg' | r2img }}" alt="" class="w-full h-full object-cover blur-[2px]" style="object-position: center; transform: scale(1.05);" aria-hidden="true" loading="eager" decoding="async" />
+    </div>
+    <!-- Subtle Overlay to Enhance Text Readability -->
+    <div class="absolute inset-0 -z-15 bg-gradient-to-b from-white/40 via-transparent to-white/30"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[400px] bg-dawn-gradient-strong rounded-full blur-[80px] -z-10 opacity-70 animate-pulse" style="animation-duration: 4s;"></div>
 
-    <div class="inline-flex items-center gap-3 px-5 py-2 bg-white border border-trust-200 rounded-full mb-8 shadow-sm animate-float">
+    <div class="relative z-10 inline-flex items-center gap-3 px-5 py-2 bg-white/95 backdrop-blur-sm border border-trust-200 rounded-full mb-8 shadow-sm animate-float">
         <span class="flex h-2 w-2 relative">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-trust-600 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-trust-600"></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
         </span>
         <span class="text-xs font-bold text-slate-600 tracking-wide uppercase">台北專業攝影工作室</span>
     </div>
     
-    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6">
+    <h1 class="relative z-10 text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6 drop-shadow-[0_2px_8px_rgba(255,255,255,0.8)]">
         Your Ticket to <br>
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-slate-600 to-slate-400 font-serif italic font-normal px-2">the next chapter.</span>
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-slate-600 to-slate-400 font-serif italic font-normal px-2 drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)]" style="text-shadow: 0 2px 8px rgba(255,255,255,0.9);">the next chapter.</span>
     </h1>
     
-    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-4 font-medium">
+    <p class="relative z-10 text-lg md:text-xl text-slate-700 max-w-2xl mx-auto leading-relaxed mb-4 font-medium drop-shadow-[0_1px_4px_rgba(255,255,255,0.8)]">
           讓每一個「好時」，都有你我的「身影」
         </p>
     
-    <p class="text-base md:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+    <p class="relative z-10 text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
           台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
         </p>
 </div>
@@ -88,28 +94,28 @@ seo:
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Who We Are</span>
                 <h3 class="text-3xl font-bold text-slate-900 mb-4">關於我們</h3>
                 <p class="text-slate-500 leading-relaxed mb-8 max-w-sm">
-                    好時有影攝影工作室，專注於「人」的本質。我們不生產複製人，而是透過鏡頭，挖掘你獨特的職涯光譜。
+                    透過真誠與祝福與陪伴，讓我們拍的照片，陪伴著你帶到下一個人生階段。
                 </p>
                 <a href="/about/" class="flex items-center text-sm font-bold text-slate-900 group-hover:text-slate-900 transition-colors">
                     認識團隊 <svg class="w-4 h-4 ml-2 arrow-icon transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
-      </div>
-      </div>
+            </div>
+        </div>
 
         <!-- Philosophy -->
-        <div class="bento-card p-10 bg-trust-950 text-white relative overflow-hidden group brand-card cursor-pointer border-trust-900">
+        <div class="bento-card bento-card-dark p-10 text-white relative overflow-hidden group brand-card cursor-pointer">
             <div class="relative z-10">
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Our Belief</span>
-                <h3 class="text-3xl font-serif italic mb-4">Philosophy</h3>
-                <p class="text-slate-300 leading-relaxed mb-8 max-w-sm">
+                <span class="text-xs font-bold text-white uppercase tracking-widest mb-3 block opacity-80">OUR BELIEF</span>
+                <h3 class="text-3xl font-serif italic mb-4 text-white">Philosophy</h3>
+                <p class="text-slate-100 leading-relaxed mb-8 max-w-sm">
                     「讓每一個好時，都有你我的身影。」我們相信，一張好的形象照，是職涯自信的起點，也是未來的入場券。
                 </p>
                 <a href="/about/" class="flex items-center text-sm font-bold text-white group-hover:text-trust-200 transition-colors">
                     閱讀品牌故事 <svg class="w-4 h-4 ml-2 arrow-icon transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
-      </div>
-      </div>
-      </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Instagram Section -->
@@ -148,17 +154,69 @@ seo:
 <div class="mb-24 marquee-container overflow-hidden py-4 border-y border-sand-200 bg-white/50 backdrop-blur-sm">
     <div class="flex items-center gap-12 w-max animate-scroll">
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Amazon 亞馬遜</span>
-        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Google</span>
-        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">IBM</span>
-        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">MSD 默沙東</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">MSD 美商默沙東藥廠</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">鵬耀法律事務所</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">遠雄集團</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">智選科技</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">技鋼科技</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">聖邦科技</span>
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">CHARLES & KEITH</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">萬寶華</span>
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">資生堂</span>
-        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Foodpanda</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">微軟</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">雅培</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">IBM</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Inline 樂排</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">foodpanda</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">英美菸草</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Happy hair</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">白蘭氏</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">生洋網路</span>
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Garmin</span>
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">臺大醫院</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">台大醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">台大牙醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">台大物治</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">陽明醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">陽明物治</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">中山醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">馬偕醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">馬偕聽語</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">輔大醫</span>
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">政大 EMBA</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">交大 GMBA</span>
         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Amazon 亞馬遜</span>
-        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Google</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">MSD 美商默沙東藥廠</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">鵬耀法律事務所</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">遠雄集團</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">智選科技</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">技鋼科技</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">聖邦科技</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">CHARLES & KEITH</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">萬寶華</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">資生堂</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">微軟</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">雅培</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">IBM</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Inline 樂排</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">foodpanda</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">英美菸草</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Happy hair</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">白蘭氏</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">生洋網路</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Garmin</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">臺大醫院</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">台大醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">台大牙醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">台大物治</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">陽明醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">陽明物治</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">中山醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">馬偕醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">馬偕聽語</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">輔大醫</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">政大 EMBA</span>
+        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">交大 GMBA</span>
       </div>
       </div>
 
@@ -323,7 +381,7 @@ seo:
         },
         // 競選照
         'campaign-portrait': {
-            layout: 'horizontal',
+            layout: 'vertical',
             items: [
                 { src: imgPath('portfolio/campaign-portrait/campaign-portrait-1.jpg'), tag: '專業形象', sub: '競選照' },
                 { src: imgPath('portfolio/campaign-portrait/campaign-portrait-2.jpg'), tag: '專業形象', sub: '競選照' },
@@ -472,121 +530,29 @@ seo:
 <!-- Instagram Embed Script -->
 <script async src="https://www.instagram.com/embed.js"></script>
 <script>
-    // Ensure Instagram embeds are processed after page load
-    function processEmbeds() {
-        // Force remove inline styles BEFORE Instagram processes embeds
-        // This ensures Instagram script uses correct dimensions from the start
-        const wrappers = document.querySelectorAll('.instagram-embed-wrapper');
-        wrappers.forEach((wrapper) => {
-            const blockquote = wrapper.querySelector('blockquote');
-            if (blockquote) {
-                // Remove all inline width/min-width/max-width styles
-                blockquote.removeAttribute('style');
-                // Re-apply only necessary styles (background, border, etc.) but NOT width
-                blockquote.style.background = '#FFF';
-                blockquote.style.border = '0';
-                blockquote.style.borderRadius = '3px';
-                blockquote.style.boxShadow = '0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)';
-                blockquote.style.margin = '0';
-                blockquote.style.padding = '0';
-            }
-        });
-
-        if (window.instgrm) {
-            window.instgrm.Embeds.process();
-            
-            // Function to fix iframe dimensions
-            function fixIframeDimensions() {
-                const wrappers = document.querySelectorAll('.instagram-embed-wrapper');
-                wrappers.forEach((wrapper) => {
-                    const blockquote = wrapper.querySelector('blockquote');
-                    const iframe = wrapper.querySelector('iframe');
-                    if (blockquote) {
-                        blockquote.style.width = '';
-                        blockquote.style.minWidth = '';
-                        blockquote.style.maxWidth = '';
-                    }
-                    if (iframe && wrapper.offsetWidth > 0) {
-                        // Force iframe to match wrapper dimensions exactly
-                        const targetWidth = wrapper.offsetWidth;
-                        const targetHeight = wrapper.offsetHeight;
-                        
-                        // Remove any border that might cause 1px difference
-                        iframe.style.border = '0';
-                        iframe.style.padding = '0';
-                        iframe.style.margin = '0';
-                        iframe.style.outline = '0';
-                        iframe.style.boxSizing = 'border-box';
-                        iframe.style.width = targetWidth + 'px';
-                        iframe.style.height = targetHeight + 'px';
-                        iframe.style.maxWidth = '100%';
-                        iframe.style.maxHeight = '100%';
-                        
-                        // If iframe is still 1px wider, use transform scale to fix it
-                        if (iframe.offsetWidth > targetWidth) {
-                            const scaleX = targetWidth / iframe.offsetWidth;
-                            const scaleY = targetHeight / iframe.offsetHeight;
-                            iframe.style.transformOrigin = 'top left';
-                            iframe.style.transform = `scale(${scaleX}, ${scaleY})`;
-                            iframe.style.width = (iframe.offsetWidth / scaleX) + 'px';
-                            iframe.style.height = (iframe.offsetHeight / scaleY) + 'px';
-                        } else {
-                            iframe.style.transform = '';
-                        }
-                        
-                        // Also set blockquote to ensure it doesn't cause issues
-                        if (blockquote) {
-                            blockquote.style.border = '0';
-                            blockquote.style.padding = '0';
-                            blockquote.style.margin = '0';
-                            blockquote.style.boxSizing = 'border-box';
-                        }
-                    }
-                });
-            }
-            
-            // Clean up inline styles after Instagram processes embeds
-            setTimeout(fixIframeDimensions, 100);
-            setTimeout(fixIframeDimensions, 500);
-            setTimeout(fixIframeDimensions, 1000);
-            setTimeout(fixIframeDimensions, 2000);
-            
-            // Use MutationObserver to watch for changes
-            const observer = new MutationObserver(() => {
-                fixIframeDimensions();
-            });
-            
-            wrappers.forEach((wrapper) => {
-                observer.observe(wrapper, {
-                    childList: true,
-                    attributes: true,
-                    attributeFilter: ['style', 'width', 'height'],
-                    subtree: true
-                });
-            });
-        }
-    }
-
-    if (window.instgrm) {
-        processEmbeds();
-    } else {
-        window.addEventListener('load', function() {
-            processEmbeds();
-        });
-    }
-
-    // Clear blockquote inline styles IMMEDIATELY on DOMContentLoaded
+    // Clear blockquote inline styles on DOMContentLoaded
     // This happens before Instagram script processes embeds
     window.addEventListener('DOMContentLoaded', () => {
         const wrappers = document.querySelectorAll('.instagram-embed-wrapper');
         wrappers.forEach((wrapper) => {
             const blockquote = wrapper.querySelector('blockquote');
             if (blockquote) {
-                // Remove width-related inline styles immediately
+                // Remove width-related inline styles
                 blockquote.style.width = '';
                 blockquote.style.minWidth = '';
                 blockquote.style.maxWidth = '';
             }
         });
     });
+
+    // Ensure Instagram embeds are processed after page load
+    if (window.instgrm) {
+        window.instgrm.Embeds.process();
+    } else {
+        window.addEventListener('load', function() {
+            if (window.instgrm) {
+                window.instgrm.Embeds.process();
+            }
+        });
+    }
 </script>

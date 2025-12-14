@@ -9,221 +9,294 @@ seo:
 {% from "macros/layout-split.njk" import layoutSplit %}
 {% from "macros/comparison-table.njk" import comparisonTable %}
 {% from "macros/testimonial-card.njk" import testimonialCard %}
+{% from "macros/button.njk" import button %}
 
-<!-- TYPE A: Standard Center Header -->
-<header class="relative pt-32 pb-16 overflow-hidden">
-    <!-- Background Glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
-
-    <!-- Decorative Stamp (Human Touch) -->
-    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
-        <div>
-            Taipei<br>
-            <span class="font-serif italic text-xs">Est. 2026</span>
-        </div>
-    </div>
-
-    <div class="container mx-auto px-4 max-w-4xl text-center">
-        <!-- Wayfinding Tag: Refined Serif -->
-        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
-            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
-            <span class="font-hand text-2xl text-trust-900 -mt-1">03</span>
-        </div>
-
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
-            台北專業形象照推薦
-        </h1>
-        
-        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
-            證件照可以用工具生成，但您的專業形象不能。<br class="hidden md:block">LinkedIn、履歷表、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
-        </p>
-
-        {% from "macros/button.njk" import button %}
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-            {{ button("立即預約拍攝", "/booking/", "primary", "md") }}
-            {{ button("查看價目表", "/price-list/", "secondary", "md") }}
-        </div>
-    </div>
-
-    <!-- The Journey Divider -->
-    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
-        <div class="journey-divider"></div>
-        <div class="journey-notch left"></div>
-        <div class="journey-notch right"></div>
-    </div>
-</header>
-
-<div class="py-16 md:py-24">
-    <div class="container mx-auto px-4 max-w-5xl">
-
-        <!-- Why Professional Portrait -->
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">為什麼需要專業形象照？（而非一般證件照）</h2>
-            <p class="text-lg md:text-xl text-slate-600 mb-4">履歷表很完美，但頭像還是那張尷尬的舊照片？</p>
-            <p class="text-xl md:text-2xl font-bold text-slate-800">
-                醫師、律師、講師、企業主的第一印象，從形象照開始。
+<!-- Hero Section -->
+<section class="relative pt-16 pb-20 md:pt-20 md:pb-24 overflow-hidden bg-sand-50">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-trust-50/40 rounded-full blur-3xl opacity-50 -z-10"></div>
+    
+    <div class="container mx-auto px-4 max-w-5xl relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <!-- Subtle Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-sand-100/80 backdrop-blur-sm rounded-full mb-6 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                <span class="text-xs font-semibold text-slate-600 tracking-wide">專業形象照服務</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight leading-tight">
+                台北專業形象照推薦
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-10">
+                證件照可以用工具生成，但您的專業形象不能。<br class="hidden md:block">
+                LinkedIn、履歷表、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
             </p>
-        </div>
 
-        <!-- Comparison: ID Photo vs Portrait -->
-        {{ layoutSplit(
-            "content/blog/profile/profile-1.jpg",
-            "台北專業形象照-職場人像寫真-好時有影作品",
-            "證件照 vs 形象照：放在 LinkedIn 上的差異",
-            "<p>證件照解決「規格問題」，形象照解決「形象問題」。</p><p>當您需要更新 LinkedIn 頭像、求職履歷、或企業官網時，專業形象照會是更好的選擇。它不僅符合規格，更能展現您的專業氣質和個人品牌。</p><p>一張好的形象照，可以讓您在眾多求職者中脫穎而出，讓潛在客戶對您產生信任感。</p>",
-            "left"
-        ) }}
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                {{ button("立即預約拍攝", "/booking/", "primary", "lg") }}
+                {{ button("查看價目表", "/price-list/", "secondary", "lg") }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="py-12 md:py-16 bg-sand-50">
+    <div class="container mx-auto px-4 max-w-6xl">
+        
+        <!-- Why Professional Portrait -->
+        <section class="mb-20 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-trust-950 mb-4 tracking-tight">
+                    為什麼需要專業形象照？
+                </h2>
+                <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    履歷表很完美，但頭像還是那張尷尬的舊照片？<br>
+                    醫師、律師、講師、企業主的第一印象，從形象照開始。
+                </p>
+            </div>
+
+            <!-- Image + Text Split -->
+            {{ layoutSplit(
+                "content/blog/profile/profile-1.jpg",
+                "台北專業形象照-職場人像寫真-好時有影作品",
+                "證件照 vs 形象照：放在 LinkedIn 上的差異",
+                "<p class='text-lg text-slate-700 mb-4'>證件照解決「規格問題」，形象照解決「形象問題」。</p><p class='text-base text-slate-600 leading-relaxed mb-4'>當您需要更新 LinkedIn 頭像、求職履歷、或企業官網時，專業形象照會是更好的選擇。它不僅符合規格，更能展現您的專業氣質和個人品牌。</p><p class='text-base text-slate-600 leading-relaxed'>一張好的形象照，可以讓您在眾多求職者中脫穎而出，讓潛在客戶對您產生信任感。</p>",
+                "left"
+            ) }}
+        </section>
 
         <!-- Target Audience -->
-        <div class="bento-card bento-card-sand">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">適合對象：誰需要專業形象照？</h2>
-            <div class="max-w-2xl mx-auto">
-                <p class="text-lg md:text-xl text-slate-700 mb-6 text-center">您是否：</p>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-4 text-slate-700">
-                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
-                        <span class="text-base md:text-lg">您是醫師、律師、講師、企業主，需要建立專業形象？</span>
-                    </li>
-                    <li class="flex items-start gap-4 text-slate-700">
-                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
-                        <span class="text-base md:text-lg">您正在求職，履歷表需要一張能加分的照片？</span>
-                    </li>
-                    <li class="flex items-start gap-4 text-slate-700">
-                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
-                        <span class="text-base md:text-lg">您的 LinkedIn 頭像還是大學畢業照？</span>
-                    </li>
-                    <li class="flex items-start gap-4 text-slate-700">
-                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
-                        <span class="text-base md:text-lg">您需要更新企業官網或個人品牌網站的照片？</span>
-                    </li>
-                </ul>
+        <section class="mb-20 md:mb-24">
+            <div class="p-8 md:p-12 bg-sand-100/50 rounded-2xl shadow-sm">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-3">適合對象</h2>
+                    <p class="text-lg text-slate-600">誰需要專業形象照？</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto">
+                    <p class="text-lg md:text-xl text-slate-700 mb-8 text-center font-medium">您是否：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 p-5 bg-sand-50 rounded-xl shadow-sm hover:shadow-md transition-all">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-trust-100 flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-base text-slate-700 leading-relaxed">您是醫師、律師、講師、企業主，需要建立專業形象？</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-5 bg-sand-50 rounded-xl shadow-sm hover:shadow-md transition-all">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-trust-100 flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-base text-slate-700 leading-relaxed">您正在求職，履歷表需要一張能加分的照片？</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-5 bg-sand-50 rounded-xl shadow-sm hover:shadow-md transition-all">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-trust-100 flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-base text-slate-700 leading-relaxed">您的 LinkedIn 頭像還是大學畢業照？</p>
+                        </div>
+                        <div class="flex items-start gap-3 p-5 bg-sand-50 rounded-xl shadow-sm hover:shadow-md transition-all">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-trust-100 flex items-center justify-center mt-0.5">
+                                <svg class="w-4 h-4 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-base text-slate-700 leading-relaxed">您需要更新企業官網或個人品牌網站的照片？</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Comparison Table -->
-        {% set comparisonItems = [
-            {label: "用途", optionA: "正式證件申請、履歷表", optionB: "LinkedIn、企業官網、個人品牌"},
-            {label: "風格", optionA: "自然、自信", optionB: "專業、有氣場"},
-            {label: "適用場景", optionA: "需要嚴格規格的場合", optionB: "需要展現專業形象的場合"},
-            {label: "核心價值", optionA: "解決「規格問題」", optionB: "解決「形象問題」"}
-        ] %}
-        {{ comparisonTable("韓式證件照 vs 專業形象照：差異在哪裡？", comparisonItems) }}
-        
-        <p class="text-center text-slate-600 italic mb-16">
+        <section class="mb-20 md:mb-24">
+            {% set comparisonItems = [
+                {label: "用途", optionA: "正式證件申請、履歷表", optionB: "LinkedIn、企業官網、個人品牌"},
+                {label: "風格", optionA: "自然、自信", optionB: "專業、有氣場"},
+                {label: "適用場景", optionA: "需要嚴格規格的場合", optionB: "需要展現專業形象的場合"},
+                {label: "核心價值", optionA: "解決「規格問題」", optionB: "解決「形象問題」"}
+            ] %}
+            {{ comparisonTable("韓式證件照 vs 專業形象照：差異在哪裡？", comparisonItems) }}
+            
+            <div class="text-center mt-8">
+                <p class="inline-block px-6 py-3 bg-trust-50 rounded-lg text-slate-700 font-medium italic">
                     證件照解決「規格問題」，形象照解決「形象問題」。
                 </p>
+            </div>
+        </section>
 
         <!-- Testimonials -->
-        <div class="bento-card bento-card-sand">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">超過 1000+ 位專業人士的選擇</h2>
+        <section class="mb-20 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-3">超過 1000+ 位專業人士的選擇</h2>
+                <p class="text-lg text-slate-600">真實客戶見證</p>
+            </div>
 
-            {{ testimonialCard(
-                "It is our great honor to officially declare the ALSA conference open... We would like to express our sincere gratitude for our collaboration with 好時有影.",
-                "Asian Law Students' Association (ALSA) Conference 2025"
-            ) }}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="p-6 md:p-8 bg-sand-100/50 rounded-xl shadow-sm hover:shadow-md transition-all">
+                    <div class="mb-6">
+                        <svg class="w-8 h-8 text-trust-200 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p class="text-base md:text-lg text-slate-700 leading-relaxed">「{{ "It is our great honor to officially declare the ALSA conference open... We would like to express our sincere gratitude for our collaboration with 好時有影." }}」</p>
+                    </div>
+                    <div class="pt-4">
+                        <p class="text-sm font-semibold text-slate-600">— Asian Law Students' Association (ALSA) Conference 2025</p>
+                    </div>
+                </div>
+                
+                <div class="p-6 md:p-8 bg-sand-100/50 rounded-xl shadow-sm hover:shadow-md transition-all">
+                    <div class="mb-6">
+                        <svg class="w-8 h-8 text-trust-200 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p class="text-base md:text-lg text-slate-700 leading-relaxed">「{{ "必須大大讚賞的，是他們攝影師引導擺拍的功力。像我這種拍照很容易尷尬的人，這次非但沒有尷尬，還跟攝影師聊起來了...攝影師卻捕捉到『我其實可以辦得到』的那個真實又美好的自我。" }}」</p>
+                    </div>
+                    <div class="pt-4">
+                        <p class="text-sm font-semibold text-slate-600">— 40歲，自由工作者</p>
+                    </div>
+                </div>
+            </div>
             
-            {{ testimonialCard(
-                "必須大大讚賞的，是他們攝影師引導擺拍的功力。像我這種拍照很容易尷尬的人，這次非但沒有尷尬，還跟攝影師聊起來了...攝影師卻捕捉到『我其實可以辦得到』的那個真實又美好的自我。",
-                "40歲，自由工作者"
-            ) }}
-            
-            <p class="text-center text-lg text-slate-600 mt-8">
-                數據證明：90% 客戶在拍攝後 3 個月內更新 LinkedIn 頭像
-            </p>
-        </div>
+            <div class="text-center">
+                <div class="inline-flex items-center gap-3 px-6 py-4 bg-trust-50 rounded-xl shadow-sm">
+                    <div class="w-12 h-12 rounded-full bg-trust-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-trust-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-lg font-semibold text-slate-700">
+                        數據證明：<span class="text-trust-600">90%</span> 客戶在拍攝後 3 個月內更新 LinkedIn 頭像
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <!-- Process Steps -->
-        <div class="mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
-            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
-                不需要自己想姿勢，攝影師會引導您。我們的專業，就是讓「拍照很容易尷尬的人」都能「非但沒有尷尬，還跟攝影師聊起來」。
-            </p>
+        <section class="mb-20 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-4">拍攝流程</h2>
+                <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    簡單 4 步驟，無壓力體驗<br>
+                    <span class="text-base text-slate-500">不需要自己想姿勢，攝影師會引導您</span>
+                </p>
+            </div>
 
-            <ol class="step-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
-                <li class="relative pl-8">
-                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold">1</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">預約拍攝</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 md:p-8 bg-sand-100/50 rounded-xl shadow-sm hover:shadow-md transition-all h-full">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-lg font-bold">1</div>
+                        <h3 class="text-xl font-bold text-trust-950">預約拍攝</h3>
+                    </div>
                     <p class="text-slate-600 leading-relaxed">線上預約，選擇時間和地點（中山/公館）</p>
-                </li>
-                <li class="relative pl-8">
-                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-sm font-bold">2</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">現場拍攝</h3>
+                </div>
+                
+                <div class="p-6 md:p-8 bg-sand-100/50 rounded-xl shadow-sm hover:shadow-md transition-all h-full">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-lg font-bold">2</div>
+                        <h3 class="text-xl font-bold text-trust-950">現場拍攝</h3>
+                    </div>
                     <p class="text-slate-600 leading-relaxed">專業攝影師引導，自然放鬆，捕捉您的專業氣質</p>
-                </li>
-                <li class="relative pl-8">
-                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold">3</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">精修校稿</h3>
+                </div>
+                
+                <div class="p-6 md:p-8 bg-sand-100/50 rounded-xl shadow-sm hover:shadow-md transition-all h-full">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-lg font-bold">3</div>
+                        <h3 class="text-xl font-bold text-trust-950">精修校稿</h3>
+                    </div>
                     <p class="text-slate-600 leading-relaxed">專業自然精修，可校稿兩次，確保滿意</p>
-                </li>
-                <li class="relative pl-8">
-                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold">4</div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2">一週交件</h3>
+                </div>
+                
+                <div class="p-6 md:p-8 bg-sand-100/50 rounded-xl shadow-sm hover:shadow-md transition-all h-full">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-lg font-bold">4</div>
+                        <h3 class="text-xl font-bold text-trust-950">一週交件</h3>
+                    </div>
                     <p class="text-slate-600 leading-relaxed">高畫質電子檔，立即使用於 LinkedIn、履歷表、企業官網</p>
-                </li>
-            </ol>
-        </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Pricing -->
-        <div class="bento-card bento-card-sand">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">價格透明，以張計價，不強迫購買套組</h2>
-            <div class="max-w-xl mx-auto text-center">
-                <p class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                    優惠價格：<span class="text-trust-600">$999</span> /張
-                </p>
-                <p class="text-lg text-slate-600 mb-4">
-                    持學生證可優惠 $899 /張
-                </p>
-                <p class="text-base text-slate-600 mb-8">
-                    小資族友善，可單獨購買，不強迫購買套組。
-                </p>
-                <a href="/price-list/" class="inline-block btn btn-secondary btn-lg">
-                    查看完整價目表
-                </a>
+        <section class="mb-20 md:mb-24">
+            <div class="p-8 md:p-12 bg-gradient-to-br from-trust-50/80 to-sand-100/50 rounded-2xl shadow-md">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-6">價格透明，以張計價</h2>
+                    <p class="text-lg text-slate-600 mb-8">不強迫購買套組，小資族友善</p>
+                    
+                    <div class="bg-sand-50 rounded-xl p-8 md:p-10 shadow-sm mb-6">
+                        <div class="mb-4">
+                            <p class="text-sm text-slate-500 mb-2">優惠價格</p>
+                            <p class="text-4xl md:text-5xl font-bold text-trust-950">
+                                <span class="text-trust-600">$999</span>
+                                <span class="text-2xl text-slate-600 font-normal">/張</span>
+                            </p>
+                        </div>
+                        <div class="pt-4">
+                            <p class="text-base text-slate-600">
+                                持學生證可優惠 <span class="font-bold text-trust-600">$899</span> /張
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="/price-list/" class="inline-block btn btn-primary btn-lg">
+                        查看完整價目表
+                    </a>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Portfolio Gallery -->
-        <div class="mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">你的「未來人設」範例</h2>
+        <section class="mb-20 md:mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-3">你的「未來人設」範例</h2>
+                <p class="text-lg text-slate-600">真實作品展示</p>
+            </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <div class="portfolio-img-card rounded-xl overflow-hidden">
-                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-1.jpg' | r2img }}" alt="台北專業形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden aspect-[3/4]">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-1.jpg' | r2img }}" alt="台北專業形象照-職場人像寫真-好時有影作品" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="portfolio-img-card rounded-xl overflow-hidden">
-                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-2.jpg' | r2img }}" alt="律師形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden aspect-[3/4]">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-2.jpg' | r2img }}" alt="律師形象照-職場人像寫真-好時有影作品" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="portfolio-img-card rounded-xl overflow-hidden">
-                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-3.jpg' | r2img }}" alt="醫師形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden aspect-[3/4]">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-3.jpg' | r2img }}" alt="醫師形象照-職場人像寫真-好時有影作品" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="portfolio-img-card rounded-xl overflow-hidden">
-                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-4.jpg' | r2img }}" alt="求職形象照-履歷照片-個人品牌攝影" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden aspect-[3/4]">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-4.jpg' | r2img }}" alt="求職形象照-履歷照片-個人品牌攝影" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="portfolio-img-card rounded-xl overflow-hidden">
-                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-18.jpg' | r2img }}" alt="講師形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden aspect-[3/4]">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-18.jpg' | r2img }}" alt="講師形象照-職場人像寫真-好時有影作品" class="w-full h-full object-cover" loading="lazy" decoding="async" />
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
 
 <!-- Final CTA -->
-<div class="py-16 md:py-24 bg-sand-50 text-center">
+<section class="py-16 md:py-24 bg-gradient-to-b from-sand-100/50 to-sand-50">
     <div class="container mx-auto px-4 max-w-4xl">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-trust-950">準備好，讓自己被好好看見了嗎？</h2>
-        <p class="text-lg md:text-xl mb-4 text-trust-900">
-            證件照可以用工具生成，但您的專業形象不能。<br>
-            履歷表、LinkedIn、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
-        </p>
-        <p class="text-base mb-8 text-trust-900">
-            免費諮詢，無壓力了解方案
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-            <a href="/booking/" class="btn btn-secondary btn-lg">
-                立即預約拍攝
-            </a>
-            <a href="/" class="btn btn-secondary btn-lg">
-                查看完整作品集
-            </a>
+        <div class="text-center">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-trust-950 tracking-tight">
+                準備好，讓自己被好好看見了嗎？
+            </h2>
+            <p class="text-lg md:text-xl mb-4 text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                證件照可以用工具生成，但您的專業形象不能。<br>
+                履歷表、LinkedIn、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
+            </p>
+            <p class="text-base mb-10 text-slate-500">
+                免費諮詢，無壓力了解方案
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                {{ button("立即預約拍攝", "/booking/", "primary", "lg") }}
+                {{ button("查看完整作品集", "/", "secondary", "lg") }}
+            </div>
         </div>
     </div>
-</div>
+</section>

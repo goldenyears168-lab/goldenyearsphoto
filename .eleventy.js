@@ -122,13 +122,9 @@ module.exports = function (eleventyConfig) {
       // 以 _ 開頭的 partial 不輸出獨立檔案
       if (parsed.name.startsWith("_")) return;
 
-      // 只處理 main.css，其他 CSS 檔案直接複製
-      if (parsed.name !== "main") {
-        return async () => inputContent;
-      }
-
-      // 使用 PostCSS 處理 Tailwind CSS
+      // 使用 PostCSS 處理所有 CSS 檔案（包含 Tailwind CSS）
       try {
+        const outputPath = path.join("_site", path.relative("src", inputPath));
         const result = await postcss([
           tailwindcss({
             config: path.join(__dirname, 'tailwind.config.js'),
@@ -136,7 +132,7 @@ module.exports = function (eleventyConfig) {
           autoprefixer,
         ]).process(inputContent, {
           from: inputPath,
-          to: path.join("_site", "assets", "css", "main.css"),
+          to: outputPath,
         });
 
         return async () => result.css;
