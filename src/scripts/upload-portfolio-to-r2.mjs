@@ -38,6 +38,44 @@ const s3 = new S3Client({
 });
 
 const IMAGES_ROOT = path.join("src", "assets", "images");
+const LOCK_FILE = path.join(process.cwd(), ".upload-lock");
+
+/**
+ * Check if another upload process is running
+ */
+function isLocked() {
+  if (!fs.existsSync(LOCK_FILE)) return false;
+  
+  try {
+    const lockData = fs.readFileSync(LOCK_FILE, "utf8");
+    const lockTime = parseInt(lockData, 10);
+    const now = Date.now();
+    // If lock is older than 5 minutes, consider it stale
+    if (now - lockTime > 5 * 60 * 1000) {
+      fs.unlinkSync(LOCK_FILE);
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Create lock file
+ */
+function createLock() {
+  fs.writeFileSync(LOCK_FILE, Date.now().toString());
+}
+
+/**
+ * Remove lock file
+ */
+function removeLock() {
+  if (fs.existsSync(LOCK_FILE)) {
+    fs.unlinkSync(LOCK_FILE);
+  }
+}
 
 /**
  * Format bytes to human-readable string
@@ -189,20 +227,32 @@ async function walkAndUpload(dir, prefix = "") {
 }
 
 async function main() {
-  console.log("🚀 開始同步圖片到 R2 ...");
-  for (const folder of FOLDERS) {
-    const localDir = path.join(IMAGES_ROOT, folder);
-    if (!fs.existsSync(localDir)) {
-      console.warn(`⚠️ 資料夾不存在，略過：${localDir}`);
-      continue;
-    }
-    console.log(`\n=== 同步資料夾：${folder} ===`);
-    await walkAndUpload(localDir, folder);
+  // Check if another instance is running
+  if (isLocked()) {
+    console.log("⏸️  另一個上傳程序正在執行中，跳過此次執行...");
+    return;
   }
-  console.log("\n🎉 全部指定資料夾同步完成！");
+
+  try {
+    createLock();
+    console.log("🚀 開始同步圖片到 R2 ...");
+    for (const folder of FOLDERS) {
+      const localDir = path.join(IMAGES_ROOT, folder);
+      if (!fs.existsSync(localDir)) {
+        console.warn(`⚠️ 資料夾不存在，略過：${localDir}`);
+        continue;
+      }
+      console.log(`\n=== 同步資料夾：${folder} ===`);
+      await walkAndUpload(localDir, folder);
+    }
+    console.log("\n🎉 全部指定資料夾同步完成！");
+  } finally {
+    removeLock();
+  }
 }
 
 main().catch((err) => {
   console.error("❌ 發生錯誤：", err);
+  removeLock();
   process.exit(1);
 });

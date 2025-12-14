@@ -6,6 +6,7 @@
 /README.md/
 /.dev.vars
 /.env
+/.upload-lock
 
 # 報告文件（可選：如果需要保留報告到版本控制，可以移除這行）
 # /report/

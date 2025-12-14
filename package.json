@@ -9,7 +9,7 @@
     "build": "npm run compress-images && npm run upload-portfolio && eleventy",
     "compress-images": "node src/scripts/compress-images.mjs",
     "upload-portfolio": "node src/scripts/upload-portfolio-to-r2.mjs",
-    "upload:watch": "onchange 'src/assets/images/portfolio/**/*' 'src/assets/images/content/**/*' 'src/assets/images/booking/**/*' 'src/assets/images/home/**/*' 'src/assets/images/price-list/**/*' -- npm run upload-portfolio",
+    "upload:watch": "onchange 'src/assets/images/portfolio/**/*' 'src/assets/images/content/**/*' 'src/assets/images/booking/**/*' 'src/assets/images/home/**/*' 'src/assets/images/price-list/**/*' --initial --wait 5 -- npm run upload-portfolio",
     "lint": "npm run lint:js",
     "lint:js": "eslint \"src/assets/js/**/*.js\"",
     "lint:js:fix": "eslint \"src/assets/js/**/*.js\" --fix"
