@@ -58,10 +58,9 @@ extraHead: |
                 </p>
 
                 <!-- CTA Buttons -->
+                {% from "macros/button.njk" import button %}
                 <div class="flex flex-wrap gap-4 items-center mb-8">
-                    <a href="/booking/" class="btn btn-secondary btn-md">
-                        預約拍攝
-                    </a>
+                    {{ button("預約拍攝", "/booking/", "secondary", "md") }}
                     <a href="https://instagram.com/goldenyears_studio" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-md group">
                         查看 Instagram <span class="arrow group-hover:translate-x-1">→</span>
                     </a>
@@ -100,12 +99,13 @@ extraHead: |
 
 <!-- Section: Photographers -->
 <section class="mb-24">
-    <div class="flex items-center gap-3 mb-8">
-        <span class="text-2xl font-bold text-trust-950">攝影團隊</span>
-        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-center gap-3 mb-8">
+            <span class="text-2xl font-bold text-trust-950">攝影團隊</span>
+            <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <!-- 1 -->
         <a href="https://www.instagram.com/pinky1357924680/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
             <div class="aspect-[3/4] overflow-hidden">
@@ -217,17 +217,19 @@ extraHead: |
                 <span class="text-xs text-white/80">時尚雜誌質感</span>
             </div>
         </a>
+        </div>
     </div>
 </section>
 
 <!-- Section: Stylists -->
 <section class="mb-24">
-    <div class="flex items-center gap-3 mb-8">
-        <span class="text-2xl font-bold text-trust-950">造型團隊</span>
-        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-center gap-3 mb-8">
+            <span class="text-2xl font-bold text-trust-950">造型團隊</span>
+            <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <!-- 1 -->
         <a href="https://www.instagram.com/tfj___kayla/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
             <div class="aspect-[3/4] overflow-hidden">
@@ -308,17 +310,19 @@ extraHead: |
                 <p class="text-xs text-slate-500 font-medium">彩妝造型師</p>
             </div>
         </a>
+        </div>
     </div>
 </section>
 
 <!-- Section: Editors -->
 <section class="mb-24">
-    <div class="flex items-center gap-3 mb-8">
-        <span class="text-2xl font-bold text-trust-950">人像精修</span>
-        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
-    </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-center gap-3 mb-8">
+            <span class="text-2xl font-bold text-trust-950">人像精修</span>
+            <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <!-- 1 -->
         <a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
             <div class="aspect-[3/4] overflow-hidden">
@@ -382,17 +386,19 @@ extraHead: |
                 <span class="text-xs text-white/80">風格定調</span>
             </div>
         </a>
+        </div>
     </div>
 </section>
 
 <!-- Founder Story Section -->
 <section class="mb-20">
-    <div class="flex items-center gap-3 mb-8">
-        <span class="text-2xl font-bold text-trust-950">創業故事</span>
-        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="flex items-center gap-3 mb-8">
+            <span class="text-2xl font-bold text-trust-950">創業故事</span>
+            <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <a href="https://www.facebook.com/xu.yan.cheng.591473" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
             <div class="aspect-[3/4] overflow-hidden">
                 <img
@@ -431,5 +437,6 @@ extraHead: |
                 <p>好時有影就這樣誕生了。希望每個「好時」都有你我的「身影」，參與著人們的故事，紀錄日常生活的定格和延續。</p>
             </div>
         </div>
+    </div>
     </div>
 </section>

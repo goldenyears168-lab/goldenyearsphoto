@@ -194,12 +194,17 @@
     margin: 0;
   }
 
+  /* 默认链接样式 */
   a {
     text-decoration: none;
+  }
+
+  /* 默认链接颜色 - 只针对没有深色背景的链接 */
+  a:not([class*="bg-trust-9"]):not([class*="bg-trust-8"]) {
     color: var(--color-trust-600); /* Design System: Action Blue */
   }
 
-  a:hover {
+  a:not([class*="bg-trust-9"]):not([class*="bg-trust-8"]):hover {
     color: var(--color-trust-800); /* Design System: Royal Navy */
   }
 
