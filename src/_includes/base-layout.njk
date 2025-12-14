@@ -43,15 +43,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   {# Load fonts asynchronously to avoid blocking render #}
+  {# Optimized: Only load font weights actually used in the project (400, 500, 600, 700) #}
+  {# Removed 300 weight from Noto Sans TC as it's not commonly used #}
   {# font-display=swap is already included in the URL parameter &display=swap #}
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet"></noscript>
   
   {# Preconnect to Instagram CDN for faster embed loading #}
   <link rel="preconnect" href="https://static.cdninstagram.com" crossorigin>
   <link rel="preconnect" href="https://www.instagram.com" crossorigin>
   <link rel="dns-prefetch" href="https://static.cdninstagram.com">
   <link rel="dns-prefetch" href="https://scontent-tpe1-1.cdninstagram.com">
+  
+  {# Preconnect to Chatbot Service for faster widget loading #}
+  <link rel="preconnect" href="https://chatbot-service-9qg.pages.dev" crossorigin>
   
   {# --- [ Performance Optimization ] Inline CSS to eliminate render-blocking resources --- #}
   <style>

@@ -348,7 +348,17 @@ seo:
   We've set Permissions-Policy: unload=* in _headers to allow unload events, but Instagram's
   internal scripts may still trigger these browser warnings.
 -->
-<script async src="https://www.instagram.com/embed.js" crossorigin="anonymous"></script>
+{# Defer Instagram embed.js loading to improve page load performance #}
+<script>
+  // Load Instagram embed script after page load to avoid blocking render
+  window.addEventListener('load', function() {
+    const script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    document.body.appendChild(script);
+  });
+</script>
 <script>
     // Clear blockquote inline styles on DOMContentLoaded
     // This happens before Instagram script processes embeds

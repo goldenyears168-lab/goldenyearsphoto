@@ -93,6 +93,35 @@ module.exports = function (eleventyConfig) {
   // 4.2 圖片 shortcode（目前給非 R2 圖用，或之後想做 local responsive 用）
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
 
+  // 4.2.1 R2 響應式圖片 Shortcode：為 R2 圖片生成 srcset
+  // 使用方式：{% r2imgResponsive "content/blog/korean-id/portfolio-wall/korean-id-1.jpg", "alt text", "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw", "w-full h-auto object-cover" %}
+  eleventyConfig.addNunjucksShortcode("r2imgResponsive", function(relativePath, alt, sizes, cssClass) {
+    if (!relativePath) return "";
+    
+    // 清理路徑（與 r2img filter 相同的邏輯）
+    let cleanPath = String(relativePath);
+    cleanPath = cleanPath.replace(/^\/?assets\/images\//, "");
+    cleanPath = cleanPath.replace(/^\/+/, "");
+    
+    // 生成基礎 URL
+    const baseUrl = r2Base ? `${r2Base}/${cleanPath}` : `/assets/images/${cleanPath}`;
+    
+    // 如果沒有 R2 base URL，回退到單一圖片（非響應式）
+    if (!r2Base) {
+      return `<img src="${baseUrl}" alt="${alt || ''}" ${sizes ? `sizes="${sizes}"` : ''} ${cssClass ? `class="${cssClass}"` : ''} loading="lazy" decoding="async" />`;
+    }
+    
+    // 為 R2 圖片生成響應式 srcset
+    // 注意：這假設 R2 圖片已經在上傳時優化過
+    // 如果需要在多個尺寸，需要在 upload-portfolio-to-r2.mjs 中生成多個尺寸
+    // 目前使用單一 URL，但添加 sizes 屬性以幫助瀏覽器選擇合適的尺寸
+    const resolvedSizes = sizes || "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
+    const resolvedClass = cssClass || "";
+    const resolvedAlt = alt || "";
+    
+    return `<img src="${baseUrl}" alt="${resolvedAlt}" sizes="${resolvedSizes}" class="${resolvedClass}" loading="lazy" decoding="async" />`;
+  });
+
   // 4.3 ✅ 只給 Sitemap 用的 Page 集合
   eleventyConfig.addCollection("pagesForSitemap", (collectionApi) => {
     return collectionApi.getAll().filter((item) => {
