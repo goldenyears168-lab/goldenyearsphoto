@@ -1685,7 +1685,7 @@ body {
     justify-content: center;
     background-color: #F7F4EF;
     /* 使用固定比例容器，確保圖片載入時不會 layout shift */
-    aspect-ratio: 3 / 4; /* 人像比例，手機端 */
+    aspect-ratio: 3 / 4; /* 直向比例 3:4 */
     width: 100%;
     max-width: 100%;
     /* 確保容器不會超出父元素 */
@@ -1696,25 +1696,20 @@ body {
 
 @media (min-width: 768px) {
     .portfolio-img-card {
+        aspect-ratio: 3 / 4; /* 桌機端直向比例 3:4 */
         max-height: 700px; /* 桌機端最大高度 */
     }
 }
 
-@media (min-width: 768px) {
-    .portfolio-img-card {
-        aspect-ratio: 4 / 5; /* 桌機端可調整比例 */
-    }
-}
-
-/* Horizontal layout: 橫向圖片使用更寬的比例 */
+/* Horizontal layout: 橫向圖片使用 4:3 比例 */
 .portfolio-img-card-horizontal {
-    aspect-ratio: 16 / 9; /* 橫向比例，適合團體照、全家福 */
+    aspect-ratio: 4 / 3; /* 橫向比例 4:3 */
     max-height: 500px; /* 限制橫向圖片的最大高度，避免過大 */
 }
 
 @media (min-width: 768px) {
     .portfolio-img-card-horizontal {
-        aspect-ratio: 16 / 10; /* 桌機端橫向比例 */
+        aspect-ratio: 4 / 3; /* 桌機端橫向比例 4:3 */
         max-height: 560px; /* 桌機端橫向圖片最大高度 */
     }
 }

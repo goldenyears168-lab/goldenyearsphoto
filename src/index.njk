@@ -305,17 +305,17 @@ seo:
                 ? "(max-width: 768px) 100vw, 50vw"
                 : "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
             
-            // 特定圖片使用 object-contain 避免裁切：企業團體照右邊那張、學生團體照左邊那張
+            // 所有圖片都使用 object-contain 以維持原始比例，不裁切
+            // 特定圖片移除 hover 縮放特效：企業團體照右邊那張、學生團體照左邊那張
             const isCorporateGroupRight = category === 'corporate-group' && index === 1;
             const isStudentGroupLeft = category === 'student-group' && index === 0;
             const isSpecialImage = isCorporateGroupRight || isStudentGroupLeft;
-            const objectFitClass = isSpecialImage 
-                ? 'object-contain object-center' 
-                : 'object-cover object-center';
+            const objectFitClass = 'object-contain object-center';
             
             // 移除特定圖片的 hover 縮放特效
             const noEffectClass = isSpecialImage ? 'no-hover-scale' : '';
             // 恢復 animate-fade-in 動畫效果
+            // 根據 layout 決定使用橫向或直向容器：horizontal = 4:3, vertical = 3:4
             const cardClass = data.layout === 'horizontal' 
                 ? `portfolio-img-card portfolio-img-card-horizontal animate-fade-in group border border-slate-100 ${noEffectClass}`
                 : `portfolio-img-card animate-fade-in group border border-slate-100 ${noEffectClass}`;
@@ -341,7 +341,14 @@ seo:
 </script>
 
 <!-- Instagram Embed Script -->
-<script async src="https://www.instagram.com/embed.js"></script>
+<!-- 
+  Note: Instagram embeds may show "Permissions policy violation: unload" warnings in the console.
+  These warnings come from Instagram's iframe internal scripts and cannot be controlled by our site.
+  They are harmless and do not affect functionality. The embeds will work correctly despite these warnings.
+  We've set Permissions-Policy: unload=* in _headers to allow unload events, but Instagram's
+  internal scripts may still trigger these browser warnings.
+-->
+<script async src="https://www.instagram.com/embed.js" crossorigin="anonymous"></script>
 <script>
     // Clear blockquote inline styles on DOMContentLoaded
     // This happens before Instagram script processes embeds
@@ -359,13 +366,23 @@ seo:
     });
 
     // Ensure Instagram embeds are processed after page load
+    // Add error handling for embed script loading
+    function processInstagramEmbeds() {
+        if (window.instgrm && window.instgrm.Embeds) {
+            try {
+                window.instgrm.Embeds.process();
+            } catch (error) {
+                // Silently handle embed processing errors (CORS/network issues)
+                console.debug('Instagram embed processing:', error);
+            }
+        }
+    }
+
     if (window.instgrm) {
-        window.instgrm.Embeds.process();
+        processInstagramEmbeds();
     } else {
         window.addEventListener('load', function() {
-            if (window.instgrm) {
-                window.instgrm.Embeds.process();
-            }
+            processInstagramEmbeds();
         });
     }
 

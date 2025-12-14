@@ -1,6 +1,11 @@
 # Cloudflare Pages Headers Configuration
 # Ensure CSS files are served with correct MIME type
 
+# Permissions-Policy: Allow unload event for Instagram embeds
+# Note: Using * to allow all origins since Instagram uses multiple CDN domains
+/*
+  Permissions-Policy: unload=*
+
 /assets/css/*
   Content-Type: text/css; charset=utf-8
 
