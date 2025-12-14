@@ -1,8 +1,7 @@
 ---
 layout: "base-layout.njk"
 title: "身份原型測驗｜好時有影"
-pageStyles: |
-  <link rel="stylesheet" href="/assets/css/4-pages/p-identity-test.css">
+pageStyles: ""
 seo:
   description: "5 題找出你的專業氣質，發現你的身份原型。RIASEC 六種人格類型 身份原型測驗。"
 permalink: "/guide/identity-test/"
@@ -18,17 +17,65 @@ permalink: "/guide/identity-test/"
   {% endif %}
 {% endif %}
 
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">07</span>
+        </div>
+
+        {% if data and data.hero %}
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            {{ data.hero.title }}
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-4">
+            {{ data.hero.subtitle }}
+        </p>
+        <p class="text-base text-slate-600 max-w-xl mx-auto leading-relaxed mb-8">
+            {{ data.hero.description }}
+        </p>
+
+        <button id="start-btn" class="btn-primary btn-md" type="button">{{ data.hero.cta }}</button>
+        {% else %}
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            身份原型測驗
+        </h1>
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            5 題找出你的專業氣質，發現你的身份原型。
+        </p>
+        <div style="color: red; padding: 20px;">
+            <p>錯誤：無法載入測驗資料。請檢查資料檔案。</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
 <main class="identity-test">
-  <!-- Hero Section -->
+  <!-- Hero Section (for Type Cards Preview) -->
   <section id="hero" class="hero">
     <div class="container">
       {% if data and data.hero %}
-      <h1 class="hero-title">{{ data.hero.title }}</h1>
-      <p class="hero-subtitle">{{ data.hero.subtitle }}</p>
-      <p class="hero-description">{{ data.hero.description }}</p>
-      
-      <button id="start-btn" class="btn-primary" type="button">{{ data.hero.cta }}</button>
-      
       <!-- Type Cards Preview -->
       <div class="type-cards-preview">
         {% for typeKey, typeData in data.types %}
@@ -37,11 +84,6 @@ permalink: "/guide/identity-test/"
           <span class="type-name">{{ typeData.name }}</span>
         </div>
         {% endfor %}
-      </div>
-      {% else %}
-      <div style="color: red; padding: 20px; text-align: center;">
-        <p>錯誤：無法載入測驗資料。請檢查資料檔案。</p>
-        <p>Debug: data = {{ data | tojson }}</p>
       </div>
       {% endif %}
     </div>

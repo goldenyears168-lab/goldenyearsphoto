@@ -6,74 +6,115 @@ seo:
   keywords: "專業形象照, 鏡頭焦慮, 姿勢障礙, LinkedIn頭像, 履歷照"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>這是「未來人設」具象化儀式</h1>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
     </div>
-</div>
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">09</span>
+        </div>
 
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <p>履歷和作品集都已完美，但 LinkedIn頭像還是那張尷尬的舊照片。你愛拖，是因為你<strong>害怕</strong>拍照容易尷尬，有姿勢障礙，擔心在鏡頭前「假裝專業」會看起來更僵硬。</p>
-            <p style="font-weight: 700; color: #454e91ff;"> 你真正焦慮的是不知道自己是否實現那個理想的自己。
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            這是「未來人設」具象化儀式
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            專業形象照 - 告別鏡頭焦慮
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4 leading-relaxed">
+                履歷和作品集都已完美，但 LinkedIn頭像還是那張尷尬的舊照片。你愛拖，是因為你<strong class="text-slate-900">害怕</strong>拍照容易尷尬，有姿勢障礙，擔心在鏡頭前「假裝專業」會看起來更僵硬。
+            </p>
+            <p class="text-xl md:text-2xl font-bold text-slate-800">
+                你真正焦慮的是不知道自己是否實現那個理想的自己。
             </p>
         </div>
 
-        <div class="layout-split">
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/profile/profile-1.jpg' | r2img }}" alt="專業形象照的鬆弛感引導" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-            </div>
-            <div class="layout-split-text">
-                <h2>我們懂。這就是為什麼我們的攝影師不是指揮者，而是「陪伴者」。</h2>
-                <p>我們用真誠的陪伴，讓你放鬆展現自信。</p>
-                <p>在素色背景背景前，專注於捕捉你的「Quiet Professionalism」。</p>
-                <p>我們的專業，就是讓「拍照很容易尷尬的人」都能「非但沒有尷尬，還跟攝影師聊起來」，讓「有姿勢障礙的人」都能「照他說的擺就對了」。</p>
-            </div>
+        {{ layoutSplit(
+            "content/blog/profile/profile-1.jpg",
+            "專業形象照的鬆弛感引導",
+            "我們懂。這就是為什麼我們的攝影師不是指揮者，而是「陪伴者」。",
+            "<p>我們用真誠的陪伴，讓你放鬆展現自信。</p><p>在素色背景背景前，專注於捕捉你的「Quiet Professionalism」。</p><p>我們的專業，就是讓「拍照很容易尷尬的人」都能「非但沒有尷尬，還跟攝影師聊起來」，讓「有姿勢障礙的人」都能「照他說的擺就對了」。</p>",
+            "left"
+        ) }}
+
+        {{ layoutSplit(
+            "content/blog/profile/profile-2.jpg",
+            "顯化未來人設",
+            "這不是在「拍照」，這是在「具象化」。",
+            "<p>我們的真正任務，是<strong>拍出到那個「我其實可以辦得到」的、真實又美好的自我</strong>。</p><p>最後，我們採用的「<strong>以張計價</strong>」、「<strong>可單獨購買</strong>」的選擇，解決你「預算不高」、「不想買全套」的<strong>小資族焦慮</strong>。</p>",
+            "right"
+        ) }}
+
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">顧客真實回饋</h2>
+            
+            {{ testimonialCard(
+                "It is our great honor to officially declare the ALSA conference open... We would like to express our sincere gratitude for our collaboration with 好時有影.",
+                "Asian Law Students' Association (ALSA) Conference 2025"
+            ) }}
+            
+            {{ testimonialCard(
+                "必須大大讚賞的，是他們攝影師引導擺拍的功力。像我這種拍照很容易尷尬的人，這次非但沒有尷尬，還跟攝影師聊起來了...攝影師卻捕捉到『我其實可以辦得到』的那個真實又美好的自我。",
+                "40歲，自由工作者"
+            ) }}
         </div>
 
-        <div class="layout-split image-right" style="margin-top: 40px;">
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/profile/profile-2.jpg' | r2img }}" alt="顯化未來人設" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-            </div>
-            <div class="layout-split-text">
-                <h2>這不是在「拍照」，這是在「具象化」。</h2>
-                <p>我們的真正任務，是<strong>拍出到那個「我其實可以辦得到」的、真實又美好的自我</strong>。</p>
-                <p>最後，我們採用的「<strong>以張計價</strong>」、「<strong>可單獨購買</strong>」的選擇，解決你「預算不高」、「不想買全套」的<strong>小資族焦慮</strong>。</p>
-            </div>
-        </div>
-
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">顧客真實回饋</h2>
-
-            <div class="card card--testimonial">
-                <div class="card__body">
-                    <p class="card__content">"It is our great honor to officially declare the ALSA conference open... We would like to express our sincere gratitude for our collaboration with 好時有影."</p>
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">你的「未來人設」範例</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-1.jpg' | r2img }}" alt="專業形象照範例 1" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="card__footer">
-                    <p class="card__author">- Asian Law Students' Association (ALSA) Conference 2025</p>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-2.jpg' | r2img }}" alt="專業形象照範例 2" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-3.jpg' | r2img }}" alt="專業形象照範例 3" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
             </div>
-
-            <div class="card card--testimonial" style="margin-top: var(--space-6);">
-                <div class="card__body">
-                    <p class="card__content">「...必須大大讚賞的，是他們攝影師引導擺拍的功力。像我這種拍照很容易尷尬的人，這次非但沒有尷尬，還跟攝影師聊起來了...攝影師卻捕捉到『我其實可以辦得到』的那個真實又美好的自我。」</p>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-4.jpg' | r2img }}" alt="專業形象照範例 4" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="card__footer">
-                    <p class="card__author">- 40歲，自由工作者</p>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-18.jpg' | r2img }}" alt="專業形象照範例 18" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-            </div>
-        </div>
-
-        <div class="module">
-            <h2 style="text-align: center;">你的「未來人設」範例</h2>
-            <div class="portfolio-wall-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-1.jpg' | r2img }}" alt="專業形象照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-2.jpg' | r2img }}" alt="專業形象照範例 2" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-3.jpg' | r2img }}" alt="專業形象照範例 3" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-4.jpg' | r2img }}" alt="專業形象照範例 4" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-18.jpg' | r2img }}" alt="專業形象照範例 18" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
             </div>
         </div>
     </div>

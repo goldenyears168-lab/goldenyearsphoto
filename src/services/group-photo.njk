@@ -6,252 +6,295 @@ seo:
   keywords: "台北合照服務, 全家福, 情侶寫真, 團體照, 全家福攝影, 情侶寫真攝影, 全家福推薦, 畢業紀念照, 親子寫真, 閨蜜寫真"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>台北合照服務 | 為一家人停下腳步，把此刻好好記住</h1>
-        <p style="font-size: 1.2rem; margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            家人之間的情感，多半藏在日常裡：孩子的笑容、爸媽交換的眼神、兄弟姊妹鬧脾氣後又和好的方式。
-        </p>
-        <p style="font-size: 1.1rem; margin-top: 15px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 600;">
-            這些習以為常的瞬間，也許不常說出口，但它們是家最真實的樣子。
-        </p>
-        <div style="margin-top: 30px;">
-            <a href="/booking/" class="button button--primary">立即預約拍攝</a>
-            <a href="/price-list/#group-photo" class="button button--secondary" style="margin-left: 15px;">查看價目表</a>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
         </div>
     </div>
-</div>
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">05</span>
+        </div>
 
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <h2>為什麼需要專業合照？（而非用手機隨便拍）</h2>
-            <p>您是否曾經：</p>
-            <ul style="list-style: none; padding: 0; max-width: 600px; margin: 20px auto; text-align: left;">
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0;">•</span>
-                    用手機拍全家福，結果有人閉眼、有人表情尷尬？
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            台北合照服務
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-4">
+            家人之間的情感，多半藏在日常裡：孩子的笑容、爸媽交換的眼神、兄弟姊妹鬧脾氣後又和好的方式。
+        </p>
+        <p class="text-base text-slate-600 max-w-xl mx-auto leading-relaxed mb-8">
+            這些習以為常的瞬間，也許不常說出口，但它們是家最真實的樣子。
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#group-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <!-- Why Professional Group Photo -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">為什麼需要專業合照？（而非用手機隨便拍）</h2>
+            <p class="text-lg md:text-xl text-slate-600 mb-6">您是否曾經：</p>
+            <ul class="max-w-2xl mx-auto space-y-3 text-left mb-8">
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl mt-1">•</span>
+                    <span class="text-base md:text-lg">用手機拍全家福，結果有人閉眼、有人表情尷尬？</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0;">•</span>
-                    想要拍情侶寫真，但不知道怎麼擺姿勢？
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl mt-1">•</span>
+                    <span class="text-base md:text-lg">想要拍情侶寫真，但不知道怎麼擺姿勢？</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0;">•</span>
-                    想要紀念重要時刻，但不知道怎麼拍才好看？
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl mt-1">•</span>
+                    <span class="text-base md:text-lg">想要紀念重要時刻，但不知道怎麼拍才好看？</span>
                 </li>
             </ul>
-            <p style="font-weight: 700; color: #6173ff; margin-top: 20px;">
+            <p class="text-xl md:text-2xl font-bold text-slate-800">
                 合照不只是「把大家拍在一起」的問題，更是「捕捉真實情感」的問題。<br>
                 全家福、情侶寫真、團體照...這些照片會成為多年後您最珍惜的回憶。
             </p>
         </div>
 
-        <div class="layout-split image-left">
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/family/family-9.jpg' | r2img }}" alt="台北全家福攝影-親子寫真-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-            </div>
-            <div class="layout-split-text">
-                <h2>專注在彼此身上，捕捉最真實的互動</h2>
-                <p><strong>拍一組合照，是讓大家在同一刻慢下來，把忙碌擱在旁邊，只專注在彼此身上。</strong></p>
-                <p>在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆，而你們的互動會自然浮現——牽手、相視、擁抱、一起大笑。</p>
-                <p>乾淨的背景與柔和的光線，讓所有情緒都顯得更純粹。</p>
-            </div>
-        </div>
+        <!-- Philosophy -->
+        {{ layoutSplit(
+            "content/blog/family/family-9.jpg",
+            "台北全家福攝影-親子寫真-好時有影作品",
+            "專注在彼此身上，捕捉最真實的互動",
+            "<p><strong>拍一組合照，是讓大家在同一刻慢下來，把忙碌擱在旁邊，只專注在彼此身上。</strong></p><p>在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆，而你們的互動會自然浮現——牽手、相視、擁抱、一起大笑。</p><p>乾淨的背景與柔和的光線，讓所有情緒都顯得更純粹。</p>",
+            "left"
+        ) }}
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">適合對象：誰需要專業合照？</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div style="margin-bottom: 30px;">
-                    <h3 style="color: #6173ff; margin-bottom: 10px;">1. 全家福</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            想要記錄家庭成長的每個階段
+        <!-- Target Audience -->
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">適合對象：誰需要專業合照？</h2>
+            <div class="max-w-2xl mx-auto space-y-8">
+                <div>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-4">1. 全家福</h3>
+                    <ul class="space-y-2 text-base md:text-lg text-slate-700">
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>想要記錄家庭成長的每個階段</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            想要在重要節日留下美好回憶
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>想要在重要節日留下美好回憶</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            想要為長輩留下珍貴的家族照片
-                        </li>
-                    </ul>
-                </div>
-                <div style="margin-bottom: 30px;">
-                    <h3 style="color: #6173ff; margin-bottom: 10px;">2. 情侶寫真</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            慶祝紀念日、里程碑
-                        </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            想要記錄戀愛的美好時光
-                        </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            想要為關係創造儀式感
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>想要為長輩留下珍貴的家族照片</span>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 style="color: #6173ff; margin-bottom: 10px;">3. 團體照</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            畢業紀念照、同學會
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-4">2. 情侶寫真</h3>
+                    <ul class="space-y-2 text-base md:text-lg text-slate-700">
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>慶祝紀念日、里程碑</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            企業團體照、團隊建設
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>想要記錄戀愛的美好時光</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            朋友聚會、閨蜜寫真
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>想要為關係創造儀式感</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-4">3. 團體照</h3>
+                    <ul class="space-y-2 text-base md:text-lg text-slate-700">
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>畢業紀念照、同學會</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>企業團體照、團隊建設</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>朋友聚會、閨蜜寫真</span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="module">
-            <h2 style="text-align: center;">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
+        <!-- Process Steps -->
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
                 不需要自己想姿勢，攝影師會引導您。小孩也能自在，爸媽也能放鬆。
             </p>
 
-            <ol class="step-list">
-                <li>
-                    <h3>預約拍攝</h3>
-                    <p>線上預約，選擇時間和地點（中山/公館）</p>
+            <ol class="step-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-sand-100 text-slate-600 flex items-center justify-center text-sm font-bold">1</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">預約拍攝</h3>
+                    <p class="text-slate-600 leading-relaxed">線上預約，選擇時間和地點（中山/公館）</p>
                 </li>
-                <li>
-                    <h3>現場拍攝</h3>
-                    <p>專業攝影師引導，自然互動</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-sm font-bold">2</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">現場拍攝</h3>
+                    <p class="text-slate-600 leading-relaxed">專業攝影師引導，自然互動</p>
                 </li>
-                <li>
-                    <h3>精修校稿</h3>
-                    <p>專業自然精修，可校稿兩次</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-sand-100 text-slate-600 flex items-center justify-center text-sm font-bold">3</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">精修校稿</h3>
+                    <p class="text-slate-600 leading-relaxed">專業自然精修，可校稿兩次</p>
                 </li>
-                <li>
-                    <h3>一週交件</h3>
-                    <p>高畫質電子檔，立即分享</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-sand-100 text-slate-600 flex items-center justify-center text-sm font-bold">4</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">一週交件</h3>
+                    <p class="text-slate-600 leading-relaxed">高畫質電子檔，立即分享</p>
                 </li>
             </ol>
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">價格透明，以張計價，不強迫購買套組</h2>
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <p style="font-size: 1.3rem; font-weight: 700; color: #6173ff; margin-bottom: 20px;">
-                    優惠價格：$1199 /張（2-6人）
+        <!-- Pricing -->
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">價格透明，以張計價，不強迫購買套組</h2>
+            <div class="max-w-xl mx-auto text-center">
+                <p class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                    優惠價格：<span class="text-trust-600">$1199</span> /張（2-6人）
                 </p>
-                <p style="margin-bottom: 20px;">
+                <p class="text-lg text-slate-600 mb-8">
                     持學生證：可優惠 $1099 /張
                 </p>
-                <div style="text-align: left; max-width: 400px; margin: 20px auto;">
-                    <p style="font-weight: 600; margin-bottom: 10px;">服務包含：</p>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            專業自然精修（可校稿兩次）
+                <div class="text-left max-w-md mx-auto mb-8">
+                    <p class="font-bold text-slate-900 mb-4">服務包含：</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>專業自然精修（可校稿兩次）</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            成品為高畫質電子檔
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>成品為高畫質電子檔</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            妝髮造型自理
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>妝髮造型自理</span>
                         </li>
                     </ul>
-                    <p style="font-weight: 600; margin-top: 20px; margin-bottom: 10px;">升級選項：</p>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            超過 6 人，每加一人 +$200
+                    <p class="font-bold text-slate-900 mb-4">升級選項：</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>超過 6 人，每加一人 +$200</span>
                         </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            急件可於隔日交件 +$100
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-trust-600 mt-1">•</span>
+                            <span>急件可於隔日交件 +$100</span>
                         </li>
                     </ul>
                 </div>
-                <p style="margin-top: 30px; margin-bottom: 20px;">
+                <p class="text-base text-slate-600 mb-8">
                     小資族友善，可單獨購買，不強迫購買套組。
                 </p>
-                <a href="/price-list/#group-photo" class="button button--secondary">查看完整價目表</a>
+                <a href="/price-list/#group-photo" class="inline-block btn btn-secondary btn-lg">
+                    查看完整價目表
+                </a>
             </div>
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">超過 500+ 組家庭的選擇</h2>
+        <!-- Testimonials -->
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">超過 500+ 組家庭的選擇</h2>
 
-            <div class="card card--testimonial">
-                <div class="card__body">
-                    <p class="card__content">「拍一組全家福，是讓大家在同一刻慢下來，只專注在彼此身上。
-                    在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆。
-                    而你們的互動會自然浮現——牽手、相視、擁抱、一起大笑。」</p>
-                </div>
-                <div class="card__footer">
-                    <p class="card__author">- 客戶真實回饋</p>
-                </div>
-            </div>
-
-            <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; color: #666;">
+            {{ testimonialCard(
+                "拍一組全家福，是讓大家在同一刻慢下來，只專注在彼此身上。在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆。而你們的互動會自然浮現——牽手、相視、擁抱、一起大笑。",
+                "客戶真實回饋"
+            ) }}
+            
+            <p class="text-center text-lg text-slate-600 mt-8">
                 數據證明：95% 客戶在拍攝後立即分享到社群媒體
             </p>
         </div>
 
-        <div class="module">
-            <h2 style="text-align: center;">最珍惜的回憶</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 30px;">
+        <!-- Portfolio Gallery -->
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">最珍惜的回憶</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
                 一張照片，很可能成為多年後你們最珍惜的回憶。
                 它提醒你們曾在同一個時間點，以最真實的方式相互依靠、一起存在。
                 這個「現在」，值得被好好留下。
             </p>
             
-            <div class="masonry-layout">
-                <div class="masonry-item">
-                    <img src="{{ 'content/blog/couples/couples_Main.jpg' | r2img }}" alt="台北情侶寫真-紀念日寫真-好時有影作品" sizes="(min-width: 768px) 20vw, 50vw" loading="lazy" decoding="async" />
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/couples/couples_Main.jpg' | r2img }}" alt="台北情侶寫真-紀念日寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="masonry-item">
-                    <img src="{{ 'content/blog/family/family-6.jpg' | r2img }}" alt="台北全家福攝影-親子寫真-好時有影作品" sizes="(min-width: 768px) 20vw, 50vw" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/family/family-6.jpg' | r2img }}" alt="台北全家福攝影-親子寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="masonry-item">
-                    <img src="{{ 'content/blog/family/family-7.jpg' | r2img }}" alt="全家福攝影-家庭照-好時有影作品" sizes="(min-width: 768px) 20vw, 50vw" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/family/family-7.jpg' | r2img }}" alt="全家福攝影-家庭照-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="masonry-item">
-                    <img src="{{ 'content/blog/family/family-8.jpg' | r2img }}" alt="台北全家福-親子寫真-好時有影作品" sizes="(min-width: 768px) 20vw, 50vw" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/family/family-8.jpg' | r2img }}" alt="台北全家福-親子寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="masonry-item">
-                    <img src="{{ 'content/blog/couples/portfolio-wall/couples-1.jpg' | r2img }}" alt="情侶寫真-紀念日寫真-好時有影作品" sizes="(min-width: 768px) 20vw, 50vw" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/couples/portfolio-wall/couples-1.jpg' | r2img }}" alt="情侶寫真-紀念日寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
-                <div class="masonry-item">
-                    <img src="{{ 'content/blog/couples/portfolio-wall/couples-2.jpg' | r2img }}" alt="台北情侶寫真-紀念日攝影-好時有影作品" sizes="(min-width: 768px) 20vw, 50vw" loading="lazy" decoding="async" />
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/couples/portfolio-wall/couples-2.jpg' | r2img }}" alt="台北情侶寫真-紀念日攝影-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="module module-dark" style="text-align: center;">
-    <div class="container container-md">
-        <h2>預約你們的「現在」</h2>
-        <p style="font-size: 1.1rem; margin: 20px 0 30px;">
+<!-- Final CTA -->
+<div class="py-16 md:py-24 bg-trust-950 text-white text-center">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">預約你們的「現在」</h2>
+        <p class="text-lg md:text-xl text-white/90 mb-4">
             為這段無可取代的家庭時光，舉辦一場溫暖的儀式。<br>
             我們的「合照」方案 100% 透明，預約流程 100% 簡單。
         </p>
-        <p style="margin-bottom: 30px; color: #ccc;">
+        <p class="text-base text-white/70 mb-8">
             免費諮詢，無壓力了解方案
         </p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="/booking/" class="button button--primary">立即預約拍攝</a>
-            <a href="/" class="button button--secondary">查看完整作品集</a>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="/booking/" class="btn btn-secondary btn-lg">
+                立即預約拍攝
+            </a>
+            <a href="/" class="btn btn-secondary btn-lg">
+                查看完整作品集
+            </a>
         </div>
     </div>
 </div>
-

@@ -1,0 +1,46 @@
+{#
+  Form Group Macro
+  
+  Creates a standardized form group container for related form fields.
+  
+  Parameters:
+    - label: Group label (optional)
+    - required: Whether group is required (default: false)
+    - error: Group error message (optional)
+    - help: Group help text (optional)
+    - class: Additional CSS classes (optional)
+    - content: Form fields content (HTML string)
+  
+  Usage:
+    {% from "macros/form-group.njk" import formGroup %}
+    {% from "macros/input.njk" import input %}
+    {{ formGroup("個人資訊", false, "", "", "", input("name", "user-name", "姓名", "請輸入姓名", "", true) | safe + input("email", "user-email", "電子郵件", "example@email.com", "", true) | safe) }}
+#}
+
+{% macro formGroup(label='', required=false, error='', help='', class='', content='') %}
+  <fieldset class="mb-6 {{ class }}">
+    {% if label %}
+      <legend class="block text-sm font-medium text-trust-900 mb-4">
+        {{ label }}
+        {% if required %}<span class="text-error">*</span>{% endif %}
+      </legend>
+    {% endif %}
+    
+    <div class="space-y-4">
+      {{ content | safe }}
+    </div>
+    
+    {% if error %}
+      <p class="mt-2 text-sm text-error" role="alert">
+        {{ error }}
+      </p>
+    {% endif %}
+    
+    {% if help and not error %}
+      <p class="mt-2 text-sm text-slate-500">
+        {{ help }}
+      </p>
+    {% endif %}
+  </fieldset>
+{% endmacro %}
+

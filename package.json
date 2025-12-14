@@ -10,13 +10,16 @@
     "compress-images": "node src/scripts/compress-images.mjs",
     "upload-portfolio": "node src/scripts/upload-portfolio-to-r2.mjs",
     "upload:watch": "onchange 'src/assets/images/portfolio/**/*' 'src/assets/images/content/**/*' 'src/assets/images/booking/**/*' 'src/assets/images/home/**/*' 'src/assets/images/price-list/**/*' -- npm run upload-portfolio",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint": "npm run lint:js",
     "lint:js": "eslint \"src/assets/js/**/*.js\"",
-    "lint:js:fix": "eslint \"src/assets/js/**/*.js\" --fix",
-    "lint:css": "stylelint \"src/assets/css/**/*.scss\"",
-    "lint:css:fix": "stylelint \"src/assets/css/**/*.scss\" --fix"
+    "lint:js:fix": "eslint \"src/assets/js/**/*.js\" --fix"
   },
-  "keywords": ["eleventy", "static-site", "photography", "portfolio"],
+  "keywords": [
+    "eleventy",
+    "static-site",
+    "photography",
+    "portfolio"
+  ],
   "author": "Golden Years Photo",
   "license": "ISC",
   "type": "commonjs",
@@ -26,6 +29,8 @@
     "@eslint/js": "^9.39.1",
     "@lhci/cli": "^0.15.1",
     "@quasibit/eleventy-plugin-sitemap": "^2.2.0",
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.22",
     "concurrently": "^8.2.2",
     "eslint": "^9.39.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -36,12 +41,10 @@
     "onchange": "^7.1.0",
     "pa11y": "^9.0.1",
     "pa11y-ci": "^4.0.1",
-    "sass": "^1.94.0",
+    "postcss": "^8.5.6",
     "sharp": "^0.34.5",
     "sitemap-stream-parser": "^1.7.0",
-    "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.1",
-    "stylelint-config-standard-scss": "^13.1.0"
+    "tailwindcss": "^4.1.18"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^4.0.2",

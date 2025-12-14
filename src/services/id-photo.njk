@@ -6,245 +6,399 @@ seo:
   keywords: "台北韓式證件照, 韓式證件照, 證件照, 大頭照, 履歷照, 護照照片, 證件照推薦, 證件照攝影, 求職證件照, 畢業證件照"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>台北韓式證件照服務 | 一張你真正喜歡、自信出發的證件照</h1>
-        <p style="font-size: 1.2rem; margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            我們都懂那種數位焦慮。當你必須上傳履歷照，卻對著手機相簿裡尷尬的舊照片。
-        </p>
-        <p style="font-size: 1.1rem; margin-top: 15px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 600;">
-            你需要的不是一張「合規」的照片，你需要的是一張你真正喜歡、並樂意用它來代表你的數位檔案。
-        </p>
-        <div style="margin-top: 30px;">
-            <a href="/booking/" class="button button--primary">立即預約拍攝</a>
-            <a href="/price-list/#id-photo" class="button button--secondary" style="margin-left: 15px;">查看價目表</a>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/comparison-table.njk" import comparisonTable %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
         </div>
     </div>
-</div>
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">04</span>
+        </div>
 
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <h2>為什麼需要專業證件照？（而非自己用手機拍）</h2>
-            <p>您是否曾經：</p>
-            <ul style="list-style: none; padding: 0; max-width: 600px; margin: 20px auto; text-align: left;">
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0;">•</span>
-                    用手機自拍證件照，結果看起來很尷尬？
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            台北韓式證件照服務
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-4">
+            我們都懂那種數位焦慮。當你必須上傳履歷照，卻對著手機相簿裡尷尬的舊照片。
+        </p>
+        <p class="text-base text-slate-600 max-w-xl mx-auto leading-relaxed mb-8">
+            你需要的不是一張「合規」的照片，你需要的是一張你真正喜歡、並樂意用它來代表你的數位檔案。
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#id-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <!-- Why Professional ID Photo -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-6">為什麼需要專業證件照？（而非自己用手機拍）</h2>
+            <p class="text-lg md:text-xl text-slate-600 mb-6">您是否曾經：</p>
+            <ul class="max-w-2xl mx-auto space-y-4 text-left mb-8">
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl mt-1">•</span>
+                    <span class="text-base md:text-lg">用手機自拍證件照，結果看起來很尷尬？</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0;">•</span>
-                    在證件照快拍店拍了照片，但成品完全不像自己？
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl mt-1">•</span>
+                    <span class="text-base md:text-lg">在證件照快拍店拍了照片，但成品完全不像自己？</span>
                 </li>
-                <li style="margin-bottom: 10px; padding-left: 25px; position: relative;">
-                    <span style="position: absolute; left: 0;">•</span>
-                    履歷表很完美，但頭像還是那張大學畢業照？
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl mt-1">•</span>
+                    <span class="text-base md:text-lg">履歷表很完美，但頭像還是那張大學畢業照？</span>
                 </li>
             </ul>
-            <p style="font-weight: 700; color: #4c5386ff; margin-top: 20px;">
+            <p class="text-xl md:text-2xl font-bold text-slate-800">
                 證件照不只是「符合規格」的問題，更是「第一印象」的問題。<br>
                 履歷表、LinkedIn、求職網站、護照...這些地方需要的是一張能代表「您是誰」的專業證件照。
             </p>
         </div>
 
-        <div class="layout-split image-right">
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/korean-id/korean-id.jpg' | r2img }}" alt="台北韓式證件照-求職履歷照-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+        <!-- Philosophy -->
+        {{ layoutSplit(
+            "content/blog/korean-id/korean-id.jpg",
+            "台北韓式證件照-求職履歷照-好時有影作品",
+            "超越規範，專注自信",
+            "<p>這不只是平衡，這是超越規範。我們深刻理解政府規範，但我們更在意你的自信。</p><p>不做過度磨皮，只用專業、溫暖的光影與鬆弛感引導，捕捉你<strong>「最好，但依舊是你」</strong>的神情。</p>",
+            "right"
+        ) }}
+
+        <!-- Comparison Table -->
+        {% set comparisonItems = [
+            {label: "風格", optionA: "正式、嚴肅", optionB: "自然、自信"},
+            {label: "修圖", optionA: "過度磨皮、失真", optionB: "自然精修、保留真實感"},
+            {label: "適用場景", optionA: "正式證件申請", optionB: "履歷、LinkedIn、求職網站"},
+            {label: "價格", optionA: "通常較低", optionB: "優惠 $399/張"}
+        ] %}
+        <div class="bento-card bento-card-sand">
+            {{ comparisonTable("韓式證件照 vs 傳統證件照：差異在哪裡？", comparisonItems) }}
+        </div>
+
+        <!-- The Three Gates: Scenarios -->
+        <div class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-4">您即將前往哪裡？</h2>
+                <p class="text-slate-500 text-lg">針對不同目的，我們提供客製化的拍攝引導與修圖建議。</p>
             </div>
-            <div class="layout-split-text">
-                <h2>超越規範，專注自信</h2>
-                <p>這不只是平衡，這是超越規範。我們深刻理解政府規範，但我們更在意你的自信。</p>
-                <p>不做過度磨皮，只用專業、溫暖的光影與鬆弛感引導，捕捉你「<strong>最好，但依舊是你</strong>」的神情。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Gate 1: World (Visa/Passport) -->
+                <div class="gate-card group">
+                    <div class="gate-icon">
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2">Gate: The World</h3>
+                    <p class="text-sm font-bold text-slate-400 mb-4 uppercase tracking-widest">護照 / 簽證 / 駕照</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        再見了，尷尬的快拍照。我們要在嚴格的法規限制下（露耳、不遮眉），依然讓你看起來精神飽滿、五官立體。
+                    </p>
+                    <div class="border-t border-sand-200 pt-4">
+                        <p class="font-hand text-trust-600 text-lg">"Bon Voyage! 願你旅途平安。"</p>
+                    </div>
+                </div>
+
+                <!-- Gate 2: Career (Resume/LinkedIn) -->
+                <div class="gate-card group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-trust-50 to-transparent rounded-bl-full"></div>
+                    <div class="gate-icon relative z-10">
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2 relative z-10">Gate: Career</h3>
+                    <p class="text-sm font-bold text-slate-400 mb-4 uppercase tracking-widest relative z-10">求職 / 履歷 / LinkedIn</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6 relative z-10">
+                        這是你的數位門面。我們將眼神調整到「自信且好相處」的頻率。適合外商、科技、金融或新創投遞。
+                    </p>
+                    <div class="border-t border-sand-200 pt-4 relative z-10">
+                        <p class="font-hand text-trust-600 text-lg">"You're Hired! 祝面試順利。"</p>
+                    </div>
+                </div>
+
+                <!-- Gate 3: Graduation (Commencement) -->
+                <div class="gate-card group">
+                    <div class="gate-icon">
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2">Gate: Future</h3>
+                    <p class="text-sm font-bold text-slate-400 mb-4 uppercase tracking-widest">畢業證件 / 學士照</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                        定格學生時代的最後一刻。我們提供學士服、學士帽租借，為你的青春留下最完美的句點。
+                    </p>
+                    <div class="border-t border-sand-200 pt-4">
+                        <p class="font-hand text-trust-600 text-lg">"Dream Big! 畢業快樂。"</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">韓式證件照 vs 傳統證件照：差異在哪裡？</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <table style="width: 100%; border-collapse: collapse; margin: 30px 0;">
-                    <thead>
-                        <tr style="background-color: var(--color-surface-alt, #f5f5f5);">
-                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">項目</th>
-                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">傳統證件照</th>
-                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">韓式證件照</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">風格</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">正式、嚴肅</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">自然、自信</td>
-                        </tr>
-                        <tr style="background-color: var(--color-surface-alt, #f9f9f9);">
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">修圖</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">過度磨皮、失真</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">自然精修、保留真實感</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">適用場景</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">正式證件申請</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">履歷、LinkedIn、求職網站</td>
-                        </tr>
-                        <tr style="background-color: var(--color-surface-alt, #f9f9f9);">
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">價格</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">通常較低</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">優惠 $399/張</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="module">
-            <h2 style="text-align: center;">適合對象：誰需要專業證件照？</h2>
-            <div style="max-width: 700px; margin: 0 auto;">
-                <p style="font-size: 1.1rem; margin-bottom: 20px;">您是否：</p>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您正在求職，履歷表需要一張能加分的照片？
-                    </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您的 LinkedIn 頭像還是大學畢業照？
-                    </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您需要申請護照、簽證，但不想用快拍店的尷尬照片？
-                    </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您是醫師、律師、講師，需要建立專業形象？
-                    </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您即將畢業，需要一張正式的畢業證件照？
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="module">
-            <h2 style="text-align: center;">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
+        <!-- Process Steps -->
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-trust-950 text-center mb-6">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
                 不需要自己想姿勢，攝影師會引導您。我們的專業，就是讓「拍照很容易尷尬的人」都能「非但沒有尷尬，還跟攝影師聊起來」。
             </p>
 
-            <ol class="step-list">
-                <li>
-                    <h3>預約拍攝</h3>
-                    <p>線上預約，選擇時間和地點（中山/公館）</p>
+            <ol class="step-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-sand-100 text-slate-600 flex items-center justify-center text-sm font-bold">1</div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2">預約拍攝</h3>
+                    <p class="text-slate-600 leading-relaxed">線上預約，選擇時間和地點（中山/公館）</p>
                 </li>
-                <li>
-                    <h3>現場拍攝</h3>
-                    <p>專業攝影師引導，自然放鬆</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-sm font-bold">2</div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2">現場拍攝</h3>
+                    <p class="text-slate-600 leading-relaxed">專業攝影師引導，自然放鬆</p>
                 </li>
-                <li>
-                    <h3>精修校稿</h3>
-                    <p>專業自然精修，可校稿兩次</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-sand-100 text-slate-600 flex items-center justify-center text-sm font-bold">3</div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2">精修校稿</h3>
+                    <p class="text-slate-600 leading-relaxed">專業自然精修，可校稿兩次</p>
                 </li>
-                <li>
-                    <h3>一週交件</h3>
-                    <p>高畫質電子檔，立即使用</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-sand-100 text-slate-600 flex items-center justify-center text-sm font-bold">4</div>
+                    <h3 class="text-xl font-bold text-trust-950 mb-2">一週交件</h3>
+                    <p class="text-slate-600 leading-relaxed">高畫質電子檔，立即使用</p>
                 </li>
             </ol>
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">價格透明，以張計價，不強迫購買套組</h2>
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <p style="font-size: 1.3rem; font-weight: 700; color: #4c5386ff; margin-bottom: 20px;">
-                    優惠價格：$399 /張
-                </p>
-                <p style="margin-bottom: 20px;">
-                    持學生證：可享優惠價格
-                </p>
-                <div style="text-align: left; max-width: 400px; margin: 20px auto;">
-                    <p style="font-weight: 600; margin-bottom: 10px;">服務包含：</p>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            專業自然精修（可校稿兩次）
-                        </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            成品為高畫質電子檔
-                        </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            預設白色背景
-                        </li>
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            於一週內交件
-                        </li>
-                    </ul>
-                    <p style="font-weight: 600; margin-top: 20px; margin-bottom: 10px;">升級選項：</p>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
-                            <span style="position: absolute; left: 0;">•</span>
-                            急件可於隔日交件 +$100
-                        </li>
-                    </ul>
+        <!-- Pricing Ticket: The Golden Ticket -->
+        <div class="mb-16 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full bg-sand-50/50 -z-10"></div>
+            
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="ticket-card flex flex-col md:flex-row group border border-sand-200 hover:border-trust-900 transition-colors bg-white">
+                    <!-- Notches -->
+                    <div class="ticket-notch top"></div>
+                    <div class="ticket-notch bottom"></div>
+                    <div class="ticket-split-line"></div>
+
+                    <!-- Left: Content -->
+                    <div class="p-8 md:p-12 md:w-[70%] flex flex-col justify-center">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 block">Standard Fare</span>
+                                <h3 class="text-3xl font-bold text-trust-950">韓式證件照</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-4xl font-bold text-trust-600">$399</span>
+                                <span class="text-xs text-slate-400">/ 張 TWD</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-slate-500 mb-8 leading-relaxed border-l-2 border-trust-100 pl-4">
+                            包含精修與電子檔，一次搞定您的所有證件需求。<br>
+                            <span class="text-xs text-trust-600 font-bold mt-1 inline-block">🎁 學生優惠：持學生證享折扣</span>
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Included</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center gap-2 text-sm text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        專業自然精修 <span class="text-xs text-slate-400">(校稿2次)</span>
+                                    </li>
+                                    <li class="flex items-center gap-2 text-sm text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        高畫質電子檔 (Email)
+                                    </li>
+                                    <li class="flex items-center gap-2 text-sm text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        預設白色背景
+                                    </li>
+                                    <li class="flex items-center gap-2 text-sm text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        於一週內交件
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="relative">
+                                <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Add-ons</h4>
+                                <!-- Luggage Tag Style Addon -->
+                                <div class="luggage-tag inline-block mb-2">
+                                    急件 (隔日交件) +$100
+                                </div>
+                                <p class="text-xxs text-slate-400 pl-1 mt-1">* 妝髮請自理或加購</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 mt-auto">
+                            <a href="/booking/" class="w-full md:w-auto py-3 px-8 bg-trust-950 text-white rounded-xl text-sm font-bold hover:bg-trust-800 transition-all shadow-md flex items-center justify-center gap-2 no-underline">
+                                <span>立即預約 Check-in</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                            <a href="/price-list/#id-photo" class="w-full md:w-auto py-3 px-8 bg-white text-trust-950 border border-sand-200 rounded-xl text-sm font-bold hover:border-trust-950 transition-all flex items-center justify-center no-underline">
+                                查看完整價目表
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Visual Stub -->
+                    <div class="bg-sand-50 p-6 md:w-[30%] border-t md:border-t-0 md:border-l border-sand-200 flex flex-col justify-center relative overflow-hidden">
+                        <!-- Decorative Barcode Background -->
+                        <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(90deg, var(--color-trust-950) 0, var(--color-trust-950) 1px, transparent 1px, transparent 3px);"></div>
+
+                        <div class="grid grid-cols-2 gap-3 opacity-90 group-hover:opacity-100 transition-opacity relative z-10">
+                            <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-1.jpg' | r2img }}" alt="台北韓式證件照作品" class="rounded-lg shadow-sm border border-white transform rotate-[-2deg] w-full h-auto object-cover" loading="lazy" decoding="async" />
+                            <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-2.jpg' | r2img }}" alt="韓式證件照作品" class="rounded-lg shadow-sm border border-white transform rotate-[2deg] mt-4 w-full h-auto object-cover" loading="lazy" decoding="async" />
+                            <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-3.jpg' | r2img }}" alt="求職證件照作品" class="rounded-lg shadow-sm border border-white transform rotate-[-1deg] w-full h-auto object-cover" loading="lazy" decoding="async" />
+                            <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-4.jpg' | r2img }}" alt="畢業證件照作品" class="rounded-lg shadow-sm border border-white transform rotate-[1deg] mt-4 w-full h-auto object-cover" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="mt-6 text-center border-t border-dashed border-slate-300 pt-4">
+                            <span class="font-barcode text-4xl text-slate-800">VALID</span>
+                        </div>
+                    </div>
                 </div>
-                <p style="margin-top: 30px; margin-bottom: 20px;">
-                    小資族友善，可單獨購買，不強迫購買套組。
-                </p>
-                <a href="/price-list/#id-photo" class="button button--secondary">查看完整價目表</a>
             </div>
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">來自護照焦慮的真實體驗</h2>
+        <!-- Postcard Testimonials -->
+        <div class="mb-16 bg-trust-950 text-white relative overflow-hidden py-24">
+            <!-- World Map Background (Optional/Abstract) -->
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, var(--color-white) 1px, transparent 1px); background-size: 30px 30px;"></div>
+            
+            <div class="container mx-auto px-4 max-w-6xl relative z-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4 font-serif italic">Postcards from the Future</h2>
+                    <p class="text-white/60 text-lg">來自客戶的真實回饋，他們已經帶著照片出發了。</p>
+                </div>
 
-            <div class="card card--testimonial">
-                <div class="card__body">
-                    <p class="card__content">「護照快到期，想趁機換個美美大頭照。
-                    原本貪圖省錢結果慘不忍睹⋯看圖應該就知道我多崩潰。
-                    只好跑去學妹大推的店家。攝影師態度那是真的好，重點是很專業。
-                    從引導到最後修圖的成品都自然又讚。」</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Postcard 1 -->
+                    <div class="postcard-testimonial rotate-[-1deg] hover:rotate-0">
+                        <div class="postcard-stamp">STAMP</div>
+                        <p class="text-sm leading-relaxed mb-6 mt-4 font-hand text-lg">
+                            "護照快到期，原本貪圖省錢結果慘不忍睹...還好來了這裡。攝影師超會引導，成品自然又讚！終於可以自信地拿出護照了。"
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-slate-200 rounded-full overflow-hidden flex-shrink-0"></div>
+                            <div class="text-xs">
+                                <span class="font-bold block text-trust-950">客戶真實回饋</span>
+                                <span class="text-slate-500">飛往世界各地</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Postcard 2 -->
+                    <div class="postcard-testimonial rotate-[1deg] hover:rotate-0 relative top-4">
+                        <div class="postcard-stamp">STAMP</div>
+                        <p class="text-sm leading-relaxed mb-6 mt-4 font-hand text-lg">
+                            "面試外商需要一張專業的照片，謝謝好時有影幫我拍出自信感。拿到 Offer 了，特地來留言感謝！"
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-slate-200 rounded-full overflow-hidden flex-shrink-0"></div>
+                            <div class="text-xs">
+                                <span class="font-bold block text-trust-950">客戶真實回饋</span>
+                                <span class="text-slate-500">任職於知名企業</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Postcard 3 -->
+                    <div class="postcard-testimonial rotate-[-1deg] hover:rotate-0">
+                        <div class="postcard-stamp">STAMP</div>
+                        <p class="text-sm leading-relaxed mb-6 mt-4 font-hand text-lg">
+                            "畢業了，想留一張好看的學士照。這裡有提供學士服很方便，修圖也很細心，保留了我的個人特色 :)"
+                        </p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-slate-200 rounded-full overflow-hidden flex-shrink-0"></div>
+                            <div class="text-xs">
+                                <span class="font-bold block text-trust-950">客戶真實回饋</span>
+                                <span class="text-slate-500">畢業於知名大學</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card__footer">
-                    <p class="card__author">- 客戶真實回饋</p>
-                </div>
+                
+                <p class="text-center text-lg text-white/80 mt-12">
+                    數據證明：90% 客戶在拍攝後立即更新履歷表頭像
+                </p>
             </div>
-
-            <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; color: #666;">
-                數據證明：90% 客戶在拍攝後立即更新履歷表頭像
-            </p>
         </div>
 
-        <div class="module">
-            <h2 style="text-align: center;">告別焦慮的「數位門面」範例</h2>
-            <div class="portfolio-wall-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-1.jpg' | r2img }}" alt="台北韓式證件照-求職履歷照-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-2.jpg' | r2img }}" alt="韓式證件照-履歷照片-專業攝影範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-3.jpg' | r2img }}" alt="求職證件照-履歷照片-個人品牌攝影" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-4.jpg' | r2img }}" alt="畢業證件照-履歷照片-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-5.jpg' | r2img }}" alt="台北韓式證件照-護照照片-專業攝影範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-6.jpg' | r2img }}" alt="韓式證件照-求職履歷照-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-7.jpg' | r2img }}" alt="專業證件照-履歷照片-個人品牌攝影" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-8.jpg' | r2img }}" alt="台北證件照-求職履歷照-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+        <!-- Portfolio Gallery -->
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-trust-950 text-center mb-12">告別焦慮的「數位門面」範例</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-1.jpg' | r2img }}" alt="台北韓式證件照-求職履歷照-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-2.jpg' | r2img }}" alt="韓式證件照-履歷照片-專業攝影範例" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-3.jpg' | r2img }}" alt="求職證件照-履歷照片-個人品牌攝影" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-4.jpg' | r2img }}" alt="畢業證件照-履歷照片-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-5.jpg' | r2img }}" alt="台北韓式證件照-護照照片-專業攝影範例" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-6.jpg' | r2img }}" alt="韓式證件照-求職履歷照-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-7.jpg' | r2img }}" alt="專業證件照-履歷照片-個人品牌攝影" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-8.jpg' | r2img }}" alt="台北證件照-求職履歷照-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="module module-dark" style="text-align: center;">
-    <div class="container container-md">
-        <h2>準備好，讓自己被好好看見了嗎？</h2>
-        <p style="font-size: 1.1rem; margin: 20px 0 30px;">
+<!-- Final CTA -->
+<div class="py-16 md:py-24 bg-trust-950 text-white text-center">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">準備好，讓自己被好好看見了嗎？</h2>
+        <p class="text-lg md:text-xl text-white/90 mb-4">
             證件照可以用工具生成，但您的專業形象不能。<br>
             履歷表、LinkedIn、求職網站，都需要一張真正能代表「您是誰」的專業證件照。
         </p>
-        <p style="margin-bottom: 30px; color: #ccc;">
+        <p class="text-base text-white/70 mb-8">
             免費諮詢，無壓力了解方案
         </p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="/booking/" class="button button--primary">立即預約拍攝</a>
-            <a href="/" class="button button--secondary">查看完整作品集</a>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="/booking/" class="btn btn-secondary btn-lg">
+                立即預約拍攝
+            </a>
+            <a href="/" class="btn btn-secondary btn-lg">
+                查看完整作品集
+            </a>
         </div>
     </div>
 </div>
-

@@ -1,0 +1,52 @@
+{#
+  Button Macro
+  
+  Creates a standardized button component with variants and sizes.
+  
+  Parameters:
+    - text: Button text
+    - href: Link URL (optional, if provided creates <a>, otherwise <button>)
+    - variant: 'primary' | 'secondary' | 'ghost' (default: 'primary')
+    - size: 'sm' | 'md' | 'lg' (default: 'md')
+    - class: Additional CSS classes (optional)
+    - type: Button type for <button> elements (default: 'button')
+    - disabled: Whether button is disabled (default: false)
+    - icon: Icon HTML to include (optional)
+    - iconPosition: 'left' | 'right' (default: 'left')
+  
+  Usage:
+    {% from "macros/button.njk" import button %}
+    {{ button("預約拍攝", "/booking/", "primary", "lg") }}
+    {{ button("了解更多", "/about/", "secondary", "md", "custom-class") }}
+    {{ button("取消", "", "ghost", "sm", "", "button", false, "<svg>...</svg>", "right") }}
+#}
+
+{% macro button(text, href='', variant='primary', size='md', class='', type='button', disabled=false, icon='', iconPosition='left') %}
+  {% set baseClasses = 'btn' %}
+  {% set variantClass = 'btn-' + variant %}
+  {% set sizeClass = 'btn-' + size %}
+  {% set allClasses = [baseClasses, variantClass, sizeClass, class] | join(' ') | trim %}
+  
+  {% if href %}
+    <a href="{{ href }}" class="{{ allClasses }}" {% if disabled %}aria-disabled="true" tabindex="-1"{% endif %}>
+      {% if icon and iconPosition == 'left' %}
+        <span class="inline-block mr-2">{{ icon | safe }}</span>
+      {% endif %}
+      {{ text }}
+      {% if icon and iconPosition == 'right' %}
+        <span class="inline-block ml-2">{{ icon | safe }}</span>
+      {% endif %}
+    </a>
+  {% else %}
+    <button type="{{ type }}" class="{{ allClasses }}" {% if disabled %}disabled{% endif %}>
+      {% if icon and iconPosition == 'left' %}
+        <span class="inline-block mr-2">{{ icon | safe }}</span>
+      {% endif %}
+      {{ text }}
+      {% if icon and iconPosition == 'right' %}
+        <span class="inline-block ml-2">{{ icon | safe }}</span>
+      {% endif %}
+    </button>
+  {% endif %}
+{% endmacro %}
+

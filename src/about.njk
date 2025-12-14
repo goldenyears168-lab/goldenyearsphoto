@@ -4,310 +4,432 @@ title: "關於我們 - 團隊介紹｜好時有影"
 seo:
   description: "好時有影的專業團隊有才華洋溢的攝影師、細心​​的造型師，還有專業的修圖師，我們共同為您打造真實又好看的影像。"
   keywords: "好時有影團隊, 攝影師介紹, 造型師介紹, 修圖師, 專業攝影團隊, 台北照相館"
+extraHead: |
+  <style>
+    /* Team Card Overlay Styles */
+    .team-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+    .bento-card:hover .team-card-overlay {
+      opacity: 1;
+    }
+    .bento-card .team-card-info {
+      transition: opacity 0.3s ease;
+    }
+    .bento-card:hover .team-card-info {
+      opacity: 0;
+    }
+  </style>
 ---
 
-{# 
-=================================================
-  區塊 0：頁首標題與介紹 (NEW)
-=================================================
-#}
-<div class="module">
-  <div class="container" style="max-width: 900px; text-align: center;">
-    <h1 style="margin-bottom: 1rem;">團隊介紹</h1>
-    <p style="font-size: 1.1rem; max-width: 720px; margin-left: auto; margin-right: auto;">
-      好時有影的專業團隊有才華洋溢的攝影師、細心​​的造型師，還有專業的修圖師，我們共同為您打造真實又好看的影像。陪伴您，紀錄下最真實、溫暖的瞬間。
-    </p>
-  </div>
-</div>
+<!-- TYPE B: Story Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-b from-blue-50/50 to-transparent -z-10 opacity-50"></div>
 
-{# 
-=================================================
-  區塊 1：攝影師陣容 (Photographers)
-=================================================
-#}
-<div class="module module-gray">
-  <div class="container">
-    <h2 class="text-center" style="margin-bottom: 2rem;">攝影團隊</h2>
-    <div class="team-grid team-grid-5">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- Text Side -->
+            <div class="text-left relative">
+                <!-- Handwritten Note -->
+                <div class="absolute -top-8 -left-4 transform -rotate-6 font-hand text-slate-400 text-xl hidden md:block" aria-hidden="true">
+                    Our Story...
+                </div>
 
-      <a href="https://www.instagram.com/pinky1357924680/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/01.about-photographer-1-su.jpg' | r2img }}"
-            alt="好時有影 店長 - 琬茜"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">琬茜</h3>
-          <p class="card__subtitle">店長</p>
-        </div>
-      </a>
+                <div class="inline-flex items-center gap-2 mb-6">
+                    <span class="w-8 h-px bg-trust-950"></span>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-[0.2em]">The Team</span>
+                </div>
 
-      <a href="https://www.instagram.com/han.jen.wu/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/02.about-photographer-2-han2.jpg' | r2img }}"
-            alt="好時有影 專業攝影師 - 涵甄"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">涵甄</h3>
-          <p class="card__subtitle">專業攝影師</p>
-        </div>
-      </a>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+                    這是一群<br>紀錄真實的人。
+                </h1>
+                
+                <p class="text-lg text-slate-500 leading-relaxed mb-8 border-l-2 border-sand-200 pl-4">
+                    從會計師到攝影師，我們相信數據與感性可以並存。<br>
+                    好時有影，為您定格職涯最自信的瞬間。
+                </p>
 
-      <a href="https://www.instagram.com/goldenyears_studio/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/03.about-photographer-3-z.jpg' | r2img }}"
-            alt="好時有影 專業攝影師 - 林立"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">林立</h3>
-          <p class="card__subtitle">專業攝影師</p>
-        </div>
-      </a>
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap gap-4 items-center mb-8">
+                    <a href="/booking/" class="btn btn-secondary btn-md">
+                        預約拍攝
+                    </a>
+                    <a href="https://instagram.com/goldenyears_studio" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-md group">
+                        查看 Instagram <span class="arrow group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
 
-      <a href="https://www.instagram.com/mike_tsao__/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/04.about-photographer-4-dm.jpg' | r2img }}"
-            alt="好時有影 專業攝影師 - 敦閔"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-            class="img-rotate-fix"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">敦閔</h3>
-          <p class="card__subtitle">專業攝影師</p>
-        </div>
-      </a>
+                <!-- Signature instead of Barcode -->
+                <div class="font-hand text-3xl text-trust-900 opacity-80 mt-4">
+                    Golden Years Studio
+                </div>
+            </div>
 
-      <a href="https://www.instagram.com/vincentshots_photograph/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/05.about-photographer-5-vincent.jpg' | r2img }}"
-            alt="好時有影 專業攝影師 - 唯任"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
+            <!-- Visual Side -->
+            <div class="relative hidden md:block">
+                <div class="aspect-[4/3] bg-white p-2 rounded-lg shadow-sm rotate-2 border border-sand-200">
+                    <div class="w-full h-full bg-sand-100 flex items-center justify-center text-slate-400 overflow-hidden rounded">
+                        <!-- Team Photo Placeholder - 可以使用第一張團隊照片 -->
+                        <img
+                            src="{{ 'content/about/01.about-photographer-1-su.jpg' | r2img }}"
+                            alt="好時有影團隊"
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                </div>
+                <!-- Photo Corner Tape Effect -->
+                <div class="absolute -top-2 -right-2 w-16 h-6 bg-sand-300/50 rotate-45 transform translate-y-2" aria-hidden="true"></div>
+            </div>
         </div>
-        <div class="card__body">
-          <h3 class="card__title">唯任</h3>
-          <p class="card__subtitle">專業攝影師</p>
-        </div>
-      </a>
-
     </div>
-  </div>
-</div>
 
-
-{# 
-=================================================
-  區塊 2：造型師陣容 (Stylists)
-=================================================
-#}
-<div class="module">
-  <div class="container">
-    <h2 class="text-center" style="margin-bottom: 2rem;">造型團隊</h2>
-    <div class="team-grid team-grid-5">
-
-      <a href="https://www.instagram.com/tfj___kayla/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/06.about-stylist-1-k.jpg' | r2img }}"
-            alt="好時有影 彩妝造型師 - 凱雯"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">凱雯</h3>
-          <p class="card__subtitle">彩妝造型師</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/sammi26_makeup" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/07.about-stylist-3-sc.jpg' | r2img }}"
-            alt="好時有影 彩妝造型師 - 紹綺"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">紹綺</h3>
-          <p class="card__subtitle">彩妝造型師</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/chloelilin/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/08.about-stylist-2-chole.jpg' | r2img }}"
-            alt="好時有影 彩妝造型師 - 秝琳"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">秝琳</h3>
-          <p class="card__subtitle">彩妝造型師</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/renee.23_makeup/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/09.about-stylist-5--show.jpg' | r2img }}"
-            alt="好時有影 彩妝造型師 - 琇慈"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">琇慈</h3>
-          <p class="card__subtitle">彩妝造型師</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/penny_yeh_makeup/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/10.about-stylist-4-yi.jpg' | r2img }}"
-            alt="好時有影 彩妝造型師 - 純依"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">純依</h3>
-          <p class="card__subtitle">彩妝造型師</p>
-        </div>
-      </a>
-
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
     </div>
-  </div>
-</div>
+</header>
 
-{# 
-=================================================
-  區塊 3：修圖師後製 (Editors)
-=================================================
-#}
-<div class="module module-gray">
-  <div class="container">
-    <h2 class="text-center" style="margin-bottom: 2rem;">人像精修</h2>
-    <div class="team-grid team-grid-5">
-
-      <a href="https://www.instagram.com/goldenyears_studio/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/11.about-3-ed-mira.jpg' | r2img }}"
-            alt="好時有影 修圖師 - Mira"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">Mira</h3>
-          <p class="card__subtitle">修圖師</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/suntime__studio/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/12.about-3-ed-chinyi.jpg' | r2img }}"
-            alt="好時有影 修圖師 - 靜怡"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">靜怡</h3>
-          <p class="card__subtitle">修圖師</p>
-        </div>
-      </a>
-
-      <a href="https://www.instagram.com/goldenyears_studio/" class="card card--team" target="_blank" rel="noopener noreferrer">
-        <div class="card__image">
-          <img
-            src="{{ 'content/about/13.about-1-ed-yiz1.jpg' | r2img }}"
-            alt="好時有影 修圖師 - 宜蓁"
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">宜蓁</h3>
-          <p class="card__subtitle">修圖師</p>
-        </div>
-      </a>
-
+<!-- Section: Photographers -->
+<section class="mb-24">
+    <div class="flex items-center gap-3 mb-8">
+        <span class="text-2xl font-bold text-trust-950">攝影團隊</span>
+        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
     </div>
-  </div>
-</div>
-
-{# 
-=================================================
-  區塊 4：創業故事 (Founder's Story)
-=================================================
-#}
-<div class="module">
-  <div class="container">
-        
-    <div class="layout-split layout-split-founder"> 
-            
-      <div class="layout-split-image">
-        <a href="https://www.facebook.com/xu.yan.cheng.591473" target="_blank" rel="noopener noreferrer">
-          <img
-            src="{{ 'content/about/about-3.jpg' | r2img }}"
-            alt="好時有影 總監 - 晏誠 (Jack)"
-            sizes="(min-width: 768px) 50vw, 100vw"
-            loading="lazy"
-            decoding="async"
-          />
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- 1 -->
+        <a href="https://www.instagram.com/pinky1357924680/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/01.about-photographer-1-su.jpg' | r2img }}"
+                    alt="好時有影 店長 - 琬茜"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">琬茜</h3>
+                <p class="text-xs text-slate-500 font-medium">店長</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Store Manager</span>
+                <h3 class="text-xl font-bold text-white mb-2">琬茜</h3>
+                <div class="inline-flex items-center text-xs text-white border-b border-white/50 pb-0.5 w-max">
+                    View Portfolio <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </div>
+            </div>
         </a>
-      </div>
-            
-      <div class="layout-split-text">
-        <h2>政大會計系、轉職攝影師</h2>
-        <p>在四大會計師事務所的某天望著辦公室前後，彷彿看見自己未來的一生路徑—</p>
-        <p>一年後坐在隔壁；五年後坐在小隔間；十年後有一間辦公室...這應是條清晰完美的職涯路徑？而我卻常望向窗外。</p>
-        <p>那時我的工作量已忙到沒時間思考人生了，決定先離職再說。</p>
-        <p>從當員工轉當自由接案者，接著開照相館，我想成為創造回憶與故事的攝影師。與其說是在拍照，更像是一個聽故事的人。</p>
-        <blockquote class="magazine" style="max-width: 100%; margin: 20px 0;">
-          <p>「當被故事感動，</p>
-          <p>就會對這份工作有熱情
-和使命。」</p>
-        </blockquote>
-        <p>我們聽聞許多人生故事：畢業生對未來困惑、轉職的人面臨的職涯課題、拍攝簽證照的人飛向世界各處、還有許多意味著離別的合照...</p>
-        <p>好時有影就這樣誕生了。希望每個「好時」都有你我的「身影」，參與著人們的故事，紀錄日常生活的定格和延續。</p>
-      </div>
+
+        <!-- 2 -->
+        <a href="https://www.instagram.com/han.jen.wu/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/02.about-photographer-2-han2.jpg' | r2img }}"
+                    alt="好時有影 專業攝影師 - 涵甄"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">涵甄</h3>
+                <p class="text-xs text-slate-500 font-medium">專業攝影師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Photographer</span>
+                <h3 class="text-xl font-bold text-white mb-2">涵甄</h3>
+                <span class="text-xs text-white/80">捕捉細膩光影</span>
+            </div>
+        </a>
+
+        <!-- 3 -->
+        <a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/03.about-photographer-3-z.jpg' | r2img }}"
+                    alt="好時有影 專業攝影師 - 林立"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">林立</h3>
+                <p class="text-xs text-slate-500 font-medium">專業攝影師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Photographer</span>
+                <h3 class="text-xl font-bold text-white mb-2">林立</h3>
+                <span class="text-xs text-white/80">擅長引導互動</span>
+            </div>
+        </a>
+
+        <!-- 4 -->
+        <a href="https://www.instagram.com/mike_tsao__/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/04.about-photographer-4-dm.jpg' | r2img }}"
+                    alt="好時有影 專業攝影師 - 敦閔"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">敦閔</h3>
+                <p class="text-xs text-slate-500 font-medium">專業攝影師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Photographer</span>
+                <h3 class="text-xl font-bold text-white mb-2">敦閔</h3>
+                <span class="text-xs text-white/80">日系清新風格</span>
+            </div>
+        </a>
+
+        <!-- 5 -->
+        <a href="https://www.instagram.com/vincentshots_photograph/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/05.about-photographer-5-vincent.jpg' | r2img }}"
+                    alt="好時有影 專業攝影師 - 唯任"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">唯任</h3>
+                <p class="text-xs text-slate-500 font-medium">專業攝影師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Photographer</span>
+                <h3 class="text-xl font-bold text-white mb-2">唯任</h3>
+                <span class="text-xs text-white/80">時尚雜誌質感</span>
+            </div>
+        </a>
     </div>
-  </div>
-</div>
+</section>
+
+<!-- Section: Stylists -->
+<section class="mb-24">
+    <div class="flex items-center gap-3 mb-8">
+        <span class="text-2xl font-bold text-trust-950">造型團隊</span>
+        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- 1 -->
+        <a href="https://www.instagram.com/tfj___kayla/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/06.about-stylist-1-k.jpg' | r2img }}"
+                    alt="好時有影 彩妝造型師 - 凱雯"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center">
+                <h3 class="text-lg font-bold text-trust-900">凱雯</h3>
+                <p class="text-xs text-slate-500 font-medium">彩妝造型師</p>
+            </div>
+        </a>
+        <!-- 2 -->
+        <a href="https://www.instagram.com/sammi26_makeup" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/07.about-stylist-3-sc.jpg' | r2img }}"
+                    alt="好時有影 彩妝造型師 - 紹綺"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center">
+                <h3 class="text-lg font-bold text-trust-900">紹綺</h3>
+                <p class="text-xs text-slate-500 font-medium">彩妝造型師</p>
+            </div>
+        </a>
+        <!-- 3 -->
+        <a href="https://www.instagram.com/chloelilin/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/08.about-stylist-2-chole.jpg' | r2img }}"
+                    alt="好時有影 彩妝造型師 - 秝琳"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center">
+                <h3 class="text-lg font-bold text-trust-900">秝琳</h3>
+                <p class="text-xs text-slate-500 font-medium">彩妝造型師</p>
+            </div>
+        </a>
+        <!-- 4 -->
+        <a href="https://www.instagram.com/renee.23_makeup/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/09.about-stylist-5--show.jpg' | r2img }}"
+                    alt="好時有影 彩妝造型師 - 琇慈"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center">
+                <h3 class="text-lg font-bold text-trust-900">琇慈</h3>
+                <p class="text-xs text-slate-500 font-medium">彩妝造型師</p>
+            </div>
+        </a>
+        <!-- 5 -->
+        <a href="https://www.instagram.com/penny_yeh_makeup/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/10.about-stylist-4-yi.jpg' | r2img }}"
+                    alt="好時有影 彩妝造型師 - 純依"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center">
+                <h3 class="text-lg font-bold text-trust-900">純依</h3>
+                <p class="text-xs text-slate-500 font-medium">彩妝造型師</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Section: Editors -->
+<section class="mb-24">
+    <div class="flex items-center gap-3 mb-8">
+        <span class="text-2xl font-bold text-trust-950">人像精修</span>
+        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <!-- 1 -->
+        <a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/11.about-3-ed-mira.jpg' | r2img }}"
+                    alt="好時有影 修圖師 - Mira"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">Mira</h3>
+                <p class="text-xs text-slate-500 font-medium">修圖師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Retoucher</span>
+                <h3 class="text-xl font-bold text-white mb-2">Mira</h3>
+                <span class="text-xs text-white/80">細節修飾</span>
+            </div>
+        </a>
+        <!-- 2 -->
+        <a href="https://www.instagram.com/suntime__studio/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/12.about-3-ed-chinyi.jpg' | r2img }}"
+                    alt="好時有影 修圖師 - 靜怡"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">靜怡</h3>
+                <p class="text-xs text-slate-500 font-medium">修圖師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Retoucher</span>
+                <h3 class="text-xl font-bold text-white mb-2">靜怡</h3>
+                <span class="text-xs text-white/80">光影調校</span>
+            </div>
+        </a>
+        <!-- 3 -->
+        <a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/13.about-1-ed-yiz1.jpg' | r2img }}"
+                    alt="好時有影 修圖師 - 宜蓁"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">宜蓁</h3>
+                <p class="text-xs text-slate-500 font-medium">修圖師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Retoucher</span>
+                <h3 class="text-xl font-bold text-white mb-2">宜蓁</h3>
+                <span class="text-xs text-white/80">風格定調</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- Founder Story Section -->
+<section class="mb-20">
+    <div class="flex items-center gap-3 mb-8">
+        <span class="text-2xl font-bold text-trust-950">創業故事</span>
+        <div class="h-px bg-slate-200 flex-1 ml-4"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <a href="https://www.facebook.com/xu.yan.cheng.591473" target="_blank" rel="noopener noreferrer" class="bento-card block p-0 bg-white group cursor-pointer relative">
+            <div class="aspect-[3/4] overflow-hidden">
+                <img
+                    src="{{ 'content/about/about-3.jpg' | r2img }}"
+                    alt="好時有影 總監 - 晏誠 (Jack)"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <div class="p-4 text-center team-card-info">
+                <h3 class="text-lg font-bold text-trust-900">晏誠 (Jack)</h3>
+                <p class="text-xs text-slate-500 font-medium">總監 / 攝影師</p>
+            </div>
+            <div class="team-card-overlay">
+                <span class="text-xs font-bold text-trust-200 uppercase tracking-widest mb-1">Founder & Director</span>
+                <h3 class="text-xl font-bold text-white mb-2">晏誠 (Jack)</h3>
+                <span class="text-xs text-white/80">政大會計系，轉職攝影師</span>
+            </div>
+        </a>
+        
+        <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-trust-950 mb-6">政大會計系、轉職攝影師</h2>
+            <div class="space-y-4 text-base md:text-lg text-slate-600 leading-relaxed">
+                <p>在四大會計師事務所的某天望著辦公室前後，彷彿看見自己未來的一生路徑—</p>
+                <p>一年後坐在隔壁；五年後坐在小隔間；十年後有一間辦公室...這應是條清晰完美的職涯路徑？而我卻常望向窗外。</p>
+                <p>那時我的工作量已忙到沒時間思考人生了，決定先離職再說。</p>
+                <p>從當員工轉當自由接案者，接著開照相館，我想成為創造回憶與故事的攝影師。與其說是在拍照，更像是一個聽故事的人。</p>
+            </div>
+            <blockquote class="bento-card p-6 md:p-8 bg-sand-50 border-l-4 border-trust-800 my-8 italic text-lg md:text-xl text-slate-700">
+                <p class="mb-2">「當被故事感動，</p>
+                <p>就會對這份工作有熱情和使命。」</p>
+            </blockquote>
+            <div class="space-y-4 text-base md:text-lg text-slate-600 leading-relaxed">
+                <p>我們聽聞許多人生故事：畢業生對未來困惑、轉職的人面臨的職涯課題、拍攝簽證照的人飛向世界各處、還有許多意味著離別的合照...</p>
+                <p>好時有影就這樣誕生了。希望每個「好時」都有你我的「身影」，參與著人們的故事，紀錄日常生活的定格和延續。</p>
+            </div>
+        </div>
+    </div>
+</section>

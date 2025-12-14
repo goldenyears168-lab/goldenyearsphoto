@@ -1,208 +1,369 @@
 ---
 layout: "base-layout.njk"
 title: "妝髮服務"
-pageStyles: |
-  <link rel="stylesheet" href="/assets/css/4-pages/p-guide-makeup.css">
 seo:
-  description: "台北形象照推薦 好時有影攝影工作室，提供專業妝髮服務，搭配形象照、履歷照、畢業照等拍攝需求。由經驗豐富的彩妝師打造自然妝感。"
+  description: "好時有影提供專業妝髮服務，由經驗豐富的彩妝師打造自然妝感，讓每一位顧客展現自信風采。"
 ---
 
-<div class="module module-dark page-hero">
-  <div class="container">
-    <h1>專業妝髮造型服務</h1>
-    <p class="subtitle">
-      好時有影提供專業妝髮服務，搭配形象照、履歷照、畢業照等拍攝需求。由經驗豐富的彩妝師打造自然妝感，讓每一位顧客展現自信風采。
-    </p>
-  </div>
-</div>
-
-<div class="module">
-  <div class="container container-md page-content">
-    
-    <h2>為何選擇我們的妝髮服務？</h2>
-    <p>攝影妝容與日常妝容截然不同。專業的攝影妝髮需要考慮到棚內燈光的強度、鏡頭的解析度，以及最終的修圖效果。我們的造型師團隊擁有豐富的攝影妝髮經驗，最擅長打造「上鏡」且「自然」的精緻妝感。</p>
-
-    <hr>
-
-    <h3>預約方式與建議</h3>
-    <p>請於預約拍攝時，於加購項目中選擇您需要的「化妝服務」選項。</p>
-    <p><strong>妝髮建議：</strong>為達最佳妝效，建議您當天素顏前來即可。造型師將為您進行簡易清潔與妝前保養。
-    </p>
-
-    <hr>
-
-    <h3>服務方案與價格</h3>
-    
-    <div class="service-package-list">
-
-      <div class="service-package">
+<!-- TYPE C: Action Header -->
+<header class="relative pt-32 pb-12 overflow-hidden">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
         
-        <div class="package-header">
-          <h4>A. 女生 基礎日常妝</h4>
-          <div class="package-meta">
-            <span class="price">$800</span>
-            <span class="duration">30 min</span>
-          </div>
+        <!-- Wayfinding Tag: Compass/Location -->
+        <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white border border-sand-200 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-xxs font-bold text-trust-950 uppercase tracking-widest">Professional Styling</span>
         </div>
 
-        <div class="package-image-placeholder">
-          <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-1.jpg' | r2img }}" alt="女生基礎日常妝 妝髮成果" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            專業妝髮，<br class="hidden md:block">自信上鏡的起點。
+        </h1>
         
-        <div class="package-content-wrapper">
-          <p class="arrival-note">（須於拍攝時間前 40 分鐘到店）</p>
-          <p><strong>適合：</strong>無化妝習慣的人。妝感清淡，提亮整體氣色。</p>
-          <div class="package-details">
-            <ul class="includes">
-              <li>簡易清潔</li>
-              <li>膚色修飾</li>
-              <li>修容</li>
-              <li>腮紅</li>
-              <li>內眼線</li>
-              <li>畫眉</li>
-              <li>唇彩</li>
-            </ul>
-            <ul class="excludes">
-              <li>修眉</li>
-              <li>睫毛膏</li>
-              <li>假睫毛</li>
-              <li>外眼線</li>
-              <li>電棒捲或其他髮型</li>
-            </ul>
-          </div>
-        </div>
-      </div> <div class="service-package">
-        <div class="package-header">
-          <h4>B. 男生 基礎妝</h4>
-          <div class="package-meta">
-            <span class="price">$600</span>
-            <span class="duration">30 min</span>
-          </div>
-        </div>
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            由經驗豐富的彩妝師打造自然妝感。這不是要把你變成別人，而是透過專業的光影修飾，還原你最飽滿的精神狀態。
+        </p>
 
-        <div class="package-image-placeholder">
-          <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-2.jpg' | r2img }}" alt="男生基礎妝 妝髮成果" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#packages" class="btn-primary btn-md">
+                查看方案
+            </a>
+            <a href="/price-list/" class="btn-secondary btn-md">
+                完整價目表
+            </a>
         </div>
-
-        <div class="package-content-wrapper">
-          <p class="arrival-note">（須於拍攝時間前 40 分鐘到店）</p>
-          <p><strong>適合：</strong>無化妝習慣的人。</p>
-          <div class="package-details">
-            <ul class="includes">
-              <li>簡易清潔</li>
-              <li>膚色修飾</li>
-              <li>修容</li>
-              <li>眉型</li>
-              <li>護唇膏</li>
-            </ul>
-            <ul class="excludes">
-              <li>眼妝</li>
-              <li>腮紅</li>
-              <li>油頭或造型抓髮</li>
-            </ul>
-          </div>
-        </div>
-      </div> <div class="service-package">
-        <div class="package-header">
-          <h4>C. 女生 韓系精緻妝髮</h4>
-          <div class="package-meta">
-            <span class="price">$1,500</span>
-            <span class="duration">1 hr</span>
-          </div>
-        </div>
-        
-        <div class="package-image-placeholder">
-          <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-3.jpg' | r2img }}" alt="女生韓系精緻妝髮 妝髮成果" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-        </div>
-
-        <div class="package-content-wrapper">
-          <p class="arrival-note">（須於拍攝時間前 1 小時 10 分鐘到店）</p>
-          <p><strong>適合：</strong>會自己化妝、想體驗精緻妝容的人。妝感精緻但自然，適合參加約會、面試、聚會等活動。</p>
-          <div class="package-details">
-            <ul class="includes">
-              <li>簡易清潔</li>
-              <li>輕透底妝</li>
-              <li>修容</li>
-              <li>腮紅</li>
-              <li>眼妝（內外眼線）</li>
-              <li>精緻眉型</li>
-              <li>唇彩</li>
-              <li>韓系波浪髮型</li>
-            </ul>
-            <ul class="excludes">
-              <li>假睫毛</li>
-              <li>其他髮型</li>
-            </ul>
-          </div>
-        </div>
-      </div> <div class="service-package">
-        <div class="package-header">
-          <h4>D. 男生 韓系精緻妝髮</h4>
-          <div class="package-meta">
-            <span class="price">$1,200</span>
-            <span class="duration">1 hr</span>
-          </div>
-        </div>
-        
-        <div class="package-image-placeholder">
-          <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-4.jpg' | r2img }}" alt="男生韓系精緻妝髮 妝髮成果" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-        </div>
-
-        <div class="package-content-wrapper">
-          <p class="arrival-note">（須於拍攝時間前 1 小時 10 分鐘到店）</p>
-          <p><strong>適合：</strong>想體驗精緻妝容與髮型的人。妝感精緻但自然，適合參加約會、面試、聚會等活動。</p>
-          <div class="package-details">
-            <ul class="includes">
-              <li>簡易清潔</li>
-              <li>輕透底妝</li>
-              <li>修容</li>
-              <li>眼妝</li>
-              <li>精緻眉型</li>
-              <li>唇彩</li>
-              <li>造型抓髮</li>
-            </ul>
-            <ul class="excludes">
-            </ul>
-          </div>
-        </div>
-      </div> <div class="service-package">
-        <div class="package-header">
-          <h4>E. 女生 訂製妝髮專案</h4>
-          <div class="package-meta">
-            <span class="price">$3,000</span>
-            <span class="duration">1.5 hr</span>
-          </div>
-        </div>
-        
-        <div class="package-image-placeholder">
-          <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-5.jpg' | r2img }}" alt="女生訂製妝髮專案 妝髮成果" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-        </div>
-
-        <div class="package-content-wrapper">
-          <p class="arrival-note">（須於拍攝時間前 1 小時 45 分鐘到店）</p>
-          <p><strong>適合：</strong>平時有化妝習慣、想體驗不同造型的人。妝感較明顯，可彈性客製造型，適合參加各式重要場合或宴會。</p>
-          <div class="package-details">
-            <ul class="includes">
-              <li>清潔保養</li>
-              <li>乾淨底妝</li>
-              <li>修容</li>
-              <li>打亮</li>
-              <li>腮紅</li>
-              <li>精緻眼妝（假睫毛）</li>
-              <li>精緻眉型</li>
-              <li>唇彩</li>
-              <li>客製髮型</li>
-              <li>專業造型溝通及建議</li>
-            </ul>
-            <ul class="excludes">
-              <li>飾品租借</li>
-              <li>新娘整體造型</li>
-            </ul>
-          </div>
-        </div>
-      </div> </div> <div class="text-align-center" style="margin-top: 40px;">
-      <a href="/booking/" class="button button-primary">立即預約拍攝</a>
     </div>
+</header>
 
-  </div>
+<div class="pt-8 pb-20">
+    <div class="max-w-[1000px] mx-auto px-4 md:px-8 relative">
+
+        <!-- Concept Section: Why & How (Bento Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <!-- Why Us -->
+            <div class="bento-card p-8 md:p-10 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-6 opacity-5 pointer-events-none text-trust-950">
+                    <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 3-1.5 3z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-trust-950 mb-4">為何選擇我們的妝髮？</h3>
+                <p class="text-slate-600 leading-relaxed text-sm">
+                    攝影妝容與日常妝容截然不同。棚內強光會「吃妝」，鏡頭的高解析度則會放大瑕疵。<br><br>
+                    我們的造型師懂得如何在這些條件下，透過<strong class="text-trust-900">立體修容</strong>與<strong class="text-trust-900">膚質打底</strong>，打造出既「上鏡」又「不假面」的專業質感。
+                </p>
+            </div>
+
+            <!-- Booking Advice -->
+            <div class="bento-card bento-card-sand">
+                <h3 class="text-xl font-bold text-trust-950 mb-4">預約方式與建議</h3>
+                <ul class="space-y-4 text-sm text-slate-600">
+                    <li class="flex gap-3">
+                        <span class="w-6 h-6 rounded-full bg-white border border-sand-200 flex items-center justify-center text-trust-900 font-bold text-xs shrink-0">1</span>
+                        <span>請於預約拍攝時，在加購項目中勾選您需要的「妝髮服務」選項。</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="w-6 h-6 rounded-full bg-white border border-sand-200 flex items-center justify-center text-trust-900 font-bold text-xs shrink-0">2</span>
+                        <span><strong class="text-trust-950">妝前準備：</strong>為達最佳效果，建議您當天<strong class="text-trust-950">素顏前來</strong>（可擦保養品）。造型師會為您進行簡易清潔與妝前打底。</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Packages List Section -->
+        <div id="packages" class="scroll-mt-24">
+            <h3 class="text-2xl font-bold text-trust-950 mb-8 text-center">服務方案與價格</h3>
+            
+            <div class="space-y-8">
+                
+                <!-- Package A -->
+                <div class="bento-card p-6 md:p-8 overflow-hidden">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                        <!-- Content -->
+                        <div class="md:flex-1">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="text-xl md:text-2xl font-bold text-slate-900">A. 女生 基礎日常妝</h4>
+                                    <span class="text-xs text-slate-500 block mt-1">適合無化妝習慣者，提亮氣色</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-trust-900">$800</div>
+                                    <div class="text-xs text-slate-400">30 min</div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-4">（須於拍攝時間前 40 分鐘到店）</p>
+                            <div class="bg-sand-50/50 rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                <div class="space-y-2">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">包含項目：</p>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>簡易清潔</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>膚色修飾</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>修容、腮紅</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>內眼線、畫眉、唇彩</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2 border-t md:border-t-0 md:border-l border-sand-200 pt-3 md:pt-0 md:pl-3">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">不包含：</p>
+                                    <div class="flex items-center gap-2 text-slate-400">
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        <span>修眉、睫毛膏、假睫毛</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-400">
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        <span>外眼線、電棒捲或其他髮型</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="md:w-[40%] rounded-xl overflow-hidden shadow-sm group bg-white">
+                            <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-1.jpg' | r2img }}" alt="女生基礎日常妝 妝髮成果" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package B -->
+                <div class="bento-card p-6 md:p-8 overflow-hidden">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                        <!-- Content -->
+                        <div class="md:flex-1">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="text-xl md:text-2xl font-bold text-slate-900">B. 男生 基礎妝</h4>
+                                    <span class="text-xs text-slate-500 block mt-1">適合所有男性，乾淨俐落</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-trust-900">$600</div>
+                                    <div class="text-xs text-slate-400">30 min</div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-4">（須於拍攝時間前 40 分鐘到店）</p>
+                            <div class="bg-sand-50/50 rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                <div class="space-y-2">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">包含項目：</p>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>簡易清潔</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>膚色修飾、修容</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>眉型、護唇膏</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2 border-t md:border-t-0 md:border-l border-sand-200 pt-3 md:pt-0 md:pl-3">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">不包含：</p>
+                                    <div class="flex items-center gap-2 text-slate-400">
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        <span>眼妝、腮紅</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-400">
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        <span>油頭或造型抓髮</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="md:w-[40%] rounded-xl overflow-hidden shadow-sm group bg-white">
+                            <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-2.jpg' | r2img }}" alt="男生基礎妝 妝髮成果" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package C (Popular) -->
+                <div class="bento-card p-6 md:p-8 overflow-hidden bg-trust-50/50 border-trust-200">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                        <!-- Content -->
+                        <div class="md:flex-1">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <h4 class="text-xl md:text-2xl font-bold text-trust-900">C. 女生 韓系精緻妝髮</h4>
+                                        <span class="text-xxs font-bold px-2 py-0.5 rounded-full bg-trust-900 text-white uppercase tracking-wider">POPULAR</span>
+                                    </div>
+                                    <span class="text-xs text-slate-500 block mt-1">適合約會、面試、重要場合，妝感精緻</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-trust-900">$1,500</div>
+                                    <div class="text-xs text-slate-400">1 hr</div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-4">（須於拍攝時間前 1 小時 10 分鐘到店）</p>
+                            <div class="bg-white/80 rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm border border-trust-100">
+                                <div class="space-y-2">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">包含項目：</p>
+                                    <div class="flex items-center gap-2 text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>簡易清潔、輕透底妝</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>修容、腮紅</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>眼妝（內外眼線）</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>精緻眉型、唇彩</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>韓系波浪髮型</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2 border-t md:border-t-0 md:border-l border-sand-200 pt-3 md:pt-0 md:pl-3">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">不包含：</p>
+                                    <div class="flex items-center gap-2 text-slate-400">
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        <span>假睫毛</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-400">
+                                        <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        <span>其他髮型</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="md:w-[40%] rounded-xl overflow-hidden shadow-sm group bg-white">
+                            <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-3.jpg' | r2img }}" alt="女生韓系精緻妝髮 妝髮成果" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package D -->
+                <div class="bento-card p-6 md:p-8 overflow-hidden">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                        <!-- Content -->
+                        <div class="md:flex-1">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="text-xl md:text-2xl font-bold text-slate-900">D. 男生 韓系精緻妝髮</h4>
+                                    <span class="text-xs text-slate-500 block mt-1">體驗精緻底妝與髮型設計</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-trust-900">$1,200</div>
+                                    <div class="text-xs text-slate-400">1 hr</div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-4">（須於拍攝時間前 1 小時 10 分鐘到店）</p>
+                            <div class="bg-sand-50/50 rounded-lg p-4 text-sm">
+                                <p class="text-slate-600 mb-2">包含項目同基礎妝髮，升級為：</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-trust-800 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>簡易清潔、輕透底妝</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-trust-800 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>修容、眼妝</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-trust-800 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>精緻眉型、唇彩</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-trust-800 font-medium">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>造型抓髮</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="md:w-[40%] rounded-xl overflow-hidden shadow-sm group bg-white">
+                            <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-4.jpg' | r2img }}" alt="男生韓系精緻妝髮 妝髮成果" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package E -->
+                <div class="bento-card p-6 md:p-8 overflow-hidden">
+                    <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                        <!-- Content -->
+                        <div class="md:flex-1">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="text-xl md:text-2xl font-bold text-slate-900">E. 女生 訂製妝髮專案</h4>
+                                    <span class="text-xs text-slate-500 block mt-1">客製造型，適合重要宴會</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-trust-900">$3,000</div>
+                                    <div class="text-xs text-slate-400">1.5 hr</div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-4">（須於拍攝時間前 1 小時 45 分鐘到店）</p>
+                            <div class="bg-sand-50/50 rounded-lg p-4 text-sm">
+                                <p class="font-semibold text-slate-900 mb-2 text-xs">包含項目：</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>清潔保養、乾淨底妝</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>修容、打亮、腮紅</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>精緻眼妝（假睫毛）</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>精緻眉型、唇彩</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>客製髮型</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-slate-700">
+                                        <svg class="w-4 h-4 text-trust-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>專業造型溝通及建議</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-sand-200">
+                                    <p class="font-semibold text-slate-900 mb-2 text-xs">不包含：</p>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center gap-2 text-slate-400">
+                                            <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                            <span>飾品租借</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-slate-400">
+                                            <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                            <span>新娘整體造型</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image -->
+                        <div class="md:w-[40%] rounded-xl overflow-hidden shadow-sm group bg-white">
+                            <img src="{{ 'content/guide/makeup-and-hair/makeup-and-hair-5.jpg' | r2img }}" alt="女生訂製妝髮專案 妝髮成果" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="mt-16 text-center">
+            <a href="/booking/" class="btn btn-primary btn-md inline-block">
+                立即預約拍攝
+            </a>
+        </div>
+
+    </div>
 </div>

@@ -1,0 +1,63 @@
+{#
+  Select Macro
+  
+  Creates a standardized select dropdown component.
+  
+  Parameters:
+    - name: Select name attribute
+    - id: Select id attribute (optional, defaults to name)
+    - label: Label text (optional)
+    - options: Array of options [{'value': '', 'text': '', 'selected': false}]
+    - required: Whether field is required (default: false)
+    - disabled: Whether field is disabled (default: false)
+    - class: Additional CSS classes (optional)
+    - error: Error message to display (optional)
+    - help: Help text to display (optional)
+  
+  Usage:
+    {% from "macros/select.njk" import select %}
+    {% set options = [] %}
+    {{ select("service", "service-type", "服務類型", options, true) }}
+#}
+
+{% macro select(name, id='', label='', options=[], required=false, disabled=false, class='', error='', help='') %}
+  {% set selectId = id or name %}
+  {% set selectClasses = ['w-full px-4 py-3 border border-sand-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-trust-500 focus:border-transparent transition-colors bg-white', class] | join(' ') | trim %}
+  
+  <div class="mb-4">
+    {% if label %}
+      <label for="{{ selectId }}" class="block text-sm font-medium text-trust-900 mb-2">
+        {{ label }}
+        {% if required %}<span class="text-error">*</span>{% endif %}
+      </label>
+    {% endif %}
+    
+    <select
+      name="{{ name }}"
+      id="{{ selectId }}"
+      {% if required %}required{% endif %}
+      {% if disabled %}disabled{% endif %}
+      class="{{ selectClasses }}"
+      {% if error %}aria-invalid="true" aria-describedby="{{ selectId }}-error"{% endif %}
+    >
+      {% for option in options %}
+        <option value="{{ option.value }}" {% if option.selected %}selected{% endif %}>
+          {{ option.text }}
+        </option>
+      {% endfor %}
+    </select>
+    
+    {% if error %}
+      <p id="{{ selectId }}-error" class="mt-1 text-sm text-error" role="alert">
+        {{ error }}
+      </p>
+    {% endif %}
+    
+    {% if help and not error %}
+      <p class="mt-1 text-sm text-slate-500">
+        {{ help }}
+      </p>
+    {% endif %}
+  </div>
+{% endmacro %}
+

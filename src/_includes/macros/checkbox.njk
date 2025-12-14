@@ -1,0 +1,61 @@
+{#
+  Checkbox Macro
+  
+  Creates a standardized checkbox component.
+  
+  Parameters:
+    - name: Checkbox name attribute
+    - id: Checkbox id attribute (optional, defaults to name)
+    - label: Label text (optional)
+    - value: Checkbox value (optional)
+    - checked: Whether checkbox is checked (default: false)
+    - required: Whether field is required (default: false)
+    - disabled: Whether field is disabled (default: false)
+    - class: Additional CSS classes (optional)
+    - error: Error message to display (optional)
+    - help: Help text to display (optional)
+  
+  Usage:
+    {% from "macros/checkbox.njk" import checkbox %}
+    {{ checkbox("agree", "agree-terms", "我同意條款", "yes", false, true) }}
+#}
+
+{% macro checkbox(name, id='', label='', value='', checked=false, required=false, disabled=false, class='', error='', help='') %}
+  {% set checkboxId = id or name %}
+  {% set checkboxClasses = ['w-4 h-4 text-trust-600 border-sand-200 rounded focus:ring-trust-500 focus:ring-2', class] | join(' ') | trim %}
+  
+  <div class="mb-4">
+    <div class="flex items-start">
+      <input
+        type="checkbox"
+        name="{{ name }}"
+        id="{{ checkboxId }}"
+        {% if value %}value="{{ value }}"{% endif %}
+        {% if checked %}checked{% endif %}
+        {% if required %}required{% endif %}
+        {% if disabled %}disabled{% endif %}
+        class="{{ checkboxClasses }}"
+        {% if error %}aria-invalid="true" aria-describedby="{{ checkboxId }}-error"{% endif %}
+      />
+      {% if label %}
+        <label for="{{ checkboxId }}" class="ml-2 text-sm text-trust-900">
+          {{ label }}
+          {% if required %}<span class="text-error">*</span>{% endif %}
+        </label>
+      {% endif %}
+    </div>
+    
+    {% if error %}
+      <p id="{{ checkboxId }}-error" class="mt-1 text-sm text-error" role="alert">
+        {{ error }}
+      </p>
+    {% endif %}
+    
+    {% if help and not error %}
+      <p class="mt-1 text-sm text-slate-500">
+        {{ help }}
+      </p>
+    {% endif %}
+  </div>
+{% endmacro %}
+

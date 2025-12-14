@@ -1,0 +1,26 @@
+{#
+  Testimonial Card Macro
+  
+  Creates a unified testimonial card.
+  
+  Parameters:
+    - quote: Testimonial quote text
+    - author: Author name/attribution
+    - variant: 'default' or 'highlight' (optional)
+  
+  Usage:
+    {% from "macros/testimonial-card.njk" import testimonialCard %}
+    {{ testimonialCard("必須大大讚賞的，是他們攝影師引導擺拍的功力...", "40歲，自由工作者") }}
+#}
+
+{% macro testimonialCard(quote, author, variant='default') %}
+<div class="bento-card bento-card-default">
+    <div class="mb-6">
+        <p class="text-lg md:text-xl text-slate-700 leading-relaxed italic">「{{ quote }}」</p>
+    </div>
+    <div class="pt-4 border-t border-slate-200">
+        <p class="text-sm font-semibold text-slate-600">— {{ author }}</p>
+    </div>
+</div>
+{% endmacro %}
+

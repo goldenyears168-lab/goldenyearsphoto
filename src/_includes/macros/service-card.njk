@@ -1,0 +1,41 @@
+{#
+  Service Card Macro
+  
+  Creates a unified service information card.
+  
+  Parameters:
+    - title: Service title
+    - description: Service description
+    - features: Array of feature items
+    - image: Image path (optional)
+    - imageAlt: Image alt text (optional)
+  
+  Usage:
+    {% from "macros/service-card.njk" import serviceCard %}
+    {{ serviceCard("專業形象照", "證件照可以用工具生成...", ["專業自然精修", "高畫質電子檔"], "content/blog/profile/profile-1.jpg", "專業形象照範例") }}
+#}
+
+{% macro serviceCard(title, description, features=[], image='', imageAlt='') %}
+<div class="bento-card bento-card-default">
+    {% if image %}
+    <div class="mb-6 rounded-xl overflow-hidden">
+        <img src="{{ image | r2img }}" alt="{{ imageAlt }}" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+    </div>
+    {% endif %}
+    <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">{{ title }}</h3>
+    {% if description %}
+    <p class="text-base md:text-lg text-slate-600 mb-6 leading-relaxed">{{ description }}</p>
+    {% endif %}
+    {% if features.length > 0 %}
+    <ul class="space-y-3">
+        {% for feature in features %}
+        <li class="flex items-start gap-3 text-slate-700">
+            <span class="text-trust-600 mt-1">✓</span>
+            <span>{{ feature }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endmacro %}
+

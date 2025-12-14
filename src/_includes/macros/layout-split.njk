@@ -1,0 +1,43 @@
+{#
+  Layout Split Macro
+  
+  Creates a split layout with image and text.
+  
+  Parameters:
+    - image: Image path
+    - imageAlt: Image alt text
+    - title: Section title
+    - content: Text content (can be HTML)
+    - imagePosition: 'left' or 'right' (default: 'left')
+  
+  Usage:
+    {% from "macros/layout-split.njk" import layoutSplit %}
+    {{ layoutSplit("content/blog/profile/profile-1.jpg", "專業形象照", "證件照 vs 形象照", "<p>證件照解決「規格問題」...</p>", "left") }}
+#}
+
+{% macro layoutSplit(image, imageAlt, title, content, imagePosition='left') %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+    {% if imagePosition == 'left' %}
+    <div class="order-1 rounded-xl overflow-hidden shadow-lg">
+        <img src="{{ image | r2img }}" alt="{{ imageAlt }}" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+    </div>
+    <div class="order-2">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">{{ title }}</h2>
+        <div class="text-base md:text-lg text-slate-600 leading-relaxed space-y-4">
+            {{ content | safe }}
+        </div>
+    </div>
+    {% else %}
+    <div class="order-2 md:order-1">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">{{ title }}</h2>
+        <div class="text-base md:text-lg text-slate-600 leading-relaxed space-y-4">
+            {{ content | safe }}
+        </div>
+    </div>
+    <div class="order-1 md:order-2 rounded-xl overflow-hidden shadow-lg">
+        <img src="{{ image | r2img }}" alt="{{ imageAlt }}" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+    </div>
+    {% endif %}
+</div>
+{% endmacro %}
+

@@ -1,0 +1,62 @@
+{#
+  Input Macro
+  
+  Creates a standardized input field component.
+  
+  Parameters:
+    - type: Input type (default: 'text')
+    - name: Input name attribute
+    - id: Input id attribute (optional, defaults to name)
+    - label: Label text (optional)
+    - placeholder: Placeholder text (optional)
+    - value: Input value (optional)
+    - required: Whether field is required (default: false)
+    - disabled: Whether field is disabled (default: false)
+    - class: Additional CSS classes (optional)
+    - error: Error message to display (optional)
+    - help: Help text to display (optional)
+  
+  Usage:
+    {% from "macros/input.njk" import input %}
+    {{ input("text", "name", "user-name", "姓名", "請輸入您的姓名", "", true) }}
+    {{ input("email", "email", "", "電子郵件", "example@email.com", "", true, false, "", "請輸入有效的電子郵件", "我們不會分享您的電子郵件") }}
+#}
+
+{% macro input(type='text', name, id='', label='', placeholder='', value='', required=false, disabled=false, class='', error='', help='') %}
+  {% set inputId = id or name %}
+  {% set inputClasses = ['w-full px-4 py-3 border border-sand-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-trust-500 focus:border-transparent transition-colors', class] | join(' ') | trim %}
+  
+  <div class="mb-4">
+    {% if label %}
+      <label for="{{ inputId }}" class="block text-sm font-medium text-trust-900 mb-2">
+        {{ label }}
+        {% if required %}<span class="text-error">*</span>{% endif %}
+      </label>
+    {% endif %}
+    
+    <input
+      type="{{ type }}"
+      name="{{ name }}"
+      id="{{ inputId }}"
+      {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+      {% if value %}value="{{ value }}"{% endif %}
+      {% if required %}required{% endif %}
+      {% if disabled %}disabled{% endif %}
+      class="{{ inputClasses }}"
+      {% if error %}aria-invalid="true" aria-describedby="{{ inputId }}-error"{% endif %}
+    />
+    
+    {% if error %}
+      <p id="{{ inputId }}-error" class="mt-1 text-sm text-error" role="alert">
+        {{ error }}
+      </p>
+    {% endif %}
+    
+    {% if help and not error %}
+      <p class="mt-1 text-sm text-slate-500">
+        {{ help }}
+      </p>
+    {% endif %}
+  </div>
+{% endmacro %}
+

@@ -6,86 +6,103 @@ seo:
   keywords: "畢業照, 畢業寫真, 儀式感, 畢業禮物, 閨蜜寫真"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>我們的最後一場儀式：<br>定格青春，告別而不走散</h1>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
     </div>
-</div>
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">14</span>
+        </div>
 
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <p>學士帽會歸還，課本會賣掉，宿舍會清空。</p>
-            <p style="font-weight: 700; color: #6173ff;"> 你們需要一個強而有力的「儀式感」，
-                <br>來定格這段混亂、焦慮、但也無比燦爛的黃金歲月。
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            我們的最後一場儀式：<br class="hidden md:block">定格青春，告別而不走散
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            畢業照 - 定格青春，告別而不走散
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#group-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4">學士帽會歸還，課本會賣掉，宿舍會清空。</p>
+            <p class="text-xl md:text-2xl font-bold text-slate-800">
+                你們需要一個強而有力的「儀式感」，<br>
+                來定格這段混亂、焦慮、但也無比燦爛的黃金歲月。
             </p>
         </div>
 
-        <div class="layout-split image-right"> 
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-1.jpg' | r2img }}" alt="畢業照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-            </div>
-            <div class="layout-split-text">
-                <h2>一場反傳統的畢業紀念</h2>
-                <p>拒絕上一代僵硬微笑的「團拍」。</p>
-                <p>我們鼓勵你們在棚內打鬧、大笑、重現黑歷史。
-                <br>在純粹的畫布前，主角永遠是你們的「<strong>情感連結</strong>」。</p>
-            </div>
+        {{ layoutSplit(
+            "content/blog/graduation/portfolio-wall/graduation-1.jpg",
+            "畢業照範例 1",
+            "一場反傳統的畢業紀念",
+            "<p>拒絕上一代僵硬微笑的「團拍」。</p><p>我們鼓勵你們在棚內打鬧、大笑、重現黑歷史。<br>在純粹的畫布前，主角永遠是你們的「<strong>情感連結</strong>」。</p>",
+            "right"
+        ) }}
+
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">來自你們的真實心聲</h2>
+
+            {{ testimonialCard(
+                "她是Lin，我最親愛的姊姊...總覺得我們認識的好晚好晚，但換一個角度想很謝謝老天爺讓我們相遇，一起累積很多很多很幸福的回憶。再過兩週以後妳要回家鄉打拼了...未來我們都要好好的生活！",
+                "畢業生真實回饋"
+            ) }}
+            
+            {{ testimonialCard(
+                "在人生最後的求學階段留下紀念，是我送給自己的畢業禮物。兩年的時間不長也不短，慶幸的是，一切好像都在焦慮中順利渡過了。最終，還是想謝謝兩年前的自己...",
+                "畢業生真實回饋"
+            ) }}
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">來自你們的真實心聲</h2>
-
-            <blockquote class="magazine" style="background-color: #ffffff;">
-                <p>「她是Lin，我最親愛的姊姊...
-                總覺得我們認識的好晚好晚，但換一個角度想很謝謝老天爺讓我們相遇，
-                一起累積很多很多很幸福的回憶。
-                再過兩週以後妳要回家鄉打拼了...
-                未來我們都要好好的生活！」</blockquote>
-            </blockquote>
-
-            <blockquote class="magazine" style="background-color: #ffffff; margin-top: 30px;">
-                <p>「在人生最後的求學階段留下紀念，是我送給自己的畢業禮物。
-                兩年的時間不長也不短，慶幸的是，一切好像都在焦慮中順利渡過了。
-                最終，還是想謝謝兩年前的自己...」</blockquote>
-            </blockquote>
-        </div>
-
-        <div class="module">
-            <h2 style="text-align: center;">你們的「黃金歲月」範例</h2>
-            <div class="portfolio-wall-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-1.jpg' | r2img }}" alt="畢業照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-1.jpg' | r2img }}" alt="畢業照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-2.jpg' | r2img }}" alt="畢業照範例 2" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-3.jpg' | r2img }}" alt="畢業照範例 3" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-4.jpg' | r2img }}" alt="畢業照範例 4" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-5.jpg' | r2img }}" alt="畢業照範例 5" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-6.jpg' | r2img }}" alt="畢業照範例 6" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-7.jpg' | r2img }}" alt="畢業照範例 7" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-8.jpg' | r2img }}" alt="畢業照範例 8" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-9.jpg' | r2img }}" alt="畢業照範例 9" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-10.jpg' | r2img }}" alt="畢業照範例 10" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-11.jpg' | r2img }}" alt="畢業照範例 11" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-12.jpg' | r2img }}" alt="畢業照範例 12" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-13.jpg' | r2img }}" alt="畢業照範例 13" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-14.jpg' | r2img }}" alt="畢業照範例 14" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-15.jpg' | r2img }}" alt="畢業照範例 15" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-16.jpg' | r2img }}" alt="畢業照範例 16" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-17.jpg' | r2img }}" alt="畢業照範例 17" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-18.jpg' | r2img }}" alt="畢業照範例 18" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-19.jpg' | r2img }}" alt="畢業照範例 19" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-20.jpg' | r2img }}" alt="畢業照範例 20" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-21.jpg' | r2img }}" alt="畢業照範例 21" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-22.jpg' | r2img }}" alt="畢業照範例 22" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-23.jpg' | r2img }}" alt="畢業照範例 23" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-24.jpg' | r2img }}" alt="畢業照範例 24" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-25.jpg' | r2img }}" alt="畢業照範例 25" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-26.jpg' | r2img }}" alt="畢業照範例 26" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-27.jpg' | r2img }}" alt="畢業照範例 27" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-28.jpg' | r2img }}" alt="畢業照範例 28" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/graduation/portfolio-wall/graduation-29.jpg' | r2img }}" alt="畢業照範例 29" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">你們的「黃金歲月」範例</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {% set images = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22] %}
+                {% for i in images %}
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img 
+                        src="{{ ('content/blog/graduation/portfolio-wall/graduation-' + i + '.jpg') | r2img }}" 
+                        alt="畢業照範例 {{ i }}" 
+                        class="w-full h-auto object-cover" 
+                        loading="lazy" 
+                        decoding="async" 
+                    />
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

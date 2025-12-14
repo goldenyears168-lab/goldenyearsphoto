@@ -1,0 +1,31 @@
+{#
+  Container Macro
+  
+  Creates a standardized container component with max-width and padding.
+  
+  Parameters:
+    - size: 'sm' | 'md' | 'lg' | 'xl' | 'full' (default: 'lg')
+    - class: Additional CSS classes (optional)
+    - content: Container content (HTML string)
+  
+  Usage:
+    {% from "macros/container.njk" import container %}
+    {{ container("lg", "py-16", "<h1>標題</h1><p>內容</p>") }}
+#}
+
+{% macro container(size='lg', class='', content='') %}
+  {% set sizeClasses = {
+    'sm': 'max-w-2xl',
+    'md': 'max-w-4xl',
+    'lg': 'max-w-6xl',
+    'xl': 'max-w-7xl',
+    'full': 'max-w-full'
+  } %}
+  
+  {% set allClasses = ['mx-auto px-4 sm:px-6 lg:px-8', sizeClasses[size], class] | join(' ') | trim %}
+  
+  <div class="{{ allClasses }}">
+    {{ content | safe }}
+  </div>
+{% endmacro %}
+

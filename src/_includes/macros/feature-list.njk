@@ -1,0 +1,32 @@
+{#
+  Feature List Macro
+  
+  Creates a unified feature list component.
+  
+  Parameters:
+    - title: Section title
+    - items: Array of feature items (strings)
+    - variant: 'default' or 'highlight' (optional)
+  
+  Usage:
+    {% from "macros/feature-list.njk" import featureList %}
+    {% set items = ["專業自然精修", "高畫質電子檔", "可校稿兩次"] %}
+    {{ featureList("服務包含", items) }}
+#}
+
+{% macro featureList(title, items, variant='default') %}
+<div class="mb-8">
+    {% if title %}
+    <h4 class="text-xl md:text-2xl font-semibold text-slate-900 mb-4">{{ title }}</h4>
+    {% endif %}
+    <ul class="space-y-3">
+        {% for item in items %}
+        <li class="flex items-start gap-3 text-slate-700">
+            <span class="text-trust-600 mt-1">•</span>
+            <span class="text-base md:text-lg">{{ item }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endmacro %}
+

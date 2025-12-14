@@ -1,0 +1,61 @@
+{#
+  Radio Macro
+  
+  Creates a standardized radio button component.
+  
+  Parameters:
+    - name: Radio name attribute (required, same for all options in a group)
+    - id: Radio id attribute (required, unique for each option)
+    - label: Label text (optional)
+    - value: Radio value (required)
+    - checked: Whether radio is checked (default: false)
+    - required: Whether field is required (default: false)
+    - disabled: Whether field is disabled (default: false)
+    - class: Additional CSS classes (optional)
+    - error: Error message to display (optional)
+    - help: Help text to display (optional)
+  
+  Usage:
+    {% from "macros/radio.njk" import radio %}
+    {{ radio("payment", "payment-card", "信用卡", "card", false, true) }}
+    {{ radio("payment", "payment-cash", "現金", "cash", false, true) }}
+#}
+
+{% macro radio(name, id, label='', value='', checked=false, required=false, disabled=false, class='', error='', help='') %}
+  {% set radioClasses = ['w-4 h-4 text-trust-600 border-sand-200 focus:ring-trust-500 focus:ring-2', class] | join(' ') | trim %}
+  
+  <div class="mb-4">
+    <div class="flex items-start">
+      <input
+        type="radio"
+        name="{{ name }}"
+        id="{{ id }}"
+        value="{{ value }}"
+        {% if checked %}checked{% endif %}
+        {% if required %}required{% endif %}
+        {% if disabled %}disabled{% endif %}
+        class="{{ radioClasses }}"
+        {% if error %}aria-invalid="true" aria-describedby="{{ id }}-error"{% endif %}
+      />
+      {% if label %}
+        <label for="{{ id }}" class="ml-2 text-sm text-trust-900">
+          {{ label }}
+          {% if required %}<span class="text-error">*</span>{% endif %}
+        </label>
+      {% endif %}
+    </div>
+    
+    {% if error %}
+      <p id="{{ id }}-error" class="mt-1 text-sm text-error" role="alert">
+        {{ error }}
+      </p>
+    {% endif %}
+    
+    {% if help and not error %}
+      <p class="mt-1 text-sm text-slate-500">
+        {{ help }}
+      </p>
+    {% endif %}
+  </div>
+{% endmacro %}
+

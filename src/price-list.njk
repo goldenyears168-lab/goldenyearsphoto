@@ -1,183 +1,427 @@
 ---
 layout: "base-layout.njk"
-title: "服務價目表｜好時有影 - 韓式證件照、形象照)"
-pageStyles: |
-  <link rel="stylesheet" href="/assets/css/4-pages/p-price-list.css">
+title: "旅程價目表｜好時有影 - 您的職涯登機證"
 seo:
-  description: "查詢好時有影「韓式證件照」、「專業形象照」、「合照」及「妝髮服務」的完整價格。我們 100% 堅持價格透明，提供 Z 世代最安心的預約體驗。"
+  description: "查詢好時有影「韓式證件照」、「專業形象照」的完整價格。我們將攝影服務轉化為您的職涯登機證，100% 價格透明。"
 ---
 
-<div class="module">
-  <div class="container container-md text-align-center">
-    <h1>服務項目與價目表</h1>
-  </div>
+    <!-- TYPE A: Standard Center Header -->
+    <header class="relative pt-32 pb-16 overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+        <!-- Decorative Stamp (Human Touch) -->
+        <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+            <div>
+                Taipei<br>
+                <span class="font-serif italic text-xs">Est. 2026</span>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <!-- Wayfinding Tag: Refined Serif -->
+            <div class="inline-flex items-center gap-3 mb-6 opacity-80">
+                <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+                <span class="font-hand text-2xl text-trust-900 -mt-1">01</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+                服務價目表
+            </h1>
+            
+            <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+                透明的價格，是信任的起點。<br class="hidden md:block">為您的職涯重要時刻，提供最值得的投資。
+            </p>
+        </div>
+    </header>
+
+    <div class="pt-8 pb-20 px-4 md:px-8 max-w-[1100px] mx-auto relative">
+
+    <!-- Service 1: ID Photo (Ticket Style) -->
+    <div id="id-photo" class="relative mb-16 scroll-mt-32">
+        <!-- Location Marker - Removed for cleaner look -->
+
+        <div class="ticket-card flex flex-col md:flex-row group">
+            <!-- Subtle Dividers -->
+            <div class="ticket-notch top"></div>
+            <div class="ticket-notch bottom"></div>
+            <div class="ticket-split-line"></div>
+
+            <!-- Left: Ticket Body (Info) -->
+            <div class="p-8 md:p-10 md:w-[70%] flex flex-col justify-center relative">
+                <!-- Watermark - Removed for cleaner look -->
+
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="stamp-box">BEST SELLER</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-trust-950">韓式證件照</h3>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-3xl font-bold text-trust-950 tracking-tight">$399</span>
+                    </div>
 </div>
 
-<div class="module module-gray">
-  <div class="container">
-    {# 韓式證件照 #}
-    <div class="card card--service card--split" id="id-photo">
-      <div class="card__body">
-        <h3 class="card__title">韓式證件照</h3>
-        <p class="card__price">
-          優惠 $399 <span class="card__price-unit">/張</span>
-        </p>
+                <p class="text-sm text-slate-500 mb-8 leading-relaxed max-w-lg">
+                    不只是證件照，更是您的第一張通行證。包含專業修圖與現場校稿，確保您在護照或履歷上看起來精神奕奕。
+                </p>
 
-        <h4 class="price-section-title">服務包含</h4>
-        <ul class="price-list price-list--includes">
-          <li class="price-list__item">專業自然精修 (可校稿兩次)</li>
-          <li class="price-list__item">成品為高畫質電子檔</li>
-          <li class="price-list__item">妝髮造型自理</li>
-          <li class="price-list__item">預設白色背景</li>
-          <li class="price-list__item">於一週內交件</li>
-        </ul>
+                <div class="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-x-6 gap-y-6 mb-8">
+                    <div>
+                        <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Included</h4>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>專業自然精修 <span class="text-slate-400 text-xs ml-1">(校稿2次)</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                高畫質電子檔
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                預設白色背景
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Add-ons</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-sm bg-sand-50 px-3 py-2 rounded-lg border border-sand-100">
+                                <span class="text-slate-600">急件處理</span>
+                                <span class="font-bold text-slate-800 text-xs">+$100</span>
+                            </div>
+                            <p class="text-xxs text-slate-400 mt-2 pl-1">* 妝髮請自理</p>
+                        </div>
+                    </div>
+                </div>
 
-        <h4 class="price-section-title">升級選項</h4>
-        <ul class="price-list price-list--upgrades">
-          <li class="price-list__item">急件可於隔日交件+$100</li>
-        </ul>
+                <div class="mt-auto pt-2">
+                    <a href="/booking/" class="btn btn-primary btn-md w-full md:w-auto flex items-center gap-2">
+                        <span>預約時段</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Ticket Stub (Visuals) -->
+            <div class="bg-sand-50 p-6 md:w-[30%] border-t md:border-t-0 md:border-l border-sand-200 flex flex-col">
+                    <div class="mb-4 opacity-50 hidden md:block">
+                    <span class="text-xxs text-slate-400 font-mono tracking-widest">GATE: ID</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 flex-1">
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/ID_Card_Example_1.jpg' | r2img }}" alt="正式證件/大頭照" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/ID_Card_Example_2.jpg' | r2img }}" alt="履歷證件/大頭照" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/ID_Card_Example_3.jpg' | r2img }}" alt="畢業證件" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/ID_Card_Example_4.jpg' | r2img }}" alt="畢業紀念" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
       </div>
 
-      <div class="card__media price-gallery">
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/ID_Card_Example_1.jpg' | r2img }}" alt="正式證件/大頭照" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">正式證件/大頭照</p>
+                <div class="mt-4 flex justify-between items-center text-xxs text-slate-400 font-mono tracking-widest">
+                    <span>GATE: ID</span>
+                    <span>QTY: 1</span>
+                </div>
+            </div>
         </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/ID_Card_Example_2.jpg' | r2img }}" alt="履歷證件/大頭照" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">履歷證件/大頭照</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/ID_Card_Example_3.jpg' | r2img }}" alt="畢業證件" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">畢業證件</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/ID_Card_Example_4.jpg' | r2img }}" alt="畢業紀念" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">畢業紀念</p>
-        </div>
-      </div>
     </div>
 
-    {# 個人形象照 #}
-    <div class="c-card c-card--price c-card--split price-service-card price-service-card--portrait">
-      <div class="c-card__body price-service-card__details">
-        <h3 class="c-card__title price-service-card__title">個人形象照</h3>
-        <p class="c-card__price price-service-card__price">
-          優惠 $999 <span class="c-card__price-unit price-service-card__price-unit">/張</span>
-        </p>
-        <p class="c-card__price-tag c-card__price-tag--student price-service-card__price-tag">
-          持學生證可優惠 $899 /張
-        </p>
+    <!-- Service 2: Professional Portrait -->
+    <div id="portrait" class="relative mb-16 scroll-mt-32">
+        <!-- Location Marker - Removed for cleaner look -->
 
-        <h4 class="price-section-title">服務包含</h4>
-        <ul class="price-list price-list--includes">
-          <li class="price-list__item">專業自然精修 (可校稿兩次)</li>
-          <li class="price-list__item">成品為高畫質電子檔</li>
-          <li class="price-list__item">妝髮造型自理</li>
-          <li class="price-list__item">於一週內交件</li>
-        </ul>
+        <div class="ticket-card flex flex-col md:flex-row group">
+            <div class="ticket-notch top"></div>
+            <div class="ticket-notch bottom"></div>
+            <div class="ticket-split-line"></div>
 
-        <h4 class="price-section-title">升級選項</h4>
-        <ul class="price-list price-list--upgrades">
-          <li class="price-list__item">個人全身照+$200</li>
-          <li class="price-list__item">客製背景（白）+$500</li>
-          <li class="price-list__item">急件可於隔日交件+$100</li>
-        </ul>
-      </div>
+            <div class="p-8 md:p-10 md:w-[70%] flex flex-col justify-center relative">
+                <!-- Watermark - Removed for cleaner look -->
 
-      <div class="card__media price-gallery">
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Portrait_Example_1.jpg' | r2img }}" alt="專業形象" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">專業形象</p>
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="stamp-box border-trust-200 text-trust-600 bg-trust-50/50">CAREER</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-trust-950">個人形象照</h3>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-3xl font-bold text-trust-950 tracking-tight">$999</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="text-xs bg-sand-100 text-slate-600 px-2 py-1 rounded font-medium border border-sand-200">學生證優惠 $899</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-x-6 gap-y-6 mb-8">
+                    <div>
+                        <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Included</h4>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                專業自然精修
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                高畫質電子檔
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                現場動作指導 (Pose Guide)
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Upgrades</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-sm bg-sand-50 px-3 py-2 rounded-lg border border-sand-100">
+                                <span class="text-slate-600">全身照</span>
+                                <span class="font-bold text-slate-800 text-xs">+$200</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm bg-sand-50 px-3 py-2 rounded-lg border border-sand-100">
+                                <span class="text-slate-600">客製背景</span>
+                                <span class="font-bold text-slate-800 text-xs">+$500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-2">
+                    <a href="/booking/" class="btn btn-primary btn-md w-full md:w-auto flex items-center gap-2">
+                        <span>預約時段</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-sand-50 p-6 md:w-[30%] border-t md:border-t-0 md:border-l border-sand-200 flex flex-col">
+                <div class="mb-4 opacity-50 hidden md:block">
+                    <span class="text-xxs text-slate-400 font-mono tracking-widest">GATE: PRO</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3 flex-1">
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/Portrait_Example_1.jpg' | r2img }}" alt="專業形象" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/Portrait_Example_2.jpg' | r2img }}" alt="畢業寫真" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/Portrait_Example_3.jpg' | r2img }}" alt="各式寫真" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/Portrait_Example_4.jpg' | r2img }}" alt="體態寫真" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between items-center text-xxs text-slate-400 font-mono tracking-widest">
+                    <span>GATE: PRO</span>
+                    <span>QTY: 1</span>
+                </div>
+            </div>
         </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Portrait_Example_2.jpg' | r2img }}" alt="畢業寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">畢業寫真</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Portrait_Example_3.jpg' | r2img }}" alt="各式寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">各式寫真</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Portrait_Example_4.jpg' | r2img }}" alt="體態寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">體態寫真</p>
-        </div>
-      </div>
     </div>
 
-    {# 合照 (2-6人) #}
-    <div class="c-card c-card--price c-card--split price-service-card price-service-card--group" id="group-photo">
-      <div class="c-card__body price-service-card__details">
-        <h3 class="c-card__title price-service-card__title">合照 (2-6人)</h3>
-        <p class="c-card__price price-service-card__price">
-          優惠 $1199 <span class="c-card__price-unit price-service-card__price-unit">/張</span>
-        </p>
-        <p class="c-card__price-tag c-card__price-tag--student price-service-card__price-tag">
-          持學生證可優惠 $1099 /張
-        </p>
+    <!-- Service 3: Group Photo -->
+    <div id="group" class="relative mb-16 scroll-mt-32">
+        <!-- Location Marker - Removed for cleaner look -->
 
-        <h4 class="price-section-title">服務包含</h4>
-        <ul class="price-list price-list--includes">
-          <li class="price-list__item">專業自然精修 (可校稿兩次)</li>
-          <li class="price-list__item">成品為高畫質電子檔</li>
-          <li class="price-list__item">妝髮造型自理</li>
-        </ul>
+        <div class="ticket-card flex flex-col md:flex-row group">
+            <div class="ticket-notch top"></div>
+            <div class="ticket-notch bottom"></div>
+            <div class="ticket-split-line"></div>
 
-        <h4 class="price-section-title">升級選項</h4>
-        <ul class="price-list price-list--upgrades">
-          <li class="price-list__item">超過6人，每加一人 +$200</li>
-          <li class="price-list__item">急件可於隔日交件+$100</li>
-        </ul>
+            <div class="p-8 md:p-10 md:w-[70%] flex flex-col justify-center relative">
+                <!-- Watermark - Removed for cleaner look -->
+
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="stamp-box border-slate-200 text-slate-400">TEAM</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-trust-950">合照 (2-6人)</h3>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-3xl font-bold text-trust-950 tracking-tight">$1,199</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="text-xs bg-sand-100 text-slate-600 px-2 py-1 rounded font-medium border border-sand-200">學生證優惠 $1,099</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-x-6 gap-y-6 mb-8">
+                    <div>
+                        <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Included</h4>
+                        <ul class="space-y-2.5">
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                專業自然精修
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                現場動作指導
+                            </li>
+                            <li class="flex items-start gap-2.5 text-sm text-slate-700">
+                                <svg class="w-4 h-4 check-icon mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                適合：情侶、閨蜜、家人
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-3">Group Fare</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-sm bg-sand-50 px-3 py-2 rounded-lg border border-sand-100">
+                                <span class="text-slate-600">第7人起</span>
+                                <span class="font-bold text-slate-800 text-xs">+$200/人</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-2">
+                    <a href="/booking/" class="btn btn-primary btn-md w-full md:w-auto flex items-center gap-2">
+                        <span>預約時段</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
       </div>
 
-      <div class="card__media price-gallery">
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Group_Example_1.jpg' | r2img }}" alt="情侶寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">情侶寫真</p>
+            <div class="bg-sand-50 p-6 md:w-[30%] border-t md:border-t-0 md:border-l border-sand-200 flex flex-col">
+                <div class="mb-4 opacity-50 hidden md:block">
+                    <span class="text-xxs text-slate-400 font-mono tracking-widest">GATE: GRP</span>
+                </div>
+                <div class="grid grid-cols-1 gap-3 h-full">
+                    <div class="grid grid-cols-1 gap-3 h-full">
+                        <div class="rounded-lg overflow-hidden shadow-sm h-32 bg-white border border-sand-100">
+                            <img src="{{ 'content/price-list/Group_Example_1.jpg' | r2img }}" alt="情侶寫真" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 flex-1">
+                            <div class="rounded-lg overflow-hidden shadow-sm aspect-square bg-white border border-sand-100">
+                                <img src="{{ 'content/price-list/Group_Example_2.jpg' | r2img }}" alt="畢業紀念" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                            </div>
+                            <div class="rounded-lg overflow-hidden shadow-sm aspect-square bg-white border border-sand-100">
+                                <img src="{{ 'content/price-list/Group_Example_3.jpg' | r2img }}" alt="親子寫真" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-between items-center text-xxs text-slate-400 font-mono tracking-widest">
+                    <span>GATE: GRP</span>
+                    <span>QTY: 2+</span>
+                </div>
+            </div>
         </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Group_Example_2.jpg' | r2img }}" alt="畢業紀念" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">畢業紀念</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Group_Example_3.jpg' | r2img }}" alt="親子寫真" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">親子寫真</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Group_Example_4.jpg' | r2img }}" alt="寵物合照" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">寵物合照</p>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <!-- Service 4: Makeup (Bento Style) -->
+    <div id="makeup" class="scroll-mt-32 mb-20 relative">
+        <!-- Location Marker - Removed for cleaner look -->
+        
+        <h2 class="text-2xl font-bold text-trust-950 mb-8 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-sand-100 flex items-center justify-center text-sm">✨</span>
+            Pre-Flight Prep: 妝髮服務
+        </h2>
+        
+        <div class="ticket-card flex flex-col md:flex-row group">
+            <!-- Left: List -->
+            <div class="p-8 md:p-10 md:w-[60%] bg-white">
+                <div class="space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-slate-400 w-4">A</span>
+                                <span class="font-medium text-slate-800">女生 基礎日常妝</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-bold text-trust-950">$800</span>
+                                <span class="text-xs text-slate-400 ml-2">30m</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-slate-400 w-4">B</span>
+                                <span class="font-medium text-slate-800">男生 基礎妝髮</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-bold text-trust-950">$600</span>
+                                <span class="text-xs text-slate-400 ml-2">30m</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between bg-trust-50/50 p-3 rounded-lg border border-trust-100">
+                            <div class="flex items-center gap-3">
+                            <span class="text-xs font-bold text-trust-600 w-4">C</span>
+                            <span class="font-bold text-trust-950">女生 韓系精緻妝髮</span>
+                            <span class="text-xxs bg-white text-trust-600 px-1.5 py-0.5 rounded border border-trust-200">POPULAR</span>
+                        </div>
+                            <div class="text-right">
+                                <span class="font-bold text-trust-950">$1,500</span>
+                                <span class="text-xs text-slate-400 ml-2">60m</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-slate-400 w-4">D</span>
+                                <span class="font-medium text-slate-800">男生 韓系精緻妝髮</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-bold text-trust-950">$1,200</span>
+                                <span class="text-xs text-slate-400 ml-2">60m</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-1">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs font-bold text-slate-400 w-4">E</span>
+                                <span class="font-medium text-slate-800">女生 訂製妝髮專案</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-bold text-trust-950">$3,000</span>
+                                <span class="text-xs text-slate-400 ml-2">90m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Visuals -->
+            <div class="bg-sand-50 p-6 md:w-[40%] border-t md:border-t-0 md:border-l border-sand-200">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="relative rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/Makeup_Example_Female.jpg' | r2img }}" alt="女生妝髮" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xxs font-bold text-slate-700 shadow-sm border border-sand-100">Female Style</div>
+                    </div>
+                    <div class="relative rounded-lg overflow-hidden shadow-sm aspect-[3/4] bg-white border border-sand-100">
+                        <img src="{{ 'content/price-list/Makeup_Example_Male.jpg' | r2img }}" alt="男生妝髮" class="w-full h-full object-cover rounded opacity-90 group-hover:opacity-100 transition-opacity" loading="lazy" decoding="async" />
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-2 py-1 rounded text-xxs font-bold text-slate-700 shadow-sm border border-sand-100">Male Grooming</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="module">
-  <div class="container">
-    <h2 class="text-align-center">加購妝髮服務</h2>
-
-    <div class="c-card c-card--makeup c-card--split price-makeup-card">
-      <div class="c-card__body price-makeup-card__details">
-        <h3 class="c-card__title price-makeup-card__title">加購妝髮方案價格</h3>
-        <ul class="price-list price-list--makeup">
-          <li class="price-list__item">A. 女生 基礎日常妝 $800 / 30min</li>
-          <li class="price-list__item">B. 男生 基礎妝髮 $600 / 30min</li>
-          <li class="price-list__item">C. 女生 韓系精緻妝髮 $1500 / 1hr</li>
-          <li class="price-list__item">D. 男生 韓系精緻妝髮 $1200 / 1hr</li>
-          <li class="price-list__item">E. 女生 訂製妝髮專案 $3000 / 1.5hr</li>
-        </ul>
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-sand-200 pt-10 text-center md:text-left">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+            <div class="mb-4 md:mb-0 font-hand text-lg text-slate-400">
+                See you at the top.
+            </div>
+            <div class="flex gap-6 text-xs font-bold uppercase tracking-wider text-slate-400">
+                <a href="/guide/faq/" class="hover:text-slate-800">常見問題</a>
+                <a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer" class="hover:text-slate-800">聯絡我們</a>
+                <a href="/" class="hover:text-slate-800">回到首頁</a>
       </div>
+        </div>
+        <div class="mt-8 text-xxs text-sand-300 text-center font-mono">
+            © 2025 Golden Years Studio. A Ritual for Your Career.
+        </div>
+    </footer>
 
-      <div class="c-card__media price-makeup-card__gallery price-gallery">
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Makeup_Example_Female.jpg' | r2img }}" alt="妝髮服務範例 - 女生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">女生妝髮</p>
-        </div>
-        <div class="price-gallery__item">
-          <img src="{{ 'content/price-list/Makeup_Example_Male.jpg' | r2img }}" alt="妝髮服務範例 - 男生" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-          <p class="price-gallery__caption">男生妝髮</p>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

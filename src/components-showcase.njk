@@ -1,0 +1,212 @@
+---
+layout: base-layout.njk
+title: 元件展示頁面 | Golden Years Photo
+description: 設計系統元件庫展示與測試頁面
+---
+
+{% from "macros/heading.njk" import heading %}
+{% from "macros/container.njk" import container %}
+{% from "macros/button.njk" import button %}
+{% from "macros/card.njk" import card %}
+{% from "macros/badge.njk" import badge %}
+{% from "macros/alert.njk" import alert %}
+{% from "macros/input.njk" import input %}
+{% from "macros/textarea.njk" import textarea %}
+{% from "macros/select.njk" import select %}
+{% from "macros/checkbox.njk" import checkbox %}
+{% from "macros/radio.njk" import radio %}
+{% from "macros/form-group.njk" import formGroup %}
+
+<div class="min-h-screen bg-sand-50 py-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    {{ heading(1, "設計系統元件展示", "4xl", "mb-12 text-center") }}
+    
+    <!-- Buttons Section -->
+    <section class="mb-16">
+      {{ heading(2, "按鈕元件", "3xl", "mb-8") }}
+      
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Primary Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            {{ button("Primary Small", "", "primary", "sm") }}
+            {{ button("Primary Medium", "", "primary", "md") }}
+            {{ button("Primary Large", "", "primary", "lg") }}
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Secondary Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            {{ button("Secondary Small", "", "secondary", "sm") }}
+            {{ button("Secondary Medium", "", "secondary", "md") }}
+            {{ button("Secondary Large", "", "secondary", "lg") }}
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Ghost Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            {{ button("Ghost Small", "", "ghost", "sm") }}
+            {{ button("Ghost Medium", "", "ghost", "md") }}
+            {{ button("Ghost Large", "", "ghost", "lg") }}
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Button with Links</h3>
+          <div class="flex flex-wrap gap-4">
+            {{ button("預約拍攝", "/booking/", "primary", "lg") }}
+            {{ button("了解更多", "/about/", "secondary", "md") }}
+            {{ button("取消", "", "ghost", "sm") }}
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Cards Section -->
+    <section class="mb-16">
+      {{ heading(2, "卡片元件", "3xl", "mb-8") }}
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{ card("default", "", "<h3 class=\"text-xl font-bold mb-2\">Default Card</h3><p class=\"text-slate-600\">這是標準卡片，白色背景，sand-200 邊框</p>") }}
+        {{ card("sand", "", "<h3 class=\"text-xl font-bold mb-2\">Sand Card</h3><p class=\"text-slate-600\">這是沙色背景卡片</p>") }}
+        {{ card("elevated", "", "<h3 class=\"text-xl font-bold mb-2\">Elevated Card</h3><p class=\"text-slate-600\">這是提升卡片，有更明顯的陰影</p>") }}
+        {{ card("bordered", "", "<h3 class=\"text-xl font-bold mb-2\">Bordered Card</h3><p class=\"text-slate-600\">這是強調邊框卡片</p>") }}
+      </div>
+    </section>
+    
+    <!-- Badges Section -->
+    <section class="mb-16">
+      {{ heading(2, "徽章元件", "3xl", "mb-8") }}
+      
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-semibold text-trust-900 mb-3">Sizes</h3>
+          <div class="flex flex-wrap gap-4 items-center">
+            {{ badge("Small", "default", "sm") }}
+            {{ badge("Medium", "default", "md") }}
+            {{ badge("Large", "default", "lg") }}
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold text-trust-900 mb-3">Variants</h3>
+          <div class="flex flex-wrap gap-4">
+            {{ badge("Default", "default", "md") }}
+            {{ badge("Success", "success", "md") }}
+            {{ badge("Warning", "warning", "md") }}
+            {{ badge("Error", "error", "md") }}
+            {{ badge("Info", "info", "md") }}
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Alerts Section -->
+    <section class="mb-16">
+      {{ heading(2, "提示元件", "3xl", "mb-8") }}
+      
+      <div class="space-y-4">
+        {{ alert("info", "資訊", "這是一條資訊提示，用於提供一般資訊", false) }}
+        {{ alert("success", "成功", "操作已成功完成！", false) }}
+        {{ alert("warning", "警告", "請注意這個警告訊息", false) }}
+        {{ alert("error", "錯誤", "發生了一個錯誤，請檢查您的輸入", true) }}
+      </div>
+    </section>
+    
+    <!-- Form Elements Section -->
+    <section class="mb-16">
+      {{ heading(2, "表單元件", "3xl", "mb-8") }}
+      
+      <div class="bento-card bento-card-default p-8">
+        <form class="space-y-6">
+          <fieldset class="mb-6">
+            <legend class="block text-sm font-medium text-trust-900 mb-4">個人資訊</legend>
+            <div class="space-y-4">
+              {{ input("name", "showcase-name", "姓名", "請輸入您的姓名", "", true) }}
+              {{ input("email", "showcase-email", "電子郵件", "example@email.com", "", true) }}
+            </div>
+          </fieldset>
+          
+          {% set serviceOptions = [
+            {'value': '', 'text': '請選擇服務', 'selected': true},
+            {'value': 'portrait', 'text': '個人寫真', 'selected': false},
+            {'value': 'id-photo', 'text': '證件照', 'selected': false},
+            {'value': 'group-photo', 'text': '團體照', 'selected': false}
+          ] %}
+          {{ select("service", "showcase-service", "服務類型", serviceOptions, true) }}
+          
+          {{ textarea("message", "showcase-message", "訊息", "請輸入您的需求", "", 5, false) }}
+          
+          <fieldset class="mb-6">
+            <legend class="block text-sm font-medium text-trust-900 mb-4">付款方式 <span class="text-error">*</span></legend>
+            <div class="space-y-3">
+              {{ radio("payment", "payment-card", "信用卡", "card", false, true) }}
+              {{ radio("payment", "payment-cash", "現金", "cash", false, true) }}
+              {{ radio("payment", "payment-transfer", "轉帳", "transfer", false, true) }}
+            </div>
+          </fieldset>
+          
+          {{ checkbox("agree", "showcase-agree", "我同意條款與隱私政策", "yes", false, true) }}
+          
+          <div class="flex gap-4">
+            {{ button("提交", "", "primary", "lg", "", "submit") }}
+            {{ button("取消", "", "secondary", "lg") }}
+          </div>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Layout Components Section -->
+    <section class="mb-16">
+      {{ heading(2, "布局元件", "3xl", "mb-8") }}
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Grid Layout</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bento-card bento-card-default p-4 text-center">項目 1</div>
+            <div class="bento-card bento-card-default p-4 text-center">項目 2</div>
+            <div class="bento-card bento-card-default p-4 text-center">項目 3</div>
+            <div class="bento-card bento-card-default p-4 text-center">項目 4</div>
+            <div class="bento-card bento-card-default p-4 text-center">項目 5</div>
+            <div class="bento-card bento-card-default p-4 text-center">項目 6</div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Stack Layout</h3>
+          <div class="flex flex-col space-y-4">
+            <div class="bento-card bento-card-default p-4">堆疊項目 1</div>
+            <div class="bento-card bento-card-default p-4">堆疊項目 2</div>
+            <div class="bento-card bento-card-default p-4">堆疊項目 3</div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-trust-900 mb-4">Flex Layout</h3>
+          <div class="flex flex-row justify-between items-center gap-4">
+            <div class="bento-card bento-card-default p-4">Flex 項目 1</div>
+            <div class="bento-card bento-card-default p-4">Flex 項目 2</div>
+            <div class="bento-card bento-card-default p-4">Flex 項目 3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Headings Section -->
+    <section class="mb-16">
+      {{ heading(2, "標題元件", "3xl", "mb-8") }}
+      
+      <div class="space-y-4">
+        {{ heading(1, "Heading 1 (H1)", "", "mb-2") }}
+        {{ heading(2, "Heading 2 (H2)", "", "mb-2") }}
+        {{ heading(3, "Heading 3 (H3)", "", "mb-2") }}
+        {{ heading(4, "Heading 4 (H4)", "", "mb-2") }}
+        {{ heading(5, "Heading 5 (H5)", "", "mb-2") }}
+        {{ heading(6, "Heading 6 (H6)", "", "mb-2") }}
+      </div>
+    </section>
+  </div>
+</div>

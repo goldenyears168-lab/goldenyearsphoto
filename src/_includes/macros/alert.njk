@@ -1,0 +1,53 @@
+{#
+  Alert Macro
+  
+  Creates a standardized alert/notification component.
+  
+  Parameters:
+    - variant: 'info' | 'success' | 'warning' | 'error' (default: 'info')
+    - title: Alert title (optional)
+    - message: Alert message
+    - dismissible: Whether alert can be dismissed (default: false)
+    - class: Additional CSS classes (optional)
+  
+  Usage:
+    {% from "macros/alert.njk" import alert %}
+    {{ alert("success", "成功", "操作已成功完成", false, "mb-4") }}
+    {{ alert("error", "錯誤", "請檢查您的輸入", true) }}
+#}
+
+{% macro alert(variant='info', title='', message='', dismissible=false, class='') %}
+  {% set variantClasses = {
+    'info': 'bg-trust-50 border-trust-200 text-trust-800',
+    'success': 'bg-green-50 border-green-200 text-green-800',
+    'warning': 'bg-yellow-50 border-yellow-200 text-yellow-800',
+    'error': 'bg-red-50 border-red-200 text-red-800'
+  } %}
+  
+  {% set iconClasses = {
+    'info': 'ℹ️',
+    'success': '✓',
+    'warning': '⚠',
+    'error': '✕'
+  } %}
+  
+  {% set allClasses = ['border rounded-lg p-4', variantClasses[variant], class] | join(' ') | trim %}
+  
+  <div class="{{ allClasses }}" role="alert">
+    <div class="flex items-start">
+      <span class="mr-3 text-lg">{{ iconClasses[variant] }}</span>
+      <div class="flex-1">
+        {% if title %}
+          <h4 class="font-semibold mb-1">{{ title }}</h4>
+        {% endif %}
+        <p class="text-sm">{{ message }}</p>
+      </div>
+      {% if dismissible %}
+        <button type="button" class="ml-4 text-current opacity-50 hover:opacity-100" aria-label="關閉">
+          ×
+        </button>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+

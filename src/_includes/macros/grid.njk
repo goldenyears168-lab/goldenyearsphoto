@@ -1,0 +1,41 @@
+{#
+  Grid Macro
+  
+  Creates a standardized grid layout component.
+  
+  Parameters:
+    - cols: Number of columns (default: 1, can be '1' | '2' | '3' | '4' | 'auto')
+    - gap: Gap size (default: '4', can be '0' | '2' | '4' | '6' | '8')
+    - responsive: Responsive breakpoints (optional, e.g. 'md:grid-cols-2 lg:grid-cols-3')
+    - class: Additional CSS classes (optional)
+    - content: Grid items content (HTML string)
+  
+  Usage:
+    {% from "macros/grid.njk" import grid %}
+    {{ grid("3", "6", "md:grid-cols-2 lg:grid-cols-3", "", "<div>項目 1</div><div>項目 2</div><div>項目 3</div>") }}
+#}
+
+{% macro grid(cols='1', gap='4', responsive='', class='', content='') %}
+  {% set colsClasses = {
+    '1': 'grid-cols-1',
+    '2': 'grid-cols-2',
+    '3': 'grid-cols-3',
+    '4': 'grid-cols-4',
+    'auto': 'grid-cols-auto'
+  } %}
+  
+  {% set gapClasses = {
+    '0': 'gap-0',
+    '2': 'gap-2',
+    '4': 'gap-4',
+    '6': 'gap-6',
+    '8': 'gap-8'
+  } %}
+  
+  {% set allClasses = ['grid', colsClasses[cols], gapClasses[gap], responsive, class] | join(' ') | trim %}
+  
+  <div class="{{ allClasses }}">
+    {{ content | safe }}
+  </div>
+{% endmacro %}
+

@@ -6,69 +6,97 @@ seo:
   keywords: "寵物寫真, 寵物攝影, 毛小孩, 寵物照, 好時有影"
 ---
 
-<div class="module module-dark page-hero">
-  <div class="container">
-    <h1>把陪伴<br>變成可以永遠保存的模樣</h1>
-  </div>
-</div>
+{% from "macros/layout-split.njk" import layoutSplit %}
 
-<div class="module">
-  <div class="container" style="max-width: 900px;">
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
 
-    <div class="content-intro">
-      <p>牠陪著你走過許多時刻——<br>
-      早晨醒來的第一個伸懶腰、你疲累時的默默靠近、<br>
-      回家時那份毫不保留的開心。</p>
-      <p>或許你沒有多想，但這些畫面，都構成了你生命中最柔軟的部分。</p>
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
     </div>
 
-    <div class="layout-split image-right">
-      <div class="layout-split-image">
-        <img src="{{ 'content/blog/pet/pet-9.jpg' | r2img }}" alt="寵物寫真範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-      </div>
-      <div class="layout-split-text">
-        <h2>棚拍：最溫柔的保存</h2>
-        <p><strong>寵物的時間總是走得快，<br>而照片，是我們能替牠做的最溫柔的保存。</strong></p>
-        <p>棚拍能讓牠在安定舒適的環境中展現真實的性格：
-        安靜、膽小、活潑、黏人——沒有嘈雜聲、沒有陌生干擾，
-        只留下牠最放鬆、最自然的神情。</p>
-        <p>我們會捕捉牠看著你的眼神、趴在你腿上的姿勢、
-        以及你們之間不需言語的依靠。</p>
-      </div>
-    </div>
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">11</span>
+        </div>
 
-    <div class="module">
-      <h2 style="text-align: center;">帶回牠跳動的存在</h2>
-      <p style="text-align: center; max-width: 700px; margin-inline: auto;">一組照片，能在未來的日子裡，帶回牠曾經在你生命裡跳動的存在。
-      不是奢侈，而是替這段陪伴留下重量。</p>
-      
-      <div class="content-image-grid">
-        <div class="grid-image">
-          <img src="{{ 'content/blog/pet/pet-6.jpg' | r2img }}" alt="寵物寫真範例 2" sizes="300px" loading="lazy" decoding="async" class="" />
-        </div>
-        <div class="grid-image">
-          <img src="{{ 'content/blog/pet/pet-7.jpg' | r2img }}" alt="寵物寫真範例 3" sizes="300px" loading="lazy" decoding="async" class="" />
-        </div>
-        <div class="grid-image">
-          <img src="{{ 'content/blog/pet/pet-8.jpg' | r2img }}" alt="寵物寫真範例 4" sizes="300px" loading="lazy" decoding="async" class="" />
-        </div>
-      </div>
-    </div>
-
-    <div class="module module-dark" style="text-align: center;">
-      <div class="container container-md">
-        <h2>預約這段溫柔的陪伴</h2>
-        <p>為這段獨一無二的柔軟時光，留下最真實的紀錄。<br>我們的「合照」方案 100% 透明，預約流程 100% 簡單。</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            把陪伴<br class="hidden md:block">變成可以永遠保存的模樣
+        </h1>
         
-        <div class="layout-split" style="grid-template-columns: repeat(2, 1fr); gap: 20px; justify-content: center; margin-top: 20px;">
-          <a href="/price-list/" class="button button-secondary">
-            查看 $1199 合照方案
-          </a>
-          <a href="/booking.njk" class="button button-primary">
-            🟡 立即預約
-          </a>
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            寵物寫真 - 把陪伴變成永遠的模樣
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#group-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4 leading-relaxed">
+                牠陪著你走過許多時刻——<br>
+      早晨醒來的第一個伸懶腰、你疲累時的默默靠近、<br>
+                回家時那份毫不保留的開心。
+            </p>
+            <p class="text-lg md:text-xl text-slate-600">
+                或許你沒有多想，但這些畫面，都構成了你生命中最柔軟的部分。
+            </p>
+    </div>
+
+        {{ layoutSplit(
+            "content/blog/pet/pet-9.jpg",
+            "寵物寫真範例 1",
+            "棚拍：最溫柔的保存",
+            "<p><strong>寵物的時間總是走得快，<br>而照片，是我們能替牠做的最溫柔的保存。</strong></p><p>棚拍能讓牠在安定舒適的環境中展現真實的性格：安靜、膽小、活潑、黏人——沒有嘈雜聲、沒有陌生干擾，只留下牠最放鬆、最自然的神情。</p><p>我們會捕捉牠看著你的眼神、趴在你腿上的姿勢、以及你們之間不需言語的依靠。</p>",
+            "right"
+        ) }}
+
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">帶回牠跳動的存在</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
+                一組照片，能在未來的日子裡，帶回牠曾經在你生命裡跳動的存在。
+                不是奢侈，而是替這段陪伴留下重量。
+            </p>
+      
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {% set images = [6, 7, 8, 1, 2, 3] %}
+                {% for i in images %}
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img 
+                        src="{{ ('content/blog/pet/pet-' + i + '.jpg') | r2img }}" 
+                        alt="寵物寫真範例 {{ i }}" 
+                        class="w-full h-auto object-cover" 
+                        loading="lazy" 
+                        decoding="async" 
+                    />
+        </div>
+                {% endfor %}
+        </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

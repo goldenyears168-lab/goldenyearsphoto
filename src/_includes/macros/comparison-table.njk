@@ -1,0 +1,44 @@
+{#
+  Comparison Table Macro
+  
+  Creates a unified comparison table.
+  
+  Parameters:
+    - title: Table title
+    - items: Array of comparison items {'label': '項目', 'optionA': '選項A', 'optionB': '選項B'}
+  
+  Usage:
+    {% from "macros/comparison-table.njk" import comparisonTable %}
+    {% set items = [
+        {'label': '風格', 'optionA': '正式、嚴肅', 'optionB': '自然、自信'},
+        {'label': '修圖', 'optionA': '過度磨皮', 'optionB': '自然精修'}
+    ] %}
+    {{ comparisonTable("韓式證件照 vs 傳統證件照", items) }}
+#}
+
+{% macro comparisonTable(title, items) %}
+<div class="mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">{{ title }}</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm">
+            <thead>
+                <tr class="bg-slate-100">
+                    <th class="px-6 py-4 text-left font-bold text-slate-900 border-b border-slate-200">項目</th>
+                    <th class="px-6 py-4 text-left font-bold text-slate-900 border-b border-slate-200">選項 A</th>
+                    <th class="px-6 py-4 text-left font-bold text-slate-900 border-b border-slate-200">選項 B</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="border-b border-slate-200 hover:bg-slate-50 transition-colors {% if loop.index % 2 == 0 %}bg-slate-50/50{% endif %}">
+                    <td class="px-6 py-4 font-semibold text-slate-700">{{ item.label }}</td>
+                    <td class="px-6 py-4 text-slate-600">{{ item.optionA }}</td>
+                    <td class="px-6 py-4 text-slate-600">{{ item.optionB }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endmacro %}
+

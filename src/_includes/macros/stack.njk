@@ -1,0 +1,39 @@
+{#
+  Stack Macro
+  
+  Creates a standardized vertical stack layout component.
+  
+  Parameters:
+    - gap: Gap size (default: '4', can be '0' | '2' | '4' | '6' | '8')
+    - align: Alignment (default: 'stretch', can be 'start' | 'center' | 'end' | 'stretch')
+    - class: Additional CSS classes (optional)
+    - content: Stack items content (HTML string)
+  
+  Usage:
+    {% from "macros/stack.njk" import stack %}
+    {{ stack("6", "stretch", "", "<div>項目 1</div><div>項目 2</div>") }}
+#}
+
+{% macro stack(gap='4', align='stretch', class='', content='') %}
+  {% set gapClasses = {
+    '0': 'space-y-0',
+    '2': 'space-y-2',
+    '4': 'space-y-4',
+    '6': 'space-y-6',
+    '8': 'space-y-8'
+  } %}
+  
+  {% set alignClasses = {
+    'start': 'items-start',
+    'center': 'items-center',
+    'end': 'items-end',
+    'stretch': 'items-stretch'
+  } %}
+  
+  {% set allClasses = ['flex flex-col', gapClasses[gap], alignClasses[align], class] | join(' ') | trim %}
+  
+  <div class="{{ allClasses }}">
+    {{ content | safe }}
+  </div>
+{% endmacro %}
+

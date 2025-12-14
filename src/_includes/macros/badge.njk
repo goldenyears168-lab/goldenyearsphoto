@@ -1,0 +1,39 @@
+{#
+  Badge Macro
+  
+  Creates a standardized badge/tag component.
+  
+  Parameters:
+    - text: Badge text
+    - variant: 'default' | 'success' | 'warning' | 'error' | 'info' (default: 'default')
+    - size: 'sm' | 'md' | 'lg' (default: 'md')
+    - class: Additional CSS classes (optional)
+  
+  Usage:
+    {% from "macros/badge.njk" import badge %}
+    {{ badge("新功能", "success", "sm") }}
+    {{ badge("即將推出", "warning", "md") }}
+#}
+
+{% macro badge(text, variant='default', size='md', class='') %}
+  {% set variantClasses = {
+    'default': 'bg-sand-100 text-trust-900',
+    'success': 'bg-green-100 text-green-800',
+    'warning': 'bg-yellow-100 text-yellow-800',
+    'error': 'bg-red-100 text-red-800',
+    'info': 'bg-trust-100 text-trust-800'
+  } %}
+  
+  {% set sizeClasses = {
+    'sm': 'text-xs px-2 py-1',
+    'md': 'text-sm px-3 py-1.5',
+    'lg': 'text-base px-4 py-2'
+  } %}
+  
+  {% set allClasses = ['inline-flex items-center rounded-full font-medium', variantClasses[variant], sizeClasses[size], class] | join(' ') | trim %}
+  
+  <span class="{{ allClasses }}">
+    {{ text }}
+  </span>
+{% endmacro %}
+

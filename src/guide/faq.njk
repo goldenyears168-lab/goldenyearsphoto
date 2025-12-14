@@ -2,121 +2,336 @@
 layout: "base-layout.njk"
 title: "常見問題（FAQ）｜好時有影"
 pageType: "qa"
-pageStyles: |
-  <link rel="stylesheet" href="/assets/css/main.css">
 seo:
   description: "預約、拍攝、修圖、取件等常見問題一次看懂。"
 permalink: "/guide/faq/"
 ---
 
-<section class="faq-page">
-  <div class="container container-md">
-    <header class="faq-hero-chatbot">
-      <h1>有任何問題？直接問我！</h1>
-      <p class="lead">我是好時有影的 AI 顧問，可以幫您解答預約、價格、流程等各種問題。</p>
-    </header>
+<style>
+    /* FAQ Page Specific Styles */
+    .faq-hero {
+        position: relative;
+    }
+    
+    .faq-hero::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70vw;
+        height: 300px;
+        background: linear-gradient(135deg, #F0F4FF 0%, #FDFBF7 60%, #F0F4FF 100%); /* trust-50 to sand-50 to trust-50 */
+        border-radius: 9999px;
+        filter: blur(80px);
+        opacity: 0.6;
+        z-index: -1;
+        pointer-events: none;
+    }
 
-    {# Chatbot 內嵌顯示區域 #}
-    <div id="faq-chatbot-container" class="faq-chatbot-container"></div>
+    /* Bento Card Styles */
+    .bento-card {
+        background-color: white;
+        border: 1px solid #E2DCD3; /* sand-200 */
+        border-radius: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        overflow: hidden;
+    }
 
-    <div class="faq-fallback">
-      <details>
-        <summary>展開查看常見問題快速參考</summary>
-        <div class="faq-content">
-          <section id="booking" class="faq-category" aria-labelledby="booking-title">
-            <h2 id="booking-title">預約與費用</h2>
+    /* FAQ Item Styling */
+    details.faq-item {
+        background-color: #FDFBF7; /* sand-50 */
+        border: 1px solid #E2DCD3; /* sand-200 */ /* sand-200 */
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    
+    details.faq-item:hover {
+        border-color: #1E3A8A; /* trust-800 - Design System */
+        background-color: #FFF;
+    }
 
-            <details class="faq-item">
-              <summary class="faq-q">請問拍攝費用是多少錢？</summary>
-              <div class="faq-a">
-                <p>完整價目表請
-                  <a href="/price-list/">點此查看完整價目表</a>。</p>
-              </div>
-            </details>
+    details.faq-item[open] {
+        background-color: #FFF;
+        border-color: #0F172A; /* trust-900 - Design System (Focus State) */
+        box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+    }
 
-            <details class="faq-item">
-              <summary class="faq-q">如何知道自己預約成功？</summary>
-              <div class="faq-a">
-                <p>收到預約確認信即代表預約成功。</p>
-              </div>
-            </details>
+    summary {
+        list-style: none;
+    }
+    summary::-webkit-details-marker {
+        display: none;
+    }
 
-            <details class="faq-item">
-              <summary class="faq-q">要如何取消預約、改期或更改服務項目？</summary>
-              <div class="faq-a">
-                <p>請在原本的預約確認信中點擊取消連結，取消後再重新預約即可。</p>
-              </div>
-            </details>
-          </section>
+    /* Animation for content */
+    details[open] summary ~ .faq-content {
+        animation: slideDown 0.3s ease-in-out forwards;
+    }
 
-          <section id="shooting" class="faq-category" aria-labelledby="shooting-title">
-            <h2 id="shooting-title">拍攝與造型</h2>
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-            <details class="faq-item">
-              <summary class="faq-q">可以同時拍形象照、學士服與證件照嗎？</summary>
-              <div class="faq-a">
-                <p>一個時段最多拍攝一套衣服形象照＋一套衣服證件照。如需兩套以上形象照請預約兩個時段。</p>
-              </div>
-            </details>
+    /* Chatbot Placeholder */
+    .chatbot-placeholder {
+        background: linear-gradient(135deg, #fff 0%, #F8FAFC 100%);
+        border: 2px dashed #C7D2FE; /* trust-200 - Design System */
+        border-radius: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        color: #1E3A8A; /* trust-800 - Design System */
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    .chatbot-placeholder:hover {
+        border-color: #1E3A8A; /* trust-800 - Design System */
+        color: #020617; /* trust-950 - Design System */
+        background-color: #F0F4FF; /* trust-50 - Design System */
+    }
+</style>
 
-            <details class="faq-item">
-              <summary class="faq-q">面對鏡頭會尷尬，怎麼辦？</summary>
-              <div class="faq-a">
-                <p>放心交給我們！攝影師會引導姿勢與表情，讓拍攝自然好看。</p>
-              </div>
-            </details>
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
 
-            <details class="faq-item">
-              <summary class="faq-q">擔心拍攝過程動作生硬不自然，如何解決？</summary>
-              <div class="faq-a">
-                <p>可先參考作品集找幾個適合自己的 Pose；拍攝時攝影師也會引導合適的動作與表情。</p>
-              </div>
-            </details>
-          </section>
-
-          <section id="retouch" class="faq-category" aria-labelledby="retouch-title">
-            <h2 id="retouch-title">修圖與交件</h2>
-
-            <details class="faq-item">
-              <summary class="faq-q">拍攝完成後如何交件、何時交件？</summary>
-              <div class="faq-a">
-                <p>修圖完成後寄到您預留信箱；一般情況一週內寄出。急件可＋100 元/張，該張於隔日 18:00 前寄出。</p>
-                <p>不提供拍攝當日修圖寄出、或先寄未修檔案。</p>
-              </div>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-q">會提供所有原始檔嗎？</summary>
-              <div class="faq-a">
-                <p>不提供原始檔與實體輸出，只提供 JPG 電子檔；亦不提供購買之外的其他原始檔。</p>
-              </div>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-q">修圖範圍包含哪些？</summary>
-              <div class="faq-a">
-                <p>精緻修圖包含：瑕疵移除、五官與髮型細節、紋路淡化與身形微調、背景瑕疵去除。</p>
-                <p><strong>不包含：</strong>格紋衣服皺摺、眼鏡反光、物件置換、改背景色、髮色補染、五官合成、灰底去背等。</p>
-              </div>
-            </details>
-          </section>
-
-          <section id="rights" class="faq-category" aria-labelledby="rights-title">
-            <h2 id="rights-title">授權與作品</h2>
-
-            <details class="faq-item">
-              <summary class="faq-q">照片會被放到作品集嗎？</summary>
-              <div class="faq-a">
-                <p>只有經您書面同意授權公開使用的照片，才可能放入作品集或社群。</p>
-              </div>
-            </details>
-          </section>
-
-          <footer class="faq-cta">
-            <p>還有其他問題嗎？<a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer">點此透過 IG 詢問我們<span class="sr-only">（另開新視窗）</span></a></p>
-          </footer>
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
         </div>
-      </details>
     </div>
-  </div>
-</section>
+
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">02</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            有任何問題？<br class="hidden md:block">直接問我！
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed">
+            我是好時有影的 AI 顧問，可以幫您解答預約、價格、流程等各種問題。
+        </p>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-8 md:py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+
+        {# Chatbot 內嵌顯示區域 #}
+        <div id="faq-chatbot-container" class="mb-12">
+            <!-- Placeholder for Chatbot Integration -->
+            <div class="chatbot-placeholder">
+                <div class="text-center">
+                    <svg class="w-8 h-8 mx-auto mb-3 opacity-60 text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                    <span>AI Consultant Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Content Wrapper -->
+        <div class="bento-card p-8 md:p-12 relative">
+            <!-- Decorative Element -->
+            <div class="absolute top-0 right-0 p-6 opacity-5 pointer-events-none text-trust-900">
+                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+            </div>
+
+            <!-- FAQ Section: Booking & Fees -->
+            <section id="booking" aria-labelledby="booking-title" class="mb-12 relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-8 rounded-full bg-trust-50 flex items-center justify-center text-trust-800 font-serif italic border border-trust-200">1</span>
+                    <h2 id="booking-title" class="text-2xl md:text-3xl font-bold text-trust-950">預約與費用</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>請問拍攝費用是多少錢？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>完整價目表請 <a href="/price-list/" class="text-trust-800 hover:text-trust-900 font-bold underline decoration-2 underline-offset-2">點此查看完整價目表</a>。</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>如何知道自己預約成功？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>收到預約確認信即代表預約成功。</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>要如何取消預約、改期或更改服務項目？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>請在原本的預約確認信中點擊取消連結，取消後再重新預約即可。</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- FAQ Section: Shooting & Styling -->
+            <section id="shooting" aria-labelledby="shooting-title" class="mb-12 relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-8 rounded-full bg-trust-50 flex items-center justify-center text-trust-800 font-serif italic border border-trust-200">2</span>
+                    <h2 id="shooting-title" class="text-2xl md:text-3xl font-bold text-trust-950">拍攝與造型</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>可以同時拍形象照、學士服與證件照嗎？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>一個時段最多拍攝一套衣服形象照＋一套衣服證件照。如需兩套以上形象照請預約兩個時段。</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>面對鏡頭會尷尬，怎麼辦？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>放心交給我們！攝影師會引導姿勢與表情，讓拍攝自然好看。</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>擔心拍攝過程動作生硬不自然，如何解決？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>可先參考作品集找幾個適合自己的 Pose；拍攝時攝影師也會引導合適的動作與表情。</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- FAQ Section: Retouch & Delivery -->
+            <section id="retouch" aria-labelledby="retouch-title" class="mb-12 relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-8 rounded-full bg-trust-50 flex items-center justify-center text-trust-800 font-serif italic border border-trust-200">3</span>
+                    <h2 id="retouch-title" class="text-2xl md:text-3xl font-bold text-trust-950">修圖與交件</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>拍攝完成後如何交件、何時交件？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm space-y-2">
+                            <p>修圖完成後寄到您預留信箱；一般情況一週內寄出。急件可＋100 元/張，該張於隔日 18:00 前寄出。</p>
+                            <p>不提供拍攝當日修圖寄出、或先寄未修檔案。</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>會提供所有原始檔嗎？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>不提供原始檔與實體輸出，只提供 JPG 電子檔；亦不提供購買之外的其他原始檔。</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>修圖範圍包含哪些？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm space-y-2">
+                            <p>精緻修圖包含：瑕疵移除、五官與髮型細節、紋路淡化與身形微調、背景瑕疵去除。</p>
+                            <p><strong>不包含：</strong>格紋衣服皺摺、眼鏡反光、物件置換、改背景色、髮色補染、五官合成、灰底去背等。</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- FAQ Section: Rights -->
+            <section id="rights" aria-labelledby="rights-title" class="mb-0 relative z-10">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-8 h-8 rounded-full bg-trust-50 flex items-center justify-center text-trust-800 font-serif italic border border-trust-200">4</span>
+                    <h2 id="rights-title" class="text-2xl md:text-3xl font-bold text-trust-950">授權與作品</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="faq-item group">
+                        <summary class="cursor-pointer p-6 font-bold text-slate-800 flex items-center justify-between hover:text-trust-800 transition-colors">
+                            <span>照片會被放到作品集嗎？</span>
+                            <span class="bg-white rounded-full p-1 border border-sand-200 group-open:rotate-180 transition-transform duration-300 group-open:border-trust-800 group-open:text-trust-800">
+                                <svg class="w-4 h-4 text-slate-400 group-open:text-trust-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content px-6 pb-6 pt-0 text-slate-600 leading-relaxed text-sm">
+                            <p>只有經您書面同意授權公開使用的照片，才可能放入作品集或社群。</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer Call to Action -->
+        <footer class="text-center mt-12">
+            <p class="text-lg text-slate-600 mb-4">
+                還有其他問題嗎？
+            </p>
+            <a href="https://www.instagram.com/goldenyears_studio/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-trust-800 hover:text-trust-900 font-bold border-b-2 border-trust-200 hover:border-trust-800 transition-all pb-0.5">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                點此透過 IG 詢問我們<span class="visually-hidden">（另開新視窗）</span>
+            </a>
+        </footer>
+    </div>
+</div>

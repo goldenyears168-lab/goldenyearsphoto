@@ -1,0 +1,26 @@
+{#
+  Card Macro
+  
+  Creates a standardized card component with variants.
+  
+  Parameters:
+    - variant: 'default' | 'sand' | 'elevated' | 'bordered' (default: 'default')
+    - class: Additional CSS classes (optional)
+    - content: Card content (HTML string)
+  
+  Usage:
+    {% from "macros/card.njk" import card %}
+    {{ card("default", "", "<h3>標題</h3><p>內容</p>") }}
+    {{ card("sand", "mb-6", "<h3>沙色卡片</h3>") }}
+#}
+
+{% macro card(variant='default', class='', content='') %}
+  {% set baseClasses = 'bento-card' %}
+  {% set variantClass = 'bento-card-' + variant %}
+  {% set allClasses = [baseClasses, variantClass, class] | join(' ') | trim %}
+  
+  <div class="{{ allClasses }}">
+    {{ content | safe }}
+  </div>
+{% endmacro %}
+

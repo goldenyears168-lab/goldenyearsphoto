@@ -1,0 +1,44 @@
+{#
+  Hero Section Macro
+  
+  Creates a unified hero section for service pages.
+  
+  Parameters:
+    - title: Main heading text
+    - subtitle: Subtitle text (optional)
+    - description: Description text (optional)
+    - ctaPrimary: Primary CTA text and link
+    - ctaSecondary: Secondary CTA text and link (optional)
+    - variant: 'dark' or 'light' (default: 'dark')
+  
+  Usage:
+    {% from "macros/hero-section.njk" import heroSection %}
+    {% set cta1 = {'text': '立即預約拍攝', 'url': '/booking/'} %}
+    {% set cta2 = {'text': '查看價目表', 'url': '/price-list/'} %}
+    {{ heroSection("台北專業形象照推薦", "打造職場第一印象", "證件照可以用工具生成...", cta1, cta2) }}
+#}
+
+{% macro heroSection(title, subtitle='', description='', ctaPrimary, ctaSecondary=null, variant='dark') %}
+<div class="module module-dark page-hero">
+    <div class="container mx-auto px-4 py-16 md:py-24 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">{{ title }}</h1>
+        {% if subtitle %}
+        <p class="text-xl md:text-2xl text-white/90 mb-4 max-w-3xl mx-auto">{{ subtitle }}</p>
+        {% endif %}
+        {% if description %}
+        <p class="text-lg md:text-xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">{{ description }}</p>
+        {% endif %}
+        <div class="flex flex-wrap gap-4 justify-center mt-8">
+            <a href="{{ ctaPrimary.url }}" class="btn btn-primary btn-lg">
+                {{ ctaPrimary.text }}
+            </a>
+            {% if ctaSecondary %}
+            <a href="{{ ctaSecondary.url }}" class="btn btn-secondary text-base md:text-lg px-8 py-4">
+                {{ ctaSecondary.text }}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endmacro %}
+

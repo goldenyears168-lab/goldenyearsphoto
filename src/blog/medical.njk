@@ -6,69 +6,97 @@ seo:
   keywords: "醫師袍形象照, 醫師形象照, 專業形象照, 醫生履歷照, 醫師 profile, 好時有影"
 ---
 
-<div class="module module-dark page-hero">
-  <div class="container">
-    <h1>在專業之外<br>呈現你的溫度與信任感</h1>
-  </div>
-</div>
+{% from "macros/layout-split.njk" import layoutSplit %}
 
-<div class="module">
-  <div class="container" style="max-width: 900px;">
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
 
-    <div class="content-intro">
-      <p>白袍代表的不只是身分，更是一份被賦予的信任。</p>
-      <p>在病人尚未見到你之前，形象照往往是他們接收的第一個訊息。
-      你的神情、姿態與氣質，能讓他們感到安心，也能建立初步的信任。</p>
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
     </div>
 
-    <div class="layout-split image-right">
-      <div class="layout-split-image">
-        <img src="{{ 'content/blog/medical/medical-9.jpg' | r2img }}" alt="醫師袍形象照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-      </div>
-      <div class="layout-split-text">
-        <h2>沉穩、清晰、真實</h2>
-        <p><strong>專業的醫師形象照，不需要浮誇，
-        而是以沉穩、清晰與真實為主。</strong></p>
-        <p>棚拍提供一致的光線、乾淨的背景，
-        讓你的專業眼神、溫和表情、細節姿態，都能被準確呈現。</p>
-        <p>不論你是臨床醫師、研究者、診所負責人或演講者，
-        照片都能成為你的專業名片——清楚、可靠、有力量。</p>
-      </div>
-    </div>
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">10</span>
+        </div>
 
-    <div class="module">
-      <h2 style="text-align: center;">具份量的專業名片</h2>
-      <p style="text-align: center; max-width: 700px; margin-inline: auto;">這不只是拍照，而是為你的醫療工作留下具份量的形象。
-      當病人透過照片認識你時，
-      他們看到的不只是白袍，更是你背後的責任與溫度。</p>
-      
-      <div class="content-image-grid">
-        <div class="grid-image">
-          <img src="{{ 'content/blog/medical/medical-7.jpg' | r2img }}" alt="醫師袍形象照範例 2" sizes="300px" loading="lazy" decoding="async" class="" />
-        </div>
-        <div class="grid-image">
-          <img src="{{ 'content/blog/medical/medical-6.jpg' | r2img }}" alt="醫師袍形象照範例 3" sizes="300px" loading="lazy" decoding="async" class="" />
-        </div>
-        <div class="grid-image">
-          <img src="{{ 'content/blog/medical/medical-8.jpg' | r2img }}" alt="醫師袍形象照範例 4" sizes="300px" loading="lazy" decoding="async" class="" />
-        </div>
-      </div>
-    </div>
-
-    <div class="module module-dark" style="text-align: center;">
-      <div class="container container-md">
-        <h2>預約您的專業形象</h2>
-        <p>為您的專業身分，打造一張充滿信任感的名片。<br>我們的「形象照」方案 100% 透明，預約流程 100% 簡單。</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            在專業之外<br class="hidden md:block">呈現你的溫度與信任感
+        </h1>
         
-        <div class="layout-split" style="grid-template-columns: repeat(2, 1fr); gap: 20px; justify-content: center; margin-top: 20px;">
-          <a href="/price-list/" class="button button-secondary">
-            查看形象照方案
-          </a>
-          <a href="/booking.njk" class="button button-primary">
-            🟡 立即預約
-          </a>
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            醫師袍形象照 - 呈現溫度與信任感
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4 leading-relaxed">
+                白袍代表的不只是身分，更是一份被賦予的信任。
+            </p>
+            <p class="text-lg md:text-xl text-slate-600">
+                在病人尚未見到你之前，形象照往往是他們接收的第一個訊息。<br>
+                你的神情、姿態與氣質，能讓他們感到安心，也能建立初步的信任。
+            </p>
+    </div>
+
+        {{ layoutSplit(
+            "content/blog/medical/medical-9.jpg",
+            "醫師袍形象照範例 1",
+            "沉穩、清晰、真實",
+            "<p><strong>專業的醫師形象照，不需要浮誇，而是以沉穩、清晰與真實為主。</strong></p><p>棚拍提供一致的光線、乾淨的背景，讓你的專業眼神、溫和表情、細節姿態，都能被準確呈現。</p><p>不論你是臨床醫師、研究者、診所負責人或演講者，照片都能成為你的專業名片——清楚、可靠、有力量。</p>",
+            "right"
+        ) }}
+
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">具份量的專業名片</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
+                這不只是拍照，而是為你的醫療工作留下具份量的形象。
+      當病人透過照片認識你時，
+                他們看到的不只是白袍，更是你背後的責任與溫度。
+            </p>
+      
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {% set images = [7, 6, 5, 4, 3, 2, 1] %}
+                {% for i in images %}
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img 
+                        src="{{ ('content/blog/medical/medical-' + i + '.jpg') | r2img }}" 
+                        alt="醫師袍形象照範例 {{ i }}" 
+                        class="w-full h-auto object-cover" 
+                        loading="lazy" 
+                        decoding="async" 
+                    />
+        </div>
+                {% endfor %}
+        </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

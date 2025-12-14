@@ -6,106 +6,98 @@ seo:
   keywords: "全家福, 全家福攝影, 家庭照, 親子寫真, 好時有影"
 ---
 
-<div class="module module-dark page-hero">
-  <div class="container">
-    <h1>為一家人停下腳步<br>把此刻好好記住</h1>
-  </div>
-</div>
+{% from "macros/layout-split.njk" import layoutSplit %}
 
-<div class="module">
-  <div class="container" style="max-width: 900px;">
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
 
-    <div class="content-intro">
-      <p>家人之間的情感，多半藏在日常裏：<br>
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">13</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            為一家人停下腳步<br class="hidden md:block">把此刻好好記住
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            全家福 - 把此刻好好記住
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#group-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4 leading-relaxed">
+                家人之間的情感，多半藏在日常裏：<br>
       孩子的笑容、爸媽交換的眼神、<br>
-      兄弟姊妹鬧脾氣後又和好的方式。</p>
-      <p>這些習以為常的瞬間，也許不常說出口，
-      但它們是家最真實的樣子。</p>
+                兄弟姊妹鬧脾氣後又和好的方式。
+            </p>
+            <p class="text-lg md:text-xl text-slate-600">
+                這些習以為常的瞬間，也許不常說出口，<br>
+                但它們是家最真實的樣子。
+            </p>
     </div>
 
-    <div class="layout-split image-left">
-      <div class="layout-split-image">
-        <img 
-          src="{{ 'content/blog/family/family-9.jpg' | r2img }}" 
-          alt="全家福範例 1"
-          sizes="(min-width: 768px) 50vw, 100vw"
-          loading="lazy"
-          decoding="async"
-          class=""
-        />
-      </div>
-      <div class="layout-split-text">
-        <h2>專注在彼此身上</h2>
-        <p><strong>拍一組全家福，是讓大家在同一刻慢下來，
-        把忙碌擱在旁邊，只專注在彼此身上。</strong></p>
-        <p>在棚拍的安穩環境中，小孩能更自在，
-        爸媽也能放鬆，而你們的互動會自然浮現——
-        牽手、相視、擁抱、一起大笑。</p>
-        <p>乾淨的背景與柔和的光線，
-        讓所有情緒都顯得更純粹。</p>
-      </div>
-    </div>
+        {{ layoutSplit(
+            "content/blog/family/family-9.jpg",
+            "全家福範例 1",
+            "專注在彼此身上",
+            "<p><strong>拍一組全家福，是讓大家在同一刻慢下來，把忙碌擱在旁邊，只專注在彼此身上。</strong></p><p>在棚拍的安穩環境中，小孩能更自在，爸媽也能放鬆，而你們的互動會自然浮現——牽手、相視、擁抱、一起大笑。</p><p>乾淨的背景與柔和的光線，讓所有情緒都顯得更純粹。</p>",
+            "left"
+        ) }}
 
-    <div class="module">
-      <h2 style="text-align: center;">最珍惜的回憶</h2>
-      <p style="text-align: center; max-width: 700px; margin-inline: auto;">
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">最珍惜的回憶</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
         一張照片，很可能成為多年後你們最珍惜的回憶。
         它提醒你們曾在同一個時間點，以最真實的方式相互依靠、一起存在。
         這個「現在」，值得被好好留下。
       </p>
       
-      <div class="content-image-grid">
-
-        <div class="grid-image">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {% set images = [6, 7, 8, 9] %}
+                {% for i in images %}
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
           <img 
-            src="{{ 'content/blog/family/family-6.jpg' | r2img }}" 
-            alt="全家福範例 2"
-            sizes="300px"
+                        src="{{ ('content/blog/family/family-' + i + '.jpg') | r2img }}" 
+                        alt="全家福範例 {{ i }}" 
+                        class="w-full h-auto object-cover" 
             loading="lazy"
             decoding="async"
-            class=""
           />
         </div>
-
-        <div class="grid-image">
-          <img 
-            src="{{ 'content/blog/family/family-7.jpg' | r2img }}" 
-            alt="全家福範例 3"
-            sizes="300px"
-            loading="lazy"
-            decoding="async"
-            class=""
-          />
-        </div>
-
-        <div class="grid-image">
-          <img 
-            src="{{ 'content/blog/family/family-8.jpg' | r2img }}" 
-            alt="全家福範例 4"
-            sizes="300px"
-            loading="lazy"
-            decoding="async"
-            class=""
-          />
-        </div>
-
-      </div>
-    </div>
-
-
-    <div class="module module-dark" style="text-align: center;">
-      <div class="container container-md">
-        <h2>預約你們的「現在」</h2>
-        <p>為這段無可取代的家庭時光，舉辦一場溫暖的儀式。<br>我們的「合照」方案 100% 透明，預約流程 100% 簡單。</p>
-        
-        <div class="layout-split" style="grid-template-columns: repeat(2, 1fr); gap: 20px; justify-content: center; margin-top: 20px;">
-          <a href="/price-list/" class="button button-secondary">
-            查看 $1199 合照方案
-          </a>
-          <a href="/booking.njk" class="button button-primary">
-            🟡 立即預約
-          </a>
-        </div>
+                {% endfor %}
       </div>
     </div>
   </div>

@@ -6,202 +6,227 @@ seo:
   keywords: "台北專業形象照推薦, 專業形象照, 個人品牌攝影, 職場人像寫真, 醫師形象照, 律師形象照, 求職形象照, LinkedIn頭像"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>台北專業形象照推薦 | 打造職場第一印象的攝影服務</h1>
-        <p style="font-size: 1.2rem; margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
-            證件照可以用工具生成，但您的專業形象不能。LinkedIn、履歷表、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
-        </p>
-        <div style="margin-top: 30px;">
-            <a href="/booking/" class="button button--primary">立即預約拍攝</a>
-            <a href="/price-list/" class="button button--secondary" style="margin-left: 15px;">查看價目表</a>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/comparison-table.njk" import comparisonTable %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
         </div>
     </div>
-</div>
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">03</span>
+        </div>
 
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <h2>為什麼需要專業形象照？（而非一般證件照）</h2>
-            <p>履歷表很完美，但頭像還是那張尷尬的舊照片？</p>
-            <p style="font-weight: 700; color: #454e91ff;">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            台北專業形象照推薦
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            證件照可以用工具生成，但您的專業形象不能。<br class="hidden md:block">LinkedIn、履歷表、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <!-- Why Professional Portrait -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">為什麼需要專業形象照？（而非一般證件照）</h2>
+            <p class="text-lg md:text-xl text-slate-600 mb-4">履歷表很完美，但頭像還是那張尷尬的舊照片？</p>
+            <p class="text-xl md:text-2xl font-bold text-slate-800">
                 醫師、律師、講師、企業主的第一印象，從形象照開始。
             </p>
         </div>
 
-        <div class="layout-split">
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/profile/profile-1.jpg' | r2img }}" alt="台北專業形象照-職場人像寫真-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-            </div>
-            <div class="layout-split-text">
-                <h2>證件照 vs 形象照：放在 LinkedIn 上的差異</h2>
-                <p>證件照解決「規格問題」，形象照解決「形象問題」。</p>
-                <p>當您需要更新 LinkedIn 頭像、求職履歷、或企業官網時，專業形象照會是更好的選擇。它不僅符合規格，更能展現您的專業氣質和個人品牌。</p>
-                <p>一張好的形象照，可以讓您在眾多求職者中脫穎而出，讓潛在客戶對您產生信任感。</p>
-            </div>
-        </div>
+        <!-- Comparison: ID Photo vs Portrait -->
+        {{ layoutSplit(
+            "content/blog/profile/profile-1.jpg",
+            "台北專業形象照-職場人像寫真-好時有影作品",
+            "證件照 vs 形象照：放在 LinkedIn 上的差異",
+            "<p>證件照解決「規格問題」，形象照解決「形象問題」。</p><p>當您需要更新 LinkedIn 頭像、求職履歷、或企業官網時，專業形象照會是更好的選擇。它不僅符合規格，更能展現您的專業氣質和個人品牌。</p><p>一張好的形象照，可以讓您在眾多求職者中脫穎而出，讓潛在客戶對您產生信任感。</p>",
+            "left"
+        ) }}
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">適合對象：誰需要專業形象照？</h2>
-            <div style="max-width: 700px; margin: 0 auto;">
-                <p style="font-size: 1.1rem; margin-bottom: 20px;">您是否：</p>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您是醫師、律師、講師、企業主，需要建立專業形象？
+        <!-- Target Audience -->
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">適合對象：誰需要專業形象照？</h2>
+            <div class="max-w-2xl mx-auto">
+                <p class="text-lg md:text-xl text-slate-700 mb-6 text-center">您是否：</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-4 text-slate-700">
+                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
+                        <span class="text-base md:text-lg">您是醫師、律師、講師、企業主，需要建立專業形象？</span>
                     </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您正在求職，履歷表需要一張能加分的照片？
+                    <li class="flex items-start gap-4 text-slate-700">
+                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
+                        <span class="text-base md:text-lg">您正在求職，履歷表需要一張能加分的照片？</span>
                     </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您的 LinkedIn 頭像還是大學畢業照？
+                    <li class="flex items-start gap-4 text-slate-700">
+                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
+                        <span class="text-base md:text-lg">您的 LinkedIn 頭像還是大學畢業照？</span>
                     </li>
-                    <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-                        <span style="position: absolute; left: 0;">✓</span>
-                        您需要更新企業官網或個人品牌網站的照片？
+                    <li class="flex items-start gap-4 text-slate-700">
+                        <span class="text-trust-600 text-xl font-bold mt-1">✓</span>
+                        <span class="text-base md:text-lg">您需要更新企業官網或個人品牌網站的照片？</span>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="module">
-            <h2 style="text-align: center;">韓式證件照 vs 專業形象照：差異在哪裡？</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <table style="width: 100%; border-collapse: collapse; margin: 30px 0;">
-                    <thead>
-                        <tr style="background-color: var(--color-surface-alt, #f5f5f5);">
-                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">項目</th>
-                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">韓式證件照</th>
-                            <th style="padding: 15px; text-align: left; border: 1px solid #ddd;">專業形象照</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">用途</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">正式證件申請、履歷表</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">LinkedIn、企業官網、個人品牌</td>
-                        </tr>
-                        <tr style="background-color: var(--color-surface-alt, #f9f9f9);">
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">風格</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">自然、自信</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">專業、有氣場</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">適用場景</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">需要嚴格規格的場合</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">需要展現專業形象的場合</td>
-                        </tr>
-                        <tr style="background-color: var(--color-surface-alt, #f9f9f9);">
-                            <td style="padding: 15px; border: 1px solid #ddd; font-weight: 600;">核心價值</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">解決「規格問題」</td>
-                            <td style="padding: 15px; border: 1px solid #ddd;">解決「形象問題」</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p style="text-align: center; font-style: italic; color: #666;">
+        <!-- Comparison Table -->
+        {% set comparisonItems = [
+            {label: "用途", optionA: "正式證件申請、履歷表", optionB: "LinkedIn、企業官網、個人品牌"},
+            {label: "風格", optionA: "自然、自信", optionB: "專業、有氣場"},
+            {label: "適用場景", optionA: "需要嚴格規格的場合", optionB: "需要展現專業形象的場合"},
+            {label: "核心價值", optionA: "解決「規格問題」", optionB: "解決「形象問題」"}
+        ] %}
+        {{ comparisonTable("韓式證件照 vs 專業形象照：差異在哪裡？", comparisonItems) }}
+        
+        <p class="text-center text-slate-600 italic mb-16">
                     證件照解決「規格問題」，形象照解決「形象問題」。
                 </p>
-            </div>
-        </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">超過 1000+ 位專業人士的選擇</h2>
+        <!-- Testimonials -->
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">超過 1000+ 位專業人士的選擇</h2>
 
-            <div class="card card--testimonial">
-                <div class="card__body">
-                    <p class="card__content">"It is our great honor to officially declare the ALSA conference open... We would like to express our sincere gratitude for our collaboration with 好時有影."</p>
-                </div>
-                <div class="card__footer">
-                    <p class="card__author">- Asian Law Students' Association (ALSA) Conference 2025</p>
-                </div>
-            </div>
-
-            <div class="card card--testimonial" style="margin-top: var(--space-6);">
-                <div class="card__body">
-                    <p class="card__content">「...必須大大讚賞的，是他們攝影師引導擺拍的功力。像我這種拍照很容易尷尬的人，這次非但沒有尷尬，還跟攝影師聊起來了...攝影師卻捕捉到『我其實可以辦得到』的那個真實又美好的自我。」</p>
-                </div>
-                <div class="card__footer">
-                    <p class="card__author">- 40歲，自由工作者</p>
-                </div>
-            </div>
-
-            <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; color: #666;">
+            {{ testimonialCard(
+                "It is our great honor to officially declare the ALSA conference open... We would like to express our sincere gratitude for our collaboration with 好時有影.",
+                "Asian Law Students' Association (ALSA) Conference 2025"
+            ) }}
+            
+            {{ testimonialCard(
+                "必須大大讚賞的，是他們攝影師引導擺拍的功力。像我這種拍照很容易尷尬的人，這次非但沒有尷尬，還跟攝影師聊起來了...攝影師卻捕捉到『我其實可以辦得到』的那個真實又美好的自我。",
+                "40歲，自由工作者"
+            ) }}
+            
+            <p class="text-center text-lg text-slate-600 mt-8">
                 數據證明：90% 客戶在拍攝後 3 個月內更新 LinkedIn 頭像
             </p>
         </div>
 
-        <div class="module">
-            <h2 style="text-align: center;">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
+        <!-- Process Steps -->
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6">拍攝流程：簡單 4 步驟，無壓力體驗</h2>
+            <p class="text-center text-lg text-slate-600 max-w-2xl mx-auto mb-12">
                 不需要自己想姿勢，攝影師會引導您。我們的專業，就是讓「拍照很容易尷尬的人」都能「非但沒有尷尬，還跟攝影師聊起來」。
             </p>
 
-            <ol class="step-list">
-                <li>
-                    <h3>預約拍攝</h3>
-                    <p>線上預約，選擇時間和地點（中山/公館）</p>
+            <ol class="step-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold">1</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">預約拍攝</h3>
+                    <p class="text-slate-600 leading-relaxed">線上預約，選擇時間和地點（中山/公館）</p>
                 </li>
-                <li>
-                    <h3>現場拍攝</h3>
-                    <p>專業攝影師引導，自然放鬆，捕捉您的專業氣質</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-trust-100 text-trust-600 flex items-center justify-center text-sm font-bold">2</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">現場拍攝</h3>
+                    <p class="text-slate-600 leading-relaxed">專業攝影師引導，自然放鬆，捕捉您的專業氣質</p>
                 </li>
-                <li>
-                    <h3>精修校稿</h3>
-                    <p>專業自然精修，可校稿兩次，確保滿意</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold">3</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">精修校稿</h3>
+                    <p class="text-slate-600 leading-relaxed">專業自然精修，可校稿兩次，確保滿意</p>
                 </li>
-                <li>
-                    <h3>一週交件</h3>
-                    <p>高畫質電子檔，立即使用於 LinkedIn、履歷表、企業官網</p>
+                <li class="relative pl-8">
+                    <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold">4</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">一週交件</h3>
+                    <p class="text-slate-600 leading-relaxed">高畫質電子檔，立即使用於 LinkedIn、履歷表、企業官網</p>
                 </li>
             </ol>
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">價格透明，以張計價，不強迫購買套組</h2>
-            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                <p style="font-size: 1.3rem; font-weight: 700; color: #454e91ff; margin-bottom: 20px;">
-                    優惠價格：$999 /張
+        <!-- Pricing -->
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">價格透明，以張計價，不強迫購買套組</h2>
+            <div class="max-w-xl mx-auto text-center">
+                <p class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                    優惠價格：<span class="text-trust-600">$999</span> /張
                 </p>
-                <p style="margin-bottom: 20px;">
+                <p class="text-lg text-slate-600 mb-4">
                     持學生證可優惠 $899 /張
                 </p>
-                <p style="margin-bottom: 30px;">
+                <p class="text-base text-slate-600 mb-8">
                     小資族友善，可單獨購買，不強迫購買套組。
                 </p>
-                <a href="/price-list/" class="button button--secondary">查看完整價目表</a>
+                <a href="/price-list/" class="inline-block btn btn-secondary btn-lg">
+                    查看完整價目表
+                </a>
             </div>
         </div>
 
-        <div class="module">
-            <h2 style="text-align: center;">你的「未來人設」範例</h2>
-            <div class="portfolio-wall-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-1.jpg' | r2img }}" alt="台北專業形象照-職場人像寫真-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-2.jpg' | r2img }}" alt="律師形象照-職場人像寫真-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-3.jpg' | r2img }}" alt="醫師形象照-職場人像寫真-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-4.jpg' | r2img }}" alt="求職形象照-履歷照片-個人品牌攝影" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
-                <img src="{{ 'content/blog/profile/portfolio-wall/profile-18.jpg' | r2img }}" alt="講師形象照-職場人像寫真-好時有影作品" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" />
+        <!-- Portfolio Gallery -->
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">你的「未來人設」範例</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-1.jpg' | r2img }}" alt="台北專業形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-2.jpg' | r2img }}" alt="律師形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-3.jpg' | r2img }}" alt="醫師形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-4.jpg' | r2img }}" alt="求職形象照-履歷照片-個人品牌攝影" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/profile/portfolio-wall/profile-18.jpg' | r2img }}" alt="講師形象照-職場人像寫真-好時有影作品" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="module module-dark" style="text-align: center;">
-    <div class="container container-md">
-        <h2>準備好，讓自己被好好看見了嗎？</h2>
-        <p style="font-size: 1.1rem; margin: 20px 0 30px;">
+<!-- Final CTA -->
+<div class="py-16 md:py-24 bg-trust-950 text-white text-center">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">準備好，讓自己被好好看見了嗎？</h2>
+        <p class="text-lg md:text-xl text-white/90 mb-4">
             證件照可以用工具生成，但您的專業形象不能。<br>
             履歷表、LinkedIn、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
         </p>
-        <p style="margin-bottom: 30px; color: #ccc;">
+        <p class="text-base text-white/70 mb-8">
             免費諮詢，無壓力了解方案
         </p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="/booking/" class="button button--primary">立即預約拍攝</a>
-            <a href="/" class="button button--secondary">查看完整作品集</a>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="/booking/" class="btn btn-secondary btn-lg">
+                立即預約拍攝
+            </a>
+            <a href="/" class="btn btn-secondary btn-lg">
+                查看完整作品集
+            </a>
         </div>
     </div>
 </div>
-

@@ -1,95 +1,207 @@
 ---
 layout: "base-layout.njk"
 title: "預約中山店｜好時有影"
-pageStyles: |
-  <link rel="stylesheet" href="/assets/css/4-pages/p-booking-page.css">
 seo:
   description: "預約好時有影中山店。請先確認服務須知，再滑至下方預約系統完成預訂。"
 permalink: "/booking/zhongshan/"
 ---
 
-<div class="page-booking">
-  <div class="module">
-    <div class="container container-md text-align-center">
-      <h1>預約中山店</h1>
-      <p class="text-large">
-        請先確認下方的服務內容與須知，<br class="d-sm-none">
-        再使用本頁的預約系統預約。
-      </p>
-    </div>
-  </div>
+<style>
+    /* Notice box for important notes */
+    .notice-box {
+        background-color: #F0F4FF; /* trust-50 - Design System */
+        border-left: 4px solid #4F46E5; /* trust-600 - Design System */
+        border-radius: 0.5rem;
+    }
 
-  <div class="module module-gray">
-    <div class="container container-lg">
-      <section id="zhongshan" class="booking-content">
-        <div class="booking-text">
-          <div class="service-rules">
-            <p class="notice-box">
-              <strong>預約即代表您已閱讀並同意服務須知，謝謝您！</strong>
-            </p>
+    .check-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #4F46E5; /* trust-600 - Design System */
+        margin-top: 0.6em;
+        flex-shrink: 0;
+    }
 
-            {# ... (服務須知內容不變) ... #}
-            <h4>預約方式</h4>
-            <ul>
-              <li>預約系統開放未來近 14 日內。</li>
-              <li>取消／改期請至預約確認信操作。</li>
-              <li>形象照＋證件照：先選形象照再備註加購證件照。</li>
-              <li>多組項目請預約兩個時段（每時段低消一張）。</li>
-            </ul>
+    /* Widget Container Styling */
+    .booking-widget-container {
+        min-height: 600px;
+        background-color: #FFFFFF;
+        border: 1px solid #E2DCD3; /* sand-200 - Design System */
+        border-radius: 1.5rem;
+        overflow: hidden;
+        position: relative;
+    }
 
-            <h4>拍攝前準備</h4>
-            <ul>
-              <li>服裝自備；店內提供學士服帽與黑色領帶。</li>
-              <li>備有吹風機、電捲棒與掛燙機。</li>
-            </ul>
+    /* Trust color utilities - Design System v6 */
+    .bg-trust-50 { background-color: #F0F4FF; /* Design System */ }
+    .text-trust-600 { color: #4F46E5; /* Design System */ }
+    .text-trust-800 { color: #1E3A8A; /* Design System */ }
+    .text-trust-900 { color: #0F172A; /* Design System */ }
+    .text-trust-950 { color: #020617; /* Design System */ }
+    .border-trust-600 { border-color: #4F46E5; /* Design System */ }
+    .border-trust-200 { border-color: #C7D2FE; /* Design System */ }
 
-            <h4>其他事項</h4>
-            <ul>
-              <li>請勿飲食，垃圾請自行帶離。</li>
-              <li>IG 私訊：<strong>@goldenyears_studio</strong></li>
-              <li>
-                <p><strong>中山店地址：</strong>台北市中山區南京東路1段10號4樓</p>
-              </li>
-            </ul>
-          </div>
+    /* Dawn gradient */
+    .bg-dawn-gradient {
+        background: linear-gradient(135deg, #F8FAFC 0%, #FDFBF7 60%, #F1F5F9 100%);
+    }
+</style>
 
-          <div class="booking-embed">
-            <script src="//widget.simplybook.asia/v2/widget/widget.js" type="text/javascript"></script>
-            <script type="text/javascript">
-              var widget = new SimplybookWidget({
-                "widget_type": "iframe",
-                "url": "https://goldenyearsportrait2.simplybook.asia",
-                "theme": "creative",
-                "theme_settings": {
-                  "timeline_show_end_time": "0",
-                  "timeline_modern_display": "as_slots",
-                  "timeline_hide_unavailable": "1",
-                  "index_page_content_grid": "[{\"template\":\"col_25_50_25\",\"items\":[\"timetable\"]}]",
-                  "hide_past_days": "1",
-                  "sb_base_color": "#243f8a",
-                  "display_item_mode": "block",
-                  "body_bg_color": "#fdfdfd",
-                  "dark_font_color": "#494949",
-                  "light_font_color": "#ffffff",
-                  "btn_color_1": "#5e7da7",
-                  "show_sidebar": "0",
-                  "sb_busy": "#dad2ce",
-                  "sb_available": "#d3e0f1"
-                },
-                "timeline": "modern_week",
-                "datepicker": "inline_datepicker",
-                "is_rtl": false,
-                "app_config": {"clear_session": 0, "allow_switch_to_ada": 0, "predefined": []}
-              });
-            </script>
-          </div>
-          
-          <p class="safety-net">
-            若內嵌無法顯示，可改用外部頁：
-            <a href="https://goldenyearsportrait2.simplybook.asia/v2/" target="_blank" rel="noopener">中山店預約連結</a>
-          </p>
+<!-- TYPE C: Action Header -->
+<header class="relative pt-32 pb-12 overflow-hidden">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        
+        <!-- Wayfinding Tag: Compass/Location -->
+        <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white border border-sand-200 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-xxs font-bold text-trust-950 uppercase tracking-widest">Zhongshan Studio</span>
         </div>
-      </section>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            預約中山店
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            請先確認下方的服務內容與須知，<br class="hidden md:block">再使用本頁的預約系統完成登機手續。
+        </p>
     </div>
-  </div>
+</header>
+
+<div class="pt-8 pb-20 px-4 md:px-8 max-w-[1000px] mx-auto relative">
+
+    <!-- Service Rules Section (Briefing) -->
+    <section id="info" class="mb-16">
+        <div class="bento-card p-8 md:p-12 lg:p-16 relative">
+            <!-- Decorative Element -->
+            <div class="absolute top-0 right-0 p-6 opacity-5 pointer-events-none text-trust-950">
+                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </div>
+
+            <!-- Important Notice -->
+            <div class="notice-box p-6 mb-12 rounded-lg flex items-start gap-4">
+                <svg class="w-6 h-6 text-trust-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div>
+                    <p class="text-base font-bold text-trust-900">
+                        預約即代表您已閱讀並同意服務須知，謝謝您！
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+                <!-- Column 1 -->
+                <div>
+                    <h4 class="text-lg font-bold text-trust-950 mb-5 pb-3 border-b border-sand-200">預約方式</h4>
+                    <ul class="space-y-4 text-base text-slate-600 leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>預約系統開放未來近 14 日內時段。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>取消／改期請直接至您信箱中的「預約確認信」內連結操作。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span><strong>形象照＋證件照：</strong>請先選擇形象照，再於備註欄加購證件照。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>多組項目請預約兩個連續時段（每時段低消一張）。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-lg font-bold text-trust-950 mb-5 pb-3 border-b border-sand-200">拍攝前準備</h4>
+                    <ul class="space-y-4 text-base text-slate-600 leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>服裝請自備；店內提供學士服、學士帽與簡易黑色領帶。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>現場備有吹風機、電捲棒與掛燙機供您整理儀容。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>建議提早 5-10 分鐘抵達整理妝髮。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-lg font-bold text-trust-950 mb-5 pb-3 border-b border-sand-200">其他事項</h4>
+                    <ul class="space-y-4 text-base text-slate-600 leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>棚內請勿飲食，垃圾請自行帶離。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span>IG 私訊客服：<a href="https://instagram.com/goldenyears_studio" target="_blank" class="text-trust-600 font-bold hover:underline">@goldenyears_studio</a></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="check-dot"></div>
+                            <span><strong>中山店地址：</strong><br>台北市中山區南京東路1段10號4樓</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
+
+<!-- Booking Widget Section - Full Width -->
+<section id="booking-system" class="mt-16 mb-12 w-full">
+    <div class="px-4 md:px-8 max-w-[1400px] mx-auto">
+        <div class="booking-widget-container shadow-sm p-4 md:p-8 relative">
+            <!-- Loading State Placeholder -->
+            <div class="absolute inset-0 flex items-center justify-center bg-white z-0">
+                <span class="text-slate-400 text-sm animate-pulse">Loading Booking System...</span>
+            </div>
+            
+            <!-- Widget Script -->
+            <div class="relative z-10">
+                <script src="//widget.simplybook.asia/v2/widget/widget.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    var widget = new SimplybookWidget({
+                        "widget_type": "iframe",
+                        "url": "https://goldenyearsportrait2.simplybook.asia",
+                        "theme": "creative",
+                        "theme_settings": {
+                            "timeline_show_end_time": "0",
+                            "timeline_modern_display": "as_slots",
+                            "timeline_hide_unavailable": "1",
+                            "index_page_content_grid": "[{\"template\":\"col_25_50_25\",\"items\":[\"timetable\"]}]",
+                            "hide_past_days": "1",
+                            "sb_base_color": "#1E3A8A", /* Customized to Trust-800 */
+                            "display_item_mode": "block",
+                            "body_bg_color": "#FDFBF7", /* Customized to Sand-50 */
+                            "dark_font_color": "#0F172A",
+                            "light_font_color": "#ffffff",
+                            "btn_color_1": "#020617", /* trust-950 - Design System */
+                            "show_sidebar": "0",
+                            "sb_busy": "#E2DCD3", /* sand-200 - Design System */
+                            "sb_available": "#F0F4FF" /* trust-50 - Design System */
+                        },
+                        "timeline": "modern_week",
+                        "datepicker": "inline_datepicker",
+                        "is_rtl": false,
+                        "app_config": {"clear_session": 0, "allow_switch_to_ada": 0, "predefined": []}
+                    });
+                </script>
+            </div>
+        </div>
+        
+        <p class="text-center text-sm text-slate-500 mt-6">
+            若預約系統無法顯示，請嘗試：
+            <a href="https://goldenyearsportrait2.simplybook.asia/v2/" target="_blank" rel="noopener" class="text-trust-600 hover:text-trust-800 font-bold border-b border-trust-200 hover:border-trust-600 transition-all">
+                開啟外部預約頁面 <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+            </a>
+        </p>
+    </div>
+</section>

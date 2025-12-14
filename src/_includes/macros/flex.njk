@@ -1,0 +1,65 @@
+{#
+  Flex Macro
+  
+  Creates a standardized flex layout component.
+  
+  Parameters:
+    - direction: Flex direction (default: 'row', can be 'row' | 'col' | 'row-reverse' | 'col-reverse')
+    - gap: Gap size (default: '4', can be '0' | '2' | '4' | '6' | '8')
+    - justify: Justify content (default: 'start', can be 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly')
+    - align: Align items (default: 'center', can be 'start' | 'center' | 'end' | 'stretch' | 'baseline')
+    - wrap: Whether to wrap (default: false)
+    - class: Additional CSS classes (optional)
+    - content: Flex items content (HTML string)
+  
+  Usage:
+    {% from "macros/flex.njk" import flex %}
+    {{ flex("row", "4", "between", "center", false, "", "<div>項目 1</div><div>項目 2</div>") }}
+#}
+
+{% macro flex(direction='row', gap='4', justify='start', align='center', wrap=false, class='', content='') %}
+  {% set directionClasses = {
+    'row': 'flex-row',
+    'col': 'flex-col',
+    'row-reverse': 'flex-row-reverse',
+    'col-reverse': 'flex-col-reverse'
+  } %}
+  
+  {% set gapClasses = {
+    '0': 'gap-0',
+    '2': 'gap-2',
+    '4': 'gap-4',
+    '6': 'gap-6',
+    '8': 'gap-8'
+  } %}
+  
+  {% set justifyClasses = {
+    'start': 'justify-start',
+    'center': 'justify-center',
+    'end': 'justify-end',
+    'between': 'justify-between',
+    'around': 'justify-around',
+    'evenly': 'justify-evenly'
+  } %}
+  
+  {% set alignClasses = {
+    'start': 'items-start',
+    'center': 'items-center',
+    'end': 'items-end',
+    'stretch': 'items-stretch',
+    'baseline': 'items-baseline'
+  } %}
+  
+  {% if wrap %}
+    {% set wrapClass = 'flex-wrap' %}
+  {% else %}
+    {% set wrapClass = 'flex-nowrap' %}
+  {% endif %}
+  
+  {% set allClasses = ['flex', directionClasses[direction], gapClasses[gap], justifyClasses[justify], alignClasses[align], wrapClass, class] | join(' ') | trim %}
+  
+  <div class="{{ allClasses }}">
+    {{ content | safe }}
+  </div>
+{% endmacro %}
+

@@ -6,46 +6,83 @@ seo:
   keywords: "2吋照片裁切線上, 證件照, 大頭照, 身分證, 健保卡, 履歷照, 簽證照"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container container-md">
-        <h1>{{ title }}</h1>
-        <p class="subtitle" style="font-size: 1.1rem; color: #E2E8F0;">
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">06</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            {{ title }}
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
             2吋照片裁切線上、證件照、大頭照、身分證、健保卡、履歷照、簽證照
         </p>
-    </div>
-</div>
 
-<div class="module">
-    <div class="container container-md">
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#id-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
         
-        <p class="intro" style="font-size: 1.2rem; font-weight: 600; text-align: center;">
+        <div class="text-center mb-16">
+            <p class="text-xl md:text-2xl font-bold text-slate-800 mb-6">
             還在用實體沖印的思維，去應付數位上傳的規格。
         </p>
-        
-        <h2>別再管幾吋，重點是 像素 和 比例</h2>
-        <p>網站說要2吋照片，不一定是2寸，而是要正確的像素尺寸與人像比例。</p>
-        <ul>
-            <li><strong>比例不符：</strong> 證件照必須是4.5 x 3.5。</li>
-            <li><strong>臉太大或太小：</strong> 頭頂到下巴需佔照片長度的 70–80%。</li>
-        </ul>
-        
-        <div class="module" style="padding-top: 0; padding-bottom: 0;">
-            <h2 style="text-align: center; margin-top: 0;">免費2吋裁切工具</h2>
-            <p class="text-align-center">上傳照片，裁切符合規格的數位2吋照。</p>
-            
-            <div class="tool-embed-container" style="position: relative; overflow: hidden; width: 100%; padding-top: 100%; border: 1px solid #ddd; border-radius: 12px; margin-top: 20px;">
-                <iframe
-                    src="https://s1031432.github.io/yctest/inch2_head2.html"
-                    title="自助裁切工具"
-                    style="position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none;"
-                    loading="lazy">
-                </iframe>
-            </div>
-            
-            <p style="text-align: center; margin-top: 20px;">
-                👉 <strong><a href="https://s1031432.github.io/yctest/inch2_head2.html" target="_blank">立即使用裁切工具 (若上方嵌入載入失敗，請點此)</a></strong>
+        </div>
+
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">別再管幾吋，重點是 像素 和 比例</h2>
+            <p class="text-lg md:text-xl text-slate-600 mb-6">
+                網站說要2吋照片，不一定是2寸，而是要正確的像素尺寸與人像比例。
             </p>
+            <ul class="space-y-4 max-w-2xl mx-auto text-left">
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl font-bold mt-1">•</span>
+                    <div>
+                        <strong class="text-slate-900">比例不符：</strong> 證件照必須是4.5 x 3.5。
+                    </div>
+                </li>
+                <li class="flex items-start gap-3 text-slate-700">
+                    <span class="text-trust-600 text-xl font-bold mt-1">•</span>
+                    <div>
+                        <strong class="text-slate-900">臉太大或太小：</strong> 頭頂到下巴需佔照片長度的 70–80%。
+                    </div>
+                </li>
+        </ul>
         </div>
         
+        {% from "macros/card.njk" import card %}
+        {{ card("default", "p-8 md:p-10", "<h2 class=\"text-3xl md:text-4xl font-bold text-slate-900 text-center mb-6\">免費2吋裁切工具</h2><p class=\"text-center text-lg text-slate-600 mb-8\">上傳照片，裁切符合規格的數位2吋照。</p><div class=\"aspect-video bg-sand-100 rounded-xl overflow-hidden mb-6\"><iframe src=\"https://s1031432.github.io/yctest/inch2_head2.html\" title=\"自助裁切工具\" class=\"w-full h-full border-0\" loading=\"lazy\"></iframe></div><p class=\"text-center text-base md:text-lg text-slate-600\">👉 <strong><a href=\"https://s1031432.github.io/yctest/inch2_head2.html\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-trust-600 hover:text-trust-800 underline\">立即使用裁切工具 (若上方嵌入載入失敗，請點此)</a></strong></p>") }}
     </div>
 </div>

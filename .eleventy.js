@@ -1,7 +1,9 @@
 // === 1. Node.js 核心模組 ===
 const path = require("path");
-const sass = require("sass");
 const fs = require("fs");
+const postcss = require("postcss");
+const tailwindcss = require("@tailwindcss/postcss");
+const autoprefixer = require("autoprefixer");
 require("dotenv").config();
 
 // === 2. Eleventy 插件 ===
@@ -111,22 +113,37 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  // 4.4 Sass 編譯（Eleventy v2 的 addExtension 寫法）
-  const scssInputPath = "src/assets/css";
-  eleventyConfig.addTemplateFormats("scss");
-  eleventyConfig.addExtension("scss", {
+  // 4.4 Tailwind CSS 編譯（Eleventy v2 的 addExtension 寫法）
+  eleventyConfig.addTemplateFormats("css");
+  eleventyConfig.addExtension("css", {
     outputFileExtension: "css",
     async compile(inputContent, inputPath) {
       const parsed = path.parse(inputPath);
       // 以 _ 開頭的 partial 不輸出獨立檔案
       if (parsed.name.startsWith("_")) return;
 
-      const result = sass.compileString(inputContent, {
-        loadPaths: [scssInputPath],
-        style: "compressed",
-      });
+      // 只處理 main.css，其他 CSS 檔案直接複製
+      if (parsed.name !== "main") {
+        return async () => inputContent;
+      }
 
-      return async () => result.css;
+      // 使用 PostCSS 處理 Tailwind CSS
+      try {
+        const result = await postcss([
+          tailwindcss({
+            config: path.join(__dirname, 'tailwind.config.js'),
+          }),
+          autoprefixer,
+        ]).process(inputContent, {
+          from: inputPath,
+          to: path.join("_site", "assets", "css", "main.css"),
+        });
+
+        return async () => result.css;
+      } catch (error) {
+        console.error(`[PostCSS] Error processing CSS: ${error.message}`);
+        throw error;
+      }
     },
   });
 
@@ -140,8 +157,9 @@ module.exports = function (eleventyConfig) {
   // 知識庫已遷移到獨立 Chatbot 服務
   // eleventyConfig.addPassthroughCopy("knowledge");
 
-  // 4.6 監聽 SCSS 變更
+  // 4.6 監聽 CSS 和 Tailwind 配置變更
   eleventyConfig.addWatchTarget("src/assets/css/");
+  eleventyConfig.addWatchTarget("tailwind.config.js");
 
   // 4.7 提供給 sitemap.xml.njk 使用的日期 Filter
   eleventyConfig.addFilter("dateToISO", function (value) {
@@ -177,9 +195,9 @@ module.exports = function (eleventyConfig) {
     }
   });
 
-  // 4.9 CSS Inlining Filter: Compiles SCSS on-the-fly for inlining
+  // 4.9 CSS Inlining Filter: Reads compiled CSS for inlining
   // This eliminates render-blocking resources by inlining CSS in <style> tags
-  // Strategy: Map CSS paths to SCSS source files and compile directly (more reliable than reading _site/)
+  // Strategy: Read compiled CSS from _site directory (processed by PostCSS/Tailwind)
   eleventyConfig.addNunjucksFilter("inlineCSS", function (cssPath) {
     if (!cssPath) return "";
 
@@ -191,36 +209,29 @@ module.exports = function (eleventyConfig) {
       cleanPath = `assets/css/${cleanPath}`;
     }
 
-    // Map CSS path to SCSS source file (now in src/)
-    // e.g., /assets/css/main.css -> src/assets/css/main.scss
-    // e.g., /assets/css/4-pages/p-home.css -> src/assets/css/4-pages/p-home.scss
-    const scssPath = cleanPath.replace(/\.css$/, ".scss");
-    const scssPathFull = path.join("src", scssPath);
+    // Map CSS path to source file (now in src/)
+    // e.g., /assets/css/main.css -> src/assets/css/main.css
+    const cssSourcePath = path.join("src", cleanPath);
+    const outputPath = path.join("_site", cleanPath);
 
     try {
-      // Primary strategy: Compile SCSS directly from source
-      if (fs.existsSync(scssPathFull)) {
-        const sourceContent = fs.readFileSync(scssPathFull, "utf8");
-        const result = sass.compileString(sourceContent, {
-          loadPaths: ["src/assets/css"],
-          style: "compressed",
-        });
-        // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
-        return result.css.replace(/^\uFEFF/, '');
-      }
-
-      // Fallback: Try reading compiled CSS from _site (in case SCSS doesn't exist)
-      const outputPath = path.join("_site", cleanPath);
+      // Primary strategy: Read compiled CSS from _site (processed by PostCSS/Tailwind)
       if (fs.existsSync(outputPath)) {
         const cssContent = fs.readFileSync(outputPath, "utf8");
         // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
         return cssContent.replace(/^\uFEFF/, '');
       }
 
-      console.warn(`[inlineCSS] CSS/SCSS file not found: ${cssPath} (tried ${scssPathFull} and ${outputPath})`);
+      // Fallback: Try reading source CSS (for non-Tailwind CSS files)
+      if (fs.existsSync(cssSourcePath)) {
+        const cssContent = fs.readFileSync(cssSourcePath, "utf8");
+        return cssContent.replace(/^\uFEFF/, '');
+      }
+
+      console.warn(`[inlineCSS] CSS file not found: ${cssPath} (tried ${outputPath} and ${cssSourcePath})`);
       return "";
     } catch (error) {
-      console.error(`[inlineCSS] Error compiling CSS from ${cssPath}:`, error.message);
+      console.error(`[inlineCSS] Error reading CSS from ${cssPath}:`, error.message);
       console.error(`[inlineCSS] Stack:`, error.stack);
       return "";
     }
@@ -257,6 +268,6 @@ module.exports = function (eleventyConfig) {
     },
     passthroughFileCopy: true,
     // 要讓 sitemap.xml.njk 正確輸出 XML，一定要包含 'xml'
-    templateFormats: ["njk", "md", "html", "scss", "xml"],
+    templateFormats: ["njk", "md", "html", "css", "xml"],
   };
 };

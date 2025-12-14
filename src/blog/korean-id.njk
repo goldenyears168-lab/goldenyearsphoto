@@ -6,58 +6,111 @@ seo:
   keywords: "韓式證件照, 數位門面, 履歷照, 護照, 證件照焦慮"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>你的數位門面：<br>一張你真正喜歡、自信出發的韓式證件照</h1>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
     </div>
-</div>
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">08</span>
+        </div>
 
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <p>我們都懂那種數位焦慮。
-            <br>當你必須上傳履歷照，卻對著手機相簿裡尷尬的舊照片。</p>
-            <p style="font-weight: 700; color: #4c5386ff;"> 你需要的不是一張「合規」的照片，
-                <br>你需要的是一張你真正喜歡、並樂意用它來代表你的數位檔案。
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            你的數位門面
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            一張你真正喜歡、自信出發的韓式證件照
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/#id-photo" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4 leading-relaxed">
+                我們都懂那種數位焦慮。<br>當你必須上傳履歷照，卻對著手機相簿裡尷尬的舊照片。
+            </p>
+            <p class="text-xl md:text-2xl font-bold text-slate-800">
+                你需要的不是一張「合規」的照片，<br>你需要的是一張你真正喜歡、並樂意用它來代表你的數位檔案。
             </p>
         </div>
 
-        <div class="layout-split image-right"> <div class="layout-split-image">
-                <img src="{{ 'content/blog/korean-id/korean-id.jpg' | r2img }}" alt="韓式證件照範例" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-            </div>
-            <div class="layout-split-text">
-                <h2>超越規範，專注自信</h2>
-                <p>這不只是平衡，這是超越規範。
-                <br>我們深刻理解政府規範，
-                <br>但我們更在意你的自信。</p>
-                <p>不做過度磨皮，只用專業、溫暖的光影與鬆弛感引導，
-                <br>捕捉你「<strong>最好，但依舊是你</strong>」的神情。</p>
-            </div>
+        {{ layoutSplit(
+            "content/blog/korean-id/korean-id.jpg",
+            "韓式證件照範例",
+            "超越規範，專注自信",
+            "<p>這不只是平衡，這是超越規範。<br>我們深刻理解政府規範，<br>但我們更在意你的自信。</p><p>不做過度磨皮，只用專業、溫暖的光影與鬆弛感引導，<br>捕捉你「<strong>最好，但依舊是你</strong>」的神情。</p>",
+            "right"
+        ) }}
+
+        <div class="bento-card bento-card-sand">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">來自護照焦慮的真實體驗</h2>
+
+            {{ testimonialCard(
+                "護照快到期，想趁機換個美美大頭照。原本貪圖省錢結果慘不忍睹⋯看圖應該就知道我多崩潰。只好跑去學妹大推的店家。攝影師態度那是真的好，重點是很專業。從引導到最後修圖的成品都自然又讚。",
+                "客戶真實回饋"
+            ) }}
         </div>
 
-        <div class="module module-gray" style="margin: 60px -30px 0 -30px; padding: 40px 30px; border-radius: 12px;">
-            <h2 style="text-align: center; margin-top: 0;">來自護照焦慮的真實體驗</h2>
-
-            <blockquote class="magazine" style="background-color: ">
-                <p>「護照快到期，想趁機換個美美大頭照。
-                原本貪圖省錢結果慘不忍睹⋯看圖應該就知道我多崩潰。
-                只好跑去學妹大推的店家。攝影師態度那是真的好，重點是很專業。
-                從引導到最後修圖的成品都自然又讚。」</p>
-            </blockquote>
-        </div>
-
-        <div class="module">
-            <h2 style="text-align: center;">告別焦慮的「數位門面」範例</h2>
-            <div class="portfolio-wall-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-1.jpg' | r2img }}" alt="韓式證件照範例 1" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-2.jpg' | r2img }}" alt="韓式證件照範例 2" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-3.jpg' | r2img }}" alt="韓式證件照範例 3" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-4.jpg' | r2img }}" alt="韓式證件照範例 4" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-5.jpg' | r2img }}" alt="韓式證件照範例 5" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-6.jpg' | r2img }}" alt="韓式證件照範例 6" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-7.jpg' | r2img }}" alt="韓式證件照範例 7" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-                <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-8.jpg' | r2img }}" alt="韓式證件照範例 8" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-12">告別焦慮的「數位門面」範例</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-1.jpg' | r2img }}" alt="韓式證件照範例 1" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-2.jpg' | r2img }}" alt="韓式證件照範例 2" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-3.jpg' | r2img }}" alt="韓式證件照範例 3" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-4.jpg' | r2img }}" alt="韓式證件照範例 4" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-5.jpg' | r2img }}" alt="韓式證件照範例 5" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-6.jpg' | r2img }}" alt="韓式證件照範例 6" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-7.jpg' | r2img }}" alt="韓式證件照範例 7" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
+                <div class="portfolio-img-card rounded-xl overflow-hidden">
+                    <img src="{{ 'content/blog/korean-id/portfolio-wall/korean-id-8.jpg' | r2img }}" alt="韓式證件照範例 8" class="w-full h-auto object-cover" loading="lazy" decoding="async" />
+                </div>
             </div>
         </div>
     </div>

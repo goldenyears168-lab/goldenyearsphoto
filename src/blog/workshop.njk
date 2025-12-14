@@ -6,127 +6,128 @@ seo:
   keywords: "一日攝影師, 工作坊, 友情派對, 畢業紀念, 社群共創"
 ---
 
-<div class="module module-dark page-hero">
-    <div class="container">
-        <h1>【社群共創】這不只是拍照，<br>這是一場「封存回憶」的魔法儀式</h1>
-    </div>
-</div>
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+{% from "macros/card.njk" import card %}
+{% from "macros/button.njk" import button %}
 
-<div class="module">
-    <div class="container" style="max-width: 900px;">
-        <div style="font-size: 1.1rem; text-align: center; margin-bottom: 40px;">
-            <p>你是否也曾想過，除了畢業旅行，還能用什麼方式，能把與朋友間的羈絆紀錄下來？</p>
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">15</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            這不只是拍照，<br class="hidden md:block">這是一場「封存回憶」的魔法儀式
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            一日攝影師工作坊 - 封存回憶的魔法儀式
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/booking/" class="btn-primary btn-md">
+                立即預約拍攝
+            </a>
+            <a href="/price-list/" class="btn-secondary btn-md">
+                查看價目表
+            </a>
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+        
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600">
+                你是否也曾想過，除了畢業旅行，還能用什麼方式，能把與朋友間的羈絆紀錄下來？
             </p>
         </div>
 
+        {{ layoutSplit(
+            "content/blog/workshop/service-workshop-2.jpg",
+            "一日攝影師工作坊現場",
+            "這不是攝影課，而是一場關於理解與被理解的遊戲",
+            "<p>每位參加者都會有機會成為「攝影師」與「被拍者」，體會被看見，也學會欣賞他人。</p><p>在專業陪伴下輪流成為拍攝者與被攝者，為彼此留下情緒價值與珍貴回憶。</p><p>擔任一日攝影師可以為自己親朋好友、工作夥伴或任何想感謝的人，親手拍攝一組形象照或個人寫真。</p><p>同時請您寫下幾句想對他們說的悄悄話祝福小語，在修圖師修好後，祝福小語會與照片一起收到。相信對被拍攝者來說，將會是一個特別的回憶。</p><p>我們相信，一張照片能成為友情的見證，一段祝福能成為回憶的印記。</p><p>在這2小時裡，你不只是被拍照，而是能用朋友の眼睛，看見最自然、最動人的自己。</p><p>這是一場挑戰，更是一場彼此理解與情感連結的體驗。</p>",
+            "left"
+        ) }}
 
-        <div class="layout-split">
-            <div class="layout-split-image">
-            <img src="{{ 'content/blog/workshop/service-workshop-2.jpg' | r2img }}" alt="一日攝影師工作坊現場" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-            </div>
-            <div class="layout-split-text">
-            <h2>這不是攝影課，而是一場關於理解與被理解的遊戲</h2>
-            <p>每位參加者都會有機會成為「攝影師」與「被拍者」，體會被看見，也學會欣賞他人。</p>
-            <p>在專業陪伴下輪流成為拍攝者與被攝者，為彼此留下情緒價值與珍貴回憶。</p>
-            <p>擔任一日攝影師可以為自己親朋好友、工作夥伴或任何想感謝的人，親手拍攝一組形象照或個人寫真。</p>
-            <p>同時請您寫下幾句想對他們說的悄悄話祝福小語，在修圖師修好後，祝福小語會與照片一起收到。相信對被拍攝者來說，將會是一個特別的回憶。</p>
-            <p>我們相信，一張照片能成為友情的見證，一段祝福能成為回憶的印記。</p>
-            <p>在這2小時裡，你不只是被拍照，而是能用朋友の眼睛，看見最自然、最動人的自己。</p>
-            <p>這是一場挑戰，更是一場彼此理解與情感連結的體驗。</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {{ card("default", "p-6 md:p-8", "<h2 class=\"text-2xl font-bold text-slate-900 text-center mb-6\">活動資訊</h2><ul class=\"space-y-3 text-base md:text-lg text-slate-700\"><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>適合人數：5–6人</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>體驗時間：約150分鐘</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>收費價格：NT$ 6,000</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>成品：每人1張精修 JPG</span></li></ul>") }}
+            
+            {{ card("default", "p-6 md:p-8", "<h2 class=\"text-2xl font-bold text-slate-900 text-center mb-6\">體驗內容</h2><ul class=\"space-y-3 text-base md:text-lg text-slate-700\"><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>角色扮演與拍攝小任務，寫下悄悄話祝福</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>基本攝影與擺姿技巧</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>觀察彼此，找到最好看的瞬間</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>建立更多理解與默契</span></li></ul>") }}
+
+            {{ card("default", "p-6 md:p-8", "<h2 class=\"text-2xl font-bold text-slate-900 text-center mb-6\">適合對象</h2><ul class=\"space-y-3 text-base md:text-lg text-slate-700\"><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>想和好朋友留下專屬回憶</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>企業迎新活動</span></li><li class=\"flex items-start gap-3\"><span class=\"text-trust-600 mt-1\">•</span><span>團隊 Team Building</span></li></ul>") }}
+        </div>
+
+        {{ layoutSplit(
+            "content/blog/workshop/service-workshop-1.jpg",
+            "悄悄話祝福",
+            "核心：悄悄話祝福",
+            "<p>這不是重點。重點是「<strong>悄悄話祝福</strong>」：你將為你的朋友<strong>親手拍下照片</strong>，並<strong>偷偷寫下</strong>專屬於他們的「祝福驚喜」。</p><p>你會發現，按下快門，不只是紀錄，更是一種把故事和回憶都封存起來的魔法，是好有意義的事」</p>",
+            "right"
+        ) }}
+
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">來自顧客體驗的回饋</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{ testimonialCard(
+                    "原以為，30 分鐘速戰S-決...卻沒想到，我們竟然在攝影棚玩了快3個小時哈哈哈😆 其實我是一個很怕尷尬的人，但因為相機的後面是情緒價值給滿的你們，被拍也變得很自然。",
+                    "學員回饋"
+                ) }}
+                
+                {{ testimonialCard(
+                    "讓我這個攝影小麻瓜也有出頭天的機會...小小目標就是 拍下好朋友們在我眼裡最真實的模樣...而且在寄出的精修照片信件裡，我偷偷藏了專屬於他們的文字祝福驚喜。",
+                    "學員回饋"
+                ) }}
+                
+                {{ testimonialCard(
+                    "能夠親手用相機為朋友們拍下他們身在這個人生階段下的模樣，是好有意義的事！！...每個瞬間都稍縱及逝，想用影像保存下這些珍貴的片刻。",
+                    "學員回饋"
+                ) }}
             </div>
         </div>
 
-
-
-        
-        <div class="module" style="margin: 40px 0;">
-            <div class="container" style="display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 220px;">
-                    <h2 style="text-align: center;">活動資訊</h2>
-                    <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
-                        <li>適合人數：5–6人</li>
-                        <li>體驗時間：約150分鐘</li>
-                        <li>收費價格：NT$ 6,000</li>
-                        <li>成品：每人1張精修 JPG</li>
-                    </ul>
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 text-center mb-8">學員 IG 體驗分享</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="instagram-embed-wrapper">
+                    <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DOikMvVAVt6/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
                 </div>
-                <div style="flex: 1; min-width: 220px;">
-                    <h2 style="text-align: center;">體驗內容</h2>
-                    <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
-                        <li>角色扮演與拍攝小任務，寫下悄悄話祝福</li>
-                        <li>基本攝影與擺姿技巧</li>
-                        <li>觀察彼此，找到最好看的瞬間</li>
-                        <li>建立更多理解與默契</li>
-                    </ul>
-                </div>
-                <div style="flex: 1; min-width: 220px;">
-                    <h2 style="text-align: center;">適合對象</h2>
-                    <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
-                        <li>想和好朋友留下專屬回憶</li>
-                        <li>企業迎新活動</li>
-                        <li>團隊 Team Building</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-        
-
-        <div class="layout-split image-right" style="margin-top: 40px;">
-            <div class="layout-split-image">
-                <img src="{{ 'content/blog/workshop/service-workshop-1.jpg' | r2img }}" alt="悄悄話祝福" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" decoding="async" class="" />
-            </div>
-            <div class="layout-split-text">
-                <h2>核心：悄悄話祝福</h2>
-                <p>這不是重點。重點是「<strong>悄悄話祝福</strong>」：你將為你的朋友<strong>親手拍下照片</strong>，並<strong>偷偷寫下</strong>專屬於他們的「祝福驚喜」。</p>
-                <p>你會發現，按下快門，不只是紀錄，更是一種把故事和回憶都封存起來的魔法，是好有意義的事」</p>
-            </div>
-        </div>
-
-    
-
-            <div class="module" style="margin: 40px 0;">
-                <h2 style="text-align: center;">來自顧客體驗的回饋</h2>
-                <div style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;">
-                <div style="background: #f7f7f9; border-radius: 10px; box-shadow: 0 2px 8px #0001; padding: 24px; max-width: 320px; flex: 1 1 260px;">
-                    <p style="font-size: 1.05rem; margin-bottom: 16px;">「...原以為，30 分鐘速戰S-決...卻沒想到，我們竟然在攝影棚玩了快3個小時哈哈哈😆 其實我是一個很怕尷尬的人，但因為相機的後面是情緒價值給滿的你們，被拍也變得很自然。」</p>
-                    <footer style="text-align: right; color: #888;">—</footer>
-                </div>
-                <div style="background: #f7f7f9; border-radius: 10px; box-shadow: 0 2px 8px #0001; padding: 24px; max-width: 320px; flex: 1 1 260px;">
-                    <p style="font-size: 1.05rem; margin-bottom: 16px;">「...讓我這個攝影小麻瓜也有出頭天的機會...小小目標就是 拍下好朋友們在我眼裡最真實的模樣...而且在寄出的精修照片信件裡，我偷偷藏了專屬於他們的文字祝福驚喜。」</p>
-                    <footer style="text-align: right; color: #888;">— </footer>
-                </div>
-                <div style="background: #f7f7f9; border-radius: 10px; box-shadow: 0 2px 8px #0001; padding: 24px; max-width: 320px; flex: 1 1 260px;">
-                    <p style="font-size: 1.05rem; margin-bottom: 16px;">「能夠親手用相機為朋友們拍下他們身在這個人生階段下的模樣，是好有意義的事！！...每個瞬間都稍縱及逝，想用影像保存下這些珍貴的片刻。」</p>
-                    <footer style="text-align: right; color: #888;">— </footer>
-                </div>
-                </div>
-            </div>
-
-
-            <div class="module" style="margin: 40px 0;">
-                <h2 style="text-align: center;">學員 IG 體驗分享</h2>
-                <div style="display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;">
-                    <div style="flex: 1 1 320px; min-width: 320px; max-width: 540px;">
-                        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https.www.instagram.com/reel/DOikMvVAVt6/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"></blockquote>
-                    </div>
-                    <div style="flex: 1 1 320px; min-width: 320px; max-width: 540px;">
-                        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https.www.instagram.com/reel/DNIuoqnMnex/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"></blockquote>
+                <div class="instagram-embed-wrapper">
+                    <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DNIuoqnMnex/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
                     </div>
                 </div>
                 <script async src="//www.instagram.com/embed.js"></script>
             </div>
 
-
-        <div class="module" style="text-align: center; padding-bottom: 0;">
-            <h2>祝福儀式體驗</h2>
-            
-            <div class="layout-split" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
-                <a href="/about.njk" class="button button-secondary">
-                    我們的品牌理念
-                </a>
-                <a href="https.www.instagram.com/goldenyears_studio/" class="button button-primary" target="_blank" rel="noopener noreferrer">
+        <div class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">祝福儀式體驗</h2>
+            <div class="flex flex-wrap gap-4 justify-center">
+                {{ button("我們的品牌理念", "/about/", "secondary", "lg") }}
+                <a href="https://www.instagram.com/goldenyears_studio/" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
                     看IG更多花絮
                 </a>
             </div>
