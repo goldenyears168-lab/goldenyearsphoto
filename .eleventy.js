@@ -199,6 +199,7 @@ module.exports = function (eleventyConfig) {
   // 4.9 CSS Inlining Filter: Reads compiled CSS for inlining
   // This eliminates render-blocking resources by inlining CSS in <style> tags
   // Strategy: Read compiled CSS from _site directory (processed by PostCSS/Tailwind)
+  // Note: This filter runs during template rendering, so CSS files should already be compiled
   eleventyConfig.addNunjucksFilter("inlineCSS", function (cssPath) {
     if (!cssPath) return "";
 
@@ -214,22 +215,33 @@ module.exports = function (eleventyConfig) {
     // e.g., /assets/css/main.css -> src/assets/css/main.css
     const cssSourcePath = path.join("src", cleanPath);
     const outputPath = path.join("_site", cleanPath);
+    
+    // Also try relative to process.cwd() in case we're in a different directory
+    const outputPathAbsolute = path.join(process.cwd(), "_site", cleanPath);
+    const cssSourcePathAbsolute = path.join(process.cwd(), "src", cleanPath);
 
     try {
       // Primary strategy: Read compiled CSS from _site (processed by PostCSS/Tailwind)
+      // Try multiple paths to handle different build environments
+      let cssContent = null;
       if (fs.existsSync(outputPath)) {
-        const cssContent = fs.readFileSync(outputPath, "utf8");
+        cssContent = fs.readFileSync(outputPath, "utf8");
+      } else if (fs.existsSync(outputPathAbsolute)) {
+        cssContent = fs.readFileSync(outputPathAbsolute, "utf8");
+      } else if (fs.existsSync(cssSourcePath)) {
+        // Fallback: Try reading source CSS (for non-Tailwind CSS files)
+        cssContent = fs.readFileSync(cssSourcePath, "utf8");
+      } else if (fs.existsSync(cssSourcePathAbsolute)) {
+        cssContent = fs.readFileSync(cssSourcePathAbsolute, "utf8");
+      }
+
+      if (cssContent) {
         // Strip BOM (Byte Order Mark) character that can break CSS @layer rules
         return cssContent.replace(/^\uFEFF/, '');
       }
 
-      // Fallback: Try reading source CSS (for non-Tailwind CSS files)
-      if (fs.existsSync(cssSourcePath)) {
-        const cssContent = fs.readFileSync(cssSourcePath, "utf8");
-        return cssContent.replace(/^\uFEFF/, '');
-      }
-
-      console.warn(`[inlineCSS] CSS file not found: ${cssPath} (tried ${outputPath} and ${cssSourcePath})`);
+      console.warn(`[inlineCSS] CSS file not found: ${cssPath}`);
+      console.warn(`[inlineCSS] Tried paths: ${outputPath}, ${outputPathAbsolute}, ${cssSourcePath}, ${cssSourcePathAbsolute}`);
       return "";
     } catch (error) {
       console.error(`[inlineCSS] Error reading CSS from ${cssPath}:`, error.message);
