@@ -1,0 +1,675 @@
+{
+  "summary": {
+    "files_checked": 50,
+    "total_issues": 109,
+    "critical_issues": 0,
+    "warnings": 70,
+    "info": 39
+  },
+  "issues": {
+    "critical": [],
+    "warning": [
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/index.njk",
+        "message": "发现大字体类 7xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/index.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/price-list.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/about.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/about.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/guide/crop-tool.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/guide/identity-test.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/guide/identity-test.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/guide/faq.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/guide/makeup-and-hair.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "overflow-risk",
+        "file": "src/_includes/base-layout.njk",
+        "message": "可能存在水平滚动风险，建议添加overflow-x: hidden"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/booking/zhongshan.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/booking/index.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/booking/gongguan.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/korean-id.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/family.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/family.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/family.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/couples.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/couples.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/couples.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/workshop.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/workshop.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/medical.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/medical.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/medical.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/pet.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/pet.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/blog/pet.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/profile.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/blog/graduation.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/services/id-photo.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/services/id-photo.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/services/id-photo.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/services/portrait.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/services/portrait.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/services/group-photo.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/services/group-photo.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/services/group-photo.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/services/group-photo.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/_includes/macros/alert.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/_includes/macros/button.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/_includes/macros/button.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "touch-target-size",
+        "file": "src/_includes/macros/button.njk",
+        "message": "按钮/链接可能触摸目标太小（建议至少44x44px）"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/_includes/macros/hero-section.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      },
+      {
+        "severity": "warning",
+        "type": "large-text-no-breakpoint",
+        "file": "src/_includes/macros/price-card.njk",
+        "message": "发现大字体类 5xl 没有移动端断点"
+      }
+    ],
+    "info": [
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/components-showcase.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/index.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/index.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/price-list.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/price-list.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/about.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/about.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/guide/crop-tool.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/guide/crop-tool.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/guide/identity-test.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/guide/faq.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/guide/makeup-and-hair.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/guide/makeup-and-hair.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/_includes/base-layout.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/_includes/base-layout.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/booking/zhongshan.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/booking/index.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/booking/index.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/booking/gongguan.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/korean-id.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/family.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/couples.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/workshop.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/medical.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/pet.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/profile.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/blog/graduation.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/services/id-photo.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/services/id-photo.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/services/portrait.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/services/portrait.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/services/group-photo.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/_includes/macros/container.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/_includes/macros/layout-split.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/_includes/macros/layout-split.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/_includes/macros/comparison-table.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "large-spacing-no-breakpoint",
+        "file": "src/_includes/macros/price-card.njk",
+        "message": "大间距值建议添加移动端断点"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/_includes/macros/price-card.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      },
+      {
+        "severity": "info",
+        "type": "mobile-hidden",
+        "file": "src/_includes/partials/navigation.njk",
+        "message": "发现移动端隐藏的元素，请确认是否合理"
+      }
+    ]
+  },
+  "recommendations": [
+    "✅ 使用Chrome DevTools的设备模拟器测试不同屏幕尺寸",
+    "✅ 在真实移动设备上测试触摸交互",
+    "✅ 检查字体大小在小屏幕上的可读性"
+  ]
+}

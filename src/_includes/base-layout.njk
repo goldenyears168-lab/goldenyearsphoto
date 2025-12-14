@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>{{ title }}｜好時有影 Golden Years</title>
 
   {# --- [ SEO 驗證成功 ] --- #}
@@ -86,7 +86,7 @@
   </style>
 </head>
 
-<body class="text-slate-600 antialiased selection:bg-trust-100 selection:text-trust-900 font-sans flex flex-col min-h-screen bg-[#FDFBF7]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' opacity=\'0.03\'/%3E%3C/svg%3E');">
+<body class="text-slate-600 antialiased selection:bg-trust-100 selection:text-trust-900 font-sans flex flex-col min-h-screen bg-[#FDFBF7] overflow-x-hidden w-full max-w-[100vw] {% if pageType == 'home' %}page-home{% endif %}" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' opacity=\'0.03\'/%3E%3C/svg%3E');">
 
     {# 只給螢幕閱讀器 / Lighthouse 用的隱藏 h1~h4 #}
     <h1 class="visually-hidden">好時有影 Golden Years 主網站</h1>
@@ -96,16 +96,16 @@
 
     {% include "partials/navigation.njk" %}
 
-    <main class="pt-20 pb-20 px-4 md:px-8 max-w-[1400px] mx-auto">
+    <main class="pt-16 sm:pt-20 pb-20 px-4 md:px-8 max-w-[1400px] mx-auto">
         {{ content | safe }}
     </main>
 
     <!-- Footer -->
-    <footer class="mt-20 bg-[#FDFBF7] pt-16 pb-12 font-sans relative">
+    <footer class="mt-20 bg-[#FDFBF7] pt-16 pb-12 font-sans relative" style="padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0));">
         <div class="footer-edge"></div>
         <div class="absolute top-0 left-0 w-full h-px border-t border-dashed border-sand-300 opacity-50"></div>
 
-        <div class="container mx-auto px-4 max-w-[1400px] relative z-10">
+        <div class="container mx-auto px-4 max-w-[1400px] relative z-10" style="padding-left: calc(1rem + env(safe-area-inset-left, 0)); padding-right: calc(1rem + env(safe-area-inset-right, 0));">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
                 
                 <!-- Left: Locations -->
@@ -195,9 +195,24 @@
       data-api-endpoint="https://chatbot-service-9qg.pages.dev/api/goldenyears/chat"
       data-api-base-url="https://chatbot-service-9qg.pages.dev"
       data-page-type="{{ pageType | default('other') }}"
-      data-auto-open="{{ 'true' if pageType == 'home' else 'false' }}"
+      data-auto-open="false"
+      data-mobile-auto-open="false"
       defer
     ></script>
+    <script>
+      // 確保手機版 widget 默認關閉
+      window.addEventListener('DOMContentLoaded', function() {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+        if (isMobile && window.goldenyearsChatbot) {
+          // 如果 widget 已經載入，確保它是關閉的
+          try {
+            window.goldenyearsChatbot.close();
+          } catch(e) {
+            // Widget 可能尚未初始化，忽略錯誤
+          }
+        }
+      });
+    </script>
     
     {# 
       自定義域名版本（當 DNS 配置完成後使用）:

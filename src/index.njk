@@ -10,16 +10,10 @@ seo:
 ---
 
 <!-- Hero Section -->
-<div class="text-center mb-16 relative pt-24 md:pt-28 overflow-hidden">
-    <!-- Background Image - Very Subtle with Blur -->
-    <div class="absolute inset-0 -z-20 opacity-[0.04]">
-        <img src="{{ 'portfolio/family/family-2.jpg' | r2img }}" alt="" class="w-full h-full object-cover blur-[2px]" style="object-position: center; transform: scale(1.05);" aria-hidden="true" loading="eager" decoding="async" />
-    </div>
-    <!-- Subtle Overlay to Enhance Text Readability -->
-    <div class="absolute inset-0 -z-15 bg-gradient-to-b from-white/40 via-transparent to-white/30"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[400px] bg-dawn-gradient-strong rounded-full blur-[80px] -z-10 opacity-70 animate-pulse" style="animation-duration: 4s;"></div>
+<div class="home-hero text-center mb-8 sm:mb-12 md:mb-16 relative pt-16 sm:pt-20 md:pt-24 px-4 overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[60vw] aspect-square sm:max-w-md sm:h-[400px] bg-dawn-gradient-strong rounded-full blur-[80px] -z-10 opacity-70 animate-pulse hero-bg-blur" style="animation-duration: 4s;"></div>
 
-    <div class="relative z-10 inline-flex items-center gap-3 px-5 py-2 bg-white/95 backdrop-blur-sm border border-trust-200 rounded-full mb-8 shadow-sm animate-float">
+    <div class="inline-flex items-center gap-3 px-5 py-2 bg-white border border-trust-200 rounded-full mb-8 shadow-sm animate-float">
         <span class="flex h-2 w-2 relative">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -27,27 +21,27 @@ seo:
         <span class="text-xs font-bold text-slate-600 tracking-wide uppercase">台北專業攝影工作室</span>
     </div>
     
-    <h1 class="relative z-10 text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-6 drop-shadow-[0_2px_8px_rgba(255,255,255,0.8)]">
-        Your Ticket to <br>
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-slate-600 to-slate-400 font-serif italic font-normal px-2 drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)]" style="text-shadow: 0 2px 8px rgba(255,255,255,0.9);">the next chapter.</span>
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-7xl xl:text-8xl font-bold text-slate-900 tracking-tight leading-[1.15] sm:leading-[1.1] mb-4 sm:mb-6 px-2 sm:px-4">
+        Your Ticket to <br class="hidden sm:block">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-slate-600 to-slate-400 font-serif italic font-normal px-2 block sm:inline">the next chapter.</span>
     </h1>
     
-    <p class="relative z-10 text-lg md:text-xl text-slate-700 max-w-2xl mx-auto leading-relaxed mb-4 font-medium drop-shadow-[0_1px_4px_rgba(255,255,255,0.8)]">
+    <p class="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-4 font-medium px-4">
           讓每一個「好時」，都有你我的「身影」
         </p>
     
-    <p class="relative z-10 text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_1px_3px_rgba(255,255,255,0.8)]">
+    <p class="text-sm sm:text-base md:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed px-4">
           台北專業履歷・形象照攝影｜專為頂尖學府與百大企業打造的專業形象
         </p>
 </div>
 
 <!-- Portfolio Section (Interactive Hub) -->
-<section id="portfolio" class="py-16 md:py-24">
+<section id="portfolio" class="py-12 sm:py-16 md:py-24">
     
     <!-- Capability Cloud: All Buttons -->
-    <div class="mb-10 text-center">
+    <div class="mb-10 text-center max-w-[1400px] mx-auto">
         <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">找到你的專屬風格</p>
-        <div class="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto px-4">
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-5xl mx-auto category-pill-container">
             <!-- Default Active -->
             <button class="category-pill active" onclick="filterPortfolio('passport-korea', this)">韓式證件照</button>
             
@@ -80,7 +74,7 @@ seo:
       </div>
 
     <!-- Dynamic Gallery Grid -->
-    <div id="portfolio-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    <div id="portfolio-grid" class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8">
         <!-- Initial Content (Will be replaced by JS) -->
   </div>
 </section>
@@ -507,23 +501,40 @@ seo:
         // Fallback to passport-korea if category not found
         const data = portfolioData[category] || portfolioData['passport-korea'];
       
-        // Adjust Grid Layout based on data type - No fixed row height, let images maintain aspect ratio
+        // Adjust Grid Layout based on data type - 響應式間距
         if (data.layout === 'horizontal') {
-            grid.className = "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6";
+            grid.className = "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-[1400px] mx-auto px-0";
       } else {
-            grid.className = "grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6";
+            grid.className = "grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-[1400px] mx-auto px-0";
       }
 
         // Render Items with Fade Effect - No cropping, preserve aspect ratio
-        grid.innerHTML = data.items.map((item, index) => `
+        // 圖片響應式優化：使用 srcset 和 sizes
+        grid.innerHTML = data.items.map((item, index) => {
+            // 生成響應式圖片尺寸（如果 CDN 支援）
+            const baseSrc = item.src;
+            // 假設 CDN 支援 ?w= 參數來調整寬度，如果不支援則使用原圖
+            const srcset = `${baseSrc}?w=400 400w, ${baseSrc}?w=800 800w, ${baseSrc}?w=1200 1200w`;
+            const sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
+            
+            return `
             <div class="portfolio-img-card animate-fade-in group border border-slate-100" style="animation-delay: ${index * 0.1}s">
-                <img src="${item.src}" alt="${item.sub}" loading="lazy">
+                <img 
+                    src="${baseSrc}" 
+                    srcset="${srcset}"
+                    sizes="${sizes}"
+                    alt="${item.sub}" 
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover object-center"
+                >
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end items-start">
                     <span class="inline-block bg-white/20 backdrop-blur text-white text-xxs font-bold px-2 py-1 rounded mb-1">${item.tag}</span>
                     <span class="text-white text-xs font-bold tracking-wide">${item.sub}</span>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
     }
 </script>
 
@@ -555,4 +566,5 @@ seo:
             }
         });
     }
+
 </script>

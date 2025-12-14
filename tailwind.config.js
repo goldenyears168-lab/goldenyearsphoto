@@ -122,6 +122,12 @@ module.exports = {
         '2xl': '1.5rem',    // 24px
         '3xl': '1.875rem',  // 30px
         '4xl': '2.25rem',   // 36px
+        // Fluid Typography (流動字體)
+        'fluid-hero': 'clamp(1.875rem, 5vw + 1rem, 4.5rem)',      // 30px - 72px
+        'fluid-subtitle': 'clamp(1rem, 2vw + 0.5rem, 1.25rem)',   // 16px - 20px
+        'fluid-body': 'clamp(0.875rem, 1vw + 0.5rem, 1rem)',      // 14px - 16px
+        'fluid-xl': 'clamp(1.5rem, 3vw + 0.5rem, 2.25rem)',       // 24px - 36px
+        'fluid-2xl': 'clamp(1.875rem, 4vw + 0.5rem, 3rem)',       // 30px - 48px
       },
       
       lineHeight: {
@@ -203,9 +209,16 @@ module.exports = {
       },
       
       screens: {
-        'md': '768px',
-        'lg': '992px',
-        'xl': '1200px',
+        // Mobile-first breakpoints (手機專用)
+        'xs': '360px',      // 最小手機 (iPhone SE)
+        'sm': '375px',      // 標準手機 (iPhone 12/13/14)
+        'mobile-md': '390px', // 較大手機 (iPhone 12/13 Pro Max)
+        'mobile-lg': '414px', // 最大手機 (iPhone Plus)
+        // Standard breakpoints (保持向後兼容)
+        'md': '768px',      // 平板 (保持原有語義)
+        'lg': '992px',      // 小桌機 (保持原有語義)
+        'xl': '1200px',     // 大桌機 (保持原有語義)
+        '2xl': '1400px',    // 超大桌機
       },
       
       // Transition durations
