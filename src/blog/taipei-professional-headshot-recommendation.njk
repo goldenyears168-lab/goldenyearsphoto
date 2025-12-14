@@ -1,0 +1,749 @@
+---
+layout: "base-layout.njk"
+title: "專業形象照推薦名單！12 間個人形象照推薦店家、拍照姿勢、費用一次看 - 好時有影"
+seo:
+  description: "【2025最新】想拍履歷照、LinkedIn形象照卻不知道選哪間？本文整理12間以上台北、台中、高雄專業形象照推薦店家，包含HOLO+FACE、好時有影、CHUN3春山相館等熱門店家評比、價格比較、拍照姿勢教學。從NT$599到NT$15,000完整費用行情，學生、求職者、企業主管都能找到最適合的形象照方案。"
+  keywords: "專業形象照推薦, 個人形象照, 履歷照, LinkedIn形象照, 台北形象照推薦, 台中形象照, 高雄形象照, 形象照費用, 形象照價格, 形象照姿勢, 形象照店家推薦, 學生形象照, 求職形象照, 韓式形象照, 形象照攝影, 形象照拍攝, 形象照工作室, 形象照推薦台北, 形象照推薦台中, 形象照推薦高雄"
+  ogTitle: "專業形象照推薦名單！12間店家完整評比、費用、姿勢教學"
+  ogDescription: "2025最新形象照推薦指南：12間以上台北、台中、高雄店家評比，包含價格、風格、適合族群完整分析。從NT$599到NT$15,000，找到最適合你的專業形象照方案。"
+---
+
+{% from "macros/layout-split.njk" import layoutSplit %}
+{% from "macros/testimonial-card.njk" import testimonialCard %}
+{% from "macros/button.njk" import button %}
+
+<!-- TYPE A: Standard Center Header -->
+<header class="relative pt-32 pb-16 overflow-hidden">
+    <!-- Background Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-dawn-gradient -z-10 opacity-60"></div>
+
+    <!-- Decorative Stamp (Human Touch) -->
+    <div class="artisan-stamp top-20 right-[15%] hidden md:flex" aria-hidden="true">
+        <div>
+            Taipei<br>
+            <span class="font-serif italic text-xs">Est. 2026</span>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <!-- Wayfinding Tag: Refined Serif -->
+        <div class="inline-flex items-center gap-3 mb-6 opacity-80 border-b border-sand-200 pb-1">
+            <span class="font-serif italic text-slate-500 text-lg">Section No.</span>
+            <span class="font-hand text-2xl text-trust-900 -mt-1">10</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-trust-950 mb-6 tracking-tight">
+            專業形象照推薦名單：12間以上台北、台中、高雄形象照店家完整評比
+        </h1>
+        
+        <p class="text-lg text-slate-500 max-w-xl mx-auto leading-relaxed mb-8">
+            履歷照、LinkedIn形象照、個人品牌形象照推薦｜拍照姿勢教學、費用行情、店家評比一次看
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            {{ button("立即預約拍攝", "/booking/", "primary", "md") }}
+            {{ button("查看價目表", "/price-list/", "secondary", "md") }}
+        </div>
+    </div>
+
+    <!-- The Journey Divider -->
+    <div class="container mx-auto px-4 max-w-6xl mt-16 relative">
+        <div class="journey-divider"></div>
+        <div class="journey-notch left"></div>
+        <div class="journey-notch right"></div>
+    </div>
+</header>
+
+<div class="py-16 md:py-24">
+    <div class="container mx-auto px-4 max-w-5xl">
+
+        <div class="text-center mb-16">
+            <p class="text-lg md:text-xl text-slate-600 mb-4 leading-relaxed">
+                想拍一組能用在<strong>履歷、LinkedIn、個人品牌官網或社群頭貼</strong>的專業形象照，卻不知道該選哪一間攝影工作室嗎？
+            </p>
+            <p class="text-xl md:text-2xl font-bold text-slate-800 mb-4">
+                市面上的形象照店家從連鎖品牌、老字號照相館到個人工作室選擇眾多，<strong>風格、價格與服務差異也很大</strong>。
+            </p>
+            <p class="text-base md:text-lg text-slate-600">
+                本文為<strong>2025年最新</strong>專業形象照推薦指南，涵蓋<strong>台北、台中、高雄</strong>三大都會區，從<strong>NT$599入門方案到NT$15,000高階服務</strong>，幫你找到最適合的專業形象照店家。
+            </p>
+        </div>
+
+        <!-- 目錄 -->
+        <div class="bento-card bento-card-sand mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">文章目錄（快速導航）</h2>
+            <nav class="space-y-2" aria-label="文章目錄">
+                <a href="#what-is-headshot" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">一、形象照是什麼？為什麼越來越多人需要專業形象照？</a>
+                <a href="#recommendations" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">二、專業形象照推薦名單｜12 間以上人氣形象照店家評比（台北、台中、高雄）</a>
+                <a href="#pricing" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">三、拍個人形象照要花多少錢？2025年形象照費用行情完整整理</a>
+                <a href="#posing" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">四、形象照姿勢怎麼擺？專業形象照拍攝姿勢教學與注意事項</a>
+                <a href="#how-to-choose" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">五、專業形象照推薦怎麼選？不同需求適合哪一間？</a>
+                <a href="#trends" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">六、形象照市場趨勢與選擇策略</a>
+                <a href="#faq" class="block text-slate-700 hover:text-trust-900 transition-colors py-1">七、常見問題 FAQ</a>
+            </nav>
+        </div>
+
+        <!-- 一、形象照是什麼？ -->
+        <section id="what-is-headshot" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">一、形象照是什麼？為什麼越來越多人需要專業形象照？</h2>
+            
+            <div class="prose prose-lg max-w-none text-slate-700 leading-relaxed">
+                <p class="mb-4">
+                    <strong>專業形象照</strong>是一種「有目的性的肖像照」，不同於日常生活照或制式證件照，形象照更重視：
+                </p>
+                <ul class="list-disc pl-6 mb-6 space-y-2">
+                    <li><strong>個人專業感與可信度</strong>：透過專業攝影技術展現職場專業形象</li>
+                    <li><strong>表情、姿態與肢體語言</strong>：捕捉自信、親和或權威的氣場</li>
+                    <li><strong>服裝、妝髮與整體氛圍</strong>：完整造型設計，符合使用場景需求</li>
+                    <li><strong>照片實際使用場景</strong>：履歷照、LinkedIn頭像、個人品牌官網、社群媒體、公司官網團隊介紹等</li>
+                </ul>
+                <p class="mb-4">
+                    無論是<strong>求職新鮮人、轉職者、創作者、自由接案者、企業主管</strong>，一張對的專業形象照，往往就是他人對你的<strong>第一印象</strong>，直接影響求職成功率、品牌信任度與專業形象。
+                </p>
+                <div class="bento-card bento-card-sand mt-6">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">專業形象照的常見用途</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-700">
+                        <li><strong>履歷照</strong>：求職、實習、研究所申請</li>
+                        <li><strong>LinkedIn形象照</strong>：建立專業人脈網絡</li>
+                        <li><strong>個人品牌官網</strong>：創作者、講師、顧問的個人介紹頁</li>
+                        <li><strong>社群媒體頭貼</strong>：Instagram、Facebook、Twitter專業形象</li>
+                        <li><strong>公司官網團隊介紹</strong>：企業官網、關於我們頁面</li>
+                        <li><strong>演講、課程宣傳</strong>：講師介紹、課程海報</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 二、專業形象照推薦名單 -->
+        <section id="recommendations" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">二、專業形象照推薦名單｜12 間以上人氣形象照店家評比（台北、台中、高雄）</h2>
+            
+            <p class="text-slate-600 mb-8">
+                以下依照<strong>服務特色、風格定位與適合族群</strong>進行整理，涵蓋<strong>台北、台中、高雄</strong>三大都會區，包含連鎖品牌、個人工作室、老字號照相館等不同類型，排名不分先後。每間店家都附上<strong>價格、特色、CP值評價</strong>，方便你快速比較選擇。
+            </p>
+
+            <!-- 推薦 1：好時有影 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 1：好時有影（台北專業形象照推薦）</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：求職者、學生、創作者、個人品牌經營者</p>
+                <p class="mb-4">
+                    <strong>好時有影</strong>主打「職涯啟程」與「祝福儀式」概念，強調<strong>專業形象照</strong>不只是拍好看，而是能實際用在下一個人生階段。特別適合需要<strong>履歷照、LinkedIn形象照</strong>的求職者與學生。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>攝影師引導明確，適合第一次拍形象照的人，解決姿勢障礙問題</li>
+                        <li>風格自然耐看，不過度修圖、不失真，保留個人特色</li>
+                        <li>對<strong>履歷照、LinkedIn形象照</strong>、學生族群特別友善，提供學生優惠</li>
+                        <li>價格相對親民，適合預算有限但重視品質者</li>
+                        <li>提供<strong>以張計價</strong>、<strong>可單獨購買</strong>的彈性方案</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    👉 如果你想要的是「好用、專業、不浮誇」的<strong>專業形象照</strong>，好時有影是許多學生與年輕上班族的首選。<a href="/blog/profile" class="text-trust-700 hover:text-trust-900 underline">了解更多好時有影形象照方案</a>
+                </p>
+            </div>
+
+            <!-- 推薦 2：HOLO＋FACE -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 2：HOLO＋FACE（全台最大連鎖品牌）</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：喜歡韓系風格、想要精緻妝髮者、企業團體</p>
+                <p class="mb-4">
+                    <strong>HOLO＋FACE</strong>為全台最大連鎖品牌，無疑是將「<strong>韓式證件照</strong>」概念在台灣商業化最成功的品牌。其營運模式類似於「攝影界的星巴克」，強調標準化、可複製的高品質體驗，分店遍佈<strong>台北、台中、高雄</strong>，交通便利。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>工業化美學的極致標竿：使用大口徑柔光箱配合反光板，創造出幾乎無陰影的潔淨畫面</li>
+                        <li>一站式服務：從官網預約、報到、領取服裝、專業彩妝師造型，到攝影師引導、一對一修圖</li>
+                        <li>提供「職業形象照」、「情緒寫真」等細分產品</li>
+                        <li>價格：經典形象照原價約 NT$3,500，優惠價約 NT$2,600</li>
+                        <li>分店多，交通便利，但各分店品質略有差異，建議先看作品</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：考慮到包含妝髮與服裝，且全台多點服務的便利性，其價格具有合理的市場支撐力。
+                </p>
+            </div>
+
+            <!-- 推薦 3：CHUN3 春山相館 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 3：CHUN3 春山相館</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：重視整體包裝與儀式感者、時尚產業工作者</p>
+                <p class="mb-4">
+                    CHUN3 春山相館是近年來台中最受矚目的店家之一，據點位於一中商圈與台北。其品牌視覺設計極具現代感，店內裝潢如同網美咖啡廳。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>提出「完顏證件照」概念，風格結合了韓式的清透與日系的空氣感</li>
+                        <li>「MAG 高智感」雜誌風格形象照：運用特殊的佈光讓人物呈現出如同時尚雜誌封面的質感</li>
+                        <li>提供「All-in-One」一站式服務，包含精緻妝髮與拍攝指導</li>
+                        <li>獨家的「隨拍即看」系統讓客戶能即時確認成果</li>
+                        <li>價格：完顏證件照 NT$1,200；職人形象照（半身+全身）優惠價 NT$4,800；雜誌感形象照（3張）NT$6,300</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：雖然價格屬於中高價位，但考慮到其提供的設計價值與獨特風格，對於重視「品味」的客戶來說物有所值。
+                </p>
+            </div>
+
+            <!-- 推薦 4：亞洲攝影 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 4：亞洲攝影</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：預算導向、希望實惠價格者</p>
+                <p class="mb-4">經營多年的老字號照相館，價格相對親民，適合只需要基本專業形象照的人。</p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>價格實在</li>
+                        <li>攝影風格偏傳統</li>
+                        <li>妝髮與風格選擇較少</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 推薦 5：日春 kacha 照相館 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 5：日春 kacha 照相館</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：韓式證件照、清新風格愛好者</p>
+                <p class="mb-4">以韓式證件照起家，也提供形象照拍攝服務，整體風格偏乾淨、明亮。</p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>妝髮自然、風格清新</li>
+                        <li>店內流程流暢</li>
+                        <li>偏向證件照延伸的形象拍攝</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 推薦 6：Qoopio 大研創意 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 6：Qoopio 大研創意</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：想拍多元題材、非純商務風格者、創意工作者、設計師</p>
+                <p class="mb-4">
+                    若 Holo+FACE 是標準化的代表，Qoopio 大研創意則更像是巷弄中的精品選物店，強調「客製化」與「溫度」。分店選址於人文氣息濃厚的中山區與住宅區景美。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>修圖哲學享有極高評價，被稱為「像自己，但是是變漂亮的自己」，避免過度磨皮</li>
+                        <li>攝影師擅長捕捉受攝者「不經意」的自信瞬間</li>
+                        <li>提供背景色選擇建議，不僅限於單調的灰白</li>
+                        <li>承諾拍攝完畢三小時內即可透過 LINE 傳送修圖校稿，當晚取件</li>
+                        <li>價格：證件照純拍攝 NT$599 起，含精緻彩妝約 NT$1,299；形象照半身照約 NT$1,299 至 NT$2,199</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：入門門檻低（NT$599 方案），讓只想單純拍攝的客戶無負擔；而全套服務的價格也略低於 Holo+FACE，展現了極佳的競爭力。
+                </p>
+            </div>
+
+            <!-- 推薦 7：Black Deer Image 黑鹿影像 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 7：Black Deer Image 黑鹿影像</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：想拍全身形象、空間感照片者、音樂家、藝術家、作家</p>
+                <p class="mb-4">
+                    黑鹿影像在台中市場獨樹一格。當大多數店家都在追求「白、亮、透」時，黑鹿擅長運用「暗調」（Low-Key）與對比色。他們的形象照常帶有電影劇照的氛圍。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>光影敘事的藝術家風格：運用暗調與對比色，強烈凸顯人物的眼神與臉部輪廓</li>
+                        <li>風格適合音樂家、藝術家、作家或想要展現「深度」的專業人士</li>
+                        <li>擁有完整攝影棚空間，適合拍攝較有場景感的形象照</li>
+                        <li>風格偏個性與創作感，帶有電影劇照的氛圍</li>
+                        <li>價格略高，屬於藝術風格的高階選擇</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 推薦 8：Ohmo Studio 奧莫韓式照相館 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 8：Ohmo Studio 奧莫韓式照相館</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：想要明星感、強烈造型者、學生、社會新鮮人</p>
+                <p class="mb-4">
+                    深耕於公館台大商圈的 Ohmo Studio，精準鎖定學生與社會新鮮人族群。其品牌形象年輕、活潑，據點包括台北公館、板橋。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>學區內的性價比之王：相比於大型連鎖店動輒三千起跳的價格，Ohmo 將形象照控制在兩千元以內</li>
+                        <li>風格承襲了韓系的清亮與粉嫩，特別針對年輕肌膚的處理有一套標準</li>
+                        <li>攝影師多為年輕女性，被評價為「活潑」、「會引導」，能有效消除被攝者的緊張感</li>
+                        <li>價格：半身形象照 NT$1,800；職業形象照 NT$2,300</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：預算有限者的最佳選擇，品質穩定且價格親民。
+                </p>
+            </div>
+
+            <!-- 推薦 9：StyleLab 風格實驗室 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 9：StyleLab 風格實驗室</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：需要強烈個人風格與氣場的專業人士、律師、醫師、健身教練、企業高管</p>
+                <p class="mb-4">
+                    位於台北東區時尚核心地帶的 StyleLab，其品牌基因帶有濃厚的「時尚雜誌」色彩。他們將商業廣告攝影的規格「降維」應用於個人形象照。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>時尚商業攝影的降維打擊：光影運用更為大膽、立體，常使用硬光（Hard Light）來雕塑臉部輪廓</li>
+                        <li>特別適合律師、醫師、健身教練、企業高管等需要展現「權威感」與「專業度」的角色</li>
+                        <li>提供如同明星般的拍攝體驗，妝髮時間長達 30-60 分鐘</li>
+                        <li>價格：職業形象照（特價）NT$2,100（含妝髮、修圖），高階方案可達 NT$3,900 至 NT$7,900</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：其 NT$2,100 的方案在台北東區精華地段幾乎是「破盤價」，讓消費者能以親民價格體驗商業攝影的品質。
+                </p>
+            </div>
+
+            <!-- 推薦 10：Face ID Studio -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 10：Face ID Studio</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：喜歡韓系風格、重視妝髮細節者</p>
+                <p class="mb-4">
+                    Face ID Studio 是台北另一家主打韓式風格的工作室。根據網路評價與 Dcard 推薦，他們以妝髮的細緻度著稱。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>精緻妝髮的競爭者，以妝髮的細緻度著稱</li>
+                        <li>價格區間與 Holo+FACE 重疊，是消費者在預約不到龍頭店家時的優質替代方案</li>
+                        <li>服務品質穩定，風格符合韓式標準</li>
+                        <li>價格：精緻妝髮方案約 NT$3,100，基礎妝髮 NT$2,700</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 推薦 11：Chuck Su 查克蘇照相館 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 11：Chuck Su 查克蘇照相館（南部）</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：企業主、政治人物、高階經理人、追求極致品質者</p>
+                <p class="mb-4">
+                    Chuck Su 查克蘇照相館在南台灣樹立了難以跨越的價格與品質門檻。他們不將自己定位為單純的照相館，而是「形象顧問」與「品質保證」。據點包括高雄左營富民旗艦、鳳山文山、巨蛋。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>南台灣的奢華指標：照片質感極其細膩，光影層次豐富，具有高度的立體感</li>
+                        <li>推出業界少見的「證件照保固」服務——若證件照因拍攝問題導致申辦不通過，免費重拍直到通過</li>
+                        <li>價格：形象照（全身+半身，6張）NT$15,000；證件照妝髮方案（6張）NT$7,500</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：這是屬於「身分地位象徵」的消費。對於企業主、政治人物或高階經理人而言，一張查克蘇的照片代表的是對個人品牌的極致重視。
+                </p>
+            </div>
+
+            <!-- 推薦 12：Jing Photo J相館 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">形象照推薦 12：Jing Photo J相館（南部）</h3>
+                <p class="text-lg font-semibold text-slate-700 mb-4">適合族群：預算有限但重視品質者、學生、社會新鮮人</p>
+                <p class="mb-4">
+                    位於高雄火車站附近的 J相館，以極具競爭力的價格與透明的方案迅速崛起。據點包括高雄三民、台南。
+                </p>
+                <div class="space-y-2">
+                    <p><strong>特色重點：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>價格破壞者與品質普及者：儘管價格親民，仍堅持使用全片幅相機與專業棚燈</li>
+                        <li>風格主打「日常專業風」與「韓系質感」，背景色提供白、灰、粉等多樣選擇</li>
+                        <li>強調光線自然、表情自信，並提供現場挑片與 2-3 日交件的效率服務</li>
+                        <li>價格：單張形象照 NT$1,000；三張方案 NT$2,500；妝髮加購 +NT$500</li>
+                    </ul>
+                </div>
+                <p class="mt-4 text-slate-700">
+                    CP值評價：單張一千元的價格，加上五百元的妝髮，讓學生或社會新鮮人僅需 NT$1,500 就能擁有一張專業形象照。這是目前市場上最具競爭力的價格之一。
+                </p>
+            </div>
+
+            <!-- 其他推薦店家 -->
+            <div class="bento-card bento-card-sand mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">其他推薦店家</h3>
+                <div class="space-y-4">
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-2">Mark Good Photo 馬可攝影（高雄）</p>
+                        <p class="text-slate-700">強調拍照的「儀式感」，提供胸上履歷/社群頭貼 NT$1,000，韓式證件照 NT$600，適合需要 LinkedIn 或公司通訊錄專用照片者</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-2">Five Studio（新北新莊）</p>
+                        <p class="text-slate-700">擅長運用「自然光」營造溫暖、居家、不造作的氛圍，適合部落客、作家、心理諮商師或親子教育工作者</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-2">Gooday101 好日写真（台北）</p>
+                        <p class="text-slate-700">主打「變身」概念，擅長極度精緻的妝髮造型與主題式場景，風格華麗、夢幻，個人變身寫真現金優惠價約 NT$8,000</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-2">Sanmao 三毛攝影（台中）</p>
+                        <p class="text-slate-700">傳統專業、穩重可靠，適合公務人員、教師、傳統產業主管</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-800 mb-2">Han Guo Studio 韓菓工作室（台中）</p>
+                        <p class="text-slate-700">以「家」為核心，親子友善、寵物友善，證件照與全家福人頭計費 NT$500 起</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 三、費用行情 -->
+        <section id="pricing" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">三、拍個人形象照要花多少錢？2025年形象照費用行情完整整理</h2>
+            
+            <p class="text-slate-600 mb-6">
+                以下為<strong>2025年最新</strong>市場常見價格區間（實際依店家而定，建議預約前先確認最新報價）：
+            </p>
+            
+            <div class="bento-card bento-card-sand mb-6">
+                <h3 class="text-xl font-bold text-slate-900 mb-3">形象照價格快速比較表</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-slate-700">
+                        <thead>
+                            <tr class="border-b border-slate-200">
+                                <th class="text-left py-2 px-3 font-semibold">價格區間</th>
+                                <th class="text-left py-2 px-3 font-semibold">推薦店家</th>
+                                <th class="text-left py-2 px-3 font-semibold">適合族群</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-2 px-3">NT$1,000-2,000</td>
+                                <td class="py-2 px-3">Qoopio、Jing Photo、Ohmo Studio</td>
+                                <td class="py-2 px-3">學生、社會新鮮人、預算有限者</td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="py-2 px-3">NT$2,000-5,000</td>
+                                <td class="py-2 px-3">HOLO+FACE、StyleLab、Face ID</td>
+                                <td class="py-2 px-3">一般上班族、求職者、個人品牌</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3">NT$5,000以上</td>
+                                <td class="py-2 px-3">CHUN3、Chuck Su、Gooday101</td>
+                                <td class="py-2 px-3">企業主管、高階經理人、特殊需求</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- 入門級 -->
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">入門級（預算 NT$1,000-2,000）</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-700">
+                        <li><strong>Qoopio 大研創意</strong>：證件照 NT$599 起，形象照 NT$1,299-2,199</li>
+                        <li><strong>Jing Photo J相館</strong>：單張形象照 NT$1,000，妝髮加購 +NT$500</li>
+                        <li><strong>Ohmo Studio</strong>：半身形象照 NT$1,800，職業形象照 NT$2,300</li>
+                        <li><strong>Mark Good Photo</strong>：胸上履歷/社群頭貼 NT$1,000</li>
+                    </ul>
+                </div>
+
+                <!-- 中階級 -->
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">中階級（預算 NT$2,000-5,000）</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-700">
+                        <li><strong>HOLO＋FACE</strong>：經典形象照優惠價約 NT$2,600</li>
+                        <li><strong>StyleLab 風格實驗室</strong>：職業形象照特價 NT$2,100（含妝髮、修圖）</li>
+                        <li><strong>Face ID Studio</strong>：基礎妝髮 NT$2,700，精緻妝髮 NT$3,100</li>
+                        <li><strong>CHUN3 春山相館</strong>：職人形象照（半身+全身）優惠價 NT$4,800</li>
+                    </ul>
+                </div>
+
+                <!-- 高階級 -->
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">高階級（預算 NT$5,000 以上）</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-700">
+                        <li><strong>CHUN3 春山相館</strong>：雜誌感形象照（3張）NT$6,300</li>
+                        <li><strong>Chuck Su 查克蘇照相館</strong>：形象照（全身+半身，6張）NT$15,000</li>
+                        <li><strong>Gooday101 好日写真</strong>：個人變身寫真約 NT$8,000</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-slate-50 rounded-lg">
+                <p class="text-slate-700">
+                    <strong>其他費用：</strong>雙人／團體形象照：NT$4,500 起；加選照片／精修：每張約 NT$500～800
+                </p>
+                <p class="text-slate-600 mt-2">
+                    價格差異主要來自：是否含妝髮、修圖張數、校稿流程與品牌定位。建議在預約前先確認方案內容，避免現場加購造成預算超支。
+                </p>
+            </div>
+        </section>
+
+        <!-- 四、姿勢建議 -->
+        <section id="posing" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">四、形象照姿勢怎麼擺？專業形象照拍攝姿勢教學與注意事項</h2>
+            
+            <p class="text-slate-600 mb-6">
+                專業形象照的姿勢選擇會直接影響照片的<strong>專業感、親和力與個人氣場</strong>。以下整理常見好用的姿勢與拍攝前準備事項。
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">常見好用姿勢（適合履歷照、LinkedIn形象照）</h3>
+                    <ul class="space-y-3 text-slate-700">
+                        <li><strong>交叉雙手：</strong>展現專業、穩定、可信賴的形象，適合金融、法律、管理職</li>
+                        <li><strong>單手插口袋：</strong>自然、自信、不僵硬，適合創意產業、行銷、設計</li>
+                        <li><strong>微側身站立：</strong>臉部立體、顯瘦，適合各種職業，是最安全的選擇</li>
+                        <li><strong>坐姿前傾：</strong>親和、有企圖心，適合業務、顧問、講師</li>
+                        <li><strong>雙手自然下垂：</strong>簡潔、專業，適合正式場合、企業官網</li>
+                    </ul>
+                </div>
+
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">拍攝前必看注意事項</h3>
+                    <ul class="space-y-3 text-slate-700">
+                        <li><strong>服裝選擇：</strong>以「你要被怎麼看見」為準，深色傳遞專業，淺色傳遞親和</li>
+                        <li><strong>避免花俏圖案：</strong>條紋、格紋可能造成視覺干擾，素色最安全</li>
+                        <li><strong>前一晚睡眠充足：</strong>氣色差很多，黑眼圈和疲態很難完全靠修圖掩蓋</li>
+                        <li><strong>不會擺姿勢沒關係：</strong>選擇會引導的攝影師更重要，專業攝影師會幫你找到最適合的角度</li>
+                        <li><strong>提前溝通需求：</strong>告訴攝影師照片用途（履歷、LinkedIn、官網），他們會建議最適合的風格</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bento-card bento-card-sand">
+                <h3 class="text-xl font-bold text-slate-900 mb-4">不同用途的形象照姿勢建議</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-slate-700">
+                    <div>
+                        <p class="font-semibold mb-2">履歷照 / 求職用：</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>微側身 + 自然微笑</li>
+                            <li>眼神直視鏡頭，展現自信</li>
+                            <li>避免過於隨性的姿勢</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">LinkedIn形象照：</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>專業但不過於正式</li>
+                            <li>可以稍微展現個人特色</li>
+                            <li>適合半身或胸上構圖</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">個人品牌官網：</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>可以更個性化</li>
+                            <li>展現個人風格與氣場</li>
+                            <li>適合全身或半身構圖</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">企業官網團隊介紹：</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>統一風格與構圖</li>
+                            <li>專業、正式、可信賴</li>
+                            <li>通常為胸上或半身</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 五、如何選擇 -->
+        <section id="how-to-choose" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">五、專業形象照推薦怎麼選？不同需求適合哪一間？</h2>
+            
+            <p class="text-slate-600 mb-6">
+                選擇<strong>專業形象照</strong>店家時，除了價格考量，更重要的是找到<strong>符合你需求、風格與預算</strong>的店家。以下根據不同族群與需求，提供精準的推薦建議。
+            </p>
+            
+            <div class="bento-card bento-card-sand mb-6">
+                <h3 class="text-xl font-bold text-slate-900 mb-4">根據需求選擇專業形象照店家</h3>
+                <div class="space-y-4 text-slate-700">
+                    <div>
+                        <p class="font-semibold text-slate-900 mb-2">如果你是：</p>
+                    </div>
+                    <ul class="space-y-3">
+                        <li><strong>求職新鮮人／學生</strong> → <a href="#recommendations" class="text-trust-700 hover:text-trust-900 underline">好時有影</a>、Ohmo Studio、Jing Photo J相館（南部）、Qoopio 大研創意（預算NT$1,000-2,000）</li>
+                        <li><strong>想要韓系精緻妝髮</strong> → <a href="#recommendations" class="text-trust-700 hover:text-trust-900 underline">HOLO＋FACE</a>、Ohmo Studio、Face ID Studio、CHUN3 春山相館（預算NT$2,000-5,000）</li>
+                        <li><strong>重視包裝與儀式感</strong> → CHUN3 春山相館、Mark Good Photo 馬可攝影（預算NT$2,000-6,000）</li>
+                        <li><strong>預算有限，只要專業感</strong> → 亞洲攝影、Qoopio 大研創意（NT$599 起）、Jing Photo J相館（NT$1,000 起）</li>
+                        <li><strong>已有明確風格想法</strong> → StyleLab 風格實驗室、Black Deer 黑鹿影像、個人攝影師（預算彈性）</li>
+                        <li><strong>需要極致品質與尊榮體驗</strong> → Chuck Su 查克蘇照相館（預算NT$15,000以上）</li>
+                        <li><strong>想要生活感與自然風格</strong> → Five Studio、Qoopio 大研創意（預算NT$1,500-3,000）</li>
+                        <li><strong>需要主題造型與變身體驗</strong> → Gooday101 好日写真（預算NT$8,000以上）</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bento-card bento-card-sand">
+                <h3 class="text-xl font-bold text-slate-900 mb-4">根據用途選擇專業形象照風格</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-slate-700">
+                    <div>
+                        <p class="font-semibold mb-2">履歷照 / 求職用：</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>推薦：好時有影、Ohmo Studio、Qoopio大研創意</li>
+                            <li>風格：專業、正式、可信賴</li>
+                            <li>預算：NT$1,000-2,500</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">LinkedIn形象照：</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>推薦：好時有影、HOLO+FACE、StyleLab</li>
+                            <li>風格：專業但不過於正式，展現個人特色</li>
+                            <li>預算：NT$2,000-4,000</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">個人品牌官網：</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>推薦：StyleLab、Black Deer、CHUN3</li>
+                            <li>風格：個性化、展現個人風格與氣場</li>
+                            <li>預算：NT$3,000-8,000</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2">企業官網團隊介紹：</p>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            <li>推薦：HOLO+FACE、Chuck Su、StyleLab</li>
+                            <li>風格：統一風格、專業、正式</li>
+                            <li>預算：NT$2,500-15,000（視人數而定）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 六、市場趨勢 -->
+        <section id="trends" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">六、形象照市場趨勢與選擇策略</h2>
+            
+            <div class="space-y-6">
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">6.1 從「韓式」到「多元化」的風格演變</h3>
+                    <p class="text-slate-700 mb-4">
+                        台灣形象照市場正經歷一場由「韓式精緻美學」與「歐美自然質感」相互激盪的風格革命。
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-700">
+                        <li><strong>韓式風格</strong>：強調高明度、低對比、膚質透亮、五官對稱，適合求職者、服務業、空服員</li>
+                        <li><strong>歐美雜誌風格</strong>：使用硬光、高對比、強調輪廓，適合高階主管、律師、講師、時尚產業</li>
+                    </ul>
+                </div>
+
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">6.2 拍攝前的準備策略</h3>
+                    <ul class="list-disc pl-6 space-y-3 text-slate-700">
+                        <li><strong>服裝心理學：</strong>深藍色傳遞信任（適合金融/法律），白色傳遞開放與創意（適合設計/行銷），黑色傳遞權威（適合管理層）</li>
+                        <li><strong>皮膚管理：</strong>拍攝前三天加強保濕，避免去角質導致紅腫。雖然有修圖，但底妝的服貼度決定了照片的質感</li>
+                        <li><strong>表情練習：</strong>在鏡子前練習「眼神用力」（Squinch），即下眼瞼微微用力，能讓眼神更專注有神</li>
+                    </ul>
+                </div>
+
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">6.3 未來趨勢：AI 與真實性的博弈</h3>
+                    <p class="text-slate-700">
+                        展望 2025 年及未來，形象照市場將面臨 AI 生成頭像的挑戰。然而，AI 生成的照片往往過於完美而顯得「虛假」，未來的趨勢將是「回歸真實」——保留皮膚紋理、展現真實歲月痕跡的「性格肖像」將比過度磨皮的「糖水照」更具說服力。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 總結 -->
+        <section class="mb-16">
+            <div class="bento-card bento-card-sand text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">總結：如何選擇最適合的專業形象照店家？</h2>
+                <p class="text-lg text-slate-700 mb-4 leading-relaxed">
+                    一張好的<strong>專業形象照</strong>，能陪你走過履歷投遞、面試、品牌曝光與職涯轉換。無論是<strong>履歷照、LinkedIn形象照</strong>，還是個人品牌官網，選對形象照店家至關重要。
+                </p>
+                <div class="text-left max-w-3xl mx-auto mb-6">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">選擇專業形象照店家的關鍵因素：</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-700 text-left">
+                        <li><strong>預算考量</strong>：從NT$599入門方案到NT$15,000高階服務，根據需求選擇合適價格區間</li>
+                        <li><strong>風格定位</strong>：韓系精緻、歐美自然、藝術創作等，選擇符合個人氣質的風格</li>
+                        <li><strong>使用場景</strong>：履歷照、LinkedIn、官網等不同用途，需要不同的風格與構圖</li>
+                        <li><strong>服務品質</strong>：攝影師引導能力、修圖技術、交件時間等都是重要考量</li>
+                        <li><strong>地理位置</strong>：台北、台中、高雄都有優質店家，選擇交通便利的據點</li>
+                    </ul>
+                </div>
+                <p class="text-xl font-bold text-slate-900 mb-6">
+                    與其追求流行，不如選擇<strong>真正適合你現在人生階段的那一張照片</strong>。
+                </p>
+                <p class="text-lg text-slate-700 mb-8">
+                    如果你正在為下一步做準備，選對<strong>專業形象照</strong>，就是最好的起點。立即預約拍攝，展現你的專業自信！
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    {{ button("立即預約拍攝", "/booking/", "primary", "md") }}
+                    {{ button("查看價目表", "/price-list/", "secondary", "md") }}
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ 常見問題 -->
+        <section id="faq" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">常見問題 FAQ</h2>
+            
+            <div class="space-y-6">
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q1：專業形象照和證件照有什麼不同？</h3>
+                    <p class="text-slate-700">
+                        <strong>證件照</strong>主要用於正式文件（護照、身分證、履歷表），有嚴格的尺寸、背景、表情規範。<strong>專業形象照</strong>則更注重個人風格與專業形象展現，可以用於LinkedIn、個人品牌官網、社群媒體等，風格選擇更多元，可以展現個人特色與氣場。
+                    </p>
+                </div>
+                
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q2：拍形象照需要自己準備服裝嗎？</h3>
+                    <p class="text-slate-700">
+                        視店家而定。大型連鎖品牌如<strong>HOLO+FACE</strong>通常會提供西裝外套、襯衫等基本服裝；個人工作室或小型店家可能需要自備。建議預約前先詢問店家是否提供服裝，或參考店家的服裝建議。一般建議準備<strong>深色或淺色素面服裝</strong>，避免花俏圖案。
+                    </p>
+                </div>
+                
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q3：形象照價格包含妝髮嗎？</h3>
+                    <p class="text-slate-700">
+                        不一定。有些店家提供<strong>「純拍攝」</strong>和<strong>「含妝髮」</strong>兩種方案，價格差異約NT$500-1,500。建議預約前確認方案內容，避免現場加購造成預算超支。如果預算有限，也可以選擇純拍攝方案，自己化淡妝即可。
+                    </p>
+                </div>
+                
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q4：學生拍形象照有優惠嗎？</h3>
+                    <p class="text-slate-700">
+                        部分店家提供學生優惠，如<strong>好時有影、Ohmo Studio</strong>等對學生族群特別友善。建議預約時主動詢問是否有學生折扣，或查看店家官網是否有學生優惠方案。通常需要出示學生證。
+                    </p>
+                </div>
+                
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q5：形象照多久可以拿到？</h3>
+                    <p class="text-slate-700">
+                        視店家而定，通常<strong>3-7個工作天</strong>。部分店家如<strong>Qoopio大研創意</strong>提供當天取件服務（拍攝完畢三小時內可透過LINE傳送修圖校稿）。如果時間緊急，建議預約時先詢問交件時間，或選擇提供急件服務的店家。
+                    </p>
+                </div>
+                
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q6：形象照可以修圖到什麼程度？</h3>
+                    <p class="text-slate-700">
+                        專業形象照通常會進行<strong>適度修圖</strong>，包括調整膚色、去除明顯瑕疵、微調光影等，但會保留個人特色，避免過度磨皮導致「塑膠臉」。建議拍攝前與攝影師溝通修圖風格，確保符合你的期望。好的形象照應該是「像自己，但是是變漂亮的自己」。
+                    </p>
+                </div>
+                
+                <div class="bento-card bento-card-sand">
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Q7：台北、台中、高雄哪個城市形象照選擇最多？</h3>
+                    <p class="text-slate-700">
+                        <strong>台北</strong>選擇最多，從連鎖品牌到個人工作室都有豐富選擇，價格區間也最廣（NT$599-15,000）。<strong>台中</strong>近年來也有不少新興店家，如CHUN3春山相館、黑鹿影像等。<strong>高雄</strong>選擇相對較少，但仍有Chuck Su查克蘇、Jing Photo J相館等優質店家。建議選擇交通便利、評價良好的店家。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 相關文章推薦 -->
+        <section class="mb-16">
+            <div class="bento-card bento-card-sand">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6">延伸閱讀：相關文章推薦</h2>
+                <div class="space-y-3 text-slate-700">
+                    <p><a href="/blog/profile" class="text-trust-700 hover:text-trust-900 underline font-medium">履歷照怎麼拍？學生履歷照完整指南與注意事項</a></p>
+                    <p><a href="/blog/korean-id" class="text-trust-700 hover:text-trust-900 underline font-medium">LinkedIn 形象照怎麼拍才專業？5個關鍵技巧一次掌握</a></p>
+                    <p><a href="/blog/profile" class="text-trust-700 hover:text-trust-900 underline font-medium">好時有影形象照方案與學生優惠完整介紹</a></p>
+                    <p><a href="/blog/profile" class="text-trust-700 hover:text-trust-900 underline font-medium">形象照拍攝前準備清單：服裝、妝髮、姿勢一次搞定</a></p>
+                </div>
+                <p class="mt-4 text-sm text-slate-600">
+                    想找<strong>台北專業形象照</strong>？可參考我們整理的<a href="/blog/taipei-professional-headshot-recommendation" class="text-trust-700 hover:text-trust-900 underline">12間以上形象照推薦名單</a>，包含完整店家評比、價格比較與選擇建議。
+                </p>
+            </div>
+        </section>
+
+    </div>
+</div>
