@@ -957,8 +957,12 @@ def main():
     print("\n📊 生成稽核報告...")
     report = generate_report(results, tokens)
     
+    # 確保 report 目錄存在
+    report_dir = PROJECT_ROOT / 'report'
+    report_dir.mkdir(exist_ok=True)
+    
     # 儲存報告
-    report_path = PROJECT_ROOT / "DESIGN_SYSTEM_AUDIT_REPORT.md"
+    report_path = report_dir / "DESIGN_SYSTEM_AUDIT_REPORT.md"
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
     

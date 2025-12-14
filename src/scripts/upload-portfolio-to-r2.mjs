@@ -66,7 +66,6 @@ async function optimizeImage(localPath) {
   // Build Sharp pipeline
   let pipeline = sharp(originalBuffer);
 
-  // Resize only if image is wider than MAX_WIDTH (maintains aspect ratio)
   if (needsResize) {
     pipeline = pipeline.resize(MAX_WIDTH, null, {
       withoutEnlargement: true, // Don't upscale smaller images
@@ -78,8 +77,6 @@ async function optimizeImage(localPath) {
   const ext = path.extname(localPath).toLowerCase();
 
   if (ext === ".jpg" || ext === ".jpeg") {
-    // Apply compression with mozjpeg (better compression)
-    // Metadata (EXIF) is automatically stripped during format conversion
     pipeline = pipeline.jpeg({ 
       quality: QUALITY, 
       mozjpeg: true
@@ -130,13 +127,11 @@ async function fileExistsInR2(key) {
     if (error.name === "NotFound" || error.$metadata?.httpStatusCode === 404) {
       return false;
     }
-    // Re-throw other errors (network issues, permissions, etc.)
     throw error;
   }
 }
 
 async function uploadFile(localPath, key) {
-  // Check if file already exists in R2 (idempotent check)
   const exists = await fileExistsInR2(key);
   if (exists) {
     console.log(`⏭️  Skipped (Already exists): ${key}`);
@@ -147,7 +142,6 @@ async function uploadFile(localPath, key) {
   const originalStats = fs.statSync(localPath);
   const originalSize = originalStats.size;
 
-  // Optimize image before uploading (does NOT modify local file)
   const optimizedBuffer = await optimizeImage(localPath);
   const optimizedSize = optimizedBuffer.length;
 

@@ -237,8 +237,12 @@ def main():
     print("🔍 查找未定義顏色...")
     report = generate_report()
     
+    # 確保 report 目錄存在
+    report_dir = PROJECT_ROOT / 'report'
+    report_dir.mkdir(exist_ok=True)
+    
     # 保存報告
-    report_path = PROJECT_ROOT / "UNDEFINED_COLORS_REPORT.md"
+    report_path = report_dir / "UNDEFINED_COLORS_REPORT.md"
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
     

@@ -10,6 +10,33 @@
     <meta name="description" content="{{ seo.description }}">
   {% endif %}
   <link rel="canonical" href="{{ metadata.url }}{{ page.url }}">
+  
+  {# --- [ Open Graph / Facebook ] --- #}
+  {% set ogTitle = seo.ogTitle | default(title) %}
+  {% set ogDescription = seo.ogDescription | default(seo.description | default("")) %}
+  {% set ogImage = seo.ogImage | default(metadata.url + "/assets/images/ui/好時有影logo藍字透明底.png") %}
+  {% set ogUrl = metadata.url + page.url %}
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ ogUrl }}">
+  <meta property="og:title" content="{{ ogTitle }}">
+  {% if ogDescription %}
+  <meta property="og:description" content="{{ ogDescription }}">
+  {% endif %}
+  <meta property="og:image" content="{{ ogImage }}">
+  <meta property="og:site_name" content="好時有影 Golden Years">
+  <meta property="og:locale" content="zh_TW">
+  
+  {# --- [ Twitter Card ] --- #}
+  {% set twitterTitle = seo.twitterTitle | default(title) %}
+  {% set twitterDescription = seo.twitterDescription | default(seo.description | default("")) %}
+  {% set twitterImage = seo.twitterImage | default(seo.ogImage | default(metadata.url + "/assets/images/ui/好時有影logo藍字透明底.png")) %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@goldenyears_studio">
+  <meta name="twitter:title" content="{{ twitterTitle }}">
+  {% if twitterDescription %}
+  <meta name="twitter:description" content="{{ twitterDescription }}">
+  {% endif %}
+  <meta name="twitter:image" content="{{ twitterImage }}">
   {# --- [ SEO 結束 ] --- #}
   
   {# --- [ Google Fonts ] --- #}
@@ -108,7 +135,14 @@
                 <div class="lg:col-span-5 flex flex-col justify-between lg:items-end text-left lg:text-right">
                     <div>
                         <a href="/" class="inline-block mb-6 group no-underline">
-                            <div class="w-[60px] h-[60px] bg-trust-950 text-white rounded-lg flex items-center justify-center text-xl font-serif font-bold shadow-md">G.</div>
+                            <img
+                                src="{{ 'ui/好時有影logo藍字透明底.png' | r2img }}"
+                                alt="好時有影 Golden Years Logo"
+                                width="160"
+                                height="160"
+                                class="h-24 w-auto object-contain max-w-[240px]"
+                                onerror="this.onerror=null; this.src='/assets/images/ui/好時有影logo藍字透明底.png';"
+                            />
                         </a>
                         <p class="text-sm text-slate-600 leading-7 mb-8 max-w-sm ml-auto">
                             讓每一個「好時」，都有你我的「身影」。<br>

@@ -9,10 +9,8 @@ module.exports = {
       // Color Tokens
       colors: {
         // ==================================================
-        // Design System v6 (Obsidian Navy Edition)
         // ==================================================
         
-        // Trust Series (信賴藍 / 黑曜石藍)
         // Now using CSS Variables as single source of truth
         'trust': {
           50: 'var(--color-trust-50)',
@@ -26,7 +24,6 @@ module.exports = {
           950: 'var(--color-trust-950)',
         },
         
-        // Sand Series (紙張米 / 燕麥色)
         // Now using CSS Variables as single source of truth
         'sand': {
           50: 'var(--color-sand-50)',
@@ -36,7 +33,6 @@ module.exports = {
         },
         
         // ==================================================
-        // Legacy Brand Colors (Deprecated - Updated to match Design System)
         // Kept for backward compatibility
         // Now using CSS Variables as single source of truth
         // ==================================================
@@ -45,13 +41,11 @@ module.exports = {
         'brand-cta': 'var(--color-brand-cta)', // trust-200
         'brand-cta-hover': 'var(--color-brand-cta-hover)', // trust-800
         
-        // Accent Colors (Deprecated - Updated to match Design System)
         // Now using CSS Variables as single source of truth
         'accent': 'var(--color-accent)', // trust-800
         'accent-weak': 'var(--color-accent-weak)', // trust-600
         'accent-strong': 'var(--color-accent-strong)', // trust-950
         
-        // Neutral Colors (Deprecated - Use slate or trust instead)
         // Now using CSS Variables as single source of truth
         'neutral': {
           50: 'var(--color-neutral-50)',
@@ -63,7 +57,6 @@ module.exports = {
           950: 'var(--color-neutral-950)', // trust-950
         },
         
-        // Surface Colors (Deprecated - Updated to match Design System)
         // Now using CSS Variables as single source of truth
         'surface': 'var(--color-surface)',
         'surface-alt': 'var(--color-surface-alt)', // sand-100
@@ -71,7 +64,6 @@ module.exports = {
         'surface-3': 'var(--color-surface-3)', // trust-950
         'surface-elevated': 'var(--color-surface-elevated)',
         
-        // Text Colors (Deprecated - Updated to match Design System)
         // Now using CSS Variables as single source of truth
         'text': 'var(--color-text)', // slate-600
         'text-main': 'var(--color-text-main)', // trust-900
@@ -86,14 +78,12 @@ module.exports = {
         'success': 'var(--color-success)',
         'error': 'var(--color-error)',
         
-        // Border Colors (Deprecated - Updated to match Design System)
         // Now using CSS Variables as single source of truth
         'border': 'var(--color-border)', // sand-200
         'border-strong': 'var(--color-border-strong)', // sand-300
         'border-subtle': 'var(--color-border-subtle)', // sand-100
         'border-dark': 'var(--color-border-dark)', // trust-900
         
-        // Legacy Mappings (Deprecated - Updated to match Design System)
         // Now using CSS Variables as single source of truth
         'dark': 'var(--color-dark)', // trust-950
         'cta': 'var(--color-cta)', // trust-200
@@ -104,7 +94,6 @@ module.exports = {
         'text-light': 'var(--color-text-light)', // trust-50
         'white': 'var(--color-white)',
         
-        // Dawn Gradient Colors (Deprecated - Consider removing)
         'dawn': {
           orange: '#FFF4E6',
           blue: '#F0F9FF',
@@ -149,7 +138,6 @@ module.exports = {
         'bold': '700',
       },
       
-      // Spacing Scale (4px base unit)
       spacing: {
         '1': '0.25rem',   // 4px
         '2': '0.5rem',    // 8px
@@ -214,7 +202,6 @@ module.exports = {
         'tooltip': '3000',
       },
       
-      // Custom breakpoints (matching existing SCSS)
       screens: {
         'md': '768px',
         'lg': '992px',

@@ -25,7 +25,6 @@
     rootMargin: '0px 0px -10% 0px', // Trigger when 10% from bottom of viewport
     threshold: 0.1, // Trigger when 10% of element is visible
     
-    // Animation delays (for staggered animations)
     staggerDelay: 100, // ms between each item in a group
     
     // Reduced motion support
@@ -77,7 +76,6 @@
       handleLazyImage(element);
     }
     
-    // Handle staggered animations (for groups of elements)
     if (element.dataset.animateStagger) {
       handleStaggeredAnimation(element);
     }
@@ -171,7 +169,6 @@
   }
   
   // ============================================
-  // Parallax Effect (Optional, GPU-accelerated)
   // ============================================
   
   /**

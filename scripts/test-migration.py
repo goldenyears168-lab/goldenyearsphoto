@@ -373,8 +373,12 @@ def main():
     # 生成報告
     report = tester.generate_report(results)
     
+    # 確保 report 目錄存在
+    report_dir = PROJECT_ROOT / 'report'
+    report_dir.mkdir(exist_ok=True)
+    
     # 保存報告
-    report_path = PROJECT_ROOT / "MIGRATION_TEST_REPORT.md"
+    report_path = report_dir / "MIGRATION_TEST_REPORT.md"
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
     

@@ -780,15 +780,19 @@ def main():
     report = analyzer.generate_report()
     print("\n" + report)
     
+    # 確保 report 目錄存在
+    report_dir = project_root / 'report'
+    report_dir.mkdir(exist_ok=True)
+    
     # 保存報告到文件
-    report_file = project_root / 'CODE_ANALYSIS_REPORT.txt'
+    report_file = report_dir / 'CODE_ANALYSIS_REPORT.txt'
     with open(report_file, 'w', encoding='utf-8') as f:
         f.write(report)
     
     print(f"\n💾 報告已保存到: {report_file}")
     
     # 保存 JSON 結果
-    json_file = project_root / 'code_analysis_results.json'
+    json_file = report_dir / 'code_analysis_results.json'
     with open(json_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False, default=str)
     

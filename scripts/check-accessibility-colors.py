@@ -299,8 +299,12 @@ class ColorContrastChecker:
                 print(f"  对比度: {issue.contrast_ratio:.2f}:1 (AAA 需要 ≥ 7:1)")
                 print(f"  上下文: {issue.context}")
         
+        # 確保 report 目錄存在
+        report_dir = self.css_file.parent.parent / 'report'
+        report_dir.mkdir(exist_ok=True)
+        
         # 生成 JSON 报告
-        report_file = self.css_file.parent.parent / 'ACCESSIBILITY_COLOR_REPORT.json'
+        report_file = report_dir / 'ACCESSIBILITY_COLOR_REPORT.json'
         report_data = {
             'summary': {
                 'total_issues': len(self.issues),

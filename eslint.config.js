@@ -1,4 +1,3 @@
-// eslint.config.js (已修正為 CommonJS 語法)
 const globals = require('globals');
 const js = require('@eslint/js');
 

@@ -263,8 +263,12 @@ def main():
     print("3️⃣  生成重構計劃")
     print("=" * 80)
     
+    # 確保 report 目錄存在
+    report_dir = PROJECT_ROOT / 'report'
+    report_dir.mkdir(exist_ok=True)
+    
     plan = generate_refactor_plan()
-    plan_file = PROJECT_ROOT / 'REFACTOR_PLAN.md'
+    plan_file = report_dir / 'REFACTOR_PLAN.md'
     with open(plan_file, 'w', encoding='utf-8') as f:
         f.write(plan)
     

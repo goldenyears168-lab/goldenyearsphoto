@@ -132,7 +132,11 @@ def main():
     report = generate_migration_report()
     
     # 保存報告
-    report_path = PROJECT_ROOT / "MIGRATION_SUGGESTIONS.md"
+    # 確保 report 目錄存在
+    report_dir = PROJECT_ROOT / 'report'
+    report_dir.mkdir(exist_ok=True)
+    
+    report_path = report_dir / "MIGRATION_SUGGESTIONS.md"
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
     
