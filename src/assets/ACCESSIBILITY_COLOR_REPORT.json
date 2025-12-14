@@ -1,0 +1,27 @@
+{
+  "summary": {
+    "total_issues": 2,
+    "fail_aa_count": 0,
+    "fail_aaa_count": 2
+  },
+  "issues": [
+    {
+      "line": 916,
+      "selector": ".btn-tag",
+      "text_color": "var(--color-neutral-400)",
+      "bg_color": "var(--color-white)",
+      "contrast_ratio": 4.76,
+      "status": "fail_aaa",
+      "context": "color: var(--color-neutral-400); /* slat...background-color: var(--color-white); /*"
+    },
+    {
+      "line": 1477,
+      "selector": ".category-pill",
+      "text_color": "var(--color-neutral-400)",
+      "bg_color": "var(--color-white)",
+      "contrast_ratio": 4.76,
+      "status": "fail_aaa",
+      "context": "color: var(--color-neutral-400); /* slat...background-color: var(--color-white); /*"
+    }
+  ]
+}

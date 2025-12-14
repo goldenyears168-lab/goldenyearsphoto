@@ -1,11 +1,11 @@
 # 遷移測試報告
 
 **測試日期**: 2025-12-14
-**測試文件數**: 2
+**測試文件數**: 3
 
 ## 📊 測試統計
 
-- ✅ **通過**: 2 個文件
+- ✅ **通過**: 3 個文件
 - ⚠️ **警告**: 0 個文件
 - ❌ **錯誤**: 0 個文件
 
@@ -15,29 +15,43 @@
 
 ### ✅ `src/blog/workshop.njk`
 
-**使用的 Macros**: button, card
+**使用的 Macros**: card, button
 
-- Button macro: 1 處
+- Button macro: 3 處
 - Card macro: 3 處
 
 
 **卡片遷移**: 3 處使用 macro
 
-**按鈕遷移**: 1 處使用 macro, 3 處使用 btn 類
+**按鈕遷移**: 3 處使用 macro, 1 處使用 btn 類
 
 ---
 
 ### ✅ `src/guide/crop-tool.njk`
 
-**使用的 Macros**: card
+**使用的 Macros**: card, button
 
-- Button macro: 0 處
+- Button macro: 2 處
 - Card macro: 0 處
 
 
 **卡片遷移**: 1 處使用 macro
 
-**按鈕遷移**: 0 處使用 macro, 2 處使用 btn 類
+**按鈕遷移**: 2 處使用 macro
+
+---
+
+### ✅ `src/services/group-photo.njk`
+
+**使用的 Macros**: button
+
+- Button macro: 2 處
+- Card macro: 0 處
+
+
+**卡片遷移**: 0 處使用 macro
+
+**按鈕遷移**: 2 處使用 macro, 3 處使用 btn 類
 
 ---
 

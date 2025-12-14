@@ -17,6 +17,7 @@ MACROS_DIR = PROJECT_ROOT / "src" / "_includes" / "macros"
 MIGRATED_FILES = [
     "src/blog/workshop.njk",
     "src/guide/crop-tool.njk",
+    "src/services/group-photo.njk",
 ]
 
 # 可用的 macros

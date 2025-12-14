@@ -40,13 +40,10 @@ seo:
             這些習以為常的瞬間，也許不常說出口，但它們是家最真實的樣子。
         </p>
 
+        {% from "macros/button.njk" import button %}
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="/booking/" class="btn-primary btn-md">
-                立即預約拍攝
-            </a>
-            <a href="/price-list/#group-photo" class="btn-secondary btn-md">
-                查看價目表
-            </a>
+            {{ button("立即預約拍攝", "/booking/", "primary", "md") }}
+            {{ button("查看價目表", "/price-list/#group-photo", "secondary", "md") }}
         </div>
     </div>
 
@@ -278,14 +275,14 @@ seo:
 </div>
 
 <!-- Final CTA -->
-<div class="py-16 md:py-24 bg-trust-950 text-white text-center">
+<div class="py-16 md:py-24 bg-sand-50 text-center">
     <div class="container mx-auto px-4 max-w-4xl">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">預約你們的「現在」</h2>
-        <p class="text-lg md:text-xl text-white/90 mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-trust-950">預約你們的「現在」</h2>
+        <p class="text-lg md:text-xl mb-4 text-trust-900">
             為這段無可取代的家庭時光，舉辦一場溫暖的儀式。<br>
             我們的「合照」方案 100% 透明，預約流程 100% 簡單。
         </p>
-        <p class="text-base text-white/70 mb-8">
+        <p class="text-base mb-8 text-trust-900">
             免費諮詢，無壓力了解方案
         </p>
         <div class="flex flex-wrap gap-4 justify-center">

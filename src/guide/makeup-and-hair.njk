@@ -23,13 +23,10 @@ seo:
             由經驗豐富的彩妝師打造自然妝感。這不是要把你變成別人，而是透過專業的光影修飾，還原你最飽滿的精神狀態。
         </p>
 
+        {% from "macros/button.njk" import button %}
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#packages" class="btn-primary btn-md">
-                查看方案
-            </a>
-            <a href="/price-list/" class="btn-secondary btn-md">
-                完整價目表
-            </a>
+            {{ button("查看方案", "#packages", "primary", "md") }}
+            {{ button("完整價目表", "/price-list/", "secondary", "md") }}
         </div>
     </div>
 </header>
@@ -360,9 +357,7 @@ seo:
 
         <!-- CTA Section -->
         <div class="mt-16 text-center">
-            <a href="/booking/" class="btn btn-primary btn-md inline-block">
-                立即預約拍攝
-            </a>
+            {{ button("立即預約拍攝", "/booking/", "primary", "md", "inline-block") }}
         </div>
 
     </div>

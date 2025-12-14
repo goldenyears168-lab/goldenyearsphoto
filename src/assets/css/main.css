@@ -10,9 +10,9 @@
   --color-trust-50: #F0F4FF;
   --color-trust-100: #E0E7FF;
   --color-trust-200: #C7D2FE;
-  --color-trust-500: #6366F1;
-  --color-trust-600: #4F46E5;
-  --color-trust-700: #4338CA;
+  --color-trust-500: #0F172A; /* Changed from vibrant blue to dark */
+  --color-trust-600: #0F172A; /* Changed from vibrant blue to dark */
+  --color-trust-700: #0F172A; /* Changed from vibrant blue to dark */
   --color-trust-800: #1E3A8A;
   --color-trust-900: #0F172A;
   --color-trust-950: #020617;
@@ -34,7 +34,7 @@
   --color-brand-cta: #C7D2FE; /* trust-200 - updated from old system */
   --color-brand-cta-hover: #1E3A8A; /* trust-800 */
   --color-accent: #1E3A8A; /* trust-800 */
-  --color-accent-weak: #4F46E5; /* trust-600 */
+  --color-accent-weak: #0F172A; /* trust-900 - changed from vibrant blue to dark */
   --color-accent-strong: #020617; /* trust-950 */
   --color-neutral-50: #f7f7f7;
   --color-neutral-100: #f0f0f0;
@@ -53,8 +53,8 @@
   --color-text-subtle: #64748B; /* slate-500 */
   --color-text-on-dark: #F0F4FF; /* trust-50 */
   --color-text-on-accent: #fff;
-  --color-text-link: #4F46E5; /* trust-600 */
-  --color-text-link-hover: #1E3A8A; /* trust-800 */
+  --color-text-link: #0F172A; /* trust-900 - changed from vibrant blue to dark */
+  --color-text-link-hover: #0F172A; /* trust-900 - changed from vibrant blue to dark */
   --color-success: #28a745;
   --color-error: #dc3545;
   --color-border: #E2DCD3; /* sand-200 */
@@ -658,7 +658,7 @@
   /* Focus state for accessibility */
   .button:focus-visible,
   .btn:focus-visible {
-    outline: 3px solid var(--color-trust-500); /* Design System: Focus Ring */
+    outline: 3px solid var(--color-trust-900); /* Design System: Focus Ring - changed from blue to dark */
     outline-offset: 3px;
   }
 
@@ -916,7 +916,7 @@
   .btn-tag {
     background-color: var(--color-white); /* white */
     border: 1px solid var(--color-sand-200); /* E2DCD3 */
-    color: var(--color-neutral-400); /* slate-500 / #64748B */
+    color: var(--color-trust-800); /* Changed from neutral-400 to trust-800 for better contrast (AAA) */
     font-size: var(--font-size-xs); /* 0.75rem */
     padding: 0.25rem 0.75rem; /* 4px 12px */
     font-weight: var(--font-weight-semibold);
@@ -989,7 +989,7 @@
   }
 
   .hero-cta:focus-visible {
-    outline: 3px solid var(--color-trust-500); /* Design System: Focus Ring */
+    outline: 3px solid var(--color-trust-900); /* Design System: Focus Ring - changed from blue to dark */
     outline-offset: 3px;
   }
 
@@ -1485,7 +1485,7 @@ body {
     font-size: var(--font-size-sm); /* 14px - Design System (0.85rem rounded to sm) */
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-normal);
-    color: var(--color-neutral-400); /* slate-500 - Design System */
+    color: var(--color-trust-800); /* Changed from neutral-400 to trust-800 for better contrast (AAA) */
     background-color: var(--color-white); /* white - Design System */
     border: 1px solid var(--color-sand-200); /* sand-200 - Design System */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Aligned with btn system */
@@ -1516,7 +1516,7 @@ body {
 }
 
 .category-pill:focus-visible {
-    outline: 3px solid var(--color-trust-500); /* Focus ring - aligned with btn system */
+    outline: 3px solid var(--color-trust-900); /* Focus ring - changed from blue to dark */
     outline-offset: 3px;
 }
 
@@ -1557,29 +1557,44 @@ body {
 
 /* Instagram Embed Wrapper */
 .instagram-embed-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    position: relative;
     width: 100%;
-    min-width: 0;
+    aspect-ratio: 9 / 16;
+    max-width: 360px;
+    margin: 0 auto;
     overflow: hidden;
 }
 .instagram-embed-wrapper blockquote {
     margin: 0 !important;
+    padding: 0 !important;
     width: 100% !important;
+    height: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    aspect-ratio: 9 / 16;
-    transform: scale(1);
-    transform-origin: top center;
+    aspect-ratio: 9 / 16 !important;
+    display: block !important;
+    box-sizing: border-box !important;
 }
 .instagram-embed-wrapper blockquote[style*="min-width"] {
     min-width: 0 !important;
 }
+.instagram-embed-wrapper blockquote[style*="width"] {
+    width: 100% !important;
+}
 .instagram-embed-wrapper iframe {
     width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 9 / 16;
+    height: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: 0 !important;
+    display: block !important;
+    aspect-ratio: 9 / 16 !important;
+    box-sizing: border-box !important;
+    object-fit: contain !important;
+    overflow: hidden !important;
 }
 
 /* Marquee Container */
@@ -1776,11 +1791,7 @@ header.fixed {
     border-top: 1px solid #f1f5f9; /* slate-100 */
 }
 
-nav a[aria-current="page"],
-nav a.active {
-    color: var(--color-trust-900); /* #0F172A - Design System (1E293B mapped to trust-900) */
-    font-weight: 600;
-}
+/* Navigation active styles removed - all nav links now use consistent gray color from parent container */
 
 /* Mobile Menu Styles */
 .mobile-nav {
@@ -2262,5 +2273,66 @@ nav a, nav button {
 
 .animate-fade-in-down {
     animation: fade-in-down 0.2s ease-out;
+}
+
+/* ==================================================
+ * Accessibility: Color Contrast Fixes
+ * 确保浅蓝色背景上的文字有足够的对比度
+ * ================================================== */
+
+/* 防止在浅蓝色背景上使用浅色文字 */
+.bg-trust-50,
+.bg-trust-100,
+.bg-trust-200 {
+    /* 确保默认文字颜色足够深 */
+    color: var(--color-trust-900) !important;
+}
+
+/* 覆盖白色文字在浅蓝色背景上的情况 */
+.bg-trust-50 .text-white,
+.bg-trust-50.text-white,
+.bg-trust-100 .text-white,
+.bg-trust-100.text-white,
+.bg-trust-200 .text-white,
+.bg-trust-200.text-white {
+    color: var(--color-trust-900) !important;
+}
+
+/* 覆盖半透明白色文字 */
+.bg-trust-50 [class*="text-white/"],
+.bg-trust-50[class*="text-white/"],
+.bg-trust-100 [class*="text-white/"],
+.bg-trust-100[class*="text-white/"],
+.bg-trust-200 [class*="text-white/"],
+.bg-trust-200[class*="text-white/"] {
+    color: var(--color-trust-900) !important;
+}
+
+/* 覆盖浅灰色文字在浅蓝色背景上的情况 */
+.bg-trust-50 .text-slate-400,
+.bg-trust-50.text-slate-400,
+.bg-trust-50 .text-slate-500,
+.bg-trust-50.text-slate-500,
+.bg-trust-100 .text-slate-400,
+.bg-trust-100.text-slate-400,
+.bg-trust-100 .text-slate-500,
+.bg-trust-100.text-slate-500,
+.bg-trust-200 .text-slate-400,
+.bg-trust-200.text-slate-400,
+.bg-trust-200 .text-slate-500,
+.bg-trust-200.text-slate-500 {
+    color: var(--color-trust-800) !important;
+}
+
+/* 半透明背景也需要处理 */
+[class*="bg-trust-50/"] .text-white,
+[class*="bg-trust-50/"][class*="text-white"],
+[class*="bg-trust-50/"] [class*="text-white/"],
+[class*="bg-trust-50/"][class*="text-white/"],
+[class*="bg-trust-50/"] .text-slate-400,
+[class*="bg-trust-50/"][class*="text-slate-400"],
+[class*="bg-trust-50/"] .text-slate-500,
+[class*="bg-trust-50/"][class*="text-slate-500"] {
+    color: var(--color-trust-900) !important;
 }
 

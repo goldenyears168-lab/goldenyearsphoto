@@ -24,8 +24,8 @@
 <div class="bento-card bento-card-default">
     <div class="flex-1 p-8 md:p-10 flex flex-col">
         <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{{ title }}</h3>
-        <p class="text-4xl md:text-5xl font-bold text-trust-600 mb-2">
-            優惠 <span class="text-trust-600">{{ price }}</span> <span class="text-xl md:text-2xl font-normal text-slate-500">{{ priceUnit }}</span>
+        <p class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+            優惠 <span class="text-slate-900">{{ price }}</span> <span class="text-xl md:text-2xl font-normal text-slate-500">{{ priceUnit }}</span>
         </p>
         {% if discount %}
         <p class="inline-block mt-2 px-4 py-2 text-sm font-semibold bg-trust-100 text-trust-800 rounded-full mb-6">
@@ -38,7 +38,7 @@
         <ul class="space-y-3 mb-8 flex-1">
             {% for feature in features %}
             <li class="flex items-start gap-3 text-slate-700">
-                <span class="text-trust-600 mt-1">•</span>
+                <span class="text-slate-900 mt-1">•</span>
                 <span>{{ feature }}</span>
             </li>
             {% endfor %}
@@ -50,7 +50,7 @@
         <ul class="space-y-3">
             {% for upgrade in upgrades %}
             <li class="flex items-start gap-3 text-slate-700">
-                <span class="text-trust-600 mt-1">•</span>
+                <span class="text-slate-900 mt-1">•</span>
                 <span>{{ upgrade }}</span>
             </li>
             {% endfor %}

@@ -22,7 +22,7 @@
 
 {% macro select(name, id='', label='', options=[], required=false, disabled=false, class='', error='', help='') %}
   {% set selectId = id or name %}
-  {% set selectClasses = ['w-full px-4 py-3 border border-sand-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-trust-500 focus:border-transparent transition-colors bg-white', class] | join(' ') | trim %}
+  {% set selectClasses = ['w-full px-4 py-3 border border-sand-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-colors bg-white', class] | join(' ') | trim %}
   
   <div class="mb-4">
     {% if label %}

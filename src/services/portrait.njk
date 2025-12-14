@@ -38,13 +38,10 @@ seo:
             證件照可以用工具生成，但您的專業形象不能。<br class="hidden md:block">LinkedIn、履歷表、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
         </p>
 
+        {% from "macros/button.njk" import button %}
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="/booking/" class="btn-primary btn-md">
-                立即預約拍攝
-            </a>
-            <a href="/price-list/" class="btn-secondary btn-md">
-                查看價目表
-            </a>
+            {{ button("立即預約拍攝", "/booking/", "primary", "md") }}
+            {{ button("查看價目表", "/price-list/", "secondary", "md") }}
         </div>
     </div>
 
@@ -210,14 +207,14 @@ seo:
 </div>
 
 <!-- Final CTA -->
-<div class="py-16 md:py-24 bg-trust-950 text-white text-center">
+<div class="py-16 md:py-24 bg-sand-50 text-center">
     <div class="container mx-auto px-4 max-w-4xl">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">準備好，讓自己被好好看見了嗎？</h2>
-        <p class="text-lg md:text-xl text-white/90 mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-trust-950">準備好，讓自己被好好看見了嗎？</h2>
+        <p class="text-lg md:text-xl mb-4 text-trust-900">
             證件照可以用工具生成，但您的專業形象不能。<br>
             履歷表、LinkedIn、求職網站，都需要一張真正能代表「您是誰」的專業形象照。
         </p>
-        <p class="text-base text-white/70 mb-8">
+        <p class="text-base mb-8 text-trust-900">
             免費諮詢，無壓力了解方案
         </p>
         <div class="flex flex-wrap gap-4 justify-center">

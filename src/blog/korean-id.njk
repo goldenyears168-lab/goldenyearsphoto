@@ -37,13 +37,10 @@ seo:
             一張你真正喜歡、自信出發的韓式證件照
         </p>
 
+        {% from "macros/button.njk" import button %}
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="/booking/" class="btn-primary btn-md">
-                立即預約拍攝
-            </a>
-            <a href="/price-list/#id-photo" class="btn-secondary btn-md">
-                查看價目表
-            </a>
+            {{ button("立即預約拍攝", "/booking/", "primary", "md") }}
+            {{ button("查看價目表", "/price-list/#id-photo", "secondary", "md") }}
         </div>
     </div>
 

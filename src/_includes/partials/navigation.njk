@@ -4,18 +4,24 @@
         
         <!-- Logo -->
         <a href="/" class="flex items-center shrink-0 gap-3 group">
-            <div class="w-8 h-8 bg-trust-950 text-white rounded flex items-center justify-center font-serif font-bold text-lg">G.</div>
-            <span class="font-serif font-bold text-trust-950 tracking-tight text-xl hidden xl:block">Golden Years</span>
+            <img
+                src="{{ 'ui/logo.jpg' | r2img }}"
+                alt="好時有影 Golden Years Logo"
+                width="120"
+                height="100"
+                class="h-12 w-auto object-contain"
+                onerror="this.onerror=null; this.src='/assets/images/ui/logo.jpg';"
+            />
         </a>
         
         <!-- Desktop Navigation -->
         <div class="hidden lg:flex items-center gap-1 text-sm font-medium text-slate-500">
             
-            <a href="/price-list/" class="hover:text-trust-900 transition-colors btn btn-ghost btn-sm">價目表</a>
+            <a href="/price-list/" class="hover:text-trust-900 transition-colors px-4 py-2 rounded-full hover:bg-slate-50">價目表</a>
             
             <!-- Mega Dropdown: Services (緊湊雙欄) -->
             <div class="relative nav-item group h-full flex items-center">
-                <button class="hover:text-trust-900 transition-colors flex items-center gap-1 btn btn-ghost btn-sm">
+                <button class="hover:text-trust-900 transition-colors flex items-center gap-1 px-4 py-2 rounded-full hover:bg-slate-50 group-hover:text-trust-900 group-hover:bg-slate-50">
                     服務項目
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -25,7 +31,7 @@
                         <div class="grid grid-cols-2 gap-6">
                             <!-- Col 1 -->
                             <div>
-                                <h5 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">主要服務</h5>
+                                <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">主要服務</h5>
                                 <ul class="space-y-1">
                                     <li><a href="/services/portrait/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">專業形象照</a></li>
                                     <li><a href="/services/id-photo/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">韓式證件照</a></li>
@@ -35,7 +41,7 @@
                             </div>
                             <!-- Col 2 -->
                             <div>
-                                <h5 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">其他服務</h5>
+                                <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">其他服務</h5>
                                 <ul class="space-y-1">
                                     <li><a href="/blog/couples/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">情侶寫真</a></li>
                                     <li><a href="/blog/family/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">全家福</a></li>
@@ -50,7 +56,7 @@
 
             <!-- Simple Dropdown: Guide -->
             <div class="relative nav-item group h-full flex items-center">
-                <button class="hover:text-trust-900 transition-colors flex items-center gap-1 btn btn-ghost btn-sm">
+                <button class="hover:text-trust-900 transition-colors flex items-center gap-1 px-4 py-2 rounded-full hover:bg-slate-50 group-hover:text-trust-900 group-hover:bg-slate-50">
                     拍攝指南
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -66,7 +72,7 @@
 
             <!-- Mega Dropdown: Portfolio (緊湊三欄) -->
             <div class="relative nav-item group h-full flex items-center">
-                <button class="hover:text-trust-900 transition-colors flex items-center gap-1 btn btn-ghost btn-sm">
+                <button class="hover:text-trust-900 transition-colors flex items-center gap-1 px-4 py-2 rounded-full hover:bg-slate-50 group-hover:text-trust-900 group-hover:bg-slate-50">
                     作品分類
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -75,7 +81,7 @@
                         <div class="grid grid-cols-3 gap-4">
                             <!-- Col 1 -->
                             <div>
-                                <h5 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">個人專業</h5>
+                                <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">個人專業</h5>
                                 <ul class="space-y-1">
                                     <li><a href="/blog/profile/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">形象照</a></li>
                                     <li><a href="/blog/korean-id/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">韓式證件照</a></li>
@@ -84,7 +90,7 @@
                             </div>
                             <!-- Col 2 -->
                             <div>
-                                <h5 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">校園與青春</h5>
+                                <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">校園與青春</h5>
                                 <ul class="space-y-1">
                                     <li><a href="/blog/graduation/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">畢業個人/團體</a></li>
                                     <li><a href="/blog/couples/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">情侶寫真</a></li>
@@ -93,7 +99,7 @@
                             </div>
                             <!-- Col 3 -->
                             <div>
-                                <h5 class="text-xxs font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">團體與家庭</h5>
+                                <h5 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 border-b border-sand-100 pb-1">團體與家庭</h5>
                                 <ul class="space-y-1">
                                     <li><a href="/#corporate-group" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">企業團體照</a></li>
                                     <li><a href="/blog/family/" class="block text-sm text-slate-600 hover:text-trust-900 py-1 hover:translate-x-1 transition-transform">全家福</a></li>
@@ -105,12 +111,12 @@
                 </div>
             </div>
 
-            <a href="/about/" class="hover:text-trust-900 transition-colors btn btn-ghost btn-sm">關於我們</a>
+            <a href="/about/" class="hover:text-trust-900 transition-colors px-4 py-2 rounded-full hover:bg-slate-50">關於我們</a>
         </div>
 
         <!-- Mobile & CTA -->
         <div class="flex items-center gap-3">
-            <a href="/booking/" class="btn btn-primary text-xs px-6 py-2.5 shrink-0">
+            <a href="/booking/" class="bg-trust-950 text-white text-xs font-bold px-6 py-2.5 rounded-full hover:bg-trust-800 transition-all no-underline shadow-md shadow-trust-900/20 shrink-0 transform hover:-translate-y-0.5">
                 線上預約
             </a>
 
