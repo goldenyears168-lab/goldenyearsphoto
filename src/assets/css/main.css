@@ -1471,24 +1471,25 @@ body {
   /* Base bento-card - default white background, can be overridden by Tailwind bg-* utilities */
   .bento-card {
     background-color: var(--color-white);
-    border: 1px solid var(--color-sand-200); /* E2DCD3 - Design System */
-    border-radius: 1.5rem; /* rounded-2xl */
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    border: none; /* 移除边框，改用阴影区分 */
+    border-radius: 0.75rem; /* rounded-xl - 减小圆角，避免切字 */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* 轻微阴影替代边框 */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
+    overflow: hidden; /* 保持 hidden 以正确显示圆角 */
     position: relative;
+    /* 添加默认 padding，确保文字不会被圆角切掉 */
+    /* 注意：如果元素使用 Tailwind 的 p-* 类，会覆盖这个默认值 */
+    padding: 1.5rem; /* 24px - 足够的内边距，确保文字距离圆角有足够空间 */
   }
 
   .bento-card:hover {
-    border-color: var(--color-trust-900); /* 0F172A - Design System */
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08); /* shadow-trust-900 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 悬停时稍微增强阴影 */
+    transform: translateY(-1px); /* 减小悬停位移 */
   }
 
-  /* Default variant - white background, sand-200 border */
+  /* Default variant - white background */
   .bento-card-default {
     background-color: var(--color-white);
-    border-color: var(--color-sand-200);
   }
 
   /* Sand variant - sand-50 background */
@@ -1499,12 +1500,12 @@ body {
   /* Dark variant - trust-950 background with white text */
   .bento-card-dark {
     background-color: var(--color-trust-950) !important;
-    border-color: var(--color-trust-900) !important;
     color: var(--color-white);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15); /* 深色背景需要更强的阴影 */
   }
 
   .bento-card-dark:hover {
-    border-color: var(--color-trust-800) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
   /* Elevated variant - stronger shadow */
@@ -1516,9 +1517,15 @@ body {
     box-shadow: var(--shadow-lg);
   }
 
-  /* Bordered variant - trust-900 border */
+  /* Bordered variant - 如果需要边框，使用这个变体 */
   .bento-card-bordered {
-    border-color: var(--color-trust-900);
+    border: 1px solid var(--color-sand-200);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .bento-card-bordered:hover {
+    border-color: var(--color-trust-300);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -1699,6 +1706,19 @@ body {
     }
 }
 
+/* Horizontal layout: 橫向圖片使用更寬的比例 */
+.portfolio-img-card-horizontal {
+    aspect-ratio: 16 / 9; /* 橫向比例，適合團體照、全家福 */
+    max-height: 500px; /* 限制橫向圖片的最大高度，避免過大 */
+}
+
+@media (min-width: 768px) {
+    .portfolio-img-card-horizontal {
+        aspect-ratio: 16 / 10; /* 桌機端橫向比例 */
+        max-height: 560px; /* 桌機端橫向圖片最大高度 */
+    }
+}
+
 .portfolio-img-card img {
     transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: 100%;
@@ -1708,6 +1728,10 @@ body {
     object-fit: cover; /* 確保填滿容器 */
     object-position: center center; /* 明確指定居中，避免切到臉 */
     display: block;
+    /* 優化圖片渲染質量：對照片使用高質量縮放 */
+    image-rendering: auto; /* 讓瀏覽器使用最佳質量縮放算法 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Portfolio overlay hover - Desktop only */

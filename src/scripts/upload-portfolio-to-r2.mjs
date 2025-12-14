@@ -21,11 +21,17 @@ const FOLDERS = [
 ];
 
 // 🚀 Image Optimization Constants
-// Optimized for actual display sizes: mobile (50vw) and desktop (25vw/20vw)
-// Actual display size: ~185x238px (from Lighthouse report)
-// Using 2x for retina: 185*2 = 370px, round up to 400px for safety
-const MAX_WIDTH = 400; // Further optimized for actual display sizes (was 800, still too large)
-const QUALITY = 75; // Balanced for photography quality vs file size
+// Dynamic sizing strategy based on original image size:
+// - Large images (>2000px): compress to smaller size (800px) for file size optimization
+// - Medium images (1000-2000px): compress to target size (1400px) for quality
+// - Small images (<1000px): keep original or use larger size (no downscaling)
+// This balances file size vs quality based on source material
+const TARGET_WIDTH_LARGE = 800;   // For images > 2000px (compress more)
+const TARGET_WIDTH_MEDIUM = 1400; // For images 1000-2000px (target size)
+const TARGET_WIDTH_SMALL = null;  // For images < 1000px (keep original, no resize)
+const LARGE_THRESHOLD = 2000;     // Images larger than this are considered "large"
+const SMALL_THRESHOLD = 1000;     // Images smaller than this are considered "small"
+const QUALITY = 85; // Higher quality for photography (was 75)
 
 if (!ACCOUNT_ID || !ACCESS_KEY_ID || !SECRET_ACCESS_KEY || !BUCKET_NAME) {
   console.error("❌ .env 相關 R2 設定缺一個，請再確認 .env");
@@ -94,6 +100,10 @@ function formatBytes(bytes) {
 
 /**
  * Optimize image using Sharp before uploading to R2
+ * Uses dynamic sizing based on original image dimensions:
+ * - Large images (>2000px): compress more (smaller target)
+ * - Medium images (1000-2000px): compress to target size
+ * - Small images (<1000px): keep original size
  * @param {string} localPath - Path to local image file
  * @returns {Promise<Buffer>} - Optimized image buffer
  */
@@ -103,13 +113,27 @@ async function optimizeImage(localPath) {
 
   // Get image metadata to check dimensions
   const metadata = await sharp(originalBuffer).metadata();
-  const needsResize = metadata.width && metadata.width > MAX_WIDTH;
+  const originalWidth = metadata.width || 0;
+
+  // Determine target width based on original image size
+  let targetWidth = null;
+  if (originalWidth > LARGE_THRESHOLD) {
+    // Large images: compress more to reduce file size
+    targetWidth = TARGET_WIDTH_LARGE;
+  } else if (originalWidth >= SMALL_THRESHOLD) {
+    // Medium images: compress to target size for quality
+    targetWidth = TARGET_WIDTH_MEDIUM;
+  } else {
+    // Small images: keep original size (no downscaling)
+    targetWidth = TARGET_WIDTH_SMALL;
+  }
 
   // Build Sharp pipeline
   let pipeline = sharp(originalBuffer);
+  const willResize = targetWidth !== null && originalWidth > targetWidth;
 
-  if (needsResize) {
-    pipeline = pipeline.resize(MAX_WIDTH, null, {
+  if (willResize) {
+    pipeline = pipeline.resize(targetWidth, null, {
       withoutEnlargement: true, // Don't upscale smaller images
       fit: "inside", // Maintain aspect ratio
     });
@@ -139,10 +163,17 @@ async function optimizeImage(localPath) {
   const optimizedBuffer = await pipeline.toBuffer();
   const optimizedSize = optimizedBuffer.length;
 
-  // Log optimization results
+  // Log optimization results with size strategy info
   const reduction = ((originalSize - optimizedSize) / originalSize * 100).toFixed(1);
+  const sizeStrategy = originalWidth > LARGE_THRESHOLD ? 'large→small' 
+    : originalWidth >= SMALL_THRESHOLD ? 'medium→target' 
+    : 'small→keep';
+  const resizeInfo = willResize 
+    ? `${originalWidth}px → ${targetWidth}px (${sizeStrategy})`
+    : `${originalWidth}px (保持原尺寸)`;
   console.log(
     `📊 ${path.basename(localPath)} | ` +
+    `${resizeInfo} | ` +
     `Original: ${formatBytes(originalSize)} -> ` +
     `Optimized: ${formatBytes(optimizedSize)} ` +
     `(${reduction}% reduction)`

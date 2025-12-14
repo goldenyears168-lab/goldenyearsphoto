@@ -274,17 +274,26 @@ seo:
       }
 
         // Render Items with Fade Effect - No cropping, preserve aspect ratio
-        // 圖片響應式優化：使用 srcset 和 sizes
+        // 圖片響應式優化：使用 sizes 屬性告知瀏覽器實際顯示尺寸
         // Note: R2 doesn't support dynamic resizing via URL params, so we use the optimized single size
-        // The image is already optimized to MAX_WIDTH (800px) during upload, which is sufficient for display
+        // The image is already optimized to MAX_WIDTH (1400px) during upload, which covers:
+        // - Horizontal layout on retina: 680px * 2 = 1360px
+        // - Vertical layout on retina: 340px * 2 = 680px
         grid.innerHTML = data.items.map((item, index) => {
             const baseSrc = item.src;
-            // Use single optimized image (already resized to 800px max during upload)
-            // This matches actual display sizes: mobile ~400px, desktop ~300px, with 2x retina support
-            const sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
+            // Use correct sizes based on layout type
+            // Horizontal: desktop 50vw (2 columns), mobile 100vw (1 column)
+            // Vertical: desktop 25vw (4 columns), mobile 50vw (2 columns)
+            const sizes = data.layout === 'horizontal' 
+                ? "(max-width: 768px) 100vw, 50vw"
+                : "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
+            
+            const cardClass = data.layout === 'horizontal' 
+                ? 'portfolio-img-card portfolio-img-card-horizontal animate-fade-in group border border-slate-100'
+                : 'portfolio-img-card animate-fade-in group border border-slate-100';
             
             return `
-            <div class="portfolio-img-card animate-fade-in group border border-slate-100" style="animation-delay: ${index * 0.1}s">
+            <div class="${cardClass}" style="animation-delay: ${index * 0.1}s">
                 <img 
                     src="${baseSrc}" 
                     sizes="${sizes}"

@@ -45,8 +45,10 @@
 /%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%85%A8%E5%AE%B6%E7%A6%8F%E8%A6%AA%E5%AD%90%E5%AF%AB%E7%9C%9F/ /blog/family/ 301
 /%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AF%B5%E7%89%A9%E5%90%88%E7%85%A7 /blog/pet/ 301
 /%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E5%AF%B5%E7%89%A9%E5%90%88%E7%85%A7/ /blog/pet/ 301
-/world-pop-up-studio-project /blog/workshop/ 301
-/world-pop-up-studio-project/ /blog/workshop/ 301
+/world-pop-up-studio-project /services/workshop/ 301
+/world-pop-up-studio-project/ /services/workshop/ 301
+/blog/workshop /services/workshop/ 301
+/blog/workshop/ /services/workshop/ 301
 
 # --- 轉到首頁的規則 (V4 修復版) ---
 /%E4%BD%9C%E5%93%81%E9%9B%86-portfolio/%E6%B4%BB%E5%8B%95%E7%B4%80%E9%8C%84 / 301

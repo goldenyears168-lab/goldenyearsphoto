@@ -1,0 +1,292 @@
+---
+layout: "base-layout.njk"
+title: "BLOG - 好時有影 Golden Years"
+seo:
+  description: "好時有影的攝影文章與作品集，包含專業形象照、韓式證件照、畢業照、情侶寫真、全家福、寵物寫真等攝影服務介紹與拍攝指南。"
+  keywords: "好時有影, 攝影文章, 形象照, 證件照, 畢業照, 情侶寫真, 全家福, 寵物寫真, 攝影作品集"
+---
+
+<!-- Blog Magazine Header -->
+<header class="relative pt-24 pb-12 overflow-hidden">
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-trust-950 mb-4 tracking-tight">
+                BLOG
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
+                攝影故事、作品集與拍攝指南
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- Blog Magazine Grid -->
+<main class="py-8 md:py-12 pb-20">
+    <div class="container mx-auto px-4 max-w-7xl">
+        
+        <!-- Featured Article (Large Card) -->
+        <div class="mb-12">
+            <a href="/blog/profile/" class="group block">
+                <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-sand-100">
+                    <div class="md:flex">
+                        <div class="md:w-1/2">
+                            <div class="aspect-[4/3] md:aspect-square overflow-hidden">
+                                <img 
+                                    src="{{ 'content/blog/profile/profile-1.jpg' | r2img }}" 
+                                    alt="害怕拍照尷尬？專業形象照不只是拍照，而是一場「未來人設」的具象化儀式"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    loading="eager"
+                                />
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                            <span class="inline-block text-xs font-bold text-trust-600 uppercase tracking-wider mb-4">精選文章</span>
+                            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 group-hover:text-trust-900 transition-colors leading-tight">
+                                害怕拍照尷尬？專業形象照不只是拍照，而是一場「未來人設」的具象化儀式
+                            </h2>
+                            <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                                履歷完美，卻卡在沒有一張好的 LinkedIn 頭像？別讓「鏡頭尷尬症」阻礙你的職涯發展。在好時有影，我們將風行星港的「數位握手」概念帶入台灣，透過獨特的「信心引導」與陪伴，讓你告別姿勢障礙，拍出自信的 Quiet Professionalism。
+                            </p>
+                            <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                                閱讀更多
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </article>
+            </a>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            
+            <!-- Article Card 1 -->
+            <a href="/blog/headshot-recommendation/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/profile/profile-2.jpg' | r2img }}" 
+                            alt="專業形象照推薦名單"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            專業形象照推薦名單！12間以上台北、台中、高雄形象照店家完整評比
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            想拍履歷照、LinkedIn形象照卻不知道選哪間？本文整理12間以上台北、台中、高雄專業形象照推薦店家，包含價格比較、拍照姿勢教學。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 2 -->
+            <a href="/blog/korean-id/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/korean-id/korean-id.jpg' | r2img }}" 
+                            alt="韓式證件照"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            韓式證件照｜你的數位門面與職場第一印象
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            你需要的是一張你真正喜歡、並樂意用它來代表你的數位檔案。好時有影捕捉你「最好，但依舊是你」的神情，適合履歷、LinkedIn、各種證件使用。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 3 -->
+            <a href="/blog/graduation/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/graduation/portfolio-wall/graduation-1.jpg' | r2img }}" 
+                            alt="畢業照攝影"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            畢業照攝影｜定格青春，告別而不走散的畢業寫真
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            學士帽會歸還，宿舍會清空。你需要一個強而有力的「儀式感」，來定格這段混亂、焦慮、但也無比燦爛的黃金歲月。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 4 -->
+            <a href="/blog/couples/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/couples/couples_Main.jpg' | r2img }}" 
+                            alt="情侶寫真攝影"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            情侶寫真攝影｜只為此刻的里程碑，捕捉專屬默契
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            捕捉那種只有彼此才懂的眼神和默契。記錄戀愛中的重要時刻與里程碑，適合紀念日、週年紀念、求婚等特殊場合。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 5 -->
+            <a href="/blog/family/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/family/family-9.jpg' | r2img }}" 
+                            alt="全家福攝影"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            全家福攝影｜把此刻好好記住，捕捉家人真實互動
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            拍一組全家福，是讓大家在同一刻慢下來，只專注在彼此身上。在棚拍的安穩環境中，捕捉家人最真實的互動與依靠。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 6 -->
+            <a href="/blog/pet/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/pet/pet-9.jpg' | r2img }}" 
+                            alt="寵物寫真攝影"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            寵物寫真攝影｜把陪伴變成永遠的模樣，記錄毛小孩時光
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            寵物的時間總是走得快，而照片是我們能替牠做的最溫柔的保存。棚拍讓牠在安定舒適的環境中，留下最放鬆、最自然的神情。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 7 -->
+            <a href="/blog/medical/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/medical/medical-9.jpg' | r2img }}" 
+                            alt="醫師袍形象照攝影"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            醫師袍形象照攝影｜呈現溫度與信任感的專業醫師形象
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            專業的醫師形象照，以沉穩、清晰與真實為主。準確呈現您的專業眼神、溫和表情與細節姿態，適合醫院官網、履歷、個人品牌使用。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+            <!-- Article Card 8 -->
+            <a href="/services/workshop/" class="group block">
+                <article class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-sand-100 h-full flex flex-col">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img 
+                            src="{{ 'content/blog/workshop/service-workshop-1.jpg' | r2img }}" 
+                            alt="一日攝影師工作坊"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3 group-hover:text-trust-900 transition-colors leading-tight">
+                            一日攝影師工作坊｜封存回憶的魔法儀式，朋友共同創作體驗
+                        </h3>
+                        <p class="text-slate-600 mb-4 flex-1 leading-relaxed">
+                            友情派對，體驗2.5小時的角色扮演，與5-6位朋友共同創造、拍攝，並寫下「悄悄話祝福」。適合畢業紀念、朋友聚會、社群共創。
+                        </p>
+                        <span class="text-sm font-semibold text-trust-700 group-hover:text-trust-900 inline-flex items-center gap-2">
+                            閱讀更多
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </article>
+            </a>
+
+        </div>
+
+    </div>
+</main>
