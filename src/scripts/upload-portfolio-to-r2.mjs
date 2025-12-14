@@ -195,6 +195,8 @@ async function uploadFile(localPath, key) {
     Key: key,
     Body: optimizedBuffer, // Upload optimized buffer, not original file
     ContentType: contentType,
+    // Add cache headers for better performance
+    CacheControl: "public, max-age=31536000, immutable",
   });
 
   await s3.send(command);

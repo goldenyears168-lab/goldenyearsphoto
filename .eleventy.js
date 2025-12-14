@@ -4,6 +4,7 @@ const fs = require("fs");
 const postcss = require("postcss");
 const tailwindcss = require("@tailwindcss/postcss");
 const autoprefixer = require("autoprefixer");
+const cssnano = require("cssnano");
 require("dotenv").config();
 
 // === 2. Eleventy 插件 ===
@@ -126,18 +127,30 @@ module.exports = function (eleventyConfig) {
       // 以 _ 開頭的 partial 不輸出獨立檔案
       if (parsed.name.startsWith("_")) return;
 
-      // 使用 PostCSS 處理所有 CSS 檔案（包含 Tailwind CSS）
-      try {
-        const outputPath = path.join("_site", path.relative("src", inputPath));
-        const result = await postcss([
-          tailwindcss({
-            config: path.join(__dirname, 'tailwind.config.js'),
-          }),
-          autoprefixer,
-        ]).process(inputContent, {
-          from: inputPath,
-          to: outputPath,
-        });
+        // 使用 PostCSS 處理所有 CSS 檔案（包含 Tailwind CSS）
+        try {
+          const outputPath = path.join("_site", path.relative("src", inputPath));
+          // Always minify CSS in build (Cloudflare Pages doesn't set NODE_ENV by default)
+          // Only skip minification in dev mode (when ELEVENTY_ENV is explicitly set to 'dev')
+          const isDev = process.env.ELEVENTY_ENV === "dev";
+          
+          // PostCSS plugins: Tailwind -> Autoprefixer -> cssnano (always enabled for production builds)
+          const plugins = [
+            tailwindcss({
+              config: path.join(__dirname, 'tailwind.config.js'),
+            }),
+            autoprefixer,
+          ];
+          
+          // Add CSS minification (skip only in explicit dev mode)
+          if (!isDev) {
+            plugins.push(cssnano({ preset: 'default' }));
+          }
+          
+          const result = await postcss(plugins).process(inputContent, {
+            from: inputPath,
+            to: outputPath,
+          });
 
         // 確保輸出目錄存在
         const outputDir = path.dirname(outputPath);

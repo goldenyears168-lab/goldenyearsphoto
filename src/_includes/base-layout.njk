@@ -39,10 +39,16 @@
   <meta name="twitter:image" content="{{ twitterImage }}">
   {# --- [ SEO 結束 ] --- #}
   
-  {# --- [ Google Fonts ] --- #}
+  {# --- [ Google Fonts - Optimized for Performance ] --- #}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
+  {# Load fonts asynchronously to avoid blocking render #}
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=La+Belle+Aurore&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet"></noscript>
+  
+  {# Preconnect to Instagram CDN for faster embed loading #}
+  <link rel="preconnect" href="https://static.cdninstagram.com">
+  <link rel="dns-prefetch" href="https://static.cdninstagram.com">
   
   {# --- [ Performance Optimization ] Inline CSS to eliminate render-blocking resources --- #}
   <style>
