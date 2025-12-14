@@ -57,9 +57,6 @@
    * Initialize the quiz system
    */
   function initQuiz() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:59',message:'initQuiz() entry',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     // Initialize DOM elements
     elements.hero = document.getElementById('hero');
     elements.quiz = document.getElementById('quiz');
@@ -67,9 +64,6 @@
     elements.startBtn = document.getElementById('start-btn');
     elements.prevBtn = document.getElementById('prev-btn');
     elements.nextBtn = document.getElementById('next-btn');
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:66',message:'DOM elements found',data:{hero:!!elements.hero,quiz:!!elements.quiz,result:!!elements.result,startBtn:!!elements.startBtn,prevBtn:!!elements.prevBtn,nextBtn:!!elements.nextBtn,heroHidden:elements.hero?.classList.contains('hidden'),quizHidden:elements.quiz?.classList.contains('hidden'),resultHidden:elements.result?.classList.contains('hidden')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-    // #endregion
     elements.restartBtn = document.getElementById('restart-btn');
     elements.questionTitle = document.getElementById('question-title');
     elements.optionsGrid = document.getElementById('options-grid');
@@ -110,9 +104,6 @@
       }
       
       state.data = JSON.parse(dataText);
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:106',message:'Data parsed successfully',data:{hasData:!!state.data,hasQuestions:!!state.data?.questions,questionsCount:state.data?.questions?.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-      // #endregion
       
       // Validate data structure
       if (!state.data || !state.data.questions || !Array.isArray(state.data.questions)) {
@@ -128,9 +119,6 @@
         elements.totalQuestions.textContent = state.data.questions.length;
       }
     } catch (error) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:121',message:'Data loading failed',data:{error:error.message,dataElementExists:!!document.getElementById('quiz-data')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-      // #endregion
       console.error('Failed to load quiz data:', error);
       console.error('Data element:', document.getElementById('quiz-data'));
       showError('無法載入測驗資料，請重新整理頁面。錯誤：' + error.message);
@@ -140,9 +128,6 @@
     if (elements.startBtn) {
       elements.startBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:129',message:'Start button clicked',data:{hasData:!!state.data},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-        // #endregion
         console.log('Start button clicked');
         if (!state.data || !state.data.questions) {
           showNotification('測驗資料尚未載入，請重新整理頁面');
@@ -150,38 +135,20 @@
         }
         startQuiz();
       });
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:138',message:'Start button listener bound',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
     } else {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:139',message:'Start button NOT found',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
       console.error('Start button element not found');
     }
     
     if (elements.prevBtn) {
       elements.prevBtn.addEventListener('click', function(e) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:142',message:'Prev button clicked',data:{disabled:elements.prevBtn.disabled},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-        // #endregion
         prevQuestion();
       });
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:143',message:'Prev button listener bound',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
     }
     
     if (elements.nextBtn) {
       elements.nextBtn.addEventListener('click', function(e) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:147',message:'Next button clicked',data:{disabled:elements.nextBtn.disabled},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-        // #endregion
         nextQuestion();
       });
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:151',message:'Next button listener bound',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
     }
     
     if (elements.restartBtn) {
@@ -202,9 +169,6 @@
    * Start the quiz
    */
   function startQuiz() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:167',message:'startQuiz() called',data:{hasData:!!state.data,heroExists:!!elements.hero,quizExists:!!elements.quiz},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
     // Reset state
     state.currentQuestion = 0;
     state.answers = [];
@@ -221,9 +185,6 @@
     // Hide hero, show quiz
     hideSection(elements.hero);
     showSection(elements.quiz);
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:183',message:'Sections shown/hidden',data:{heroHidden:elements.hero?.classList.contains('hidden'),quizHidden:elements.quiz?.classList.contains('hidden')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
 
     // Render first question
     renderQuestion();
@@ -236,22 +197,13 @@
    * Render current question
    */
   function renderQuestion() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:228',message:'renderQuestion() called',data:{hasData:!!state.data,hasQuestions:!!state.data?.questions,currentQuestion:state.currentQuestion},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-    // #endregion
     if (!state.data || !state.data.questions) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:229',message:'renderQuestion() failed - no data',data:{hasData:!!state.data},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-      // #endregion
       console.error('Cannot render question: data or questions missing', state.data);
       return;
     }
 
     const question = state.data.questions[state.currentQuestion];
     if (!question) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:235',message:'renderQuestion() failed - no question',data:{currentQuestion:state.currentQuestion,questionsLength:state.data.questions.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-      // #endregion
       console.error('Cannot render question: question not found at index', state.currentQuestion);
       return;
     }
@@ -286,9 +238,6 @@
       const optionEl = createOptionElement(option, index);
       if (elements.optionsGrid && optionEl) {
         elements.optionsGrid.appendChild(optionEl);
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:234',message:'Option element created and appended',data:{index:index,hasClickListener:!!optionEl.onclick},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-        // #endregion
         // Stagger animation
         setTimeout(() => {
           optionEl.classList.add('fade-in');
@@ -324,9 +273,6 @@
     `;
 
     optionEl.addEventListener('click', () => {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:271',message:'Option clicked',data:{index:index,currentSelected:state.selectedOptions.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
       selectOption(option, index, optionEl);
     });
 
@@ -337,9 +283,6 @@
    * Select an option (toggle behavior for multiple selection)
    */
   function selectOption(option, index, element) {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:329',message:'selectOption() called',data:{index:index,isSelected:state.selectedOptions.includes(index),currentSelectedCount:state.selectedOptions.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-    // #endregion
     // Toggle selection: 如果已選則取消，未選則加入
     const isSelected = state.selectedOptions.includes(index);
     
@@ -354,9 +297,6 @@
     }
 
     state.answers[state.currentQuestion] = [...state.selectedOptions];
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:343',message:'Option selection updated',data:{selectedCount:state.selectedOptions.length,answerCount:state.answers[state.currentQuestion]?.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-    // #endregion
 
     // Update navigation
     updateNavigationButtons();
@@ -388,14 +328,8 @@
    * Go to next question
    */
   function nextQuestion() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:380',message:'nextQuestion() called',data:{selectedOptionsCount:state.selectedOptions.length,currentQuestion:state.currentQuestion,totalQuestions:state.data?.questions?.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-    // #endregion
     // Validate selection: 至少需選 1 個選項
     if (state.selectedOptions.length === 0) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:382',message:'nextQuestion() blocked - no selection',data:{selectedOptionsCount:0},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
       showNotification('請至少選擇一個選項');
       return;
     }
@@ -430,9 +364,6 @@
    * Go to previous question
    */
   function prevQuestion() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:416',message:'prevQuestion() called',data:{currentQuestion:state.currentQuestion},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-    // #endregion
     if (state.currentQuestion > 0) {
       // Fade out current question
       if (elements.questionContainer) {
@@ -470,9 +401,6 @@
       const isLastQuestion = state.currentQuestion === state.data.questions.length - 1;
       elements.nextBtn.disabled = !hasSelection;
       elements.nextBtn.textContent = isLastQuestion ? '查看結果' : '下一題';
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:396',message:'Navigation buttons updated',data:{hasSelection:hasSelection,nextBtnDisabled:elements.nextBtn.disabled,currentQuestion:state.currentQuestion},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
-      // #endregion
     }
   }
 
@@ -966,16 +894,10 @@
    */
   function showSection(section) {
     if (!section) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:885',message:'showSection called with null section',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
-      // #endregion
       return;
     }
     section.classList.remove('hidden');
     section.classList.add('fade-in');
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:888',message:'Section shown',data:{sectionId:section.id,hasHidden:section.classList.contains('hidden')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
-    // #endregion
   }
 
   /**
@@ -1030,9 +952,6 @@
 
   // Initialize when DOM is ready
   function initialize() {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:942',message:'initialize() called',data:{readyState:document.readyState,startBtnExists:!!document.getElementById('start-btn')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     console.log('Initializing identity test...');
     console.log('DOM ready state:', document.readyState);
     console.log('Start button exists:', !!document.getElementById('start-btn'));
@@ -1049,10 +968,6 @@
     if (elements.hero) {
       elements.hero.classList.remove('hidden');
     }
-    
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/8e85e53a-9dde-4198-8adb-f4d864adfff3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'identity-test.js:947',message:'initQuiz() completed',data:{hasData:!!state.data,questionsCount:state.data?.questions?.length,heroHidden:elements.hero?.classList.contains('hidden'),quizHidden:elements.quiz?.classList.contains('hidden'),resultHidden:elements.result?.classList.contains('hidden')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     console.log('Identity test initialized');
   }
 

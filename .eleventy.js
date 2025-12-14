@@ -56,6 +56,10 @@ module.exports = function (eleventyConfig) {
   const rawR2Base = process.env.R2_PUBLIC_BASE_URL || "";
   // 移除尾端多餘的 `/`，避免之後變成 //portfolio/...
   const r2Base = rawR2Base.replace(/\/+$/, "");
+  
+  // 4.0 添加全局數據變量：R2 公開基礎 URL（用於模板中直接訪問）
+  // 如果環境變量不存在，回退到本地路徑（用於本地開發）
+  eleventyConfig.addGlobalData("r2PublicBaseUrl", r2Base || "/assets/images");
 
   // 4.1 圖片 URL Filter：把相對路徑轉成 R2 / 或本機 assets
   //

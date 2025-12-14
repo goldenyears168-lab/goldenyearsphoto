@@ -227,20 +227,6 @@
         defer
       ></script>
     #}
-
-    {# 
-      本地測試用（開發時取消註解，生產環境註解掉）:
-      
-      <script 
-        src="http://localhost:8788/widget/loader.js" 
-        data-company="goldenyears"
-        data-api-endpoint="http://localhost:8788/api/goldenyears/chat"
-        data-api-base-url="http://localhost:8788"
-        data-page-type="{{ pageType | default('other') }}"
-        data-auto-open="{{ 'true' if pageType == 'home' else 'false' }}"
-        defer
-      ></script>
-    #}
     
 </body>
 </html>

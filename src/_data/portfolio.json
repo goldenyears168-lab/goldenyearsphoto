@@ -1,0 +1,162 @@
+{
+  "passport-korea": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/korean-id/korean-id-1.jpg", "tag": "自然美肌", "sub": "韓式證件照" },
+      { "src": "portfolio/korean-id/korean-id-2.jpg", "tag": "急件可取", "sub": "韓式證件照" },
+      { "src": "portfolio/korean-id/korean-id-3.jpg", "tag": "韓式精修", "sub": "韓式證件照" },
+      { "src": "portfolio/korean-id/korean-id-4.jpg", "tag": "五官立體", "sub": "韓式證件照" }
+    ]
+  },
+  "linkedin-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/linkedin-portrait/linkedin-portrait-1.jpg", "tag": "LinkedIn 首選", "sub": "外商/科技業" },
+      { "src": "portfolio/linkedin-portrait/linkedin-portrait-2.jpg", "tag": "專業信任", "sub": "金融/顧問業" },
+      { "src": "portfolio/linkedin-portrait/linkedin-portrait-3.jpg", "tag": "親和力", "sub": "新創/行銷" },
+      { "src": "portfolio/linkedin-portrait/linkedin-portrait-4.jpg", "tag": "知識權威", "sub": "講師/作家" }
+    ]
+  },
+  "full-body-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/full-body-portrait/full-body-portrait-1.jpg", "tag": "全身形象", "sub": "專業形象照" },
+      { "src": "portfolio/full-body-portrait/full-body-portrait-2.jpg", "tag": "全身形象", "sub": "專業形象照" },
+      { "src": "portfolio/full-body-portrait/full-body-portrait-3.jpg", "tag": "全身形象", "sub": "專業形象照" },
+      { "src": "portfolio/full-body-portrait/full-body-portrait-4.jpg", "tag": "全身形象", "sub": "專業形象照" }
+    ]
+  },
+  "lawyer-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/lawyer-portrait/lawyer-portrait-1.jpg", "tag": "專業權威", "sub": "律師形象照" },
+      { "src": "portfolio/lawyer-portrait/lawyer-portrait-2.jpg", "tag": "專業權威", "sub": "律師形象照" },
+      { "src": "portfolio/lawyer-portrait/lawyer-portrait-3.jpg", "tag": "專業權威", "sub": "律師形象照" }
+    ]
+  },
+  "doctor-coat": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/doctor-coat/doctor-coat-1.jpg", "tag": "專業醫療", "sub": "醫師袍照" },
+      { "src": "portfolio/doctor-coat/doctor-coat-2.jpg", "tag": "專業醫療", "sub": "醫師袍照" },
+      { "src": "portfolio/doctor-coat/doctor-coat-3.jpg", "tag": "專業醫療", "sub": "醫師袍照" }
+    ]
+  },
+  "corporate-group": {
+    "layout": "horizontal",
+    "items": [
+      { "src": "portfolio/corporate-group/corporate-group-1.jpg", "tag": "團隊凝聚", "sub": "部門合照" },
+      { "src": "portfolio/corporate-group/corporate-group-2.jpg", "tag": "品牌形象", "sub": "新創團隊" },
+      { "src": "portfolio/corporate-group/corporate-group-3.jpg", "tag": "活動紀錄", "sub": "工作坊" }
+    ]
+  },
+  "musician-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/musician-portrait/musician-portrait-1.jpg", "tag": "藝術氣質", "sub": "樂器演奏照" },
+      { "src": "portfolio/musician-portrait/musician-portrait-2.jpg", "tag": "藝術氣質", "sub": "樂器演奏照" },
+      { "src": "portfolio/musician-portrait/musician-portrait-3.jpg", "tag": "藝術氣質", "sub": "樂器演奏照" },
+      { "src": "portfolio/musician-portrait/musician-portrait-4.jpg", "tag": "藝術氣質", "sub": "樂器演奏照" }
+    ]
+  },
+  "campaign-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/campaign-portrait/campaign-portrait-1.jpg", "tag": "專業形象", "sub": "競選照" },
+      { "src": "portfolio/campaign-portrait/campaign-portrait-2.jpg", "tag": "專業形象", "sub": "競選照" },
+      { "src": "portfolio/campaign-portrait/campaign-portrait-3.jpg", "tag": "專業形象", "sub": "競選照" },
+      { "src": "portfolio/campaign-portrait/campaign-portrait-4.jpg", "tag": "專業形象", "sub": "競選照" }
+    ]
+  },
+  "grad-id": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/grad-id/grad-id-1.jpg", "tag": "畢業紀念", "sub": "畢業證件照" },
+      { "src": "portfolio/grad-id/grad-id-2.jpg", "tag": "畢業紀念", "sub": "畢業證件照" },
+      { "src": "portfolio/grad-id/grad-id-3.jpg", "tag": "畢業紀念", "sub": "畢業證件照" }
+    ]
+  },
+  "grad-happy-id": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/grad-happy-id/grad-happy-id-1.jpg", "tag": "畢業紀念", "sub": "畢業學士服" },
+      { "src": "portfolio/grad-happy-id/grad-happy-id-2.jpg", "tag": "畢業紀念", "sub": "畢業學士服" },
+      { "src": "portfolio/grad-happy-id/grad-happy-id-3.jpg", "tag": "畢業紀念", "sub": "畢業學士服" }
+    ]
+  },
+  "grad-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/grad-portrait/grad-portrait-2.jpg", "tag": "畢業紀念", "sub": "畢業寫真" },
+      { "src": "portfolio/grad-portrait/grad-portrait-3.jpg", "tag": "畢業紀念", "sub": "畢業寫真" },
+      { "src": "portfolio/grad-portrait/grad-portrait-4.jpg", "tag": "畢業紀念", "sub": "畢業寫真" },
+      { "src": "portfolio/grad-portrait/grad-portrait-5.jpg", "tag": "畢業紀念", "sub": "畢業寫真" }
+    ]
+  },
+  "student-group": {
+    "layout": "horizontal",
+    "items": [
+      { "src": "portfolio/student-group/student-group-1.jpg", "tag": "學生團體", "sub": "學生團體照" },
+      { "src": "portfolio/student-group/student-group-2.jpg", "tag": "學生團體", "sub": "學生團體照" }
+    ]
+  },
+  "couple": {
+    "layout": "horizontal",
+    "items": [
+      { "src": "portfolio/couple/couple-1.jpg", "tag": "溫馨互動", "sub": "情侶寫真" },
+      { "src": "portfolio/couple/couple-2.jpg", "tag": "自然光", "sub": "情侶寫真" },
+      { "src": "portfolio/couple/couple-3.jpg", "tag": "紀念日", "sub": "情侶寫真" },
+      { "src": "portfolio/couple/couple-4.jpg", "tag": "幸福感", "sub": "情侶寫真" }
+    ]
+  },
+  "bestie-portrait": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/bestie-portrait/bestie-portrait-1.jpg", "tag": "閨蜜寫真", "sub": "閨蜜寫真" },
+      { "src": "portfolio/bestie-portrait/bestie-portrait-2.jpg", "tag": "閨蜜寫真", "sub": "閨蜜寫真" },
+      { "src": "portfolio/bestie-portrait/bestie-portrait-3.jpg", "tag": "閨蜜寫真", "sub": "閨蜜寫真" }
+    ]
+  },
+  "friends-portrait": {
+    "layout": "horizontal",
+    "items": [
+      { "src": "portfolio/friends-portrait/friends-portrait-1.jpg", "tag": "朋友合照", "sub": "朋友合照" },
+      { "src": "portfolio/friends-portrait/friends-portrait-2.jpg", "tag": "朋友合照", "sub": "朋友合照" },
+      { "src": "portfolio/friends-portrait/friends-portrait-3.jpg", "tag": "朋友合照", "sub": "朋友合照" }
+    ]
+  },
+  "family": {
+    "layout": "horizontal",
+    "items": [
+      { "src": "portfolio/family/family-1.jpg", "tag": "溫馨互動", "sub": "全家福" },
+      { "src": "portfolio/family/family-2.jpg", "tag": "自然光", "sub": "全家福" },
+      { "src": "portfolio/family/family-3.jpg", "tag": "紀念日", "sub": "全家福" },
+      { "src": "portfolio/family/family-4.jpg", "tag": "幸福感", "sub": "全家福" }
+    ]
+  },
+  "maternity": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/maternity/maternity-1.jpg", "tag": "好孕照", "sub": "好孕照" },
+      { "src": "portfolio/maternity/maternity-2.jpg", "tag": "好孕照", "sub": "好孕照" },
+      { "src": "portfolio/maternity/maternity-3.jpg", "tag": "好孕照", "sub": "好孕照" }
+    ]
+  },
+  "body-profile": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/body-profile/body-profile-1.jpg", "tag": "體態寫真", "sub": "體態寫真" },
+      { "src": "portfolio/body-profile/body-profile-2.jpg", "tag": "體態寫真", "sub": "體態寫真" },
+      { "src": "portfolio/body-profile/body-profile-3.jpg", "tag": "體態寫真", "sub": "體態寫真" }
+    ]
+  },
+  "emo": {
+    "layout": "vertical",
+    "items": [
+      { "src": "portfolio/emo/emo-1.jpg", "tag": "情緒寫真", "sub": "情緒寫真" },
+      { "src": "portfolio/emo/emo-2.jpg", "tag": "情緒寫真", "sub": "情緒寫真" },
+      { "src": "portfolio/emo/emo-3.jpg", "tag": "情緒寫真", "sub": "情緒寫真" },
+      { "src": "portfolio/emo/emo-4.jpg", "tag": "情緒寫真", "sub": "情緒寫真" }
+    ]
+  }
+}
