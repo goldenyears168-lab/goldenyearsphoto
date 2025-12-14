@@ -1742,6 +1742,10 @@ body {
     .portfolio-img-card:hover img {
         transform: scale(1.05);
     }
+    /* 移除特定圖片的特效 */
+    .portfolio-img-card.no-hover-scale:hover img {
+        transform: none;
+    }
 }
 
 /* Portfolio overlay - Mobile touch feedback */
@@ -1831,7 +1835,19 @@ body {
 }
 
 /* Fixed/Sticky Header Styles */
-header.fixed,
+header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    will-change: transform;
+    transform: translateZ(0);
+    /* Safe area support */
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+}
+
 header.sticky {
     position: sticky;
     top: 0;

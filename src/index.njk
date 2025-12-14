@@ -239,7 +239,10 @@ seo:
 <script>
     // Portfolio data from Eleventy global data (src/_data/portfolio.json)
     // Process portfolio data: convert relative paths to full URLs using r2img filter
-    const portfolioData = {
+    // Use IIFE to prevent redeclaration errors during hot reload
+    (function() {
+        if (window.portfolioData) return; // Prevent redeclaration during hot reload
+        window.portfolioData = {
 {%- for categoryKey, categoryData in portfolio %}
         '{{ categoryKey }}': {
             layout: '{{ categoryData.layout }}',
@@ -250,12 +253,24 @@ seo:
             ]
         }{% if not loop.last %},{% endif %}
 {%- endfor %}
-    };
+        };
+    })();
 
-    // Initialize with passport-korea
-    window.addEventListener('DOMContentLoaded', () => {
-        filterPortfolio('passport-korea', document.querySelector('.category-pill.active'));
-    });
+    // Initialize with passport-korea (only on first load, not on hot reload)
+    if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', () => {
+            const activeBtn = document.querySelector('.category-pill.active');
+            if (activeBtn) {
+                filterPortfolio('passport-korea', activeBtn);
+            }
+        });
+    } else {
+        // DOM already loaded, initialize immediately
+        const activeBtn = document.querySelector('.category-pill.active');
+        if (activeBtn) {
+            filterPortfolio('passport-korea', activeBtn);
+        }
+    }
 
     function filterPortfolio(category, btn) {
         // Update Active Button
@@ -263,17 +278,19 @@ seo:
         btn.classList.add('active');
 
         const grid = document.getElementById('portfolio-grid');
+        
         // Fallback to passport-korea if category not found
         const data = portfolioData[category] || portfolioData['passport-korea'];
       
-        // Adjust Grid Layout based on data type - 響應式間距
+        // 直接更新，不使用过渡动画以避免闪烁
+        // 先更新 className，再更新 innerHTML，减少重排
         if (data.layout === 'horizontal') {
             grid.className = "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-[1400px] mx-auto px-0";
       } else {
             grid.className = "grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-[1400px] mx-auto px-0";
       }
 
-        // Render Items with Fade Effect - No cropping, preserve aspect ratio
+        // Render Items - No cropping, preserve aspect ratio
         // 圖片響應式優化：使用 sizes 屬性告知瀏覽器實際顯示尺寸
         // Note: R2 doesn't support dynamic resizing via URL params, so we use the optimized single size
         // The image is already optimized to MAX_WIDTH (1400px) during upload, which covers:
@@ -288,9 +305,20 @@ seo:
                 ? "(max-width: 768px) 100vw, 50vw"
                 : "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
             
+            // 特定圖片使用 object-contain 避免裁切：企業團體照右邊那張、學生團體照左邊那張
+            const isCorporateGroupRight = category === 'corporate-group' && index === 1;
+            const isStudentGroupLeft = category === 'student-group' && index === 0;
+            const isSpecialImage = isCorporateGroupRight || isStudentGroupLeft;
+            const objectFitClass = isSpecialImage 
+                ? 'object-contain object-center' 
+                : 'object-cover object-center';
+            
+            // 移除特定圖片的 hover 縮放特效
+            const noEffectClass = isSpecialImage ? 'no-hover-scale' : '';
+            // 恢復 animate-fade-in 動畫效果
             const cardClass = data.layout === 'horizontal' 
-                ? 'portfolio-img-card portfolio-img-card-horizontal animate-fade-in group border border-slate-100'
-                : 'portfolio-img-card animate-fade-in group border border-slate-100';
+                ? `portfolio-img-card portfolio-img-card-horizontal animate-fade-in group border border-slate-100 ${noEffectClass}`
+                : `portfolio-img-card animate-fade-in group border border-slate-100 ${noEffectClass}`;
             
             return `
             <div class="${cardClass}" style="animation-delay: ${index * 0.1}s">
@@ -300,7 +328,7 @@ seo:
                     alt="${item.sub}" 
                     loading="lazy"
                     decoding="async"
-                    class="w-full h-full object-cover object-center"
+                    class="w-full h-full ${objectFitClass}"
                 >
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end items-start">
                     <span class="inline-block bg-white/20 backdrop-blur text-white text-xxs font-bold px-2 py-1 rounded mb-1">${item.tag}</span>
