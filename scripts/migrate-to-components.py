@@ -6,7 +6,7 @@
 
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List
 
 # 專案根目錄
 PROJECT_ROOT = Path(__file__).parent.parent

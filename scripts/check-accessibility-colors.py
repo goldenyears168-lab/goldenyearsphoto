@@ -11,14 +11,12 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 from enum import Enum
 
-
 class WCAGLevel(Enum):
     """WCAG 级别"""
     AA_NORMAL = 4.5  # 正常文字 AA 级别
     AA_LARGE = 3.0   # 大文字 AA 级别 (18pt+ 或 14pt+ bold)
     AAA_NORMAL = 7.0  # 正常文字 AAA 级别
     AAA_LARGE = 4.5   # 大文字 AAA 级别
-
 
 @dataclass
 class ColorIssue:
@@ -31,7 +29,6 @@ class ColorIssue:
     status: str  # 'pass', 'fail_aa', 'fail_aaa'
     line_number: int
     context: str
-
 
 class ColorContrastChecker:
     """颜色对比度检查器"""
@@ -50,7 +47,6 @@ class ColorContrastChecker:
     
     def get_color_value(self, color_ref: str) -> Optional[str]:
         """从 CSS 变量或直接颜色值获取实际颜色"""
-        # 移除可能的 var() 包装
         var_match = re.search(r'var\(--([^)]+)\)', color_ref)
         if var_match:
             var_name = var_match.group(1)
@@ -77,7 +73,6 @@ class ColorContrastChecker:
             var_name = match.group(1).strip()
             var_value = match.group(2).strip()
             
-            # 提取颜色值（支持 #hex, rgb(), rgba()）
             color_match = re.search(r'(#[0-9A-Fa-f]{3,6}|rgb\([^)]+\)|rgba\([^)]+\))', var_value)
             if color_match:
                 self.color_vars[var_name] = color_match.group(1)
@@ -329,14 +324,12 @@ class ColorContrastChecker:
         report_file.write_text(json.dumps(report_data, indent=2, ensure_ascii=False), encoding='utf-8')
         print(f"\n📄 详细报告已保存到: {report_file}")
 
-
 def main():
     """主函数"""
     css_file = Path(__file__).parent.parent / 'src' / 'assets' / 'css' / 'main.css'
     
     checker = ColorContrastChecker(css_file)
     checker.analyze()
-
 
 if __name__ == '__main__':
     main()

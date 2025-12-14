@@ -1,0 +1,106 @@
+================================================================================
+📊 全面代碼分析報告
+================================================================================
+
+📈 專案統計
+--------------------------------------------------------------------------------
+總文件數: 77
+總代碼行數: 16,097
+Python 文件: 18
+JavaScript 文件: 9
+CSS 文件: 1
+模板文件: 49
+
+🟡 整體健康度評分: 65/100
+扣分項目:
+  • 未使用代碼: -20分
+  • 代碼質量問題: -15分
+
+🔎 未使用的代碼
+--------------------------------------------------------------------------------
+
+Python 未使用函數 (20 個):
+  • scripts/fix-code-issues.py: escape_html
+  • scripts/design-system-audit.py: rgb_to_hsl
+  • scripts/test-migration.py: check_hardcoded_styles
+  • scripts/test-migration.py: test_file
+  • scripts/test-migration.py: check_syntax
+  • scripts/test-migration.py: check_card_migration
+  • scripts/test-migration.py: check_macro_usage
+  • scripts/test-migration.py: check_macro_imports
+  • scripts/test-migration.py: check_button_migration
+  • scripts/check-accessibility-colors.py: analyze_rule_block
+  ... 還有 10 個
+
+JavaScript 未使用函數 (4 個):
+  • src/scripts/upload-portfolio-to-r2.mjs: reduction
+  • src/scripts/upload-portfolio-to-r2.mjs: contentType
+  • src/scripts/compress-images.mjs: reduction
+  • src/assets/js/identity-test.js: progress
+
+Python 未使用導入 (13 個):
+  • scripts/comprehensive-code-analysis.py: re
+  • scripts/comprehensive-code-analysis.py: defaultdict
+  • scripts/comprehensive-code-analysis.py: os
+  • scripts/comprehensive-code-analysis.py: List
+  • scripts/comprehensive-code-analysis.py: Tuple
+  • scripts/comprehensive-code-analysis.py: Dict
+  • scripts/comprehensive-code-analysis.py: ast
+  • scripts/fix-code-issues.py: Dict
+  • scripts/test-migration.py: defaultdict
+  • scripts/check-accessibility-colors.py: Dict
+  ... 還有 3 個
+
+📊 代碼質量分析
+--------------------------------------------------------------------------------
+
+過長的文件 (5 個):
+  • scripts/comprehensive-code-analysis.py: 800 行 (medium)
+  • scripts/design-system-audit.py: 985 行 (medium)
+  • src/index.njk: 592 行 (medium)
+  • src/assets/css/main.css: 2343 行 (high)
+  • src/assets/js/identity-test.js: 971 行 (medium)
+
+代碼異味 (22 個):
+  • tailwind.config.js: commented_code (low)
+  • .eleventy.js: commented_code (low)
+  • .eleventy.js: todo_comments (medium)
+  • eslint.config.js: commented_code (low)
+  • scripts/standardize-buttons.py: commented_code (low)
+  • scripts/analyze-deprecated-tokens.py: commented_code (low)
+  • scripts/comprehensive-code-analysis.py: todo_comments (medium)
+  • scripts/cleanup-deprecated-tokens.py: commented_code (low)
+  • scripts/cleanup-deprecated-tokens.py: todo_comments (medium)
+  • scripts/design-system-audit.py: commented_code (low)
+  ... 還有 12 個
+
+✅ 最佳實踐檢查
+--------------------------------------------------------------------------------
+
+💡 建議 (1 個):
+  • 考慮將 Python 文件組織到子目錄中
+
+🔒 安全性檢查
+--------------------------------------------------------------------------------
+
+⚠️  安全警告 (3 個):
+  • src/guide/identity-test.njk: potential_xss (medium)
+  • src/_includes/base-layout.njk: potential_xss (medium)
+  • src/blog/workshop.njk: potential_xss (medium)
+
+⚡ 性能分析
+--------------------------------------------------------------------------------
+✅ 性能良好
+
+📝 文檔完整性
+--------------------------------------------------------------------------------
+
+文檔覆蓋率: 100.0%
+
+================================================================================
+📋 總結與建議
+================================================================================
+• 考慮移除未使用的函數，減少代碼複雜度
+• 將過長的文件拆分為更小的模塊
+
+================================================================================

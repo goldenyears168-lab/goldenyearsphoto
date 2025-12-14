@@ -133,7 +133,6 @@ class UnusedFileFinder:
             if ref.startswith('assets/images/'):
                 self.references.add(ref.replace('assets/images/', ''))
         
-        # 3. CSS url() 引用: url('/content/home/hero/image_7896de.jpg')
         url_pattern = r"url\(['\"]?([^)'\"]+\.(jpg|jpeg|png|gif|webp|svg|css))['\"]?\)"
         for match in re.finditer(url_pattern, content, re.IGNORECASE):
             ref = match.group(1).lstrip('/')
@@ -163,7 +162,6 @@ class UnusedFileFinder:
             else:
                 self.references.add(ref.lstrip('/'))
         
-        # 6. JavaScript 中的字符串引用: imgPath('portfolio/xxx.jpg')
         js_string_pattern = r"['\"](portfolio/[^'\"]+\.(jpg|jpeg|png|gif|webp|svg))['\"]"
         for match in re.finditer(js_string_pattern, content, re.IGNORECASE):
             ref = match.group(1)
@@ -183,7 +181,6 @@ class UnusedFileFinder:
                         self.references.add(f"assets/{ref}")
                         self.references.add(f"src/assets/{ref}")
         
-        # 8. 資料檔案引用: {% set data = data.xxx %}
         # 這個比較複雜，暫時跳過，因為資料檔案通常都會被使用
     
     def normalize_path(self, file_path: str) -> List[str]:
@@ -241,8 +238,16 @@ class UnusedFileFinder:
                 # 模板檔案可能通過 Eleventy 的檔案系統自動使用
                 # 檢查是否在 src/ 目錄下（會被 Eleventy 處理）
                 if str(rel_path).startswith('src/') and not str(rel_path).startswith('src/_includes/'):
-                    # 頁面模板通常會被使用（除非是測試檔案）
-                    if 'test' not in rel_path.lower() and 'example' not in rel_path.lower():
+                    # 檢查是否有 permalink（表示是有效頁面）
+                    try:
+                        content = self.read_file_content(file_path)
+                        if 'permalink:' in content or 'permalink =' in content:
+                            is_referenced = True
+                        # 頁面模板通常會被使用（除非是明確的測試檔案）
+                        elif 'test' not in rel_path.lower() and 'example' not in rel_path.lower():
+                            is_referenced = True
+                    except:
+                        # 如果無法讀取，保守處理，視為已使用
                         is_referenced = True
             
             # 必須保留的檔案（配置和構建腳本）
@@ -385,7 +390,6 @@ class UnusedFileFinder:
         
         return unused
 
-
 def main():
     """主函數"""
     # 獲取專案根目錄（腳本所在目錄的父目錄）
@@ -398,7 +402,6 @@ def main():
     # 返回退出碼
     total_unused = sum(len(files) for files in unused.values())
     return 0 if total_unused == 0 else 1
-
 
 if __name__ == '__main__':
     exit(main())

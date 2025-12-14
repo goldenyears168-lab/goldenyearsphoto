@@ -5,11 +5,10 @@
 """
 
 import re
-import json
-import os
+
 from pathlib import Path
 from collections import defaultdict, Counter
-from typing import Dict, List, Set, Tuple, Any
+from typing import Dict, List, Tuple, Any
 from datetime import datetime
 import colorsys
 
@@ -105,7 +104,6 @@ def extract_colors_from_text(text: str) -> List[Dict[str, Any]]:
     """從文字中提取所有顏色值，排除第三方嵌入代碼"""
     colors = []
     
-    # HEX 顏色 (#fff, #ffffff, #FFF)
     hex_pattern = r'#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b'
     for match in re.finditer(hex_pattern, text):
         context = text[max(0, match.start()-50):match.end()+50]
@@ -660,8 +658,6 @@ def generate_report(results: Dict, tokens: Dict) -> str:
 
 ## 🟩 3. 字體與排版系統分析
 
-### 字體大小 (Font Size)
-
 - **總使用次數**: {sum(count for _, count in typography_analysis['font_sizes']['most_used'])}
 - **唯一字體大小**: {typography_analysis['font_sizes']['unique']}
 - **未定義於 Token**: {len(typography_analysis['font_sizes']['undefined'])}
@@ -685,7 +681,6 @@ def generate_report(results: Dict, tokens: Dict) -> str:
         report += "✅ 所有字體大小都已定義於 Token\n"
     
     report += f"""
-### 字體粗細 (Font Weight)
 
 #### 最常使用的字體粗細
 
@@ -695,7 +690,6 @@ def generate_report(results: Dict, tokens: Dict) -> str:
         report += f"{i}. `{weight}` - 使用 {count} 次\n"
     
     report += f"""
-### 行高 (Line Height)
 
 #### 最常使用的行高
 
@@ -709,12 +703,8 @@ def generate_report(results: Dict, tokens: Dict) -> str:
 
 ## 🟪 4. 圓角、陰影、邊框分析
 
-### 圓角 (Border Radius)
-
 - **總使用次數**: {len(results['borderRadius'])}
 - **唯一值**: {len(set(r.get('value', '') for r in results['borderRadius']))}
-
-### 陰影 (Box Shadow)
 
 - **總使用次數**: {len(results['shadows'])}
 - **唯一值**: {len(set(s.get('value', '') for s in results['shadows']))}
@@ -775,8 +765,6 @@ def generate_report(results: Dict, tokens: Dict) -> str:
 
 ## 📋 技術負債分類
 
-### 🟢 快速可修 (Quick Wins)
-
 1. **統一近似顏色**
    - 將色差 < 5 的顏色合併為單一 token
    - 預估時間: 2-4 小時
@@ -789,8 +777,6 @@ def generate_report(results: Dict, tokens: Dict) -> str:
    - 將非 4px 倍數的間距值調整為標準值
    - 預估時間: 3-5 小時
 
-### 🟡 中期整理 (Medium-term)
-
 1. **建立完整的元件 Variant 系統**
    - 為 Button、Card 等元件定義明確的 variant/size/state
    - 預估時間: 1-2 天
@@ -802,8 +788,6 @@ def generate_report(results: Dict, tokens: Dict) -> str:
 3. **陰影系統標準化**
    - 定義有限的陰影層級（sm/md/lg/xl）
    - 預估時間: 2-3 小時
-
-### 🔴 架構級重構 (Architecture)
 
 1. **設計 Token 遷移策略**
    - 從 Tailwind config 遷移到 CSS Variables

@@ -6,7 +6,7 @@
 
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict
 
 # 專案根目錄
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -14,31 +14,26 @@ SRC_DIR = PROJECT_ROOT / "src"
 
 # 按鈕替換規則
 BUTTON_REPLACEMENTS = [
-    # 大型按鈕 (px-8 py-4) - 通常是 secondary
     {
         'pattern': r'class=["\']([^"\']*?)(?:bg-white|bg-transparent)[^"\']*?px-8 py-4 rounded-full[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}btn btn-secondary btn-lg"',
         'description': 'Large white/transparent button → btn-secondary btn-lg'
     },
-    # 大型按鈕 (px-8 py-4) - 帶 trust-950 背景或邊框 → primary
     {
         'pattern': r'class=["\']([^"\']*?)(?:bg-trust-950|border-trust-950|text-trust-950)[^"\']*?px-8 py-4 rounded-full[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}btn btn-primary btn-lg"',
         'description': 'Large trust-950 button → btn-primary btn-lg'
     },
-    # 小型按鈕 (px-4 py-2) - 導航按鈕
     {
         'pattern': r'class=["\']([^"\']*?)px-4 py-2 rounded-full[^"\']*?hover:bg-sand-50[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}btn btn-ghost btn-sm"',
         'description': 'Small navigation button → btn-ghost btn-sm'
     },
-    # 通用大型按鈕 (px-8 py-4)
     {
         'pattern': r'class=["\']([^"\']*?)px-8 py-4 rounded-full[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}btn btn-secondary btn-lg"',
         'description': 'Generic large button → btn-secondary btn-lg'
     },
-    # 通用小型按鈕 (px-4 py-2)
     {
         'pattern': r'class=["\']([^"\']*?)px-4 py-2 rounded-full[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}btn btn-ghost btn-sm"',

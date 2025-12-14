@@ -6,7 +6,7 @@
 
 import re
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 # 專案根目錄
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -14,7 +14,6 @@ SRC_DIR = PROJECT_ROOT / "src"
 
 # Deprecated Token 映射（僅處理實際使用，不處理 CSS 變數定義）
 DEPRECATED_REPLACEMENTS = {
-    # 在 CSS 中使用 var(--color-xxx) 的地方
     'var(--color-brand-primary)': 'var(--color-trust-950)',
     'var(--color-brand-accent)': 'var(--color-trust-800)',
     'var(--color-brand-cta)': 'var(--color-trust-200)',

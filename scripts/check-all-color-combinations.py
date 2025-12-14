@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """检查所有可能的颜色组合，包括 Tailwind 类"""
 
-import re
 from pathlib import Path
 
 def hex_to_rgb(hex_color):

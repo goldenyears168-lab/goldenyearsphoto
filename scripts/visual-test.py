@@ -6,7 +6,7 @@
 
 import re
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 PROJECT_ROOT = Path(__file__).parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
@@ -51,7 +51,6 @@ def check_design_system_compliance(file_path: Path) -> Dict:
         'non_design_system_classes': 0,
     }
     
-    # 提取所有 class 屬性
     class_pattern = r'class=["\']([^"\']+)["\']'
     class_matches = re.findall(class_pattern, content)
     
@@ -178,12 +177,20 @@ def main():
     
     report = generate_visual_test_report()
     
-    # 保存報告
+    # 保存報告（添加錯誤處理）
     report_path = PROJECT_ROOT / "VISUAL_TEST_REPORT.md"
-    with open(report_path, 'w', encoding='utf-8') as f:
-        f.write(report)
+    try:
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write(report)
+        print(f"✅ 視覺測試檢查完成！報告已保存至: {report_path}")
+    except IOError as e:
+        print(f"❌ 無法保存報告文件: {e}")
+        return 1
+    except Exception as e:
+        print(f"❌ 發生錯誤: {e}")
+        return 1
     
-    print(f"✅ 視覺測試檢查完成！報告已保存至: {report_path}")
+    return 0
 
 if __name__ == '__main__':
     main()

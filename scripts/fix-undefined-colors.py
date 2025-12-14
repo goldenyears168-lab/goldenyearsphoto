@@ -5,7 +5,7 @@
 """
 
 import re
-import os
+
 from pathlib import Path
 from collections import defaultdict
 from typing import Dict, List, Tuple

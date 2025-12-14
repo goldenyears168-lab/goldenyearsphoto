@@ -4,10 +4,10 @@
 """
 
 import re
-import os
+
 from pathlib import Path
 from collections import defaultdict, Counter
-from typing import Dict, List, Set
+from typing import Dict, List
 
 # 專案根目錄
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -26,7 +26,6 @@ DEPRECATED_TOKENS = {
     'accent-weak': {'replacement': 'trust-600', 'type': 'color'},
     'accent-strong': {'replacement': 'trust-950', 'type': 'color'},
     
-    # Neutral Colors (部分)
     'neutral-50': {'replacement': 'sand-50', 'type': 'color'},
     'neutral-100': {'replacement': 'sand-100', 'type': 'color'},
     'neutral-200': {'replacement': 'sand-200', 'type': 'color'},

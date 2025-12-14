@@ -1,0 +1,417 @@
+{
+  "unused_code": {
+    "python_functions": [
+      {
+        "file": "scripts/fix-code-issues.py",
+        "name": "escape_html",
+        "type": "function"
+      },
+      {
+        "file": "scripts/design-system-audit.py",
+        "name": "rgb_to_hsl",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "check_hardcoded_styles",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "test_file",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "check_syntax",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "check_card_migration",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "check_macro_usage",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "check_macro_imports",
+        "type": "function"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "check_button_migration",
+        "type": "function"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "name": "analyze_rule_block",
+        "type": "function"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "name": "parse_css_variables",
+        "type": "function"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "name": "parse_css_rules",
+        "type": "function"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "name": "check_contrast",
+        "type": "function"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "name": "get_color_value",
+        "type": "function"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "run",
+        "type": "function"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "extract_references",
+        "type": "function"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "read_file_content",
+        "type": "function"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "normalize_path",
+        "type": "function"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "collect_files",
+        "type": "function"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "find_unused_files",
+        "type": "function"
+      }
+    ],
+    "python_imports": [
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "re",
+        "type": "import"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "defaultdict",
+        "type": "import"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "os",
+        "type": "import"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "List",
+        "type": "import"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "Tuple",
+        "type": "import"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "Dict",
+        "type": "import"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "name": "ast",
+        "type": "import"
+      },
+      {
+        "file": "scripts/fix-code-issues.py",
+        "name": "Dict",
+        "type": "import"
+      },
+      {
+        "file": "scripts/test-migration.py",
+        "name": "defaultdict",
+        "type": "import"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "name": "Dict",
+        "type": "import"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "re",
+        "type": "import"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "name": "Set",
+        "type": "import"
+      },
+      {
+        "file": "scripts/check-all-color-combinations.py",
+        "name": "Path",
+        "type": "import"
+      }
+    ],
+    "python_variables": [],
+    "js_functions": [
+      {
+        "file": "src/scripts/upload-portfolio-to-r2.mjs",
+        "name": "reduction",
+        "type": "function"
+      },
+      {
+        "file": "src/scripts/upload-portfolio-to-r2.mjs",
+        "name": "contentType",
+        "type": "function"
+      },
+      {
+        "file": "src/scripts/compress-images.mjs",
+        "name": "reduction",
+        "type": "function"
+      },
+      {
+        "file": "src/assets/js/identity-test.js",
+        "name": "progress",
+        "type": "function"
+      }
+    ],
+    "js_variables": [],
+    "unused_files": []
+  },
+  "code_quality": {
+    "complexity": {
+      "scripts/standardize-buttons.py": 27,
+      "scripts/cleanup-non-images-only.py": 26,
+      "scripts/analyze-deprecated-tokens.py": 57,
+      "scripts/check-specific-colors.py": 22,
+      "scripts/comprehensive-code-analysis.py": 172,
+      "scripts/fix-undefined-colors.py": 44,
+      "scripts/cleanup-deprecated-tokens.py": 24,
+      "scripts/fix-code-issues.py": 48,
+      "scripts/design-system-audit.py": 131,
+      "scripts/cleanup-non-image-files.py": 40,
+      "scripts/test-migration.py": 62,
+      "scripts/visual-test.py": 23,
+      "scripts/check-accessibility-colors.py": 62,
+      "scripts/find-unused-files.py": 83,
+      "scripts/check-all-color-combinations.py": 21,
+      "scripts/standardize-cards.py": 27
+    },
+    "duplication": [],
+    "long_files": [
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "lines": 800,
+        "severity": "medium"
+      },
+      {
+        "file": "scripts/design-system-audit.py",
+        "lines": 985,
+        "severity": "medium"
+      },
+      {
+        "file": "src/index.njk",
+        "lines": 592,
+        "severity": "medium"
+      },
+      {
+        "file": "src/assets/css/main.css",
+        "lines": 2343,
+        "severity": "high"
+      },
+      {
+        "file": "src/assets/js/identity-test.js",
+        "lines": 971,
+        "severity": "medium"
+      }
+    ],
+    "long_functions": [],
+    "code_smells": [
+      {
+        "file": "tailwind.config.js",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": ".eleventy.js",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": ".eleventy.js",
+        "type": "todo_comments",
+        "count": 3,
+        "severity": "medium"
+      },
+      {
+        "file": "eslint.config.js",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/standardize-buttons.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/analyze-deprecated-tokens.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/comprehensive-code-analysis.py",
+        "type": "todo_comments",
+        "count": 6,
+        "severity": "medium"
+      },
+      {
+        "file": "scripts/cleanup-deprecated-tokens.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/cleanup-deprecated-tokens.py",
+        "type": "todo_comments",
+        "count": 1,
+        "severity": "medium"
+      },
+      {
+        "file": "scripts/design-system-audit.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/design-system-audit.py",
+        "type": "todo_comments",
+        "count": 1,
+        "severity": "medium"
+      },
+      {
+        "file": "scripts/check-accessibility-colors.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "scripts/find-unused-files.py",
+        "type": "todo_comments",
+        "count": 5,
+        "severity": "medium"
+      },
+      {
+        "file": "scripts/standardize-cards.py",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "src/index.njk",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "src/scripts/upload-portfolio-to-r2.mjs",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "src/scripts/upload-portfolio-to-r2.mjs",
+        "type": "excessive_console_logs",
+        "count": 6,
+        "severity": "low"
+      },
+      {
+        "file": "src/scripts/compress-images.mjs",
+        "type": "excessive_console_logs",
+        "count": 6,
+        "severity": "low"
+      },
+      {
+        "file": "src/assets/js/identity-test.js",
+        "type": "commented_code",
+        "severity": "low"
+      },
+      {
+        "file": "src/assets/js/identity-test.js",
+        "type": "excessive_console_logs",
+        "count": 7,
+        "severity": "low"
+      },
+      {
+        "file": "src/assets/js/scroll-animations.js",
+        "type": "commented_code",
+        "severity": "low"
+      }
+    ]
+  },
+  "best_practices": {
+    "errors": [],
+    "warnings": [],
+    "suggestions": [
+      {
+        "issue": "考慮將 Python 文件組織到子目錄中",
+        "type": "organization"
+      }
+    ]
+  },
+  "dependencies": {
+    "unused_packages": [],
+    "outdated_packages": [],
+    "security_issues": [],
+    "duplicate_deps": []
+  },
+  "security": {
+    "issues": [],
+    "warnings": [
+      {
+        "file": "src/guide/identity-test.njk",
+        "type": "potential_xss",
+        "severity": "medium"
+      },
+      {
+        "file": "src/_includes/base-layout.njk",
+        "type": "potential_xss",
+        "severity": "medium"
+      },
+      {
+        "file": "src/blog/workshop.njk",
+        "type": "potential_xss",
+        "severity": "medium"
+      }
+    ]
+  },
+  "performance": {
+    "issues": [],
+    "suggestions": []
+  },
+  "documentation": {
+    "missing_docstrings": [],
+    "missing_readme": [],
+    "coverage": 100.0
+  },
+  "health_score": 65,
+  "health_deductions": [
+    "未使用代碼: -20分",
+    "代碼質量問題: -15分"
+  ]
+}

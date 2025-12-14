@@ -6,7 +6,7 @@
 
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Set
+from typing import Dict, List
 from collections import defaultdict
 
 PROJECT_ROOT = Path(__file__).parent.parent

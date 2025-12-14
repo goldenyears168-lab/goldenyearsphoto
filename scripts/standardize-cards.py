@@ -6,7 +6,7 @@
 
 import re
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict
 
 # 專案根目錄
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -26,13 +26,11 @@ CARD_REPLACEMENTS = [
         'replacement': lambda m: f'class="{m.group(1)}bento-card bento-card-sand"',
         'description': 'Sand background card → bento-card-sand'
     },
-    # bento-card bg-slate-50 → bento-card bento-card-sand (slate-50 應該改為 sand-50)
     {
         'pattern': r'class=["\']([^"\']*?)bento-card[^"\']*?bg-slate-50[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}bento-card bento-card-sand"',
         'description': 'Slate-50 card → bento-card-sand'
     },
-    # bento-card bg-white border-slate-200 → bento-card bento-card-default (slate-200 應該改為 sand-200)
     {
         'pattern': r'class=["\']([^"\']*?)bento-card[^"\']*?bg-white[^"\']*?border-slate-200[^"\']*?["\']',
         'replacement': lambda m: f'class="{m.group(1)}bento-card bento-card-default"',
