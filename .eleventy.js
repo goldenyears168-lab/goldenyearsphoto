@@ -81,6 +81,17 @@ module.exports = function (eleventyConfig) {
     // 再把開頭多餘的 / 拿掉
     cleanPath = cleanPath.replace(/^\/+/, "");
 
+    // 對路徑進行 URL 編碼，但只編碼文件名部分（最後一個 / 之後的部分）
+    // 這樣可以處理包含空格和特殊字符的文件名
+    const pathParts = cleanPath.split('/');
+    if (pathParts.length > 0) {
+      const filename = pathParts[pathParts.length - 1];
+      const directory = pathParts.slice(0, -1).join('/');
+      // 只對文件名進行編碼，目錄部分保持不變
+      const encodedFilename = encodeURIComponent(filename);
+      cleanPath = directory ? `${directory}/${encodedFilename}` : encodedFilename;
+    }
+
     if (!r2Base) {
       // 沒設定 R2_PUBLIC_BASE_URL 時，回退到本機 assets/images
       return "/assets/images/" + cleanPath;

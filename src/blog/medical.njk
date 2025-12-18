@@ -172,12 +172,20 @@ seo:
                 以下是好時有影為醫療專業人士拍攝的<strong>醫師袍形象照</strong>作品，每一張都捕捉了專業與溫度並存的醫療形象，適合用於醫院官網、學術期刊、個人品牌等各種用途。
             </p>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {% set images = [7, 6, 5, 4, 3, 2, 1] %}
-                {% for i in images %}
+                {% set images = [
+                    "medical-9.jpg",
+                    "GGC00888 修.jpg",
+                    "GGC03924 修.jpg",
+                    "medical-6.jpg",
+                    "medical-7.jpg",
+                    "medical-8.jpg",
+                    "medical-10.jpg"
+                ] %}
+                {% for image in images %}
                 <div class="portfolio-img-card rounded-xl overflow-hidden">
                     <img 
-                        src="{{ ('content/blog/medical/medical-' + i + '.jpg') | r2img }}" 
-                        alt="醫師形象照推薦 - 好時有影專業醫師袍照作品範例 {{ i }}" 
+                        src="{{ ('content/blog/medical/' + image) | r2img }}" 
+                        alt="醫師形象照推薦 - 好時有影專業醫師袍照作品範例" 
                         class="w-full h-auto object-cover" 
                         loading="lazy" 
                         decoding="async" 
@@ -265,7 +273,7 @@ seo:
           "@type": "Article",
           "headline": "醫師形象照推薦｜如何在0.1秒內建立病患信任感",
           "description": "醫師形象照不只是拍照，更是建立醫病信任的第一張處方籤。好時有影提供專業醫師袍照拍攝服務，以沉穩、清晰、真實為核心。",
-          "image": "{{ 'content/blog/medical/medical-9.jpg' | r2img }}",
+          "image": "{{ 'content/blog/medical/medical-10.jpg' | r2img }}",
           "author": {
             "@type": "Organization",
             "name": "好時有影 Golden Years",

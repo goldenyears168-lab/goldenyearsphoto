@@ -41,12 +41,12 @@ seo:
         <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">找到你的專屬風格</p>
         <div class="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-5xl mx-auto category-pill-container">
             <!-- Default Active -->
-            <button class="category-pill active" onclick="filterPortfolio('passport-korea', this)">韓式證件照</button>
+            <button class="category-pill active" onclick="filterPortfolio('linkedin-portrait', this)">專業形象照</button>
             
             <!-- Core Services -->
-            <button class="category-pill" onclick="filterPortfolio('linkedin-portrait', this)">專業形象照</button>
             <button class="category-pill" onclick="filterPortfolio('full-body-portrait', this)">全身形象照</button>
             <button class="category-pill" onclick="filterPortfolio('grad-id', this)">畢業證件照</button>
+            <button class="category-pill" onclick="filterPortfolio('passport-korea', this)">韓式證件照</button>
             
             <!-- Professionals -->
             <button class="category-pill" onclick="filterPortfolio('lawyer-portrait', this)">律師形象照</button>
@@ -256,19 +256,19 @@ seo:
         };
     })();
 
-    // Initialize with passport-korea (only on first load, not on hot reload)
+    // Initialize with linkedin-portrait (only on first load, not on hot reload)
     if (document.readyState === 'loading') {
         window.addEventListener('DOMContentLoaded', () => {
             const activeBtn = document.querySelector('.category-pill.active');
             if (activeBtn) {
-                filterPortfolio('passport-korea', activeBtn);
+                filterPortfolio('linkedin-portrait', activeBtn);
             }
         });
     } else {
         // DOM already loaded, initialize immediately
         const activeBtn = document.querySelector('.category-pill.active');
         if (activeBtn) {
-            filterPortfolio('passport-korea', activeBtn);
+            filterPortfolio('linkedin-portrait', activeBtn);
         }
     }
 
@@ -279,8 +279,8 @@ seo:
 
         const grid = document.getElementById('portfolio-grid');
         
-        // Fallback to passport-korea if category not found
-        const data = portfolioData[category] || portfolioData['passport-korea'];
+        // Fallback to linkedin-portrait if category not found
+        const data = portfolioData[category] || portfolioData['linkedin-portrait'];
       
         // 直接更新，不使用过渡动画以避免闪烁
         // 先更新 className，再更新 innerHTML，减少重排
@@ -305,12 +305,11 @@ seo:
                 ? "(max-width: 768px) 100vw, 50vw"
                 : "(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw";
             
-            // 所有圖片都使用 object-contain 以維持原始比例，不裁切
+            // 圖片使用 CSS 的 object-fit: cover 以填滿容器，確保大小一致
             // 特定圖片移除 hover 縮放特效：企業團體照右邊那張、學生團體照左邊那張
             const isCorporateGroupRight = category === 'corporate-group' && index === 1;
             const isStudentGroupLeft = category === 'student-group' && index === 0;
             const isSpecialImage = isCorporateGroupRight || isStudentGroupLeft;
-            const objectFitClass = 'object-contain object-center';
             
             // 移除特定圖片的 hover 縮放特效
             const noEffectClass = isSpecialImage ? 'no-hover-scale' : '';
@@ -328,7 +327,7 @@ seo:
                     alt="${item.sub}" 
                     loading="lazy"
                     decoding="async"
-                    class="w-full h-full ${objectFitClass}"
+                    class="w-full h-full"
                 >
                 <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end items-start">
                     <span class="inline-block bg-white/20 backdrop-blur text-white text-xxs font-bold px-2 py-1 rounded mb-1">${item.tag}</span>
